@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&amp;family=Inter:wght@400;500;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "text-muted": "#888888",
+                        "surface-container-highest": "#353534",
+                        "on-primary": "#003907",
+                        "tertiary": "#fcf8f8",
+                        "outline": "#84967e",
+                        "on-surface-variant": "#b9ccb2",
+                        "on-primary-fixed-variant": "#00530e",
+                        "surface-bright": "#3a3939",
+                        "outline-variant": "#3b4b37",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-primary-container": "#007117",
+                        "on-tertiary-fixed": "#1c1b1b",
+                        "tertiary-fixed": "#e5e2e1",
+                        "secondary": "#c6c6c7",
+                        "tertiary-fixed-dim": "#c8c6c5",
+                        "tertiary-container": "#dfdcdb",
+                        "on-surface": "#e5e2e1",
+                        "on-secondary-container": "#b4b5b5",
+                        "surface-dim": "#131313",
+                        "primary-fixed-dim": "#00e639",
+                        "surface-elevated": "#121212",
+                        "on-tertiary-container": "#616060",
+                        "surface-container": "#201f1f",
+                        "secondary-fixed-dim": "#c6c6c7",
+                        "inverse-on-surface": "#313030",
+                        "on-secondary": "#2f3131",
+                        "on-primary-fixed": "#002203",
+                        "on-error-container": "#ffdad6",
+                        "primary": "#ebffe2",
+                        "secondary-container": "#454747",
+                        "inverse-surface": "#e5e2e1",
+                        "inverse-primary": "#006e16",
+                        "primary-container": "#00ff41",
+                        "surface-container-high": "#2a2a2a",
+                        "on-background": "#e5e2e1",
+                        "surface-variant": "#353534",
+                        "surface-container-low": "#1c1b1b",
+                        "on-tertiary-fixed-variant": "#474746",
+                        "on-secondary-fixed": "#1a1c1c",
+                        "error": "#ffb4ab",
+                        "neon-glow": "rgba(0, 255, 65, 0.4)",
+                        "error-container": "#93000a",
+                        "on-tertiary": "#313030",
+                        "on-secondary-fixed-variant": "#454747",
+                        "on-error": "#690005",
+                        "surface-tint": "#00e639",
+                        "secondary-fixed": "#e2e2e2",
+                        "background": "#131313",
+                        "surface": "#131313",
+                        "primary-fixed": "#72ff70"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "section-gap": "120px",
+                        "container-max": "1280px",
+                        "module-gap": "4px",
+                        "margin-mobile": "16px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "display-hero": ["Syne"],
+                        "headline-lg": ["Syne"],
+                        "body-lg": ["Inter"],
+                        "display-hero-mobile": ["Syne"],
+                        "label-mono": ["JetBrains Mono"],
+                        "headline-lg-mobile": ["Syne"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "display-hero": ["84px", {"lineHeight": "90px", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+                        "headline-lg": ["40px", {"lineHeight": "48px", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "display-hero-mobile": ["48px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "label-mono": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "headline-lg-mobile": ["32px", {"lineHeight": "38px", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>.grain-overlay {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuDJJtsCQyLRFcTUBKjPNHgiL0h8u6NhDIJYUnJ5mvUBjuRyUZSkFamJ2ZHyV5eiKrzH55xOLvPrlPfFWH0Iwt8LdYyWAnzGrrgl5D6DbWYU2aVkS91BocdGhWb1ISPuO1AsEHXc5UOQgUfEW3NqWtgUDsUBXJbuPvc7EOJWj16Vp1VVeB0R7G9tisy4MpjL9ihhmAPP40c7zQYs1bS9S3ZLikRImH85vvMJ9QW-_NKDAbeMQE2ibja4X9IQpkA6rKHwwuueDQx5K6M);
+    opacity: 0.05;
+    pointer-events: none
+    }
+.technical-grid {
+    background-size: 40px 40px;
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px)
+    }
+.text-vertical {
+    writing-mode: vertical-rl;
+    text-orientation: mixed
+    }
+.shadow-neon-glow {
+    box-shadow: 0 0 30px rgba(0, 255, 65, 0.2)
+    }
+.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+    }
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+        } 50% {
+        transform: translateY(-10px);
+        } 100% {
+        transform: translateY(0px);
+        }
+    }
+.animate-float {
+    animation: float 6s ease-in-out infinite
+    }</style>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-primary-container selection:text-on-primary-container overflow-x-hidden">
+<!-- Grain Overlay -->
+<div class="fixed inset-0 grain-overlay z-[100]"></div>
+<!-- Technical Grid Background -->
+<div class="fixed inset-0 technical-grid z-0"></div>
+<!-- Edge Labels -->
+<div class="fixed left-6 top-1/2 -translate-y-1/2 hidden md:flex flex-col items-center gap-8 z-10">
+<span class="text-vertical font-label-mono text-label-mono text-text-muted tracking-widest uppercase">Technical Archive</span>
+<div class="w-px h-16 bg-outline-variant/30"></div>
+</div>
+<div class="fixed right-6 top-1/2 -translate-y-1/2 hidden md:flex flex-col items-center gap-8 z-10">
+<span class="text-vertical font-label-mono text-label-mono text-text-muted tracking-widest uppercase">Case Study / 2026</span>
+<div class="w-px h-16 bg-outline-variant/30"></div>
+</div>
+<!-- Top Navigation (Shared Component) -->
+<header class="fixed top-0 w-full z-50 no-border bg-gradient-to-b from-background to-transparent">
+<div class="flex justify-between items-center px-margin-mobile md:px-8 py-6 max-w-container-max mx-auto">
+<a class="font-headline-lg text-headline-lg font-bold tracking-tighter text-on-surface" href="#">ARCHIVE.AI</a>
+<nav class="hidden md:flex gap-8">
+<a class="text-on-surface-variant hover:text-on-surface transition-colors font-label-mono text-label-mono" href="#">Work</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-label-mono text-label-mono" href="#">Tech</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors font-label-mono text-label-mono" href="#">Method</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors font-label-mono text-label-mono" href="#">Contact</a>
+</nav>
+<div class="flex items-center gap-4">
+<div class="hidden sm:flex items-center gap-2 bg-primary-container/10 px-3 py-1 rounded-full border border-primary-container/20">
+<div class="w-1.5 h-1.5 bg-primary-container rounded-full shadow-[0_0_8px_#00ff41]"></div>
+<span class="font-label-mono text-label-mono text-primary-container">Available Now</span>
+</div>
+</div>
+</div>
+</header>
+<main class="relative z-10 pt-32">
+<!-- Hero Section -->
+<section class="relative min-h-[921px] flex flex-col items-center justify-center px-margin-mobile overflow-hidden">
+<!-- Typographic Background Overlay -->
+<div class="absolute inset-0 flex items-center justify-center opacity-[0.03] select-none pointer-events-none transition-transform duration-1000 ease-out hover:scale-110">
+<h1 class="font-display-hero text-[40vw] leading-none text-on-surface italic">olio</h1>
+</div>
+<!-- Hero Content -->
+<div class="relative w-full max-w-container-max mx-auto flex flex-col md:flex-row items-end gap-12">
+<div class="w-full md:w-2/3 relative group">
+<div class="absolute -inset-4 bg-primary-container/5 rounded-[2rem] blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+<div class="aspect-video w-full rounded-[2rem] overflow-hidden border border-outline-variant/30 relative">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 ease-in-out" data-alt="A cinematic, high-resolution visualization of an AI neural network in action, featuring glowing filaments of data connecting nodes in a dark, infinite virtual space. The aesthetic is clean and futuristic, dominated by a deep obsidian background and vibrant neon-green accents of flowing light. Sharp technical details and micro-reflections give a sense of depth and complex engineering." src="https://lh3.googleusercontent.com/aida-public/AB6AXuADu526bebHLKXhnoQjsoFV2fTtExTBGoO_95Gniqb5viNt4lP9Lcu4AaAUVyj0_4QJO2HSEVqucjBDZ43SsUl752G8mHInjUUDCinwnjP8seZJbGqKEEQ-HptUmX4WgIfGBoGYCQoCurVTUSjvmR5Brq4BJ6L0qFIRMHLPGmhNsoeGhrmlc_36MTynygNqSA7kuqHHKldktPPuW3ms-2y2duf_fhpOzakR0nwrvj6fkrIVjhfjK2cTVPTBHz3TTnaHSKhKKoTAuoU"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent"></div>
+</div>
+</div>
+<div class="w-full md:w-1/3 mb-12">
+<div class="flex flex-col gap-6">
+<div class="flex items-center gap-3">
+<span class="w-12 h-[1px] bg-primary-container"></span>
+<span class="font-label-mono text-label-mono text-primary-container tracking-widest uppercase">Project 04 // 2026</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg md:text-display-hero leading-tight text-on-surface">Neural <br/>Systems <br/>Modeling</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-sm">
+                            An advanced architectural deep-dive into autonomous decision systems for distributed robotic clusters.
+                        </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Project Overview -->
+<section class="max-w-container-max mx-auto px-margin-mobile py-section-gap">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-gutter">
+<div class="md:col-span-4 flex flex-col gap-12">
+<div class="space-y-4">
+<h3 class="font-label-mono text-label-mono text-primary-container uppercase tracking-[0.2em]">Context</h3>
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-end border-b border-outline-variant/20 pb-2">
+<span class="font-body-md text-text-muted">Client</span>
+<span class="font-body-md text-on-surface">Global Robotics Research</span>
+</div>
+<div class="flex justify-between items-end border-b border-outline-variant/20 pb-2">
+<span class="font-body-md text-text-muted">Duration</span>
+<span class="font-body-md text-on-surface">6 Months</span>
+</div>
+<div class="flex justify-between items-end border-b border-outline-variant/20 pb-2">
+<span class="font-body-md text-text-muted">Role</span>
+<span class="font-body-md text-on-surface">Lead AI Engineer</span>
+</div>
+</div>
+</div>
+<div class="space-y-4">
+<h3 class="font-label-mono text-label-mono text-primary-container uppercase tracking-[0.2em]">Tech Stack</h3>
+<div class="flex flex-wrap gap-2">
+<span class="px-4 py-2 bg-surface-container-high rounded-full font-label-mono text-label-mono text-on-surface border border-outline-variant/30 hover:border-primary-container/50 transition-colors cursor-default">PyTorch</span>
+<span class="px-4 py-2 bg-surface-container-high rounded-full font-label-mono text-label-mono text-on-surface border border-outline-variant/30 hover:border-primary-container/50 transition-colors cursor-default">Rust Core</span>
+<span class="px-4 py-2 bg-surface-container-high rounded-full font-label-mono text-label-mono text-on-surface border border-outline-variant/30 hover:border-primary-container/50 transition-colors cursor-default">CUDA Optimization</span>
+<span class="px-4 py-2 bg-primary-container/10 rounded-full font-label-mono text-label-mono text-primary-container border border-primary-container/20">Machine Learning</span>
+</div>
+</div>
+</div>
+<div class="md:col-span-8 flex flex-col gap-16">
+<div class="space-y-6">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">The core challenge was to reduce decision latency in swarm clusters while maintaining 99.9% fault tolerance in extreme environments.</h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-8 pt-8">
+<div class="space-y-4 p-8 rounded-2xl bg-surface-container-low border border-outline-variant/20 relative group overflow-hidden">
+<div class="absolute inset-0 bg-primary-container/5 translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
+<h4 class="font-headline-lg text-2xl text-on-surface relative z-10">The Problem</h4>
+<p class="font-body-md text-on-surface-variant relative z-10 leading-relaxed">Traditional centralized models suffered from massive overhead when scaling past 50 units, causing bottleneck delays that compromised mission safety.</p>
+</div>
+<div class="space-y-4 p-8 rounded-2xl bg-surface-container-low border border-outline-variant/20 relative group overflow-hidden">
+<div class="absolute inset-0 bg-primary-container/5 translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
+<h4 class="font-headline-lg text-2xl text-on-surface relative z-10">The Solution</h4>
+<p class="font-body-md text-on-surface-variant relative z-10 leading-relaxed">We implemented a peer-to-peer decentralized neural gossip protocol that enabled local inference with global consensus without a central hub.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Methodology Section -->
+<section class="py-section-gap relative overflow-hidden bg-surface-container-lowest/50">
+<div class="max-w-container-max mx-auto px-margin-mobile">
+<div class="flex flex-col gap-12">
+<div class="flex justify-between items-end">
+<div class="space-y-4">
+<h3 class="font-label-mono text-label-mono text-primary-container uppercase tracking-[0.2em]">Protocol Architecture</h3>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Systems Logic</h2>
+</div>
+<div class="hidden md:flex items-center gap-4">
+<button class="w-12 h-12 rounded-full border border-outline-variant flex items-center justify-center hover:bg-primary-container hover:text-on-primary transition-all">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<button class="w-12 h-12 rounded-full border border-outline-variant flex items-center justify-center hover:bg-primary-container hover:text-on-primary transition-all">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-module-gap">
+<div class="group relative aspect-square md:aspect-auto md:h-[600px] overflow-hidden rounded-xl border border-outline-variant/20">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A sophisticated technical blueprint of an AI motherboard, showing glowing circuits and data pathways in a monochromatic aesthetic with neon green highlights. The image is crisp, detailed, and feels like a top-secret engineering schematic from a future tech company, featuring high contrast and a dark, moody environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRwcI_iDDeO1oeaRiJQDv0aWdh1PxdAIuRzN3zSXnM3PX0K2aPBUZmmarsPOFUz5MJ7xDktxqGJWzAQagpBOpcH8xPGMlc7YdJT5FiIq6UO0rnSBwg-Arotct9HT3f1vcDqaCUw4CTDr5GQn04wf1-kspdq7HTXZxN_lR5Cgbom6DxCJTqR2-fmmnq55_gk_B8Atu0r33f0wynxsVihP825-AnSfTYGCFFZGtmgAbQkQ25Y2Kp3wdkz95B0opwVdm_uTp_gG9HJFs"/>
+<div class="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-background to-transparent">
+<h5 class="font-label-mono text-label-mono text-primary-container mb-2">MODULE 01</h5>
+<p class="font-headline-lg text-2xl text-on-surface">Data Ingestion Engine</p>
+</div>
+</div>
+<div class="group relative aspect-square md:aspect-auto md:h-[600px] overflow-hidden rounded-xl border border-outline-variant/20">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A macro photograph of high-end server hardware illuminated by cool green light. The focus is on complex circuitry and metallic textures, reflecting a sense of immense processing power and high-speed data transfer. The lighting creates deep shadows and brilliant highlights, emphasizing the high-tech, engineered vibe of a professional data center." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBdkfy5h12s40aeNOTZekCHO8JS9IDaVwXWk7WUxcrWC4tYuK0BKswhX0D2rKvyLYbcC8D-4n1v-gxTnK70bIhnGyAk3ZX2tqXt--J8y8LmNNzJxptdHPCyDZ8iTBcn4RDYmLJItftCOg8vQh81_2SJZkFkTt40AP2cQnhN16jZIb4U651CSViGUSyAiuerk6Dn8IFsKh6v0eq1RRUUwp2URYaRSevs6Sae2-Quk4KC8FOuh-ZhJbRfzTel2VMfdUCMqeV-bpzT0M"/>
+<div class="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-background to-transparent">
+<h5 class="font-label-mono text-label-mono text-primary-container mb-2">MODULE 02</h5>
+<p class="font-headline-lg text-2xl text-on-surface">Neural Weighting Layer</p>
+</div>
+</div>
+<div class="group relative aspect-square md:aspect-auto md:h-[600px] overflow-hidden rounded-xl border border-outline-variant/20">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A clean, minimalist 3D rendering of a glass cube containing a complex, glowing cluster of data points shaped like a brain. The lighting is ethereal and clinical, with soft neon green glows reflecting off the glass surfaces. It represents the encapsulation of artificial intelligence in a secure, engineered environment. Dark mode aesthetic with high detail." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZGMi7PA4Lkr-w9Fg2HSac_PEEQvyetGtwkCeCmd3xBjVkCNOcNrc38GwBECHJqr2W-Uyc7VqXESkrmXze7wb5zcV-P6eeFbE26u_NqcFNuOfP67SmO5FnV7oiSiRxQX2LwrOvDMmWKyV7TT820RKO8AzyEZMuaes0ktbZteqqFHk4tM8t10e5fjlULAQ2SsnIqYCzI0UX8ogf4rEKd_1_ddxOaWmQYZNddbKvSFtYTmbb7Ffnji1fklwPfjHD4tXFSHKOcSJBOf0"/>
+<div class="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-background to-transparent">
+<h5 class="font-label-mono text-label-mono text-primary-container mb-2">MODULE 03</h5>
+<p class="font-headline-lg text-2xl text-on-surface">Consensus Mechanism</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Code Snippet Section -->
+<section class="max-w-container-max mx-auto px-margin-mobile py-section-gap">
+<div class="bg-surface-elevated rounded-3xl border border-outline-variant/30 overflow-hidden shadow-2xl">
+<div class="flex items-center justify-between px-8 py-4 bg-surface-container border-b border-outline-variant/30">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-error/40"></div>
+<div class="w-3 h-3 rounded-full bg-secondary/40"></div>
+<div class="w-3 h-3 rounded-full bg-primary-container/40"></div>
+<span class="ml-4 font-label-mono text-label-mono text-text-muted">inference_cluster.py</span>
+</div>
+<span class="font-label-mono text-label-mono text-primary-container/60 select-none">Python / Torch</span>
+</div>
+<div class="p-8 md:p-12 font-label-mono text-body-md overflow-x-auto">
+<pre class="text-on-surface-variant"><code class="language-python"><span class="text-primary-container">import</span> torch.nn <span class="text-primary-container">as</span> nn
+<span class="text-primary-container">import</span> decentral_consensus <span class="text-primary-container">as</span> dc
+
+<span class="text-text-muted"># Initialize the swarm neural fabric</span>
+<span class="text-primary-container">class</span> <span class="text-on-surface">FabricNode</span>(nn.Module):
+    <span class="text-primary-container">def</span> <span class="text-on-surface">__init__</span>(self, dims=1024, nodes=64):
+        super().<span class="text-on-surface">__init__</span>()
+        self.fabric = dc.GossipLayer(dims, nodes)
+        self.encoder = nn.TransformerEncoderLayer(d_model=dims, nhead=8)
+        
+    <span class="text-primary-container">def</span> <span class="text-on-surface">forward</span>(self, x, local_consensus):
+        <span class="text-text-muted"># Distributed consensus propagation</span>
+        state = self.fabric(x, local_consensus)
+        return self.encoder(state)
+
+<span class="text-text-muted"># Execution entry point</span>
+node = FabricNode(nodes=256)
+<span class="text-on-surface">print</span>(<span class="text-secondary">"Fabric Layer initialized with 256 peer consensus."</span>)</code></pre>
+</div>
+</div>
+</section>
+<!-- Deep Dive Gallery -->
+<section class="max-w-container-max mx-auto px-margin-mobile py-section-gap">
+<div class="flex flex-col gap-12">
+<div class="flex flex-col gap-4">
+<h3 class="font-label-mono text-label-mono text-primary-container uppercase tracking-[0.2em]">Deep Dive</h3>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Visualization &amp; Results</h2>
+</div>
+<div class="columns-1 md:columns-2 gap-module-gap">
+<div class="break-inside-avoid mb-module-gap rounded-3xl overflow-hidden border border-outline-variant/20">
+<img class="w-full hover:scale-105 transition-transform duration-700" data-alt="A dark, high-contrast visualization of a complex data cluster, showing hundreds of glowing green points connected by thin, sharp lines. The image captures the feeling of a huge digital network breathing and evolving in a void. Soft atmospheric haze and bokeh effects add a cinematic depth to the technical scene." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHXMSkaH8iK66CFCXtakKRe4_3u99CuoDknfqGNZjLyg4CEn1smL2F9_sV-gfCQAB-7vOC23SsSqXlpanXzNt36_WVAxn0IU9MwVUiqUEejRlWlZ3J9r-iWGOVsm88ZchXkbJrPcsHJtz8qyaoQfJ2_pPtPikE330TlAt-T1W53iYbAzoWuOFHWogmW4NmFMj4Db1eoGeismFE9DXs8Y6sDRjpfTohuLyhUZ7mOiHgOTKwOVV8nZ-b4GuJKfbAbfDCBlgIjZRssTo"/>
+</div>
+<div class="break-inside-avoid mb-module-gap rounded-3xl overflow-hidden border border-outline-variant/20">
+<img class="w-full hover:scale-105 transition-transform duration-700" data-alt="A close-up shot of a futuristic control interface with holographic elements and technical readouts. The color palette is dark, with intense neon green accents highlighting critical data paths. The surface has a brushed metallic texture, and the lighting is dramatic, casting long shadows across the control panel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBw_w0eXEDob8qoDdW_7ysJSTSVyhDDDySxPCej-6gTg3q2YF32IhTX59xP2YUzeaLNlgirAOLxscFGdvShVPCriS3MoMJr7nN50da6KwfdAxHGzw3uSLY0MarAOaTXYtxccP5hhMcj6RsEebrUvn-66baymH990yln7qO_PYo3mgrKP_qegY-kw9KqmKU6khLEUNXWtXvg-r9CMdvhkU-vudjZzBJcVD6st0kzu5hNXji0GNpzRJwj51eag_utyOtsx-f_1XQ08ao"/>
+</div>
+<div class="break-inside-avoid mb-module-gap rounded-3xl overflow-hidden border border-outline-variant/20">
+<img class="w-full hover:scale-105 transition-transform duration-700" data-alt="An abstract representation of AI learning, featuring a series of layered translucent planes with intricate geometric patterns etched into them. These planes are illuminated by a soft green glow from beneath, creating a sense of deep structural complexity and digital elegance. Deep shadows and high-key highlights define the form." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPBuqO1vBx0d77I8Vwti57PmVWkIIJWmU3NBPf0th9xM2Vssurw7YG6v93kbccOnChcn9kXXZuLCEnmSodM5PzcGEZF0QHgGXwWo3uGx84YxGembsv8HdKx5Agc1O0ZNABeQS2HxaSF9ASEBNnZLTVR0dUaic_Ki1LtUSK36xsUISuRJ74rhLINUd_6aNv1tXkhdqWB7S6ttXTfi4ZgLN0md599qHzqRJrfHqyI16Vr219pNy-58PAQzMH57V1aW1A2YcKIKsGpT0"/>
+</div>
+<div class="break-inside-avoid mb-module-gap rounded-3xl overflow-hidden border border-outline-variant/20">
+<img class="w-full hover:scale-105 transition-transform duration-700" data-alt="A large, cinematic view of a futuristic server farm where infinite rows of server racks stretch into a dark distance. Thousands of small neon green status lights create a shimmering effect, while a fine technical grid is faintly visible on the floor. The environment is vast, clean, and perfectly ordered, conveying a sense of monumental computational capacity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSFHfAOnI5sOhTp9NfrJN1JmxWVPZ-SrzKCHs8Ju8dfk2Jv2QVLZFyeoJ59KP7jl5LKzVfehaiKzd25L8eTbBV_Gq9eLhI21CIAF2e5HPAwBFFKVB3uYXaMZaxYM-hV0yRngrBKrwKmOSxzeal1-ZWKXT0w-GYnKa-hM9LIo6AGvInVhNLM2LRlTnS_cB6s7vDizFSGwVh0zZk9-Fo44f6p5AHTFJ52-nlDCHoumYjRByy9PxeES9d3Uy9eIPAkL-PibimJoo3bNQ"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Next Project Call to Action -->
+<section class="py-section-gap px-margin-mobile border-t border-outline-variant/10">
+<div class="max-w-container-max mx-auto flex flex-col items-center text-center gap-12">
+<span class="font-label-mono text-label-mono text-text-muted">Next Narrative</span>
+<a class="group" href="#">
+<h2 class="font-display-hero text-headline-lg md:text-[120px] leading-none text-on-surface-variant group-hover:text-primary transition-all duration-500 hover:tracking-widest">
+                        Glitch Art <br/> Festival
+                    </h2>
+</a>
+<div class="mt-8">
+<button class="px-10 py-5 bg-primary-container text-on-primary rounded-full font-headline-lg text-xl hover:shadow-neon-glow transition-all duration-300 flex items-center gap-4 group">
+                        Return to Work
+                        <span class="material-symbols-outlined transition-transform group-hover:-translate-y-1 group-hover:translate-x-1">arrow_outward</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation (Shared Component) -->
+<nav class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-module-gap px-4 py-2 bg-surface-container/80 backdrop-blur-xl docked full-width rounded-full max-w-fit mx-auto border border-outline-variant/10 shadow-[0_0_30px_rgba(0,255,65,0.15)]">
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-3 hover:text-primary hover:scale-110 transition-transform duration-300" href="#">
+<span class="material-symbols-outlined">code</span>
+<span class="font-label-mono text-[8px] uppercase mt-1">Github</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary text-on-primary rounded-full p-3 shadow-neon-glow hover:scale-110 transition-transform duration-300" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">terminal</span>
+<span class="font-label-mono text-[8px] uppercase mt-1">Project</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-3 hover:text-primary hover:scale-110 transition-transform duration-300" href="#">
+<span class="material-symbols-outlined">share</span>
+<span class="font-label-mono text-[8px] uppercase mt-1">Share</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-3 hover:text-primary hover:scale-110 transition-transform duration-300" href="#">
+<span class="material-symbols-outlined">sensors</span>
+<span class="font-label-mono text-[8px] uppercase mt-1">Status</span>
+</a>
+</nav>
+<footer class="py-12 border-t border-outline-variant/10 px-margin-mobile">
+<div class="max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+<p class="font-label-mono text-label-mono text-text-muted uppercase tracking-widest">© 2026 ARCHIVE.AI / ATIKUR RAHMAN</p>
+<div class="flex gap-8">
+<a class="font-label-mono text-label-mono text-text-muted hover:text-primary transition-colors" href="#">Twitter</a>
+<a class="font-label-mono text-label-mono text-text-muted hover:text-primary transition-colors" href="#">LinkedIn</a>
+<a class="font-label-mono text-label-mono text-text-muted hover:text-primary transition-colors" href="#">Privacy</a>
+</div>
+</div>
+</footer>
+<script>
+        // Subtle micro-interaction: Grid movement on scroll
+        window.addEventListener('scroll', () => {
+            const grid = document.querySelector('.technical-grid');
+            const scrolled = window.pageYOffset;
+            grid.style.transform = `translateY(${scrolled * 0.1}px)`;
+        });
+
+        // Hover effect for labels to glow
+        document.querySelectorAll('.font-label-mono').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                el.style.textShadow = '0 0 10px rgba(0, 255, 65, 0.4)';
+            });
+            el.addEventListener('mouseleave', () => {
+                el.style.textShadow = 'none';
+            });
+        });
+    </script>
+</body></html>

@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Fraunces:ital,opsz,wght@1,9..144,700;1,9..144,900&family=Space+Grotesk:wght@300;400;500;600;700&family=La+Belle+Aurore&family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Fraunces", serif;
+  --font-mono: "Space Grotesk", monospace;
+  --font-script: "La Belle Aurore", cursive;
+  --font-headline: "Syne", sans-serif;
+  --font-code: "JetBrains Mono", monospace;
+}
+
+:root {
+  --bg: #030303;
+  --surface: #080808;
+  --rv-card: #0a0a0a;
+  --card-hover: #121212;
+  --gold: #22d3ee; /* Keeping the Blue/Cyan color user likes */
+  --gold-light: #67e8f9;
+  --gold-dim: rgba(34, 211, 238, 0.15);
+  --indigo: #6366f1; /* Indigo */
+  --indigo-light: #818cf8;
+  --indigo-dim: rgba(99, 102, 241, 0.15);
+  --emerald: #10b981; /* Emerald accent from Ravindra's resume */
+  --emerald-dim: rgba(16, 185, 129, 0.12);
+  --text: #ffffff;
+  --rv-muted: #a3a3a3; /* Muted text from Ravindra's resume */
+  --border-rv: rgba(255, 255, 255, 0.05);
+  --border-hover: rgba(34, 211, 238, 0.3);
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  margin: 0;
+  overflow-x: hidden;
+  font-family: var(--font-sans);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.05;
+}
+
+.glass-panel {
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(24px);
+  border: 1px solid var(--border-rv);
+}
+
+.dot-pattern {
+  background-image: radial-gradient(var(--gold-dim) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.btn-primary {
+  position: relative;
+  isolation: isolate;
+  padding: 1rem 2rem;
+  border-radius: 9999px;
+  color: white;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  transition: all 0.3s ease;
+}
+
+.btn-primary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: conic-gradient(from 0deg, var(--gold), var(--indigo), var(--emerald), transparent 70%);
+  animation: spinAngle 3s linear infinite;
+  opacity: 0.6;
+  z-index: -2;
+}
+
+.btn-primary::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  background: var(--bg);
+  z-index: -1;
+}
+
+@keyframes spinAngle {
+  to { transform: rotate(360deg); }
+}
+
+.tech-tile {
+  background: var(--rv-card);
+  border: 1px solid var(--border-rv);
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.tech-tile:hover {
+  border-color: var(--gold);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px -10px var(--gold-dim);
+}

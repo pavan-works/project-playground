@@ -1,0 +1,413 @@
+<!DOCTYPE html><html class="dark" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Solige Pullaiah | AI &amp; ML Portfolio 2026</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Playfair+Display:ital,wght@0,700;1,700&amp;family=Cormorant+Garamond:ital,wght@1,600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed": "#72ff70",
+                        "tertiary-container": "#dfdcdb",
+                        "surface-dim": "#131313",
+                        "secondary-fixed-dim": "#c6c6c7",
+                        "on-surface": "#e5e2e1",
+                        "primary-container": "#00ff41",
+                        "on-primary": "#003907",
+                        "surface": "#131313",
+                        "inverse-surface": "#e5e2e1",
+                        "tertiary": "#fcf8f8",
+                        "secondary": "#c6c6c7",
+                        "tertiary-fixed-dim": "#c8c6c5",
+                        "on-surface-variant": "#b9ccb2",
+                        "text-muted": "#888888",
+                        "outline-variant": "#3b4b37",
+                        "on-error": "#690005",
+                        "tertiary-fixed": "#e5e2e1",
+                        "on-secondary": "#2f3131",
+                        "background": "#0a0a0a",
+                        "on-secondary-fixed": "#1a1c1c",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-tertiary-fixed-variant": "#474746",
+                        "neon-glow": "rgba(0, 255, 65, 0.4)",
+                        "on-tertiary": "#313030",
+                        "surface-container-low": "#1c1b1b",
+                        "on-primary-fixed-variant": "#00530e",
+                        "on-primary-fixed": "#002203",
+                        "inverse-primary": "#006e16",
+                        "on-secondary-fixed-variant": "#454747",
+                        "on-tertiary-fixed": "#1c1b1b",
+                        "primary-fixed-dim": "#00e639",
+                        "on-tertiary-container": "#616060",
+                        "on-background": "#e5e2e1",
+                        "surface-container-highest": "#353534",
+                        "surface-tint": "#00e639",
+                        "inverse-on-surface": "#313030",
+                        "error": "#ffb4ab",
+                        "outline": "#84967e",
+                        "secondary-fixed": "#e2e2e2",
+                        "surface-bright": "#3a3939",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary-container": "#b4b5b5",
+                        "surface-container-high": "#2a2a2a",
+                        "secondary-container": "#454747",
+                        "surface-variant": "#353534",
+                        "surface-container": "#201f1f",
+                        "primary": "#ebffe2",
+                        "on-primary-container": "#007117",
+                        "surface-elevated": "#121212",
+                        "error-container": "#93000a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "module-gap": "4px",
+                        "section-gap": "120px",
+                        "margin-mobile": "16px",
+                        "gutter": "24px",
+                        "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                        "display-hero": ["Syne"],
+                        "label-mono": ["JetBrains Mono"],
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Syne"],
+                        "serif-display": ["Playfair Display"],
+                        "script-accent": ["Cormorant Garamond"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #0d0e0e; /* Deep matte black base */
+        }
+        .grain-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("https://www.transparenttextures.com/patterns/black-linen.png"); /* Finer noise/grain */
+            opacity: 0.8;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        .grid-background {
+            background-image: 
+                linear-gradient(rgba(114, 255, 112, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(114, 255, 112, 0.05) 1px, transparent 1px);
+            background-size: 80px 80px; /* Thinner, subtler technical grid */
+        }
+        .text-distressed {
+            background: linear-gradient(to bottom, #f0f0f0, #999);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+        }
+        .text-script-glow {
+            color: #72ff70;
+            text-shadow: 0 0 15px rgba(114, 255, 112, 0.5);
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+        }
+        .vertical-label {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transform: rotate(180deg);
+        }
+        
+        /* Specific tweaks to match reference image */
+        .port-text {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-style: normal;
+        }
+        
+        .folio-text {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-style: normal;
+        }
+        
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #0A0A0A; }
+        ::-webkit-scrollbar-thumb { background: #333; }
+        ::-webkit-scrollbar-thumb:hover { background: #72ff70; }
+    </style>
+</head>
+<body class="text-on-surface overflow-x-hidden selection:bg-primary-fixed-dim selection:text-black min-h-screen">
+<div class="grain-overlay"></div>
+<div class="fixed inset-0 pointer-events-none grid-background z-[-1]"></div>
+<!-- Header Navigation -->
+<header class="fixed top-8 left-1/2 -translate-x-1/2 z-[100] w-full max-w-2xl px-margin-mobile">
+<nav class="bg-[#1a1c1c]/60 backdrop-blur-md border border-white/5 rounded-full h-14 flex items-center justify-between px-8">
+<div class="font-display-hero text-lg font-bold tracking-tighter">PULI PAVAN</div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="font-label-mono text-[10px] uppercase tracking-widest text-primary-fixed-dim" href="#home">Home</a>
+<a class="font-label-mono text-[10px] uppercase tracking-widest text-on-surface-variant hover:text-white transition-colors" href="#work">Work</a>
+<a class="font-label-mono text-[10px] uppercase tracking-widest text-on-surface-variant hover:text-white transition-colors" href="#about">About</a>
+<a class="font-label-mono text-[10px] uppercase tracking-widest text-on-surface-variant hover:text-white transition-colors" href="#contact">Contact</a>
+</div>
+<button class="border border-primary-fixed-dim text-primary-fixed-dim h-8 px-6 rounded-full font-label-mono text-[10px] uppercase tracking-widest hover:bg-primary-fixed-dim hover:text-black transition-all">Hire</button>
+</nav>
+</header>
+<!-- Main Content -->
+<main class="relative selection:bg-primary-fixed-dim selection:text-black flex flex-col">
+<!-- Hero Section -->
+<section class="relative min-h-screen flex flex-col items-center justify-center pt-20 px-margin-mobile opacity-100 translate-y-0 transition-all duration-1000" id="home">
+<!-- Top thin line -->
+<div class="absolute top-32 left-1/2 -translate-x-1/2 w-3/4 max-w-4xl h-[1px] bg-white/10 hidden md:block">
+<div class="absolute left-0 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-primary-fixed-dim"></div>
+</div>
+<!-- Vertical Labels (Left and Right) -->
+<div class="hidden lg:flex absolute left-8 top-1/2 -translate-y-1/2 flex-col items-center gap-4 opacity-70">
+<span class="material-symbols-outlined text-sm text-white">magic_button</span>
+<div class="vertical-label font-label-mono text-[10px] uppercase tracking-[0.4em] text-white">POETRY IN DESIGN</div>
+</div>
+<div class="hidden lg:flex absolute right-8 top-1/2 -translate-y-1/2 flex-col items-center gap-4 opacity-70">
+<div class="vertical-label font-label-mono text-[10px] uppercase tracking-[0.4em] text-white">VISUAL STORYTELLER</div>
+<span class="material-symbols-outlined text-sm text-white">magic_button</span>
+</div>
+<!-- Central Typography Cluster -->
+<div class="relative w-full max-w-6xl mx-auto flex flex-col items-center mt-12">
+<!-- Top Left Version Info -->
+<div class="absolute left-4 md:left-32 top-12 flex flex-col gap-1 items-start z-20">
+<span class="material-symbols-outlined text-white text-sm transform rotate-180 mb-2">arrow_outward</span>
+<div class="font-label-mono text-[10px] uppercase tracking-[0.3em] text-white">VERSION /</div>
+<div class="font-label-mono text-[10px] font-bold text-primary-fixed-dim tracking-widest">2026</div>
+</div>
+<!-- 2026 Badge -->
+<div class="absolute top-[-20px] md:top-0 left-1/2 md:left-[35%] -translate-x-1/2 z-20">
+<div class="bg-primary-fixed-dim text-black px-6 py-1 rounded-full font-label-mono text-sm tracking-widest font-bold border border-primary-fixed-dim">2026</div>
+</div>
+<!-- Staggered Portfolio Wordmark -->
+<div class="relative flex flex-col justify-center items-center w-full max-w-5xl">
+<!-- Port -->
+<div class="w-full flex justify-start md:pl-24 relative z-0">
+<span class="port-text text-distressed text-[120px] md:text-[280px] leading-none tracking-tight">Port</span>
+</div>
+<!-- folio -->
+<div class="w-full flex justify-end md:pr-24 relative z-0 -mt-[40px] md:-mt-[100px]">
+<span class="folio-text text-distressed text-[120px] md:text-[280px] leading-none tracking-tight">olio</span>
+<span class="absolute right-[5%] top-[10%] text-white text-xl md:text-3xl font-serif">®</span>
+</div>
+<!-- Neon Spine 'f' -->
+<div class="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+<span class="text-script-glow text-[200px] md:text-[450px] leading-none select-none translate-x-[20px] md:translate-x-[50px] -translate-y-[20px] md:-translate-y-[40px] font-light">f</span>
+</div>
+</div>
+<!-- Bottom Right Design Info -->
+<div class="absolute right-4 md:right-32 bottom-[-40px] flex items-center gap-4 z-20">
+<div class="w-10 h-10 border border-white rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-white transform -rotate-45">arrow_forward</span>
+</div>
+<div class="flex flex-col text-right">
+<div class="font-label-mono text-[10px] uppercase tracking-[0.2em] text-white">DESIGN EXECUTED</div>
+<div class="font-serif text-sm text-white italic"><span class="font-sans not-italic text-[10px] tracking-widest uppercase text-white/70">by</span> SOLIGE PULLAIAH</div>
+</div>
+</div>
+</div>
+</section>
+<!-- About Section -->
+<section class="py-24 relative px-margin-mobile transition-all duration-1000 opacity-100 translate-y-0" id="about">
+<div class="max-w-4xl mx-auto pt-20">
+<div class="grid lg:grid-cols-12 gap-12 items-start">
+<div class="lg:col-span-3">
+<h2 class="font-serif-display text-5xl md:text-7xl italic text-white font-bold tracking-tighter">Hey!</h2>
+</div>
+<div class="lg:col-span-9">
+<p class="font-display-hero text-2xl md:text-4xl leading-tight tracking-tight uppercase text-white/90">
+                            I'M <span class="text-primary-fixed-dim">SOLIGE PULLAIAH</span> — THE AI ENGINEER WHO LIVES AND BREATHES INTELLIGENT SYSTEMS. WHETHER IT'S TRAINING A NEURAL NETWORK, SOLVING REAL-WORLD PROBLEMS WITH ML, OR BUILDING IMPACTFUL AI SOLUTIONS, INNOVATION FUELS EVERYTHING I DO.
+                        </p>
+<div class="mt-16 flex flex-wrap gap-12 border-t border-white/10 pt-8">
+<div>
+<div class="font-label-mono text-[10px] uppercase tracking-widest opacity-50 mb-2 text-white">CONNECT</div>
+<a class="block font-label-mono text-sm hover:text-primary-fixed-dim transition-colors text-white" href="https://linkedin.com/in/solige-pullaiah-478462270">LinkedIn</a>
+</div>
+<div>
+<div class="font-label-mono text-[10px] uppercase tracking-widest opacity-50 mb-2 text-white">LOCATION</div>
+<div class="font-label-mono text-sm text-white">Andhra Pradesh, IN</div>
+</div>
+<div>
+<div class="font-label-mono text-[10px] uppercase tracking-widest opacity-50 mb-2 text-white">ROLE</div>
+<div class="font-label-mono text-sm text-white">AI Intern — Hrud.ai</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Portfolio Table of Content -->
+<section class="py-24 px-margin-mobile transition-all duration-1000 opacity-100 translate-y-0">
+<div class="max-w-6xl mx-auto">
+<div class="relative mb-24">
+<h2 class="font-serif-display text-6xl md:text-8xl italic leading-none text-primary-fixed-dim">
+<span class="block mb-[-0.2em] relative z-10 font-light">Table of</span>
+<span class="text-white font-bold not-italic font-display-hero uppercase tracking-tighter ml-12 md:ml-24">Content</span>
+</h2>
+</div>
+<div class="grid md:grid-cols-3 gap-y-16 gap-x-12 border-t border-white/10 pt-16">
+<div class="group cursor-pointer">
+<span class="font-serif-display text-2xl opacity-30 block mb-4 group-hover:text-primary-fixed-dim group-hover:opacity-100 transition-all text-white">01</span>
+<h3 class="font-display-hero text-xl uppercase tracking-tighter mb-2 text-white">AI / ML Projects</h3>
+<p class="font-body-md text-white/60 text-sm">End-to-end machine learning models and predictive systems.</p>
+</div>
+<div class="group cursor-pointer">
+<span class="font-serif-display text-2xl opacity-30 block mb-4 group-hover:text-primary-fixed-dim group-hover:opacity-100 transition-all text-white">02</span>
+<h3 class="font-display-hero text-xl uppercase tracking-tighter mb-2 text-white">Deep Learning</h3>
+<p class="font-body-md text-white/60 text-sm">Complex neural architectures and optimization pipelines.</p>
+</div>
+<div class="group cursor-pointer">
+<span class="font-serif-display text-2xl opacity-30 block mb-4 group-hover:text-primary-fixed-dim group-hover:opacity-100 transition-all text-white">03</span>
+<h3 class="font-display-hero text-xl uppercase tracking-tighter mb-2 text-white">Computer Vision</h3>
+<p class="font-body-md text-white/60 text-sm">Facial recognition systems and real-time processing.</p>
+</div>
+<div class="group cursor-pointer">
+<span class="font-serif-display text-2xl opacity-30 block mb-4 group-hover:text-primary-fixed-dim group-hover:opacity-100 transition-all text-white">04</span>
+<h3 class="font-display-hero text-xl uppercase tracking-tighter mb-2 text-white">Data Science</h3>
+<p class="font-body-md text-white/60 text-sm">Advanced analytics and insightful data visualizations.</p>
+</div>
+<div class="group cursor-pointer">
+<span class="font-serif-display text-2xl opacity-30 block mb-4 group-hover:text-primary-fixed-dim group-hover:opacity-100 transition-all text-white">05</span>
+<h3 class="font-display-hero text-xl uppercase tracking-tighter mb-2 text-white">Systems Design</h3>
+<p class="font-body-md text-white/60 text-sm">Architecture for production-ready intelligent systems.</p>
+</div>
+<div class="group cursor-pointer">
+<span class="font-serif-display text-2xl opacity-30 block mb-4 group-hover:text-primary-fixed-dim group-hover:opacity-100 transition-all text-white">06</span>
+<h3 class="font-display-hero text-xl uppercase tracking-tighter mb-2 text-white">Certifications</h3>
+<p class="font-body-md text-white/60 text-sm">Academic and professional credentials in tech.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Works Gallery -->
+<section class="py-24 px-margin-mobile transition-all duration-1000 opacity-100 translate-y-0" id="work">
+<div class="max-w-6xl mx-auto">
+<!-- Project Category Header -->
+<div class="flex items-center justify-between mb-12 border-b border-white/10 pb-8">
+<div class="flex items-center gap-4">
+<h3 class="font-serif-display text-4xl md:text-5xl italic text-white">Selected</h3>
+<span class="text-primary-fixed-dim font-display-hero text-3xl md:text-4xl uppercase font-bold tracking-tighter">Works</span>
+</div>
+<div class="border border-white/20 px-4 py-1.5 rounded-full">
+<span class="font-label-mono text-[10px] uppercase tracking-widest text-primary-fixed-dim">VOL — 01</span>
+</div>
+</div>
+<!-- Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="relative aspect-[4/5] bg-[#111] overflow-hidden rounded-xl border border-white/5 group cursor-pointer">
+<img alt="Work 01" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-80 group-hover:opacity-100" src="https://lh3.googleusercontent.com/aida/AP1WRLuzer8W23r3he9ySq6SIkfkE73K4Elr_qz5CMO9qbsFtuqfzbMXkbe2T4hLHa1C7YPZdVbbJWMtN_wgUGPgnISsadx2HYFAQw4uyYUEDkBAxTMIr9kjUVYmuwPUrrH1s6dAMn3AD9W5g9ZZ1tRzARA1wASL0slrtz1BqeF-4bcTUyS2yxmyP1bFR4zGlH-zIKYze21W1jfOe34_VVZa6DcJYKhDZFXPTA6e0EV3wnREsa8zd6Sc1uSj4T0">
+<div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-6 flex flex-col justify-end h-1/2">
+<span class="font-serif text-lg italic text-white mb-1">Neural Dynamics</span>
+<span class="font-label-mono text-[10px] text-primary-fixed-dim uppercase tracking-widest">AI Architecture</span>
+</div>
+</div>
+<div class="relative aspect-[4/5] bg-[#111] overflow-hidden rounded-xl border border-white/5 group cursor-pointer">
+<img alt="Work 02" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-80 group-hover:opacity-100" src="https://lh3.googleusercontent.com/aida/AP1WRLtUjdwQaMrzv2wO2YmB5DmnCsEnkhz5B0XQ6khWcuWvmAbekkTv49723e6jdmDPKiNPq1Icj4M_MyzDwuXjT5CRKPnTEDhIPp5qaNN6g6aNsh13dH41tLratVDazryDLdRMgjMCWBiDaPGaKnq2cJ-77SBvUA2BauFkQQ4xhD66naYY3pX5J2-h9W6Lg_OxeqBPh48Q95T2SAKCvCJt-Rkw_lLDWBDLUXMNrrektA7KpEecAWqx6L-sUO0">
+<div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-6 flex flex-col justify-end h-1/2">
+<span class="font-serif text-lg italic text-white mb-1">Cognitive Core</span>
+<span class="font-label-mono text-[10px] text-primary-fixed-dim uppercase tracking-widest">Deep Learning</span>
+</div>
+</div>
+<div class="relative aspect-[4/5] bg-[#111] overflow-hidden rounded-xl border border-white/5 group cursor-pointer">
+<img alt="Work 03" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-80 group-hover:opacity-100" src="https://lh3.googleusercontent.com/aida/AP1WRLttcJBTRie3W4RqY2FrpmlLjgdO5rC6A0qgRdUTgcdabjptQT0JO7VAN5cZsmID6vnSNZupeBlRC4WDHYp5dt0IwE7rFZL8Ujjf7MQ7X3-VOKs1C421RgUEKDDMwUiitjOS6w-GpIYE-n_G9wrAEMu4ScOtSn0b-8MJjJFGXZyrd_gYXs4Srj-sdUTKAGg0Mawo6XQBfK8_C-ZryUUzWoJASIn54FzqRwHJ9tPoK2AzkYfU_u3_30BjJgI">
+<div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-6 flex flex-col justify-end h-1/2">
+<span class="font-serif text-lg italic text-white mb-1">Vision Pipeline</span>
+<span class="font-label-mono text-[10px] text-primary-fixed-dim uppercase tracking-widest">Computer Vision</span>
+</div>
+</div>
+<div class="relative aspect-[4/5] bg-[#111] overflow-hidden rounded-xl border border-white/5 group cursor-pointer">
+<img alt="Work 04" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-80 group-hover:opacity-100" src="https://lh3.googleusercontent.com/aida/AP1WRLsp5r7j5F3L2RNqcksQZQGIWAyWIC7mPRB9W0eAeTob801glWV5IvAdUjn1XtpTnHKzZGQfj7cjq9z5-i8wYfTUnypivtU5QsFefKy1R3RqngPL-fLYK9Q0PPrj6RrXkRXUv2sKz3HFa44EZlZUiXR-l0sn6ol-c-PtpZLVeYIaDlx-qac5fDZ30EUIFmFuRRvthZdCqanly8yLxGk1S3rB_dCAA-WLn_0FNqjaNnW93ZyPoo_4nX2ADf4">
+<div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-6 flex flex-col justify-end h-1/2">
+<span class="font-serif text-lg italic text-white mb-1">Data Weave</span>
+<span class="font-label-mono text-[10px] text-primary-fixed-dim uppercase tracking-widest">Data Science</span>
+</div>
+</div>
+</div>
+<div class="mt-16 flex flex-col md:flex-row items-center justify-between pt-12 border-t border-white/10">
+<div class="max-w-xl text-center md:text-left mb-8 md:mb-0">
+<h4 class="font-display-hero text-xl uppercase mb-2 text-white">Ready to Build the Future?</h4>
+<p class="font-body-md text-white/60 text-sm">Let's collaborate on your next AI breakthrough. From research to deployment, I handle the complexity of intelligent systems.</p>
+</div>
+<button class="bg-primary-fixed-dim text-black px-8 py-3 rounded-full font-label-mono text-xs uppercase tracking-widest font-bold hover:bg-white transition-all">Get in Touch</button>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="py-24 px-margin-mobile border-t border-white/10 relative" id="contact">
+<div class="max-w-6xl mx-auto text-center">
+<div class="relative inline-block mb-16">
+<h2 class="font-serif-display text-[50px] md:text-[80px] leading-none text-white font-bold">
+<span class="block">Thanks <span class="text-primary-fixed-dim italic font-light font-script-accent">For</span></span>
+<span class="block">Watching</span>
+</h2>
+<div class="absolute -right-4 bottom-0 w-12 h-12 bg-primary-fixed-dim flex items-center justify-center rounded-xl rotate-12 -z-10">
+<span class="material-symbols-outlined text-black font-bold">favorite</span>
+</div>
+</div>
+<div class="flex flex-col md:flex-row justify-between items-center gap-8 pt-16 border-t border-white/5">
+<div class="text-left flex flex-col gap-2">
+<div class="font-label-mono text-[10px] uppercase tracking-widest text-white/40">SOCIALS</div>
+<div class="flex gap-6">
+<a class="font-label-mono text-xs text-white hover:text-primary-fixed-dim transition-colors uppercase" href="https://linkedin.com/in/solige-pullaiah-478462270">LINKEDIN</a>
+<a class="font-label-mono text-xs text-white hover:text-primary-fixed-dim transition-colors uppercase" href="#">GITHUB</a>
+<a class="font-label-mono text-xs text-white hover:text-primary-fixed-dim transition-colors uppercase" href="#">BEHANCE</a>
+</div>
+</div>
+<div class="text-right flex flex-col gap-2 items-center md:items-end">
+<div class="font-label-mono text-[10px] uppercase tracking-widest text-white/40">SAY HELLO</div>
+<a class="font-serif-display text-xl md:text-2xl italic text-white hover:text-primary-fixed-dim transition-colors" href="mailto:pulipavan696@gmail.com">pulipavan696@gmail.com</a>
+</div>
+</div>
+<div class="mt-16 font-label-mono text-[10px] text-white/30 uppercase tracking-[0.3em]">
+                    © 2026 SOLIGE PULLAIAH — ALL RIGHTS RESERVED
+                </div>
+</div>
+</footer>
+</main>
+<!-- Floating UI Helper -->
+<div class="fixed bottom-10 right-10 z-[100] group hidden">
+<button class="w-14 h-14 bg-[#1a1c1c]/80 backdrop-blur-md border border-white/10 rounded-full flex items-center justify-center text-primary-fixed-dim hover:scale-110 transition-all">
+<span class="material-symbols-outlined">menu_open</span>
+</button>
+</div>
+<script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Simple scroll reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-10');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('section').forEach(section => {
+            section.classList.add('transition-all', 'duration-1000', 'opacity-0', 'translate-y-10');
+            observer.observe(section);
+        });
+    </script>
+</body></html>
