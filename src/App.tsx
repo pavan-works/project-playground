@@ -33,6 +33,7 @@ import {
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { PORTFOLIO_DATA } from "./data";
+import portraitCutout from "./assets/portrait-cutout.png";
 
 const Navbar = () => (
   <nav className="fixed top-0 left-0 w-full z-[60] flex justify-between items-center px-8 md:px-16 py-8 mix-blend-difference">
@@ -63,87 +64,85 @@ const Navbar = () => (
 
 const Hero = () => {
   return (
-    <section id="home" className="relative h-screen flex flex-col items-center justify-center pt-24 overflow-hidden">
-      {/* Background elements */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-[var(--gold)]/5 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute top-[20%] right-[10%] w-[500px] h-[500px] bg-[var(--indigo)]/5 rounded-full blur-[120px] pointer-events-none" />
-      
-      {/* Vertical Side Labels */}
-      <div className="absolute left-8 top-1/2 -translate-y-1/2 flex flex-col gap-32 opacity-10 hidden xl:flex">
-        <div className="-rotate-90 origin-left text-[8px] tracking-[0.8em] font-mono uppercase whitespace-nowrap text-white">
-          Neural Interface / SP-2026 / ALPHA-7
-        </div>
-      </div>
-      <div className="absolute right-8 top-1/2 -translate-y-1/2 flex flex-col gap-32 opacity-10 hidden xl:flex">
-        <div className="rotate-90 origin-right text-[8px] tracking-[0.8em] font-mono uppercase whitespace-nowrap text-white">
-          Location / {PORTFOLIO_DATA.location} / VSP
-        </div>
-      </div>
+    <section id="home" className="relative min-h-screen flex flex-col items-center justify-end pt-24 pb-16 px-6 md:px-14 overflow-hidden">
+      {/* Ambient glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1100px] h-[1100px] bg-[var(--gold)]/5 rounded-full blur-[160px] pointer-events-none" />
 
+      {/* Portrait — centered, behind typography */}
+      <motion.img
+        src={portraitCutout}
+        alt="Solige Pullaiah"
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[70vh] md:h-[85vh] w-auto object-contain z-10 pointer-events-none select-none drop-shadow-[0_20px_60px_rgba(0,0,0,0.6)]"
+      />
 
-
-      {/* Main Typographic Lockup */}
-      <div className="relative flex flex-col items-center w-full max-w-full flex-1 justify-center px-4 md:px-12">
-        <div className="relative mb-0 h-[240px] md:h-[420px] flex items-center justify-center w-full max-w-[1600px]">
-          <motion.h1 
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-            className="text-[110px] md:text-[320px] font-display italic font-black text-white leading-none tracking-tighter absolute left-1/2 -translate-x-full -translate-y-[20%] drop-shadow-[0_0_30px_rgba(255,255,255,0.1)]"
-          >
-            Port
-          </motion.h1>
-          
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8, rotate: 1 }}
-            animate={{ opacity: 1, scale: 0.95, rotate: 1 }}
-            transition={{ duration: 1.5, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="z-30 absolute left-1/2 -translate-x-[40%] translate-y-[22%]"
-          >
-            <span className="text-[150px] md:text-[580px] font-script italic text-[var(--gold)] leading-none drop-shadow-[0_0_80px_rgba(34,211,238,0.4)]">
-              f
+      {/* Typographic lockup */}
+      <div className="relative w-full max-w-[1600px] mx-auto z-0">
+        <motion.h1
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
+          className="font-headline font-black text-white leading-[0.85] tracking-[-0.04em] text-[18vw] md:text-[15vw] text-center whitespace-nowrap"
+          style={{ fontStretch: "condensed" }}
+        >
+          AI
+          <span className="inline-flex items-center justify-center align-middle mx-2 md:mx-4 relative -top-[0.08em]">
+            <span className="inline-flex items-center justify-center w-[0.75em] h-[0.75em] rounded-full border-[0.06em] border-white">
+              <ArrowUpRight className="w-[0.45em] h-[0.45em]" strokeWidth={2.5} />
             </span>
-          </motion.div>
+          </span>
+          Engineer
+        </motion.h1>
 
-          <motion.h1 
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1.2, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="text-[110px] md:text-[320px] font-display italic font-black text-white leading-none tracking-tighter absolute left-1/2 translate-x-0 translate-y-[55%] drop-shadow-[0_0_30px_rgba(255,255,255,0.1)]"
-          >
-            olio
-          </motion.h1>
-        </div>
-
-        {/* Name and Tagline */}
-        <motion.div
+        <motion.h2
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8 }}
-          className="text-center z-30 mt-24 md:mt-32"
+          transition={{ duration: 1.1, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+          className="font-headline font-black leading-[0.85] tracking-[-0.04em] text-[18vw] md:text-[15vw] text-center whitespace-nowrap -mt-[2vw]"
+          style={{
+            WebkitTextStroke: "1.5px rgba(255,255,255,0.85)",
+            color: "transparent",
+          }}
         >
-          <h2 className="text-5xl md:text-[8rem] font-headline font-bold tracking-tighter mb-4 flex items-baseline justify-center gap-6">
-            <span className="text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]">{PORTFOLIO_DATA.name.split(' ')[0]}</span> 
-            <span className="text-white/40 drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">{PORTFOLIO_DATA.name.split(' ')[1]}</span>
-          </h2>
-          <div className="flex items-center justify-center gap-12 mb-4">
-            <div className="h-[1px] w-24 md:w-32 bg-white/10" />
-            <p className="text-[var(--rv-muted)] font-mono text-[9px] md:text-sm tracking-[0.6em] uppercase leading-relaxed max-w-4xl">
-              Architecting the future of human-AI collaboration through <span className="text-[var(--gold)] font-bold">neural synthesis</span>
-            </p>
-            <div className="h-[1px] w-24 md:w-32 bg-white/10" />
-          </div>
+          &amp; ML Researcher
+        </motion.h2>
+      </div>
+
+      {/* Bottom meta row */}
+      <div className="relative z-20 w-full max-w-[1600px] mx-auto mt-8 md:mt-6 flex flex-col md:flex-row items-start md:items-end justify-between gap-6">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.6, duration: 0.8 }}
+          className="text-white/70 text-sm md:text-base font-sans"
+        >
+          based in {PORTFOLIO_DATA.location}.
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.8, duration: 0.8 }}
+          className="flex items-center gap-6 md:gap-8 flex-wrap"
+        >
+          <span className="text-[9px] font-mono text-white/30 tracking-[0.4em] uppercase">Worked with</span>
+          {["Hrud.ai", "CodeForces", "OpenAI", "HuggingFace", "Supabase"].map((c) => (
+            <span key={c} className="text-white/50 text-xs md:text-sm font-headline tracking-wide">
+              {c}
+            </span>
+          ))}
         </motion.div>
       </div>
 
-      {/* Scroll Indicator */}
-      <motion.div 
+      {/* Scroll cue */}
+      <motion.div
         animate={{ y: [0, 8, 0] }}
         transition={{ duration: 2, repeat: Infinity }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-20"
+        className="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-30 z-30"
       >
         <span className="text-[8px] font-mono tracking-[0.8em] uppercase">Scroll</span>
-        <div className="w-[1px] h-10 bg-gradient-to-b from-white to-transparent" />
       </motion.div>
     </section>
   );
