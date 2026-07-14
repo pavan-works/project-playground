@@ -64,33 +64,22 @@ const Navbar = () => (
 
 const Hero = () => {
   return (
-    <section id="home" className="relative min-h-screen flex flex-col items-center justify-end pt-24 pb-16 px-6 md:px-14 overflow-hidden">
+    <section id="home" className="relative h-screen flex flex-col items-center justify-center pt-24 pb-8 px-6 md:px-14 overflow-hidden">
       {/* Ambient glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1100px] h-[1100px] bg-[var(--gold)]/5 rounded-full blur-[160px] pointer-events-none" />
 
-      {/* Portrait — centered, behind typography */}
-      <motion.img
-        src={portraitCutout}
-        alt="Solige Pullaiah"
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[70vh] md:h-[85vh] w-auto object-contain z-10 pointer-events-none select-none drop-shadow-[0_20px_60px_rgba(0,0,0,0.6)]"
-      />
-
-      {/* Typographic lockup */}
-      <div className="relative w-full max-w-[1600px] mx-auto z-0">
+      {/* Typographic lockup — bottom half, top layer */}
+      <div className="absolute inset-x-0 top-[16vh] md:top-[14vh] z-30 pointer-events-none px-4">
         <motion.h1
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
-          className="font-headline font-black text-white leading-[0.85] tracking-[-0.04em] text-[18vw] md:text-[15vw] text-center whitespace-nowrap"
-          style={{ fontStretch: "condensed" }}
+          className="font-headline font-black text-white leading-[0.85] tracking-[-0.05em] text-[14vw] md:text-[11.5vw] text-center whitespace-nowrap"
         >
           AI
-          <span className="inline-flex items-center justify-center align-middle mx-2 md:mx-4 relative -top-[0.08em]">
-            <span className="inline-flex items-center justify-center w-[0.75em] h-[0.75em] rounded-full border-[0.06em] border-white">
-              <ArrowUpRight className="w-[0.45em] h-[0.45em]" strokeWidth={2.5} />
+          <span className="inline-flex items-center justify-center align-middle mx-2 md:mx-3 relative -top-[0.08em]">
+            <span className="inline-flex items-center justify-center w-[0.7em] h-[0.7em] rounded-full border-[0.055em] border-white">
+              <ArrowUpRight className="w-[0.42em] h-[0.42em]" strokeWidth={2.5} />
             </span>
           </span>
           Engineer
@@ -100,9 +89,9 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.1, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-          className="font-headline font-black leading-[0.85] tracking-[-0.04em] text-[18vw] md:text-[15vw] text-center whitespace-nowrap -mt-[2vw]"
+          className="font-headline font-black leading-[0.85] tracking-[-0.05em] text-[14vw] md:text-[11.5vw] text-center whitespace-nowrap -mt-[1.5vw]"
           style={{
-            WebkitTextStroke: "1.5px rgba(255,255,255,0.85)",
+            WebkitTextStroke: "1.5px rgba(255,255,255,0.9)",
             color: "transparent",
           }}
         >
@@ -110,8 +99,18 @@ const Hero = () => {
         </motion.h2>
       </div>
 
+      {/* Portrait — centered, on TOP of typography (head clips text) */}
+      <motion.img
+        src={portraitCutout}
+        alt="Solige Pullaiah"
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
+        className="absolute bottom-16 md:bottom-14 left-1/2 -translate-x-1/2 h-[62vh] md:h-[72vh] w-auto object-contain object-bottom z-40 pointer-events-none select-none drop-shadow-[0_20px_60px_rgba(0,0,0,0.7)]"
+      />
+
       {/* Bottom meta row */}
-      <div className="relative z-20 w-full max-w-[1600px] mx-auto mt-8 md:mt-6 flex flex-col md:flex-row items-start md:items-end justify-between gap-6">
+      <div className="absolute bottom-6 left-0 right-0 z-50 w-full px-6 md:px-14 flex flex-col md:flex-row items-start md:items-end justify-between gap-4">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -125,25 +124,16 @@ const Hero = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8, duration: 0.8 }}
-          className="flex items-center gap-6 md:gap-8 flex-wrap"
+          className="flex items-center gap-4 md:gap-6 flex-wrap"
         >
-          <span className="text-[9px] font-mono text-white/30 tracking-[0.4em] uppercase">Worked with</span>
+          <span className="text-[9px] font-mono text-white/30 tracking-[0.4em] uppercase hidden md:inline">Worked with</span>
           {["Hrud.ai", "CodeForces", "OpenAI", "HuggingFace", "Supabase"].map((c) => (
-            <span key={c} className="text-white/50 text-xs md:text-sm font-headline tracking-wide">
+            <span key={c} className="text-white/50 text-xs font-headline tracking-wide">
               {c}
             </span>
           ))}
         </motion.div>
       </div>
-
-      {/* Scroll cue */}
-      <motion.div
-        animate={{ y: [0, 8, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
-        className="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-30 z-30"
-      >
-        <span className="text-[8px] font-mono tracking-[0.8em] uppercase">Scroll</span>
-      </motion.div>
     </section>
   );
 };
