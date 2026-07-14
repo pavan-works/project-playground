@@ -74,7 +74,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
-          className="font-headline font-black text-white leading-[0.85] tracking-[-0.05em] text-[14vw] md:text-[11.5vw] text-center whitespace-nowrap"
+          className="font-headline font-black text-white leading-[0.85] tracking-[-0.05em] text-[13vw] md:text-[10.5vw] text-center whitespace-nowrap"
         >
           AI
           <span className="inline-flex items-center justify-center align-middle mx-2 md:mx-3 relative -top-[0.08em]">
@@ -89,7 +89,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.1, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-          className="font-headline font-black leading-[0.85] tracking-[-0.05em] text-[14vw] md:text-[11.5vw] text-center whitespace-nowrap -mt-[1.5vw]"
+          className="font-headline font-black leading-[0.85] tracking-[-0.05em] text-[12vw] md:text-[9.5vw] text-center whitespace-nowrap -mt-[1.5vw]"
           style={{
             WebkitTextStroke: "1.5px rgba(255,255,255,0.9)",
             color: "transparent",
