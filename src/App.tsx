@@ -558,29 +558,64 @@ export default function PortfolioLanding() {
 
   if (loading) {
     return (
-      <div className="fixed inset-0 bg-[var(--bg)] flex items-center justify-center z-[100]">
-        <div className="relative flex flex-col items-center">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="flex items-center justify-center"
+      <div className="fixed inset-0 bg-[var(--bg)] flex flex-col items-center justify-center z-[100] overflow-hidden px-4">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] bg-[var(--gold)]/5 rounded-full blur-[140px] pointer-events-none" />
+
+        {/* Port f olio lockup */}
+        <div className="relative flex items-center justify-center h-[220px] md:h-[380px] w-full max-w-[1400px]">
+          <motion.h1
+            initial={{ opacity: 0, x: -60 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            className="text-[90px] md:text-[280px] font-display italic font-black text-white leading-none tracking-tighter absolute left-1/2 -translate-x-full -translate-y-[18%]"
           >
-            <div className="relative flex items-center">
-              <span className="text-4xl md:text-6xl font-headline font-bold text-white tracking-widest">SP</span>
-            </div>
-          </motion.div>
-          <div className="mt-12 flex flex-col items-center gap-4">
-            <div className="w-48 h-[1px] bg-white/5 relative overflow-hidden">
-              <motion.div 
-                initial={{ left: '-100%' }}
-                animate={{ left: '100%' }}
-                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute inset-y-0 w-1/2 bg-[var(--gold)]/30"
-              />
-            </div>
-            <span className="text-[10px] font-mono tracking-[0.8em] text-[var(--rv-muted)]/20 uppercase">Syncing Neural Core</span>
-          </div>
+            Port
+          </motion.h1>
+          <motion.span
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="z-30 absolute left-1/2 -translate-x-[42%] translate-y-[20%] text-[130px] md:text-[500px] font-script italic text-[var(--gold)] leading-none drop-shadow-[0_0_80px_rgba(34,211,238,0.5)]"
+          >
+            f
+          </motion.span>
+          <motion.h1
+            initial={{ opacity: 0, x: 60 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="text-[90px] md:text-[280px] font-display italic font-black text-white leading-none tracking-tighter absolute left-1/2 translate-x-0 translate-y-[52%]"
+          >
+            olio
+          </motion.h1>
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6, duration: 0.8 }}
+          className="text-center z-30 mt-20 md:mt-28"
+        >
+          <h2 className="text-3xl md:text-6xl font-headline font-bold tracking-tighter mb-4 flex items-baseline justify-center gap-4">
+            <span className="text-white">{PORTFOLIO_DATA.name.split(' ')[0]}</span>
+            <span className="text-white/40">{PORTFOLIO_DATA.name.split(' ')[1]}</span>
+          </h2>
+          <div className="flex items-center justify-center gap-6 mb-6">
+            <div className="h-[1px] w-12 md:w-24 bg-white/10" />
+            <p className="text-[var(--rv-muted)] font-mono text-[8px] md:text-[11px] tracking-[0.5em] uppercase max-w-2xl">
+              Architecting the future of human-AI collaboration through <span className="text-[var(--gold)] font-bold">neural synthesis</span>
+            </p>
+            <div className="h-[1px] w-12 md:w-24 bg-white/10" />
+          </div>
+
+          <div className="mt-8 mx-auto w-48 h-[1px] bg-white/5 relative overflow-hidden">
+            <motion.div
+              initial={{ left: '-100%' }}
+              animate={{ left: '100%' }}
+              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute inset-y-0 w-1/2 bg-[var(--gold)]/40"
+            />
+          </div>
+        </motion.div>
       </div>
     );
   }
