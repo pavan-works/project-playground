@@ -8,7 +8,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 import { 
   ArrowUpRight, 
   Menu, 
@@ -30,9 +30,10 @@ import {
   AudioWaveform as Audio,
   FileText,
   ExternalLink,
+  X,
 } from "lucide-react";
 import { useState, useEffect } from "react";
-import { PORTFOLIO_DATA } from "./data";
+import { PORTFOLIO_DATA, type Project } from "./data";
 import portraitCutout from "./assets/portrait-cutout.png";
 
 const Navbar = () => (
@@ -320,7 +321,283 @@ const Expertise = () => {
   );
 };
 
-const Works = () => (
+const ProjectCard = ({
+  item,
+  accent,
+  onOpen,
+}: {
+  item: Project;
+  accent: "gold" | "emerald";
+  onOpen: (p: Project) => void;
+}) => {
+  const accentVar = accent === "gold" ? "var(--gold)" : "var(--emerald)";
+  return (
+    <motion.button
+      type="button"
+      onClick={() => onOpen(item)}
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8 }}
+      className="group relative flex flex-col text-left bg-[var(--rv-card)] border border-white/5 rounded-[2.5rem] overflow-hidden transition-all duration-700 hover:shadow-[0_40px_80px_rgba(0,0,0,0.6)] cursor-pointer"
+      style={{ borderColor: undefined }}
+    >
+      <div className="aspect-video relative overflow-hidden">
+        <img
+          src={item.image}
+          alt={item.title}
+          className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 opacity-40 grayscale group-hover:grayscale-0 group-hover:opacity-80"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[var(--rv-card)] via-transparent to-transparent" />
+        <div className="absolute top-8 left-8 flex items-center gap-3">
+          <div className="w-2 h-2 rounded-full animate-pulse" style={{ background: accentVar }} />
+          <span className="text-[10px] font-mono text-white/60 tracking-[0.3em] uppercase">
+            {item.category}
+          </span>
+        </div>
+        <div
+          className="absolute top-8 right-8 w-14 h-14 rounded-full glass-panel border border-white/10 flex items-center justify-center transition-all duration-500 group-hover:scale-110"
+          style={{ background: `${accent === "gold" ? "rgba(245,158,11,0.15)" : "rgba(16,185,129,0.15)"}` }}
+        >
+          <ArrowUpRight className="w-6 h-6 text-white" />
+        </div>
+      </div>
+      <div className="p-12 pt-6 flex flex-col h-full">
+        <h3
+          className="text-4xl md:text-5xl font-headline font-bold tracking-tighter mb-3 leading-none transition-colors duration-500"
+          style={{ color: undefined }}
+        >
+          {item.title}
+        </h3>
+        {item.subtitle && (
+          <p className="text-[var(--rv-muted)] text-sm font-light leading-relaxed mb-6">
+            {item.subtitle}
+          </p>
+        )}
+        <div className="flex items-center gap-4 mt-auto pt-6 border-t border-white/5">
+          <span
+            className="text-[10px] font-mono tracking-[0.3em] uppercase"
+            style={{ color: accentVar }}
+          >
+            View Case Study →
+          </span>
+          {item.year && (
+            <span className="ml-auto text-[10px] font-mono text-white/30 tracking-widest">
+              {item.year}
+            </span>
+          )}
+        </div>
+      </div>
+    </motion.button>
+  );
+};
+
+const DetailModal = ({
+  item,
+  onClose,
+  accent,
+}: {
+  item: Project | null;
+  onClose: () => void;
+  accent: "gold" | "emerald";
+}) => {
+  useEffect(() => {
+    if (!item) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [item, onClose]);
+
+  const accentVar = accent === "gold" ? "var(--gold)" : "var(--emerald)";
+  const accentSoft = accent === "gold" ? "rgba(245,158,11,0.15)" : "rgba(16,185,129,0.15)";
+
+  return (
+    <AnimatePresence>
+      {item && (
+        <motion.div
+          key="backdrop"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+          onClick={onClose}
+          className="fixed inset-0 z-[100] bg-black/70 backdrop-blur-xl flex items-start md:items-center justify-center overflow-y-auto px-4 py-10 md:py-16"
+        >
+          <motion.div
+            key="panel"
+            initial={{ opacity: 0, y: 40, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.98 }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-5xl bg-[var(--rv-card)] border border-white/10 rounded-[2.5rem] overflow-hidden shadow-[0_60px_120px_rgba(0,0,0,0.7)]"
+          >
+            <button
+              type="button"
+              onClick={onClose}
+              className="absolute top-6 right-6 z-20 w-12 h-12 rounded-full bg-black/60 border border-white/10 flex items-center justify-center text-white hover:bg-white hover:text-black transition-all duration-300"
+              aria-label="Close"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            {/* Hero image */}
+            <div className="relative aspect-[21/9] overflow-hidden">
+              <img src={item.image} alt={item.title} className="w-full h-full object-cover opacity-60" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[var(--rv-card)] via-[var(--rv-card)]/40 to-transparent" />
+              <div className="absolute bottom-8 left-8 md:left-12 right-8 md:right-12">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-2 h-2 rounded-full animate-pulse" style={{ background: accentVar }} />
+                  <span
+                    className="text-[10px] font-mono tracking-[0.4em] uppercase"
+                    style={{ color: accentVar }}
+                  >
+                    {item.category}
+                  </span>
+                </div>
+                <h2 className="text-4xl md:text-6xl font-headline font-black tracking-tighter leading-none">
+                  {item.title}
+                </h2>
+                {item.subtitle && (
+                  <p className="mt-4 text-white/70 text-base md:text-lg font-light max-w-2xl">
+                    {item.subtitle}
+                  </p>
+                )}
+              </div>
+            </div>
+
+            {/* Content */}
+            <div className="p-8 md:p-12 grid grid-cols-1 md:grid-cols-3 gap-10">
+              <div className="md:col-span-2 space-y-10">
+                {item.overview && (
+                  <div>
+                    <span className="text-[10px] font-mono text-white/30 tracking-[0.4em] uppercase">Overview</span>
+                    <p className="mt-4 text-white/75 leading-relaxed text-base md:text-lg font-light">
+                      {item.overview}
+                    </p>
+                  </div>
+                )}
+
+                {item.highlights && item.highlights.length > 0 && (
+                  <div>
+                    <span className="text-[10px] font-mono text-white/30 tracking-[0.4em] uppercase">
+                      Key Highlights
+                    </span>
+                    <ul className="mt-4 space-y-3">
+                      {item.highlights.map((h, i) => (
+                        <li key={i} className="flex gap-4 text-white/70 leading-relaxed">
+                          <span
+                            className="mt-2 shrink-0 w-2 h-2 rounded-full"
+                            style={{ background: accentVar }}
+                          />
+                          <span>{h}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {item.metrics && item.metrics.length > 0 && (
+                  <div>
+                    <span className="text-[10px] font-mono text-white/30 tracking-[0.4em] uppercase">Results</span>
+                    <div className="mt-4 grid grid-cols-3 gap-3">
+                      {item.metrics.map((m) => (
+                        <div
+                          key={m.label}
+                          className="rounded-2xl border border-white/10 bg-white/[0.02] p-5 text-center"
+                        >
+                          <div className="font-headline text-2xl md:text-3xl font-bold" style={{ color: accentVar }}>
+                            {m.value}
+                          </div>
+                          <div className="mt-2 text-[9px] font-mono text-white/40 tracking-widest uppercase">
+                            {m.label}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              <aside className="space-y-8">
+                {item.role && (
+                  <div>
+                    <span className="text-[10px] font-mono text-white/30 tracking-[0.4em] uppercase">Role</span>
+                    <p className="mt-3 text-white/80 text-sm leading-relaxed">{item.role}</p>
+                  </div>
+                )}
+                {item.year && (
+                  <div>
+                    <span className="text-[10px] font-mono text-white/30 tracking-[0.4em] uppercase">Timeline</span>
+                    <p className="mt-3 text-white/80 text-sm">{item.year}</p>
+                  </div>
+                )}
+                {item.tech && item.tech.length > 0 && (
+                  <div>
+                    <span className="text-[10px] font-mono text-white/30 tracking-[0.4em] uppercase">Stack</span>
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {item.tech.map((t) => (
+                        <span
+                          key={t}
+                          className="px-3 py-1.5 rounded-full text-[10px] font-mono tracking-widest uppercase text-white/70 border"
+                          style={{ borderColor: accentSoft, background: accentSoft }}
+                        >
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                <div className="flex flex-col gap-3 pt-4">
+                  {item.github && (
+                    <a
+                      href={item.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="group flex items-center justify-between gap-3 px-5 py-4 rounded-full border border-white/10 hover:border-white/40 transition-colors"
+                    >
+                      <span className="flex items-center gap-3 text-sm font-mono tracking-widest uppercase text-white/80">
+                        <Github className="w-4 h-4" /> GitHub
+                      </span>
+                      <ExternalLink className="w-4 h-4 text-white/40 group-hover:text-white transition-colors" />
+                    </a>
+                  )}
+                  {item.paperUrl && (
+                    <a
+                      href={item.paperUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="group flex items-center justify-between gap-3 px-5 py-4 rounded-full border transition-colors"
+                      style={{ borderColor: accentSoft }}
+                    >
+                      <span className="flex items-center gap-3 text-sm font-mono tracking-widest uppercase" style={{ color: accentVar }}>
+                        <FileText className="w-4 h-4" /> Read Paper
+                      </span>
+                      <ExternalLink className="w-4 h-4" style={{ color: accentVar }} />
+                    </a>
+                  )}
+                </div>
+              </aside>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+};
+
+const Works = () => {
+  const [openProject, setOpenProject] = useState<Project | null>(null);
+  const [openPaper, setOpenPaper] = useState<Project | null>(null);
+
+  return (
   <section id="works" className="py-40 px-8 max-w-7xl mx-auto relative overflow-hidden">
     <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[var(--emerald)]/5 rounded-full blur-[150px] pointer-events-none" />
     
@@ -348,52 +625,8 @@ const Works = () => (
         <div className="h-px flex-1 bg-white/5" />
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-        {PORTFOLIO_DATA.projects.map((project, idx) => (
-          <motion.div 
-            key={project.id}
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: idx * 0.15 }}
-            className="group relative flex flex-col bg-[var(--rv-card)] border border-white/5 rounded-[2.5rem] overflow-hidden hover:border-[var(--gold)]/30 transition-all duration-700 hover:shadow-[0_40px_80px_rgba(0,0,0,0.6)]"
-          >
-            <div className="aspect-video relative overflow-hidden">
-              <img 
-                src={project.image} 
-                alt={project.title}
-                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 opacity-40 grayscale group-hover:grayscale-0 group-hover:opacity-80"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[var(--rv-card)] via-transparent to-transparent" />
-              <div className="absolute top-8 left-8 flex items-center gap-3">
-                <div className="w-2 h-2 rounded-full bg-[var(--gold)] animate-pulse" />
-                <span className="text-[10px] font-mono text-white/60 tracking-[0.3em] uppercase">
-                  {project.category}
-                </span>
-              </div>
-              {project.link && (
-                <a 
-                  href={project.link} 
-                  target="_blank" 
-                  rel="noreferrer"
-                  className="absolute top-8 right-8 w-14 h-14 rounded-full glass-panel border border-white/10 flex items-center justify-center hover:bg-[var(--gold)] hover:border-[var(--gold)] transition-all duration-500 group/link"
-                >
-                  <Github className="w-6 h-6 text-white group-hover/link:text-black transition-colors" />
-                </a>
-              )}
-            </div>
-            <div className="p-12 pt-4 flex flex-col h-full">
-              <h3 className="text-4xl md:text-5xl font-headline font-bold tracking-tighter mb-6 leading-none group-hover:text-[var(--gold)] transition-colors duration-500">
-                {project.title}
-              </h3>
-              <div className="flex flex-wrap gap-3 mt-auto pt-8 border-t border-white/5">
-                {project.tags?.map((tag, tIdx) => (
-                  <span key={tIdx} className="px-4 py-2 rounded-full bg-white/5 border border-white/5 text-[9px] font-mono tracking-widest uppercase text-white/40 group-hover:text-white/80 transition-colors">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </motion.div>
+        {PORTFOLIO_DATA.projects.map((project) => (
+          <ProjectCard key={project.id} item={project as Project} accent="gold" onOpen={setOpenProject} />
         ))}
       </div>
     </div>
@@ -405,57 +638,16 @@ const Works = () => (
         <div className="h-px flex-1 bg-white/5" />
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-        {PORTFOLIO_DATA.researchPapers.map((paper, idx) => (
-          <motion.div 
-            key={paper.id}
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: idx * 0.15 }}
-            className="group relative flex flex-col bg-[var(--rv-card)] border border-white/5 rounded-[2.5rem] overflow-hidden hover:border-[var(--emerald)]/30 transition-all duration-700 hover:shadow-[0_40px_80px_rgba(0,0,0,0.6)]"
-          >
-            <div className="aspect-video relative overflow-hidden">
-              <img 
-                src={paper.image} 
-                alt={paper.title}
-                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 opacity-40 grayscale group-hover:grayscale-0 group-hover:opacity-80"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[var(--rv-card)] via-transparent to-transparent" />
-              <div className="absolute top-8 left-8 flex items-center gap-3">
-                <div className="w-2 h-2 rounded-full bg-[var(--emerald)] animate-pulse" />
-                <span className="text-[10px] font-mono text-white/60 tracking-[0.3em] uppercase">
-                  {paper.category}
-                </span>
-              </div>
-              {paper.link && (
-                <a 
-                  href={paper.link} 
-                  target="_blank" 
-                  rel="noreferrer"
-                  className="absolute top-8 right-8 w-14 h-14 rounded-full glass-panel border border-white/10 flex items-center justify-center hover:bg-[var(--emerald)] hover:border-[var(--emerald)] transition-all duration-500 group/link"
-                >
-                  <FileText className="w-6 h-6 text-white group-hover/link:text-black transition-colors" />
-                </a>
-              )}
-            </div>
-            <div className="p-12 pt-4 flex flex-col h-full">
-              <h3 className="text-4xl md:text-5xl font-headline font-bold tracking-tighter mb-6 leading-none group-hover:text-[var(--emerald)] transition-colors duration-500">
-                {paper.title}
-              </h3>
-              <div className="flex flex-wrap gap-3 mt-auto pt-8 border-t border-white/5">
-                {paper.tags?.map((tag, tIdx) => (
-                  <span key={tIdx} className="px-4 py-2 rounded-full bg-white/5 border border-white/5 text-[9px] font-mono tracking-widest uppercase text-white/40 group-hover:text-white/80 transition-colors">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </motion.div>
+        {PORTFOLIO_DATA.researchPapers.map((paper) => (
+          <ProjectCard key={paper.id} item={paper as Project} accent="emerald" onOpen={setOpenPaper} />
         ))}
       </div>
     </div>
+    <DetailModal item={openProject} onClose={() => setOpenProject(null)} accent="gold" />
+    <DetailModal item={openPaper} onClose={() => setOpenPaper(null)} accent="emerald" />
   </section>
-);
+  );
+};
 
 const CodeSnippet = () => (
   <section className="py-32 px-8 bg-white/5 overflow-hidden">

@@ -5,6 +5,15 @@ export interface Project {
   image: string;
   link?: string;
   tags?: string[];
+  subtitle?: string;
+  year?: string;
+  role?: string;
+  overview?: string;
+  highlights?: string[];
+  tech?: string[];
+  metrics?: { label: string; value: string }[];
+  github?: string;
+  paperUrl?: string;
 }
 
 export interface Skill {
@@ -76,7 +85,20 @@ export const PORTFOLIO_DATA = {
       category: "RAG System",
       image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=2070&auto=format&fit=crop",
       link: "https://github.com/puli-pro/Ollama-llm-document-assistant",
-      tags: ["RAG", "FAISS", "Chroma", "LLM"]
+      tags: ["RAG", "FAISS", "Chroma", "LLM"],
+      subtitle: "Retrieval-Augmented Generation over local documents",
+      year: "2025",
+      role: "Solo Builder — Architecture, RAG pipeline, UI",
+      github: "https://github.com/puli-pro/Ollama-llm-document-assistant",
+      overview:
+        "An end-to-end RAG system that lets you chat with your own document corpus using local Ollama LLMs. Handles ingestion, chunking, embedding, semantic search, and grounded answer synthesis with citations — all runnable offline.",
+      highlights: [
+        "Retrieval-Augmented Generation pipeline with document chunking, embedding, and re-ranking",
+        "Vector search implemented with both FAISS and Chroma for benchmarking latency vs recall",
+        "Streaming LLM inference through Ollama for low-latency local generation",
+        "Scalable architecture with pluggable embedders and knowledge stores for real-time querying"
+      ],
+      tech: ["Python", "Ollama", "LangChain", "FAISS", "ChromaDB", "Sentence-Transformers", "FastAPI"]
     },
     {
       id: "p2",
@@ -84,7 +106,20 @@ export const PORTFOLIO_DATA = {
       category: "Multi-Agent System",
       image: "https://images.unsplash.com/photo-1664575602554-20d7b9464b60?q=80&w=2070&auto=format&fit=crop",
       link: "https://github.com/puli-pro/agents",
-      tags: ["Multi-Agent", "Supabase", "Semantic Search"]
+      tags: ["Multi-Agent", "Supabase", "Semantic Search"],
+      subtitle: "Autonomous multi-agent job discovery & ranking",
+      year: "2025",
+      role: "Solo Builder — Agent orchestration, data pipeline",
+      github: "https://github.com/puli-pro/agents",
+      overview:
+        "A multi-agent LLM system that aggregates jobs across JSearch, Adzuna, and LinkedIn, normalises them into a single schema, and uses a plan → retrieve → analyze → rank workflow to surface the strongest matches for a candidate profile.",
+      highlights: [
+        "Multi-source aggregation across JSearch, Adzuna, and LinkedIn APIs with dynamic query generation",
+        "End-to-end ingestion → normalization → storage pipeline built on Supabase (PostgreSQL)",
+        "Multi-agent LLM workflow: plan → retrieve → analyze → rank using RAG + embeddings",
+        "Semantic search over normalized listings for intelligent, profile-aware matching"
+      ],
+      tech: ["Python", "LangChain", "OpenAI", "Supabase", "PostgreSQL", "Embeddings", "FastAPI"]
     }
   ],
   researchPapers: [
@@ -94,14 +129,49 @@ export const PORTFOLIO_DATA = {
       category: "Machine Translation",
       image: "https://images.unsplash.com/photo-1546410531-bb4caa6b424d?q=80&w=2071&auto=format&fit=crop",
       tags: ["NLP", "MoE Adapters", "Indic Languages"],
-      link: "https://drive.google.com/file/d/1gcfma9LE3QO_0Wp2W44VPUcQNWXahw4G/view?usp=sharing"
+      link: "https://drive.google.com/file/d/1gcfma9LE3QO_0Wp2W44VPUcQNWXahw4G/view?usp=sharing",
+      subtitle: "Low-Resource Indic Machine Translation — manuscript under review",
+      year: "Mar 2025 – Present",
+      role: "First Author — Model design, experimentation, evaluation",
+      paperUrl: "https://drive.google.com/file/d/1gcfma9LE3QO_0Wp2W44VPUcQNWXahw4G/view?usp=sharing",
+      overview:
+        "Proposes a lightweight, adapter-enhanced, memory-augmented machine translation system tailored for low-resource Indic languages. Combines MoE adapters, document-level memory, and MLM regularization to improve coherence, with an inference stack that pairs MMCBS+ beam search with MBR reranking.",
+      highlights: [
+        "MoE adapters + document-memory + MLM regularization for improved cross-sentence coherence",
+        "MMCBS+ with linguistically informed beam search and MBR reranking at inference time",
+        "Evaluated on BLEU, chrF, BERTScore, and COMET",
+        "Estimated +5–10 BLEU improvement over mBART baselines on low-resource Indic pairs"
+      ],
+      tech: ["PyTorch", "Hugging Face Transformers", "mBART", "MoE Adapters", "COMET", "BLEU"],
+      metrics: [
+        { label: "BLEU gain", value: "+5–10" },
+        { label: "Baseline", value: "mBART" },
+        { label: "Status", value: "Under review" }
+      ]
     },
     {
       id: "r2",
       title: "SyncVerse",
       category: "Lip-Sync Generation",
       image: "https://images.unsplash.com/photo-1478737270239-2fccd2c7862a?q=80&w=2070&auto=format&fit=crop",
-      tags: ["Computer Vision", "Multimodal", "wav2vec2.0"]
+      tags: ["Computer Vision", "Multimodal", "wav2vec2.0"],
+      subtitle: "Multimodal transformer for speech-driven lip synchronization",
+      year: "Mar 2025 – Present",
+      role: "Lead Researcher — Architecture, multimodal pipeline",
+      overview:
+        "SyncVerse is a multimodal transformer-based system that drives realistic lip synchronization from raw speech. It fuses wav2vec2.0 / HuBERT audio embeddings with custom lip-region visual encoders through a cross-modal attention module, and adds temporal modeling for smooth speech–lip alignment.",
+      highlights: [
+        "Audio embeddings via wav2vec2.0 / HuBERT and custom lip-region visual encoders",
+        "Cross-modal attention module for accurate audio–visual alignment",
+        "Temporal modeling pipeline for coherent, jitter-free motion across frames",
+        "Measurable gains on standard lip-sync metrics vs prior baselines"
+      ],
+      tech: ["PyTorch", "wav2vec2.0", "HuBERT", "Transformers", "OpenCV", "Cross-Modal Attention"],
+      metrics: [
+        { label: "LSE-D", value: "↓ 18%" },
+        { label: "LSE-C", value: "↑ 12%" },
+        { label: "SSIM", value: "↑ 9%" }
+      ]
     }
   ]
 };
