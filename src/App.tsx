@@ -8,7 +8,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 import { 
   ArrowUpRight, 
   Menu, 
@@ -30,9 +30,10 @@ import {
   AudioWaveform as Audio,
   FileText,
   ExternalLink,
+  X,
 } from "lucide-react";
 import { useState, useEffect } from "react";
-import { PORTFOLIO_DATA } from "./data";
+import { PORTFOLIO_DATA, type Project } from "./data";
 import portraitCutout from "./assets/portrait-cutout.png";
 
 const Navbar = () => (
