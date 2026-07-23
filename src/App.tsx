@@ -740,64 +740,77 @@ export default function PortfolioLanding() {
 
   if (loading) {
     return (
-      <div className="fixed inset-0 bg-[var(--bg)] flex flex-col items-center justify-center z-[100] overflow-hidden px-4">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] bg-[var(--gold)]/5 rounded-full blur-[140px] pointer-events-none" />
+      <div className="fixed inset-0 bg-[#0a0a0a] z-[100] overflow-hidden">
+        {/* grain */}
+        <div className="absolute inset-0 opacity-[0.08] pointer-events-none mix-blend-overlay" style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")" }} />
 
-        {/* Port f olio lockup */}
-        <div className="relative flex items-center justify-center h-[220px] md:h-[380px] w-full max-w-[1400px]">
-          <motion.h1
-            initial={{ opacity: 0, x: -60 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="text-[90px] md:text-[280px] font-display italic font-black text-white leading-none tracking-tighter absolute left-1/2 -translate-x-full -translate-y-[18%]"
-          >
-            Port
-          </motion.h1>
-          <motion.span
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="z-30 absolute left-1/2 -translate-x-[42%] translate-y-[20%] text-[130px] md:text-[500px] font-script italic text-[var(--gold)] leading-none drop-shadow-[0_0_80px_rgba(34,211,238,0.5)]"
-          >
-            f
-          </motion.span>
-          <motion.h1
-            initial={{ opacity: 0, x: 60 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="text-[90px] md:text-[280px] font-display italic font-black text-white leading-none tracking-tighter absolute left-1/2 translate-x-0 translate-y-[52%]"
-          >
-            olio
-          </motion.h1>
+        {/* top rule + green dot */}
+        <div className="absolute top-8 left-10 right-10 h-px bg-white/20">
+          <motion.div initial={{ left: 0 }} animate={{ left: '100%' }} transition={{ duration: 2, ease: 'easeInOut' }} className="absolute -top-[3px] size-2 rounded-full bg-[#39ff14] shadow-[0_0_16px_#39ff14]" />
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6, duration: 0.8 }}
-          className="text-center z-30 mt-20 md:mt-28"
-        >
-          <h2 className="text-3xl md:text-6xl font-headline font-bold tracking-tighter mb-4 flex items-baseline justify-center gap-4">
-            <span className="text-white">{PORTFOLIO_DATA.name.split(' ')[0]}</span>
-            <span className="text-white/40">{PORTFOLIO_DATA.name.split(' ')[1]}</span>
-          </h2>
-          <div className="flex items-center justify-center gap-6 mb-6">
-            <div className="h-[1px] w-12 md:w-24 bg-white/10" />
-            <p className="text-[var(--rv-muted)] font-mono text-[8px] md:text-[11px] tracking-[0.5em] uppercase max-w-2xl">
-              Architecting the future of human-AI collaboration through <span className="text-[var(--gold)] font-bold">neural synthesis</span>
-            </p>
-            <div className="h-[1px] w-12 md:w-24 bg-white/10" />
+        {/* vertical labels */}
+        <div className="hidden md:flex absolute left-8 top-1/2 -translate-y-1/2 items-center gap-3 font-mono text-[11px] tracking-[0.4em] uppercase text-white/70" style={{ writingMode: 'vertical-rl', transform: 'translateY(-50%) rotate(180deg)' }}>
+          ✦ Poetry in Design
+        </div>
+        <div className="hidden md:flex absolute right-8 top-1/2 -translate-y-1/2 items-center gap-3 font-mono text-[11px] tracking-[0.4em] uppercase text-white/70" style={{ writingMode: 'vertical-rl' }}>
+          Visual Storyteller ✦
+        </div>
+
+        <div className="relative h-full w-full flex flex-col items-center justify-center px-6">
+          {/* 2026 pill */}
+          <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="mb-2">
+            <span className="bg-[#39ff14] text-black font-display italic text-2xl md:text-3xl px-6 py-1 rounded-full shadow-[0_0_30px_rgba(57,255,20,0.4)]">2026</span>
+          </motion.div>
+
+          {/* Portfolio lockup */}
+          <div className="relative flex items-baseline justify-center leading-[0.85]">
+            <motion.span
+              initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+              className="font-display italic font-black text-white/85 text-[22vw] md:text-[15rem]"
+              style={{ textShadow: '0 0 1px rgba(255,255,255,0.3)' }}
+            >
+              Port
+            </motion.span>
+            <motion.span
+              initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="font-display italic font-black text-white/85 text-[22vw] md:text-[15rem] relative"
+            >
+              folio
+              <sup className="text-[#39ff14] text-[0.18em] align-super font-sans not-italic ml-1">®</sup>
+            </motion.span>
+
+            {/* green cursive f overlay */}
+            <motion.span
+              initial={{ opacity: 0, scale: 0.6, rotate: -8 }} animate={{ opacity: 1, scale: 1, rotate: 0 }} transition={{ duration: 1.2, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              className="pointer-events-none absolute left-1/2 -translate-x-[52%] -translate-y-[8%] font-script text-[#39ff14] text-[42vw] md:text-[30rem] leading-none drop-shadow-[0_0_40px_rgba(57,255,20,0.55)]"
+            >
+              f
+            </motion.span>
           </div>
 
-          <div className="mt-8 mx-auto w-48 h-[1px] bg-white/5 relative overflow-hidden">
-            <motion.div
-              initial={{ left: '-100%' }}
-              animate={{ left: '100%' }}
-              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute inset-y-0 w-1/2 bg-[var(--gold)]/40"
-            />
-          </div>
-        </motion.div>
+          {/* bottom meta row */}
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7, duration: 0.8 }} className="mt-10 md:mt-14 w-full max-w-5xl grid grid-cols-2 md:grid-cols-3 items-end gap-6">
+            <div className="font-mono text-[10px] md:text-[11px] uppercase tracking-[0.35em] text-white/70">
+              <div className="flex items-center gap-2"><span>↘</span> Version /</div>
+              <div className="text-[#39ff14] font-display italic text-xl md:text-2xl tracking-normal mt-1">2026</div>
+            </div>
+            <div className="hidden md:flex items-center justify-center">
+              <span className="inline-grid place-items-center size-12 rounded-full border border-white/40">
+                <span className="text-white">↗</span>
+              </span>
+            </div>
+            <div className="text-right">
+              <div className="font-mono text-[9px] md:text-[10px] uppercase tracking-[0.35em] text-white/60 mb-1">Design Executed</div>
+              <div className="font-display italic text-lg md:text-2xl text-white">by {PORTFOLIO_DATA.name.toUpperCase()}</div>
+              <div className="mt-2 h-px bg-[#39ff14] w-24 ml-auto" />
+            </div>
+          </motion.div>
+
+          {/* corner sparkles */}
+          <span className="absolute left-16 bottom-16 text-white text-lg">✦</span>
+          <span className="absolute right-24 top-32 text-[#39ff14] text-sm">✦</span>
+        </div>
       </div>
     );
   }
