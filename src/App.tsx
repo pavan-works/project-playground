@@ -139,50 +139,135 @@ const Hero = () => {
   );
 };
 
+const ABOUT_STATS = [
+  { value: "15+", label: "Systems shipped" },
+  { value: "2", label: "Papers in review" },
+  { value: "12%", label: "Model gain @ CodeForces" },
+  { value: "∞", label: "Curiosity" },
+];
+
+const ABOUT_FOCUS = [
+  { title: "RAG & Retrieval", desc: "Chunking, embeddings, hybrid search, re-ranking and grounded synthesis with citations." },
+  { title: "Agentic Systems", desc: "Plan → retrieve → analyze → act workflows with tool use and durable state." },
+  { title: "Applied Research", desc: "Transformer architectures, MoE adapters and multimodal alignment — evaluated properly." },
+  { title: "Production ML", desc: "FastAPI services, vector stores, Docker, and pipelines that survive real traffic." },
+];
+
 const About = () => (
   <section id="about" className="py-40 px-8 max-w-7xl mx-auto relative overflow-hidden">
     <div className="absolute -top-40 -left-40 w-96 h-96 bg-[var(--gold)]/10 rounded-full blur-[120px] pointer-events-none" />
-    
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
-      <div className="relative">
-        <div className="flex items-center gap-4 mb-12">
-          <div className="w-12 h-px bg-[var(--gold)]" />
-          <span className="text-[var(--gold)] font-mono text-xs tracking-[0.5em] uppercase">01 / Profile</span>
-        </div>
-        <h2 className="text-6xl md:text-8xl font-headline font-bold mb-12 leading-none tracking-tighter">
+    <div className="absolute bottom-0 right-0 w-[420px] h-[420px] bg-[var(--indigo)]/10 rounded-full blur-[150px] pointer-events-none" />
+
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="flex items-center gap-4 mb-12"
+    >
+      <div className="w-12 h-px bg-[var(--gold)]" />
+      <span className="text-[var(--gold)] font-mono text-xs tracking-[0.5em] uppercase">01 / Profile</span>
+    </motion.div>
+
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-20 items-start">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.7 }}
+        className="lg:col-span-7 relative"
+      >
+        <h2 className="text-6xl md:text-8xl font-headline font-bold mb-10 leading-[0.9] tracking-tighter">
           Engineering the <br />
           <span className="italic font-display font-light text-white/60">Neural</span> Future
         </h2>
-        <p className="text-2xl text-[var(--rv-muted)] leading-relaxed mb-16 font-light max-w-xl">
+        <p className="text-xl md:text-2xl text-[var(--rv-muted)] leading-relaxed mb-10 font-light max-w-2xl">
           {PORTFOLIO_DATA.summary}
         </p>
-        
-        <button className="group relative px-10 py-5 bg-white text-black rounded-full font-bold overflow-hidden transition-all duration-500 hover:scale-105 active:scale-95 shadow-[0_20px_40px_rgba(255,255,255,0.15)]">
-          <div className="absolute inset-0 bg-gradient-to-r from-[var(--gold)] to-[var(--indigo)] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-          <span className="relative z-10 flex items-center gap-3 group-hover:text-white transition-colors duration-500 uppercase tracking-widest text-xs">
-            Download Resume <ArrowUpRight className="w-5 h-5" />
-          </span>
-        </button>
-      </div>
 
-      <div className="relative mt-24 lg:mt-0">
-        <div className="glass-panel p-12 rounded-[2.5rem] border border-white/5 relative overflow-hidden group">
+        {/* Stat strip */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 border-t border-white/10 mb-12">
+          {ABOUT_STATS.map((s, i) => (
+            <motion.div
+              key={s.label}
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.08 }}
+              className="group py-8 pr-6 border-b sm:border-b-0 border-white/10 sm:border-r last:border-r-0 sm:pl-6 first:pl-0"
+            >
+              <div className="text-4xl md:text-5xl font-headline font-bold tracking-tighter text-white group-hover:text-[var(--gold)] transition-colors duration-500">
+                {s.value}
+              </div>
+              <div className="mt-2 text-[10px] font-mono uppercase tracking-[0.25em] text-white/30">{s.label}</div>
+            </motion.div>
+          ))}
+        </div>
+
+        <div className="flex flex-wrap items-center gap-6">
+          <button className="group relative px-10 py-5 bg-white text-black rounded-full font-bold overflow-hidden transition-all duration-500 hover:scale-105 active:scale-95 shadow-[0_20px_40px_rgba(255,255,255,0.15)]">
+            <div className="absolute inset-0 bg-gradient-to-r from-[var(--gold)] to-[var(--indigo)] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <span className="relative z-10 flex items-center gap-3 group-hover:text-white transition-colors duration-500 uppercase tracking-widest text-xs">
+              Download Resume <ArrowUpRight className="w-5 h-5" />
+            </span>
+          </button>
+          <a
+            href="#works"
+            className="text-[10px] font-mono uppercase tracking-[0.35em] text-white/40 hover:text-[var(--gold)] transition-colors"
+          >
+            See the work →
+          </a>
+        </div>
+      </motion.div>
+
+      <div className="lg:col-span-5 relative space-y-6">
+        {/* Identity panel */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.1 }}
+          className="glass-panel p-10 rounded-[2.5rem] border border-white/5 relative overflow-hidden group"
+        >
           <div className="absolute inset-0 bg-gradient-to-br from-[var(--gold)]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-          <h3 className="text-3xl font-headline font-bold mb-8">Identity</h3>
-          <div className="space-y-8">
-            <div className="flex flex-col gap-2">
-              <span className="text-[10px] font-mono text-white/20 tracking-widest uppercase">Location</span>
-              <span className="text-xl font-light">{PORTFOLIO_DATA.location}</span>
-            </div>
-            <div className="flex flex-col gap-2">
-              <span className="text-[10px] font-mono text-white/20 tracking-widest uppercase">Current Role</span>
-              <span className="text-xl font-light">{PORTFOLIO_DATA.role}</span>
-            </div>
-            <div className="flex flex-col gap-2">
-              <span className="text-[10px] font-mono text-white/20 tracking-widest uppercase">Focus</span>
-              <span className="text-xl font-light">End-to-end ML & RAG Architectures</span>
-            </div>
+          <div className="relative flex items-center justify-between mb-8">
+            <h3 className="text-2xl font-headline font-bold tracking-tight">Identity</h3>
+            <span className="flex items-center gap-2 text-[9px] font-mono uppercase tracking-[0.3em] text-[var(--emerald)]">
+              <span className="w-1.5 h-1.5 rounded-full bg-[var(--emerald)] animate-pulse" /> Open to work
+            </span>
           </div>
+          <div className="relative divide-y divide-white/5">
+            {[
+              ["Location", PORTFOLIO_DATA.location],
+              ["Current Role", PORTFOLIO_DATA.role],
+              ["Focus", "End-to-end ML & RAG Architectures"],
+              ["Also known as", PORTFOLIO_DATA.alias],
+            ].map(([k, v]) => (
+              <div key={k as string} className="flex items-baseline justify-between gap-6 py-4">
+                <span className="text-[10px] font-mono text-white/25 tracking-[0.25em] uppercase shrink-0">{k}</span>
+                <span className="text-base md:text-lg font-light text-right">{v}</span>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Focus areas */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {ABOUT_FOCUS.map((f, i) => (
+            <motion.div
+              key={f.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.15 + i * 0.07 }}
+              className="group relative p-6 rounded-3xl bg-[var(--rv-card)] border border-white/5 hover:border-[var(--gold)]/40 transition-all duration-500 hover:-translate-y-1"
+            >
+              <span className="text-[9px] font-mono text-white/20 tracking-[0.3em]">0{i + 1}</span>
+              <h4 className="mt-3 text-lg font-headline font-bold tracking-tight group-hover:text-[var(--gold)] transition-colors">
+                {f.title}
+              </h4>
+              <p className="mt-2 text-xs leading-relaxed text-[var(--rv-muted)] font-light">{f.desc}</p>
+            </motion.div>
+          ))}
         </div>
       </div>
     </div>
