@@ -738,11 +738,14 @@ const Works = () => {
     <div className="mb-32">
       <div className="flex items-center gap-4 mb-12">
         <span className="text-[var(--gold)] font-mono text-xs tracking-[0.4em] uppercase">Engineering Projects</span>
-        <div className="h-px flex-1 bg-white/5" />
+        <div className="h-px flex-1 bg-gradient-to-r from-[var(--gold)]/30 to-transparent" />
+        <span className="text-[10px] font-mono text-white/25 tracking-[0.3em]">
+          {String(PORTFOLIO_DATA.projects.length).padStart(2, "0")} ITEMS
+        </span>
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-        {PORTFOLIO_DATA.projects.map((project) => (
-          <ProjectCard key={project.id} item={project as Project} accent="gold" onOpen={setOpenProject} />
+        {PORTFOLIO_DATA.projects.map((project, i) => (
+          <ProjectCard key={project.id} index={i} item={project as Project} accent="gold" onOpen={setOpenProject} />
         ))}
       </div>
     </div>
@@ -751,11 +754,14 @@ const Works = () => {
     <div>
       <div className="flex items-center gap-4 mb-12">
         <span className="text-[var(--emerald)] font-mono text-xs tracking-[0.4em] uppercase">Research Publications</span>
-        <div className="h-px flex-1 bg-white/5" />
+        <div className="h-px flex-1 bg-gradient-to-r from-[var(--emerald)]/30 to-transparent" />
+        <span className="text-[10px] font-mono text-white/25 tracking-[0.3em]">
+          {String(PORTFOLIO_DATA.researchPapers.length).padStart(2, "0")} ITEMS
+        </span>
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-        {PORTFOLIO_DATA.researchPapers.map((paper) => (
-          <ProjectCard key={paper.id} item={paper as Project} accent="emerald" onOpen={setOpenPaper} />
+        {PORTFOLIO_DATA.researchPapers.map((paper, i) => (
+          <ProjectCard key={paper.id} index={i} item={paper as Project} accent="emerald" onOpen={setOpenPaper} />
         ))}
       </div>
     </div>
