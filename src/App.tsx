@@ -410,10 +410,12 @@ const ProjectCard = ({
   item,
   accent,
   onOpen,
+  index = 0,
 }: {
   item: Project;
   accent: "gold" | "emerald";
   onOpen: (p: Project) => void;
+  index?: number;
 }) => {
   const accentVar = accent === "gold" ? "var(--gold)" : "var(--emerald)";
   return (
@@ -423,14 +425,19 @@ const ProjectCard = ({
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.8 }}
-      className="group relative flex flex-col text-left bg-[var(--rv-card)] border border-white/5 rounded-[2.5rem] overflow-hidden transition-all duration-700 hover:shadow-[0_40px_80px_rgba(0,0,0,0.6)] cursor-pointer"
-      style={{ borderColor: undefined }}
+      transition={{ duration: 0.7, delay: index * 0.08 }}
+      className="group relative flex flex-col text-left bg-[var(--rv-card)] border border-white/5 rounded-[2.5rem] overflow-hidden transition-all duration-700 hover:-translate-y-2 hover:border-white/20 hover:shadow-[0_40px_80px_rgba(0,0,0,0.6)] cursor-pointer"
     >
+      {/* accent glow on hover */}
+      <div
+        className="pointer-events-none absolute -top-24 -right-24 w-72 h-72 rounded-full blur-[100px] opacity-0 group-hover:opacity-60 transition-opacity duration-700"
+        style={{ background: accentVar }}
+      />
       <div className="aspect-video relative overflow-hidden">
         <img
           src={item.image}
           alt={item.title}
+          loading="lazy"
           className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 opacity-40 grayscale group-hover:grayscale-0 group-hover:opacity-80"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[var(--rv-card)] via-transparent to-transparent" />
@@ -440,17 +447,19 @@ const ProjectCard = ({
             {item.category}
           </span>
         </div>
+        <span className="absolute bottom-6 left-8 font-headline font-bold text-6xl leading-none text-white/10 group-hover:text-white/20 transition-colors duration-500">
+          0{index + 1}
+        </span>
         <div
-          className="absolute top-8 right-8 w-14 h-14 rounded-full glass-panel border border-white/10 flex items-center justify-center transition-all duration-500 group-hover:scale-110"
+          className="absolute top-8 right-8 w-14 h-14 rounded-full glass-panel border border-white/10 flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:rotate-45"
           style={{ background: `${accent === "gold" ? "rgba(245,158,11,0.15)" : "rgba(16,185,129,0.15)"}` }}
         >
           <ArrowUpRight className="w-6 h-6 text-white" />
         </div>
       </div>
-      <div className="p-12 pt-6 flex flex-col h-full">
+      <div className="relative p-10 md:p-12 pt-6 flex flex-col h-full">
         <h3
           className="text-4xl md:text-5xl font-headline font-bold tracking-tighter mb-3 leading-none transition-colors duration-500"
-          style={{ color: undefined }}
         >
           {item.title}
         </h3>
@@ -459,9 +468,31 @@ const ProjectCard = ({
             {item.subtitle}
           </p>
         )}
+        {item.tags && item.tags.length > 0 && (
+          <div className="flex flex-wrap gap-2 mb-6">
+            {item.tags.map((t) => (
+              <span
+                key={t}
+                className="text-[9px] font-mono uppercase tracking-[0.2em] px-3 py-1.5 rounded-full border border-white/10 text-white/50 group-hover:border-white/20 transition-colors"
+              >
+                {t}
+              </span>
+            ))}
+          </div>
+        )}
+        {item.metrics && item.metrics.length > 0 && (
+          <div className="grid grid-cols-3 gap-3 mb-6">
+            {item.metrics.slice(0, 3).map((m) => (
+              <div key={m.label} className="rounded-2xl bg-white/[0.03] border border-white/5 px-4 py-3">
+                <div className="text-base font-headline font-bold" style={{ color: accentVar }}>{m.value}</div>
+                <div className="text-[9px] font-mono uppercase tracking-[0.2em] text-white/30 mt-1">{m.label}</div>
+              </div>
+            ))}
+          </div>
+        )}
         <div className="flex items-center gap-4 mt-auto pt-6 border-t border-white/5">
           <span
-            className="text-[10px] font-mono tracking-[0.3em] uppercase"
+            className="text-[10px] font-mono tracking-[0.3em] uppercase transition-transform duration-500 group-hover:translate-x-1"
             style={{ color: accentVar }}
           >
             View Case Study →
