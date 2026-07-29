@@ -35,33 +35,8 @@ import {
 import { useState, useEffect } from "react";
 import { PORTFOLIO_DATA, type Project } from "./data";
 import portraitCutout from "./assets/portrait-cutout.png";
+import { AnimatedNav } from "./components/AnimatedNav";
 
-const Navbar = () => (
-  <nav className="fixed top-0 left-0 w-full z-[60] flex justify-between items-center px-8 md:px-16 py-8 mix-blend-difference">
-    <div className="flex items-center gap-8">
-      <a href="#home" className="flex items-center gap-4 group">
-        <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform duration-500">
-          <span className="text-black font-headline font-bold text-xs">SP</span>
-        </div>
-      </a>
-      <div className="h-6 w-[1px] bg-white/10 hidden lg:block" />
-      <div className="flex flex-col hidden lg:flex">
-        <span className="text-white font-mono text-[9px] tracking-[0.4em] uppercase opacity-60 leading-none mb-1">
-          {PORTFOLIO_DATA.role}
-        </span>
-      </div>
-    </div>
-    <div className="flex items-center gap-12 text-[var(--rv-muted)] font-mono text-[9px] tracking-[0.4em] uppercase">
-      <a href="#about" className="hover:text-[var(--gold)] transition-colors hidden md:block">About</a>
-      <a href="#expertise" className="hover:text-[var(--gold)] transition-colors hidden md:block">Expertise</a>
-      <a href="#works" className="hover:text-[var(--gold)] transition-colors hidden md:block">Works</a>
-      <button className="group relative w-12 h-12 border border-white/10 rounded-full flex items-center justify-center hover:bg-white hover:text-black transition-all duration-500 overflow-hidden">
-        <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
-        <Menu className="w-4 h-4 relative z-10" />
-      </button>
-    </div>
-  </nav>
-);
 
 const Hero = () => {
   return (
@@ -926,7 +901,7 @@ export default function PortfolioLanding() {
 
   return (
     <div className="bg-[var(--bg)] text-[var(--rv-muted)] min-h-screen selection:bg-[var(--gold)] selection:text-black">
-      <Navbar />
+      <AnimatedNav />
       <main className="relative z-10">
         <Hero />
         <About />
