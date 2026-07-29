@@ -30,6 +30,91 @@ export interface Experience {
   description: string;
 }
 
+export interface JourneyStop {
+  id: string;
+  period: string;
+  title: string;
+  place: string;
+  kind: "education" | "work" | "research";
+  caption: string;
+  description: string;
+  marker?: string;
+}
+
+export const JOURNEY_QUOTE = {
+  text: "Every model I train is really a record of what I once didn't understand.",
+  caption: "A timeline is just a loss curve with better lighting — noisy at the start, converging with every stop.",
+};
+
+export const JOURNEY: JourneyStop[] = [
+  {
+    id: "j1",
+    period: "2010 – 2020",
+    title: "The First Compile",
+    place: "Sri Sathya Sai Gurukulam (ICSE)",
+    kind: "education",
+    caption: "Curiosity before syntax.",
+    description:
+      "Ten years of schooling where asking 'but how does it actually work?' became a habit long before I had a keyboard to answer it with.",
+    marker: "80%",
+  },
+  {
+    id: "j2",
+    period: "2020 – 2022",
+    title: "Choosing the Machine",
+    place: "Sri Sathya Sai Institute of Educare (CBSE)",
+    kind: "education",
+    caption: "Math stopped being homework and became a language.",
+    description:
+      "Senior secondary years spent falling for linear algebra and probability — the two things that would later quietly run everything I build.",
+    marker: "75.8%",
+  },
+  {
+    id: "j3",
+    period: "2022 – 2026",
+    title: "Training Phase",
+    place: "Vignan's IIT — B.Tech CSE (AI Specialisation)",
+    kind: "education",
+    caption: "Four years of deliberate overfitting to one obsession.",
+    description:
+      "Deep learning, NLP and systems engineering — plus a long tail of side projects that taught me more than any syllabus could.",
+    marker: "CGPA 8.18",
+  },
+  {
+    id: "j4",
+    period: "May 2024 – Aug 2024",
+    title: "First Contact With Production",
+    place: "CodeForces — AI/ML Intern",
+    kind: "work",
+    caption: "Where accuracy met deadlines.",
+    description:
+      "Shipped ML and deep learning work against real data and real constraints, lifting model performance by 12% along the way.",
+    marker: "+12% perf",
+  },
+  {
+    id: "j5",
+    period: "Mar 2025 – Present",
+    title: "Writing It Down",
+    place: "Independent Research — LaMaTEPP & SyncVerse",
+    kind: "research",
+    caption: "Building things nobody has benchmarked yet.",
+    description:
+      "Two manuscripts under review: adapter-based low-resource Indic translation, and a multimodal transformer for speech-driven lip synchronisation.",
+    marker: "2 papers",
+  },
+  {
+    id: "j6",
+    period: "Jan 2026 – Present",
+    title: "Shipping Intelligence",
+    place: "Hrud.ai — AI Engineer",
+    kind: "work",
+    caption: "From notebooks to systems people depend on.",
+    description:
+      "Designing RAG pipelines and autonomous agents in production, leading AI engineering work end to end.",
+    marker: "Current",
+  },
+];
+
 export const PORTFOLIO_DATA = {
   name: "Solige Pullaiah",
   alias: "Puli Pavan",
