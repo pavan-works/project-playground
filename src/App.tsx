@@ -32,8 +32,8 @@ import {
   ExternalLink,
   X,
 } from "lucide-react";
-import { useState, useEffect } from "react";
-import { PORTFOLIO_DATA, type Project } from "./data";
+import { useState, useEffect, useRef } from "react";
+import { PORTFOLIO_DATA, JOURNEY, JOURNEY_QUOTE, type Project } from "./data";
 import portraitCutout from "./assets/portrait-cutout.png";
 import { AnimatedNav } from "./components/AnimatedNav";
 
