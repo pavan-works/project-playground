@@ -33,6 +33,7 @@ import {
   X,
 } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
+import { JourneyGallery } from "./components/JourneyGallery";
 import { PORTFOLIO_DATA, JOURNEY, JOURNEY_QUOTE, type Project } from "./data";
 import portraitCutout from "./assets/portrait-cutout.png";
 import { AnimatedNav } from "./components/AnimatedNav";
@@ -336,6 +337,7 @@ const JourneyStopCard = ({ stop, index }: { stop: (typeof JOURNEY)[number]; inde
 
 const Experience = () => {
   const trackRef = useRef<HTMLDivElement>(null);
+  const [activeStop, setActiveStop] = useState(0);
   const { scrollYProgress } = useScroll({
     target: trackRef,
     offset: ["start 65%", "end 60%"],
@@ -361,45 +363,49 @@ const Experience = () => {
           </span>
         </motion.div>
 
-        <div className="grid grid-cols-1 gap-16 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
-          {/* Sticky editorial header */}
-          <div className="lg:sticky lg:top-32 lg:self-start">
-            <motion.h2
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="font-headline text-5xl md:text-6xl font-bold leading-[0.9] tracking-tighter text-white"
-            >
-              Every stop
-              <br />
-              shaped
-              <span className="ml-3 font-display italic text-[var(--gold)]">who I am.</span>
-            </motion.h2>
+        {/* Heading + quote */}
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-end">
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="font-headline text-5xl md:text-6xl font-bold leading-[0.9] tracking-tighter text-white"
+          >
+            Every stop
+            <br />
+            shaped
+            <span className="ml-3 font-display italic text-[var(--gold)]">who I am.</span>
+          </motion.h2>
 
-            <motion.blockquote
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.9, delay: 0.15 }}
-              className="mt-10 border-l border-[var(--emerald)]/40 pl-6"
-            >
-              <p className="font-display text-2xl md:text-3xl italic leading-snug text-white/85">
-                “{JOURNEY_QUOTE.text}”
-              </p>
-              <footer className="mt-5 max-w-md text-sm font-light leading-relaxed text-[var(--rv-muted)]">
-                {JOURNEY_QUOTE.caption}
-              </footer>
-            </motion.blockquote>
+          <motion.blockquote
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.9, delay: 0.15 }}
+            className="border-l border-[var(--emerald)]/40 pl-6"
+          >
+            <p className="font-display text-2xl md:text-3xl italic leading-snug text-white/85">
+              “{JOURNEY_QUOTE.text}”
+            </p>
+            <footer className="mt-5 max-w-xl text-sm font-light leading-relaxed text-[var(--rv-muted)]">
+              {JOURNEY_QUOTE.caption}
+            </footer>
+          </motion.blockquote>
+        </div>
 
-            <div className="mt-12 flex items-center gap-6 font-mono text-[10px] uppercase tracking-[0.3em] text-white/35">
-              <span>{JOURNEY.length} stops</span>
-              <span className="h-px w-8 bg-white/15" />
-              <span>2010 → now</span>
-            </div>
+        <div className="mt-10 flex items-center gap-6 font-mono text-[10px] uppercase tracking-[0.3em] text-white/35">
+          <span>{JOURNEY.length} stops</span>
+          <span className="h-px w-8 bg-white/15" />
+          <span>2010 → now</span>
+        </div>
+
+        {/* Gallery + timeline */}
+        <div className="mt-16 grid grid-cols-1 gap-16 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+          <div className="lg:sticky lg:top-28 lg:self-start">
+            <JourneyGallery active={activeStop} onChange={setActiveStop} />
           </div>
 
-          {/* Timeline track */}
           <div ref={trackRef} className="relative">
             <div className="absolute left-[21px] md:left-[29px] top-3 bottom-3 w-px bg-white/[0.07]" />
             <motion.div
