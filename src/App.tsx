@@ -256,94 +256,79 @@ const KIND_META: Record<string, { label: string; Icon: typeof Activity }> = {
   research: { label: "Research", Icon: FileText },
 };
 
-const JourneyStopCard = ({ stop, index }: { stop: (typeof JOURNEY)[number]; index: number }) => {
+const ActiveStopPanel = ({ index }: { index: number }) => {
+  const stop = JOURNEY[index];
   const meta = KIND_META[stop.kind] ?? KIND_META.work;
   const { Icon } = meta;
-  const isLast = index === JOURNEY.length - 1;
+  const accent =
+    stop.kind === "research" ? "var(--indigo)" : stop.kind === "work" ? "var(--emerald)" : "var(--gold)";
 
   return (
-    <motion.li
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.7, delay: 0.05 }}
-      className="group relative pl-16 md:pl-24 pb-16 last:pb-0"
-    >
-      {/* node */}
-      <span className="absolute left-[13px] md:left-[21px] top-3 flex h-5 w-5 items-center justify-center">
-        <span
-          className="absolute inset-0 rounded-full blur-md opacity-0 group-hover:opacity-90 transition-opacity duration-500"
-          style={{ background: isLast ? "var(--emerald)" : "var(--gold)" }}
-        />
-        <span
-          className="relative h-2.5 w-2.5 rounded-full ring-4 ring-[var(--bg)] transition-transform duration-500 group-hover:scale-150"
-          style={{ background: isLast ? "var(--emerald)" : "var(--gold)" }}
-        />
-        {isLast && (
-          <span className="absolute h-5 w-5 rounded-full border border-[var(--emerald)]/60 animate-ping" />
-        )}
-      </span>
-
-      <div className="relative overflow-hidden rounded-[2rem] border border-white/[0.06] bg-[var(--rv-card)]/70 p-8 md:p-10 transition-all duration-500 group-hover:-translate-y-1 group-hover:border-white/20 group-hover:shadow-[0_30px_70px_rgba(0,0,0,0.55)]">
-        <span className="pointer-events-none absolute -top-24 -right-16 h-56 w-56 rounded-full blur-[90px] opacity-0 group-hover:opacity-40 transition-opacity duration-700"
-          style={{ background: isLast ? "var(--emerald)" : "var(--gold)" }} />
-
-        <span className="absolute right-8 top-6 font-headline text-6xl md:text-7xl font-bold leading-none text-white/[0.04] group-hover:text-white/[0.08] transition-colors duration-500">
-          {String(index + 1).padStart(2, "0")}
-        </span>
-
-        <div className="relative flex flex-wrap items-center gap-3">
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/10 px-3 py-1 text-[9px] font-mono uppercase tracking-[0.25em] text-white/50">
-            <Icon className="h-3 w-3" />
-            {meta.label}
-          </span>
-          <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-[var(--rv-muted)]">
-            {stop.period}
-          </span>
-          {stop.marker && (
-            <span
-              className="rounded-full px-3 py-1 font-mono text-[9px] uppercase tracking-[0.25em]"
-              style={{
-                color: isLast ? "var(--emerald)" : "var(--gold)",
-                background: isLast ? "var(--emerald-dim)" : "var(--gold-dim)",
-              }}
-            >
-              {stop.marker}
-            </span>
-          )}
-        </div>
-
-        <h4 className="relative mt-6 font-headline text-3xl md:text-4xl font-bold tracking-tighter leading-none">
-          {stop.title}
-        </h4>
-        <p className="relative mt-3 font-mono text-[11px] uppercase tracking-[0.2em] text-white/40">
-          {stop.place}
-        </p>
-
-        <p
-          className="relative mt-6 font-display text-xl md:text-2xl italic leading-snug"
-          style={{ color: isLast ? "var(--emerald)" : "var(--gold-light)" }}
+    <div className="relative overflow-hidden rounded-[2rem] border border-white/[0.06] bg-[var(--rv-card)]/70 p-8 md:p-10">
+      <span
+        className="pointer-events-none absolute -top-24 -right-16 h-56 w-56 rounded-full blur-[90px] opacity-30"
+        style={{ background: accent }}
+      />
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={stop.id}
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -14 }}
+          transition={{ duration: 0.45 }}
+          className="relative"
         >
-          “{stop.caption}”
-        </p>
+          <span className="absolute right-0 -top-2 font-headline text-7xl font-bold leading-none text-white/[0.05]">
+            {String(index + 1).padStart(2, "0")}
+          </span>
 
-        <p className="relative mt-4 max-w-2xl text-sm md:text-[15px] font-light leading-relaxed text-[var(--rv-muted)]">
-          {stop.description}
-        </p>
-      </div>
-    </motion.li>
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/10 px-3 py-1 text-[9px] font-mono uppercase tracking-[0.25em] text-white/50">
+              <Icon className="h-3 w-3" />
+              {meta.label}
+            </span>
+            <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-[var(--rv-muted)]">
+              {stop.period}
+            </span>
+            {stop.marker && (
+              <span
+                className="rounded-full px-3 py-1 font-mono text-[9px] uppercase tracking-[0.25em]"
+                style={{ color: accent, background: "rgba(255,255,255,0.05)" }}
+              >
+                {stop.marker}
+              </span>
+            )}
+          </div>
+
+          <h4 className="mt-6 font-headline text-4xl md:text-5xl font-bold tracking-tighter leading-none">
+            {stop.title}
+          </h4>
+          <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.2em] text-white/40">{stop.place}</p>
+
+          <p className="mt-6 font-display text-xl md:text-2xl italic leading-snug" style={{ color: accent }}>
+            “{stop.caption}”
+          </p>
+          <p className="mt-4 max-w-2xl text-sm md:text-[15px] font-light leading-relaxed text-[var(--rv-muted)]">
+            {stop.description}
+          </p>
+
+          <div className="mt-8 h-px w-full bg-white/[0.07]">
+            <div
+              className="h-px transition-all duration-500"
+              style={{ width: `${((index + 1) / JOURNEY.length) * 100}%`, background: accent }}
+            />
+          </div>
+          <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.3em] text-white/30">
+            Stop {index + 1} of {JOURNEY.length}
+          </p>
+        </motion.div>
+      </AnimatePresence>
+    </div>
   );
 };
 
 const Experience = () => {
-  const trackRef = useRef<HTMLDivElement>(null);
   const [activeStop, setActiveStop] = useState(0);
-  const { scrollYProgress } = useScroll({
-    target: trackRef,
-    offset: ["start 65%", "end 60%"],
-  });
-  const progress = useSpring(scrollYProgress, { stiffness: 90, damping: 30, mass: 0.4 });
-  const lineScale = useTransform(progress, [0, 1], [0, 1]);
 
   return (
     <section id="experience" className="relative overflow-hidden bg-white/[0.01] py-40">
@@ -400,24 +385,12 @@ const Experience = () => {
           <span>2010 → now</span>
         </div>
 
-        {/* Gallery + timeline */}
-        <div className="mt-16 grid grid-cols-1 gap-16 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
-          <div className="lg:sticky lg:top-28 lg:self-start">
-            <JourneyGallery active={activeStop} onChange={setActiveStop} />
+        {/* Active stop + image gallery */}
+        <div className="mt-16 grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:items-start">
+          <div className="lg:sticky lg:top-28">
+            <ActiveStopPanel index={activeStop} />
           </div>
-
-          <div ref={trackRef} className="relative">
-            <div className="absolute left-[21px] md:left-[29px] top-3 bottom-3 w-px bg-white/[0.07]" />
-            <motion.div
-              style={{ scaleY: lineScale }}
-              className="absolute left-[21px] md:left-[29px] top-3 bottom-3 w-px origin-top bg-gradient-to-b from-[var(--gold)] via-[var(--indigo)] to-[var(--emerald)]"
-            />
-            <ol className="relative">
-              {JOURNEY.map((stop, i) => (
-                <JourneyStopCard key={stop.id} stop={stop} index={i} />
-              ))}
-            </ol>
-          </div>
+          <JourneyGallery active={activeStop} onChange={setActiveStop} />
         </div>
       </div>
     </section>

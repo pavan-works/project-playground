@@ -1,3 +1,10 @@
+import j1 from "./assets/journey-1.jpg";
+import j2 from "./assets/journey-2.jpg";
+import j3 from "./assets/journey-3.jpg";
+import j4 from "./assets/journey-4.jpg";
+import j5 from "./assets/journey-5.jpg";
+import j6 from "./assets/journey-6.jpg";
+
 export interface Project {
   id: string;
   title: string;
@@ -39,6 +46,7 @@ export interface JourneyStop {
   caption: string;
   description: string;
   marker?: string;
+  image?: string;
 }
 
 export const JOURNEY_QUOTE = {
@@ -57,6 +65,7 @@ export const JOURNEY: JourneyStop[] = [
     description:
       "Ten years of schooling where asking 'but how does it actually work?' became a habit long before I had a keyboard to answer it with.",
     marker: "80%",
+    image: j1,
   },
   {
     id: "j2",
@@ -68,6 +77,7 @@ export const JOURNEY: JourneyStop[] = [
     description:
       "Senior secondary years spent falling for linear algebra and probability — the two things that would later quietly run everything I build.",
     marker: "75.8%",
+    image: j2,
   },
   {
     id: "j3",
@@ -79,6 +89,7 @@ export const JOURNEY: JourneyStop[] = [
     description:
       "Deep learning, NLP and systems engineering — plus a long tail of side projects that taught me more than any syllabus could.",
     marker: "CGPA 8.18",
+    image: j3,
   },
   {
     id: "j4",
@@ -90,6 +101,7 @@ export const JOURNEY: JourneyStop[] = [
     description:
       "Shipped ML and deep learning work against real data and real constraints, lifting model performance by 12% along the way.",
     marker: "+12% perf",
+    image: j4,
   },
   {
     id: "j5",
@@ -101,6 +113,7 @@ export const JOURNEY: JourneyStop[] = [
     description:
       "Two manuscripts under review: adapter-based low-resource Indic translation, and a multimodal transformer for speech-driven lip synchronisation.",
     marker: "2 papers",
+    image: j5,
   },
   {
     id: "j6",
@@ -112,6 +125,7 @@ export const JOURNEY: JourneyStop[] = [
     description:
       "Designing RAG pipelines and autonomous agents in production, leading AI engineering work end to end.",
     marker: "Current",
+    image: j6,
   },
 ];
 

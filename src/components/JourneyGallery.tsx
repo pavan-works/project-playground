@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
 import { JOURNEY } from "../data";
 
-const AUTOPLAY_MS = 3200;
+const AUTOPLAY_MS = 3800;
 const RESUME_MS = 3000;
 
 const accentFor = (kind: string) =>
@@ -75,13 +75,13 @@ export const JourneyGallery = ({
         if (Math.abs(d) > 30) step(d > 0 ? 1 : -1);
         touchY.current = null;
       }}
-      className="relative select-none rounded-[2rem] border border-white/[0.06] bg-[var(--rv-card)]/60 px-6 py-10 outline-none focus-visible:border-[var(--gold)]/40"
-      style={{ perspective: "1400px" }}
+      className="relative select-none rounded-[2rem] border border-white/[0.06] bg-[var(--rv-card)]/60 px-4 py-8 md:px-8 md:py-12 outline-none focus-visible:border-[var(--gold)]/40"
+      style={{ perspective: "1600px" }}
     >
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[var(--bg)] to-transparent z-20 rounded-t-[2rem]" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[var(--bg)] to-transparent z-20 rounded-b-[2rem]" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-[var(--bg)] to-transparent z-20 rounded-t-[2rem]" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[var(--bg)] to-transparent z-20 rounded-b-[2rem]" />
 
-      <div className="relative h-[380px]" style={{ transformStyle: "preserve-3d" }}>
+      <div className="relative h-[560px] md:h-[680px]" style={{ transformStyle: "preserve-3d" }}>
         {JOURNEY.map((stop, i) => {
           let offset = i - active;
           const half = JOURNEY.length / 2;
@@ -93,35 +93,42 @@ export const JourneyGallery = ({
             <motion.button
               key={stop.id}
               type="button"
+              aria-label={stop.title}
               onClick={() => { interact(); onChange(i); }}
               animate={{
-                y: offset * 86,
-                z: -abs * 160,
-                rotateX: offset * -12,
-                scale: 1 - abs * 0.08,
-                opacity: abs > 2 ? 0 : 1 - abs * 0.28,
+                y: offset * 130,
+                z: -abs * 220,
+                rotateX: offset * -10,
+                scale: 1 - abs * 0.09,
+                opacity: abs > 2 ? 0 : 1 - abs * 0.3,
               }}
               transition={{ type: "spring", stiffness: 140, damping: 22 }}
-              className="absolute left-1/2 top-1/2 w-[88%] -translate-x-1/2 -translate-y-1/2 cursor-pointer rounded-2xl border border-white/[0.07] bg-[#0b0b0b]/90 p-6 text-left backdrop-blur-sm"
+              className="group absolute left-1/2 top-1/2 aspect-[4/3] w-[92%] -translate-x-1/2 -translate-y-1/2 cursor-pointer overflow-hidden rounded-[1.75rem] border border-white/[0.08] bg-[#0b0b0b]"
               style={{ zIndex: 10 - abs, pointerEvents: abs > 2 ? "none" : "auto" }}
             >
+              <img
+                src={stop.image}
+                alt={stop.title}
+                loading="lazy"
+                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                style={{ filter: abs === 0 ? "none" : "grayscale(0.6) brightness(0.7)" }}
+              />
+              <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />
               <span
-                className="absolute inset-x-0 top-0 h-px"
+                className="pointer-events-none absolute inset-x-0 top-0 h-px"
                 style={{ background: `linear-gradient(90deg, transparent, ${accent}, transparent)` }}
               />
-              <div className="flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.3em] text-white/40">
-                <span>{String(i + 1).padStart(2, "0")}</span>
-                <span>{stop.period}</span>
-              </div>
-              <h4 className="mt-4 font-headline text-2xl font-bold tracking-tighter text-white">
-                {stop.title}
-              </h4>
-              <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.2em] text-white/35">
-                {stop.place}
-              </p>
-              <p className="mt-4 font-display text-lg italic leading-snug" style={{ color: accent }}>
-                “{stop.caption}”
-              </p>
+              <span className="pointer-events-none absolute left-5 top-5 rounded-full border border-white/15 bg-black/40 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.3em] text-white/70 backdrop-blur-sm">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <span className="pointer-events-none absolute inset-x-5 bottom-5 text-left">
+                <span className="block font-mono text-[10px] uppercase tracking-[0.3em]" style={{ color: accent }}>
+                  {stop.period}
+                </span>
+                <span className="mt-1 block font-headline text-2xl font-bold tracking-tighter text-white">
+                  {stop.title}
+                </span>
+              </span>
             </motion.button>
           );
         })}
