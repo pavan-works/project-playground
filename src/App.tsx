@@ -33,7 +33,7 @@ import {
   X,
 } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
-import { JourneyGallery } from "./components/JourneyGallery";
+import { InfiniteGallery } from "./components/InfiniteGallery";
 import { PORTFOLIO_DATA, JOURNEY, JOURNEY_QUOTE, type Project } from "./data";
 import portraitCutout from "./assets/portrait-cutout.png";
 import { AnimatedNav } from "./components/AnimatedNav";
@@ -264,7 +264,7 @@ const ActiveStopPanel = ({ index }: { index: number }) => {
     stop.kind === "research" ? "var(--indigo)" : stop.kind === "work" ? "var(--emerald)" : "var(--gold)";
 
   return (
-    <div className="relative overflow-hidden rounded-[2rem] border border-white/[0.06] bg-[var(--rv-card)]/70 p-8 md:p-10">
+    <div className="relative flex w-full flex-col justify-center overflow-hidden rounded-[2rem] border border-white/[0.06] bg-[var(--rv-card)]/70 p-8 md:p-10">
       <span
         className="pointer-events-none absolute -top-24 -right-16 h-56 w-56 rounded-full blur-[90px] opacity-30"
         style={{ background: accent }}
@@ -385,12 +385,16 @@ const Experience = () => {
           <span>2010 → now</span>
         </div>
 
-        {/* Active stop + image gallery */}
-        <div className="mt-16 grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:items-start">
-          <div className="lg:sticky lg:top-28">
+        {/* Active stop + 3D infinite gallery */}
+        <div className="mt-16 grid grid-cols-1 items-stretch gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)]">
+          <div className="flex">
             <ActiveStopPanel index={activeStop} />
           </div>
-          <JourneyGallery active={activeStop} onChange={setActiveStop} />
+          <InfiniteGallery
+            images={JOURNEY.map((s) => s.image!).filter(Boolean)}
+            onActiveChange={setActiveStop}
+            className="h-[560px] md:h-[680px]"
+          />
         </div>
       </div>
     </section>
