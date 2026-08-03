@@ -254,7 +254,7 @@ export const InfiniteGallery = ({
       onTouchStart={noteInteraction}
       className={`relative overflow-hidden rounded-[2rem] border border-white/[0.06] bg-[var(--rv-card)]/40 ${className}`}
     >
-      <Canvas camera={{ position: [0, 0, 14], fov: 50 }} dpr={[1, 2]} gl={{ antialias: true, alpha: true }}>
+      <Canvas camera={{ position: [0, 0, 10], fov: 55 }} dpr={[1, 2]} gl={{ antialias: true, alpha: true }}>
         <Scene images={images} visibleCount={10} onActiveChange={onActiveChange} interactedRef={interactedRef} />
       </Canvas>
       <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 flex flex-col items-center gap-2 bg-gradient-to-t from-[var(--bg)] via-[var(--bg)]/70 to-transparent px-6 pb-6 pt-14 text-center">
