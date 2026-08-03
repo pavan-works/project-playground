@@ -32,7 +32,7 @@ import {
   ExternalLink,
   X,
 } from "lucide-react";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { InfiniteGallery } from "./components/InfiniteGallery";
 import { PORTFOLIO_DATA, JOURNEY, JOURNEY_QUOTE, type Project } from "./data";
 import portraitCutout from "./assets/portrait-cutout.png";
@@ -329,6 +329,49 @@ const ActiveStopPanel = ({ index }: { index: number }) => {
 
 const Experience = () => {
   const [activeStop, setActiveStop] = useState(0);
+  const [customImages, setCustomImages] = useState<string[]>(() => {
+    try {
+      return JSON.parse(localStorage.getItem("journey-custom-images") || "[]");
+    } catch {
+      return [];
+    }
+  });
+
+  const galleryImages = useMemo(() => {
+    const base = JOURNEY.map((s) => s.image!).filter(Boolean);
+    return customImages.length > 0 ? [...customImages, ...base] : base;
+  }, [customImages]);
+
+  const handleAddImages = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files || []);
+    if (!files.length) return;
+    Promise.all(
+      files.map(
+        (file) =>
+          new Promise<string>((resolve) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(String(reader.result));
+            reader.readAsDataURL(file);
+          }),
+      ),
+    ).then((urls) => {
+      setCustomImages((prev) => {
+        const next = [...prev, ...urls];
+        try {
+          localStorage.setItem("journey-custom-images", JSON.stringify(next));
+        } catch {
+          /* storage full — keep in memory only */
+        }
+        return next;
+      });
+    });
+    e.target.value = "";
+  };
+
+  const clearCustomImages = () => {
+    setCustomImages([]);
+    localStorage.removeItem("journey-custom-images");
+  };
 
   return (
     <section id="experience" className="relative overflow-hidden bg-white/[0.01] py-40">
@@ -386,15 +429,32 @@ const Experience = () => {
         </div>
 
         {/* Active stop + 3D infinite gallery */}
-        <div className="mt-16 grid grid-cols-1 items-stretch gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)]">
+        <div className="mt-16 grid grid-cols-1 items-stretch gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
           <div className="flex">
             <ActiveStopPanel index={activeStop} />
           </div>
-          <InfiniteGallery
-            images={JOURNEY.map((s) => s.image!).filter(Boolean)}
-            onActiveChange={setActiveStop}
-            className="h-[560px] md:h-[680px]"
-          />
+          <div className="flex flex-col gap-3">
+            <InfiniteGallery
+              images={galleryImages}
+              onActiveChange={setActiveStop}
+              className="h-[360px] md:h-[420px]"
+            />
+            <div className="flex items-center gap-4">
+              <label className="cursor-pointer font-mono text-[10px] uppercase tracking-[0.25em] text-white/45 transition-colors hover:text-[var(--emerald)]">
+                + Add your own images
+                <input type="file" accept="image/*" multiple className="hidden" onChange={handleAddImages} />
+              </label>
+              {customImages.length > 0 && (
+                <button
+                  type="button"
+                  onClick={clearCustomImages}
+                  className="font-mono text-[10px] uppercase tracking-[0.25em] text-white/30 hover:text-white/70"
+                >
+                  Reset ({customImages.length})
+                </button>
+              )}
+            </div>
+          </div>
         </div>
       </div>
     </section>

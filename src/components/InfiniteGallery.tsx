@@ -178,7 +178,8 @@ function Scene({
     <>
       {planes.current.map((plane, i) => {
         const tex = textures[plane.imageIndex];
-        const aspect = tex?.image ? tex.image.width / tex.image.height : 1;
+        const img = tex?.image as { width?: number; height?: number } | undefined;
+        const aspect = img?.width && img?.height ? img.width / img.height : 1;
         const scale: [number, number, number] = aspect > 1 ? [2.6 * aspect, 2.6, 1] : [2.6, 2.6 / aspect, 1];
         const mat = materials[i];
         if (mat) mat.uniforms.map.value = tex;
