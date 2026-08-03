@@ -378,7 +378,7 @@ const Experience = () => {
       <div className="absolute inset-0 dot-pattern opacity-10" />
       <div className="absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-8">
+      <div className="relative z-10 w-full px-5 md:px-8 lg:px-12 xl:px-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -429,7 +429,7 @@ const Experience = () => {
         </div>
 
         {/* Active stop + 3D infinite gallery */}
-        <div className="mt-16 grid grid-cols-1 items-stretch gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+        <div className="mt-16 grid w-full grid-cols-1 items-stretch gap-8 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-12 xl:gap-16">
           <div className="flex">
             <ActiveStopPanel index={activeStop} />
           </div>
@@ -437,7 +437,7 @@ const Experience = () => {
             <InfiniteGallery
               images={galleryImages}
               onActiveChange={setActiveStop}
-              className="min-h-[360px] flex-1 md:min-h-[420px]"
+              className="min-h-[360px] w-full flex-1 md:min-h-[420px]"
             />
             <div className="flex items-center gap-4">
               <label className="cursor-pointer font-mono text-[10px] uppercase tracking-[0.25em] text-white/45 transition-colors hover:text-[var(--emerald)]">
