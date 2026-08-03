@@ -437,7 +437,7 @@ const Experience = () => {
             <InfiniteGallery
               images={galleryImages}
               onActiveChange={setActiveStop}
-              className="h-[360px] md:h-[420px]"
+              className="min-h-[360px] flex-1 md:min-h-[420px]"
             />
             <div className="flex items-center gap-4">
               <label className="cursor-pointer font-mono text-[10px] uppercase tracking-[0.25em] text-white/45 transition-colors hover:text-[var(--emerald)]">
