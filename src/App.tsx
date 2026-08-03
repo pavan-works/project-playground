@@ -329,6 +329,49 @@ const ActiveStopPanel = ({ index }: { index: number }) => {
 
 const Experience = () => {
   const [activeStop, setActiveStop] = useState(0);
+  const [customImages, setCustomImages] = useState<string[]>(() => {
+    try {
+      return JSON.parse(localStorage.getItem("journey-custom-images") || "[]");
+    } catch {
+      return [];
+    }
+  });
+
+  const galleryImages = useMemo(() => {
+    const base = JOURNEY.map((s) => s.image!).filter(Boolean);
+    return customImages.length > 0 ? [...customImages, ...base] : base;
+  }, [customImages]);
+
+  const handleAddImages = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files || []);
+    if (!files.length) return;
+    Promise.all(
+      files.map(
+        (file) =>
+          new Promise<string>((resolve) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(String(reader.result));
+            reader.readAsDataURL(file);
+          }),
+      ),
+    ).then((urls) => {
+      setCustomImages((prev) => {
+        const next = [...prev, ...urls];
+        try {
+          localStorage.setItem("journey-custom-images", JSON.stringify(next));
+        } catch {
+          /* storage full — keep in memory only */
+        }
+        return next;
+      });
+    });
+    e.target.value = "";
+  };
+
+  const clearCustomImages = () => {
+    setCustomImages([]);
+    localStorage.removeItem("journey-custom-images");
+  };
 
   return (
     <section id="experience" className="relative overflow-hidden bg-white/[0.01] py-40">
