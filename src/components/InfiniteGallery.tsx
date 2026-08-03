@@ -6,6 +6,7 @@ import * as THREE from "three";
 const DEPTH_RANGE = 40;
 const MAX_X = 3.2;
 const MAX_Y = 2.2;
+const X_OFFSET = 1.1;
 
 const createClothMaterial = () =>
   new THREE.ShaderMaterial({
@@ -80,7 +81,7 @@ function Scene({
   const spatial = useMemo(
     () =>
       Array.from({ length: visibleCount }, (_, i) => ({
-        x: (Math.sin((i * 2.618) % (Math.PI * 2)) * ((i % 3) * 1.2) * MAX_X) / 3,
+        x: X_OFFSET + (Math.sin((i * 2.618) % (Math.PI * 2)) * ((i % 3) * 1.2) * MAX_X) / 3,
         y: (Math.cos((i * 1.618 + Math.PI / 3) % (Math.PI * 2)) * (((i + 1) % 4) * 0.8) * MAX_Y) / 4,
       })),
     [visibleCount],
@@ -180,7 +181,8 @@ function Scene({
         const tex = textures[plane.imageIndex];
         const img = tex?.image as { width?: number; height?: number } | undefined;
         const aspect = img?.width && img?.height ? img.width / img.height : 1;
-        const scale: [number, number, number] = aspect > 1 ? [2.6 * aspect, 2.6, 1] : [2.6, 2.6 / aspect, 1];
+        const base = 4.6;
+        const scale: [number, number, number] = aspect > 1 ? [base * aspect, base, 1] : [base, base / aspect, 1];
         const mat = materials[i];
         if (mat) mat.uniforms.map.value = tex;
         return (
