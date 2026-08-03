@@ -386,15 +386,32 @@ const Experience = () => {
         </div>
 
         {/* Active stop + 3D infinite gallery */}
-        <div className="mt-16 grid grid-cols-1 items-stretch gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)]">
+        <div className="mt-16 grid grid-cols-1 items-stretch gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
           <div className="flex">
             <ActiveStopPanel index={activeStop} />
           </div>
-          <InfiniteGallery
-            images={JOURNEY.map((s) => s.image!).filter(Boolean)}
-            onActiveChange={setActiveStop}
-            className="h-[560px] md:h-[680px]"
-          />
+          <div className="flex flex-col gap-3">
+            <InfiniteGallery
+              images={galleryImages}
+              onActiveChange={setActiveStop}
+              className="h-[360px] md:h-[420px]"
+            />
+            <div className="flex items-center gap-4">
+              <label className="cursor-pointer font-mono text-[10px] uppercase tracking-[0.25em] text-white/45 transition-colors hover:text-[var(--emerald)]">
+                + Add your own images
+                <input type="file" accept="image/*" multiple className="hidden" onChange={handleAddImages} />
+              </label>
+              {customImages.length > 0 && (
+                <button
+                  type="button"
+                  onClick={clearCustomImages}
+                  className="font-mono text-[10px] uppercase tracking-[0.25em] text-white/30 hover:text-white/70"
+                >
+                  Reset ({customImages.length})
+                </button>
+              )}
+            </div>
+          </div>
         </div>
       </div>
     </section>
