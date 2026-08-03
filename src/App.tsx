@@ -32,7 +32,7 @@ import {
   ExternalLink,
   X,
 } from "lucide-react";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { InfiniteGallery } from "./components/InfiniteGallery";
 import { PORTFOLIO_DATA, JOURNEY, JOURNEY_QUOTE, type Project } from "./data";
 import portraitCutout from "./assets/portrait-cutout.png";
