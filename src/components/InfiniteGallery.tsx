@@ -6,7 +6,7 @@ import * as THREE from "three";
 const DEPTH_RANGE = 40;
 const MAX_X = 3.2;
 const MAX_Y = 2.2;
-const X_OFFSET = 0;
+const X_OFFSET = 0.9;
 
 const createClothMaterial = () =>
   new THREE.ShaderMaterial({
@@ -252,12 +252,12 @@ export const InfiniteGallery = ({
       data-journey-gallery
       onPointerDown={noteInteraction}
       onTouchStart={noteInteraction}
-      className={`relative overflow-hidden rounded-[2rem] border border-white/[0.06] bg-[var(--rv-card)]/40 ${className}`}
+      className={`relative ${className}`}
     >
       <Canvas camera={{ position: [0, 0, 10], fov: 55 }} dpr={[1, 2]} gl={{ antialias: true, alpha: true }}>
         <Scene images={images} visibleCount={10} onActiveChange={onActiveChange} interactedRef={interactedRef} />
       </Canvas>
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 flex flex-col items-center gap-2 bg-gradient-to-t from-[var(--bg)] via-[var(--bg)]/70 to-transparent px-6 pb-6 pt-14 text-center">
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 flex flex-col items-center gap-2 px-6 pb-2 text-center">
         <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-white/40">
           Use mouse wheel, arrow keys, or touch to navigate
         </p>
@@ -265,6 +265,7 @@ export const InfiniteGallery = ({
           {paused ? "Auto-play resumes after 3 seconds of inactivity" : "Auto-playing"}
         </p>
       </div>
+
     </div>
   );
 };
