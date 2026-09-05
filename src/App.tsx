@@ -433,12 +433,16 @@ const Experience = () => {
           <div className="flex">
             <ActiveStopPanel index={activeStop} />
           </div>
-          <div className="flex flex-col gap-3">
+          <div
+            className="flex flex-col gap-3"
+            style={{ marginRight: "min(0px, calc(640px - 50vw))" }}
+          >
             <InfiniteGallery
               images={galleryImages}
               onActiveChange={setActiveStop}
               className="min-h-[360px] w-full flex-1 md:min-h-[440px]"
             />
+
 
             <div className="flex items-center gap-4">
               <label className="cursor-pointer font-mono text-[10px] uppercase tracking-[0.25em] text-white/45 transition-colors hover:text-[var(--emerald)]">
