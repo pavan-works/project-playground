@@ -6,7 +6,7 @@ import * as THREE from "three";
 const DEPTH_RANGE = 40;
 const MAX_X = 3.2;
 const MAX_Y = 2.2;
-const X_OFFSET = 0.9;
+const X_OFFSET = 1.6;
 
 const createClothMaterial = () =>
   new THREE.ShaderMaterial({
