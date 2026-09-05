@@ -428,15 +428,12 @@ const Experience = () => {
           <span>2010 → now</span>
         </div>
 
-        {/* Active stop + 3D infinite gallery */}
-        <div className="mt-16 grid w-full grid-cols-1 items-stretch gap-8 md:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-12">
-          <div className="flex">
+        {/* Full-bleed active stop + 3D gallery: use the black space at both viewport edges */}
+        <div className="relative left-1/2 mt-16 grid w-screen -translate-x-1/2 grid-cols-1 items-stretch gap-8 px-4 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] md:px-6 lg:gap-12 lg:px-10">
+          <div className="flex min-w-0">
             <ActiveStopPanel index={activeStop} />
           </div>
-          <div
-            className="flex flex-col gap-3"
-            style={{ marginRight: "min(0px, calc(640px - 50vw))" }}
-          >
+          <div className="flex min-w-0 flex-col gap-3">
             <InfiniteGallery
               images={galleryImages}
               onActiveChange={setActiveStop}
