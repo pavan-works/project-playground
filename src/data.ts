@@ -153,13 +153,13 @@ export const PORTFOLIO_DATA = {
     { id: "ts15", name: "Railway", imageUrl: "https://railway.app/brand/logo-light.svg" }
   ],
   aiTools: [
-    { id: "ai1", name: "OpenAI", imageUrl: "https://cdn.simpleicons.org/openai/white" },
+    { id: "ai1", name: "OpenAI", imageUrl: "https://cdn.jsdelivr.net/npm/@lobehub/icons-static-png@latest/dark/openai.png" },
     { id: "ai2", name: "Hugging Face", imageUrl: "https://huggingface.co/front/assets/huggingface_logo-noborder.svg" },
     { id: "ai3", name: "Claude Code", imageUrl: "https://cdn.simpleicons.org/anthropic" },
     { id: "ai4", name: "Google AI Studio", imageUrl: "https://cdn.simpleicons.org/googlegemini" },
     { id: "ai5", name: "Cursor", imageUrl: "https://cdn.simpleicons.org/cursor/white" },
     { id: "ai6", name: "n8n Automation", imageUrl: "https://cdn.simpleicons.org/n8n" },
-    { id: "ai7", name: "Groq", imageUrl: "https://cdn.simpleicons.org/groq" },
+    { id: "ai7", name: "Groq", imageUrl: "https://cdn.jsdelivr.net/npm/@lobehub/icons-static-png@latest/dark/groq.png" },
     { id: "ai8", name: "LangChain", imageUrl: "https://cdn.simpleicons.org/langchain" },
     { id: "ai9", name: "FastAPI", imageUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" }
   ],
