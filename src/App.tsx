@@ -130,7 +130,7 @@ const ABOUT_FOCUS = [
 ];
 
 const About = () => (
-  <section id="about" className="py-40 px-8 max-w-7xl mx-auto relative overflow-hidden">
+  <section id="about" className="py-40 px-6 md:px-14 relative overflow-hidden">
     <div className="absolute -top-40 -left-40 w-96 h-96 bg-[var(--gold)]/10 rounded-full blur-[120px] pointer-events-none" />
     <div className="absolute bottom-0 right-0 w-[420px] h-[420px] bg-[var(--indigo)]/10 rounded-full blur-[150px] pointer-events-none" />
 
@@ -378,7 +378,7 @@ const Experience = () => {
       <div className="absolute inset-0 dot-pattern opacity-10" />
       <div className="absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-8">
+      <div className="relative z-10 w-full px-6 md:px-14">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -429,7 +429,7 @@ const Experience = () => {
         </div>
 
         {/* Full-bleed active stop + 3D gallery: use the black space at both viewport edges */}
-        <div className="relative left-1/2 mt-16 grid w-screen -translate-x-1/2 grid-cols-1 items-stretch gap-8 px-4 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] md:px-6 lg:gap-12 lg:px-10">
+        <div className="mt-16 grid grid-cols-1 items-stretch gap-8 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-12">
           <div className="flex min-w-0">
             <ActiveStopPanel index={activeStop} />
           </div>
@@ -468,7 +468,7 @@ const Expertise = () => {
       <div className="absolute inset-0 dot-pattern opacity-[0.1]" />
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
       
-      <div className="max-w-7xl mx-auto px-8 relative z-10">
+      <div className="w-full px-6 md:px-14 relative z-10">
         <div className="mb-32">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -867,7 +867,7 @@ const Works = () => {
   const [openPaper, setOpenPaper] = useState<Project | null>(null);
 
   return (
-  <section id="works" className="py-40 px-8 max-w-7xl mx-auto relative overflow-hidden">
+  <section id="works" className="py-40 px-6 md:px-14 relative overflow-hidden">
     <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[var(--emerald)]/5 rounded-full blur-[150px] pointer-events-none" />
     
     <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-8">
@@ -958,9 +958,9 @@ const CodeSnippet = () => (
 );
 
 const Footer = () => (
-  <footer className="py-32 px-8 border-t border-white/5 relative overflow-hidden">
+  <footer className="py-32 px-6 md:px-14 border-t border-white/5 relative overflow-hidden">
     <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-[var(--gold)]/5 rounded-full blur-[150px] -z-10" />
-    <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-24">
+    <div className="w-full flex flex-col md:flex-row justify-between items-start gap-24">
       <div className="flex flex-col gap-10">
         <div className="flex items-center gap-6">
           <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
