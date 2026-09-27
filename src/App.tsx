@@ -462,97 +462,88 @@ const Experience = () => {
     </section>
   );
 };
+const StackCard = ({ skill, idx }: { skill: any; idx: number }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 24 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.5, delay: idx * 0.04 }}
+    className="group relative rounded-2xl p-[1px] cursor-crosshair transition-transform duration-500 hover:-translate-y-1.5"
+    style={{
+      background:
+        "linear-gradient(160deg, rgba(52,211,153,0.35) 0%, rgba(255,255,255,0.06) 35%, rgba(255,255,255,0.04) 60%, rgba(250,204,21,0.30) 100%)",
+    }}
+  >
+    <div className="relative h-full w-full rounded-2xl bg-[#0d1117]/95 flex flex-col items-center justify-center gap-4 py-8 px-4 overflow-hidden">
+      {/* hover glow */}
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(circle_at_50%_0%,rgba(52,211,153,0.12),transparent_70%)]" />
+      <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-24 h-16 bg-yellow-400/10 blur-2xl opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
+
+      <div className="relative w-14 h-14 md:w-16 md:h-16 rounded-xl bg-white/[0.06] border border-white/10 flex items-center justify-center transition-all duration-500 group-hover:border-white/20 group-hover:scale-105">
+        {skill.imageUrl ? (
+          <img
+            src={skill.imageUrl}
+            alt={skill.name}
+            className="w-8 h-8 md:w-9 md:h-9 object-contain"
+            referrerPolicy="no-referrer"
+          />
+        ) : (
+          <div className="w-8 h-8 bg-white/10 rounded-lg animate-pulse" />
+        )}
+      </div>
+      <h3 className="relative text-[11px] md:text-xs font-mono tracking-wider text-white/50 group-hover:text-white/90 transition-colors text-center leading-tight">
+        {skill.name}
+      </h3>
+    </div>
+  </motion.div>
+);
+
 const Expertise = () => {
   return (
     <section id="expertise" className="py-40 bg-[var(--bg)] relative overflow-hidden">
       <div className="absolute inset-0 dot-pattern opacity-[0.1]" />
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
-      
-      <div className="w-full px-6 md:px-14 relative z-10">
-        <div className="mb-32">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="flex items-center gap-4 mb-16"
-          >
-            <div className="w-12 h-px bg-[var(--gold)]" />
-            <span className="text-[var(--gold)] font-mono text-xs tracking-[0.5em] uppercase">03 / Tech Stack</span>
-          </motion.div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-8 gap-4 md:gap-6">
-            {(PORTFOLIO_DATA as any).techStack.map((skill: any, idx: number) => (
-              <motion.div
-                key={skill.id}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: idx * 0.03 }}
-                className="group relative bg-[var(--surface)] border border-white/20 rounded-xl p-4 md:p-6 flex flex-col items-center justify-center text-center cursor-crosshair transition-all duration-500 hover:border-[var(--gold)] hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(34,211,238,0.25)] aspect-square"
-              >
-                <div className="w-10 h-10 md:w-12 md:h-12 mb-3 md:mb-4 flex items-center justify-center relative">
-                  <div className="absolute inset-0 bg-[var(--gold)]/10 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full" />
-                  {skill.imageUrl ? (
-                    <img 
-                      src={skill.imageUrl} 
-                      alt={skill.name} 
-                      className="w-8 h-8 md:w-10 md:h-10 object-contain transition-all duration-500 group-hover:scale-110" 
-                      referrerPolicy="no-referrer"
-                    />
-                  ) : (
-                    <div className="w-8 h-8 md:w-10 md:h-10 bg-white/10 rounded-lg animate-pulse" />
-                  )}
-                </div>
-                <h3 className="text-[9px] md:text-[10px] font-mono tracking-widest uppercase text-[var(--rv-muted)] group-hover:text-white transition-colors">
-                  {skill.name}
-                </h3>
-                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-[1px] bg-[var(--gold)]/40 group-hover:w-1/3 transition-all duration-500" />
-              </motion.div>
-            ))}
-          </div>
+      {/* decorative circuit lines */}
+      <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-[0.15]" preserveAspectRatio="none" viewBox="0 0 100 100">
+        <path d="M0,20 L35,20 L50,45 L100,45" fill="none" stroke="rgba(250,204,21,0.4)" strokeWidth="0.15" />
+        <path d="M0,80 L30,80 L45,60 L100,60" fill="none" stroke="rgba(250,204,21,0.3)" strokeWidth="0.15" />
+        <circle cx="50" cy="45" r="0.5" fill="rgba(250,204,21,0.9)" />
+        <circle cx="45" cy="60" r="0.5" fill="rgba(250,204,21,0.9)" />
+      </svg>
+
+      <div className="w-full px-6 md:px-14 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="flex items-center gap-4 mb-16"
+        >
+          <div className="w-12 h-px bg-[var(--gold)]" />
+          <span className="text-[var(--gold)] font-mono text-xs tracking-[0.5em] uppercase">03 / Tech Stack</span>
+        </motion.div>
+
+        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-9 gap-4 md:gap-5 mb-24">
+          {(PORTFOLIO_DATA as any).techStack.map((skill: any, idx: number) => (
+            <StackCard key={skill.id} skill={skill} idx={idx} />
+          ))}
         </div>
 
-        <div>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="flex items-center gap-4 mb-16"
-          >
-            <div className="w-12 h-px bg-[var(--gold)]" />
-            <span className="text-[var(--gold)] font-mono text-xs tracking-[0.5em] uppercase">04 / Tools</span>
-          </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h3 className="font-mono text-xl md:text-2xl font-bold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-200 drop-shadow-[0_0_20px_rgba(250,204,21,0.35)]">
+            APIs &amp; AI Tools
+          </h3>
+        </motion.div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-8 gap-4 md:gap-6">
-            {(PORTFOLIO_DATA as any).aiTools.map((skill: any, idx: number) => (
-              <motion.div
-                key={skill.id}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: idx * 0.03 }}
-                className="group relative bg-[var(--surface)] border border-white/20 rounded-xl p-4 md:p-6 flex flex-col items-center justify-center text-center cursor-crosshair transition-all duration-500 hover:border-[var(--gold)] hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(34,211,238,0.25)] aspect-square"
-              >
-                <div className="w-10 h-10 md:w-12 md:h-12 mb-3 md:mb-4 flex items-center justify-center relative">
-                  <div className="absolute inset-0 bg-[var(--gold)]/10 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full" />
-                  {skill.imageUrl ? (
-                    <img 
-                      src={skill.imageUrl} 
-                      alt={skill.name} 
-                      className="w-8 h-8 md:w-10 md:h-10 object-contain transition-all duration-500 group-hover:scale-110" 
-                      referrerPolicy="no-referrer"
-                    />
-                  ) : (
-                    <div className="w-8 h-8 md:w-10 md:h-10 bg-white/10 rounded-lg animate-pulse" />
-                  )}
-                </div>
-                <h3 className="text-[9px] md:text-[10px] font-mono tracking-widest uppercase text-[var(--rv-muted)] group-hover:text-white transition-colors">
-                  {skill.name}
-                </h3>
-                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-[1px] bg-[var(--gold)]/40 group-hover:w-1/3 transition-all duration-500" />
-              </motion.div>
-            ))}
-          </div>
+        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-9 gap-4 md:gap-5">
+          {(PORTFOLIO_DATA as any).aiTools.map((skill: any, idx: number) => (
+            <StackCard key={skill.id} skill={skill} idx={idx} />
+          ))}
         </div>
       </div>
     </section>
