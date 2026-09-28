@@ -1085,6 +1085,7 @@ const Footer = () => (
         <p className="text-[var(--rv-muted)]/40 text-[10px] font-mono tracking-[0.4em] uppercase leading-relaxed max-w-xs">
           © 2026 Solige Pullaiah / AI Portfolio. All neural rights reserved. Designed for the future of intelligence.
         </p>
+        <p className="text-[var(--gold)]/70 text-sm font-display italic">Thank you for visiting my portfolio ✦</p>
       </div>
 
       <div className="grid grid-cols-2 gap-24">
