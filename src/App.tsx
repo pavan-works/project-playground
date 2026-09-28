@@ -1029,7 +1029,7 @@ const Contact = () => (
 
           <div className="relative flex items-center gap-4">
             <span className="shrink-0 w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center group-hover:border-[var(--gold)]/40 group-hover:scale-105 transition-all duration-300">
-              <c.icon className="w-4.5 h-4.5 w-[18px] h-[18px] text-[var(--rv-muted)] group-hover:text-[var(--gold)] transition-colors" />
+              <c.icon className="w-[18px] h-[18px] text-[var(--rv-muted)] group-hover:text-[var(--gold)] transition-colors" />
             </span>
             <span className="text-base md:text-lg font-headline font-bold tracking-tight text-white/85 group-hover:text-white transition-colors break-all text-left">
               {c.value}
