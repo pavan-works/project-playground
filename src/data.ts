@@ -138,13 +138,13 @@ export const PORTFOLIO_DATA = {
   techStack: [
     { id: "ts1", name: "Python", imageUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
     { id: "ts2", name: "TensorFlow", imageUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" },
-    { id: "ts3", name: "Flask", imageUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg" },
+    { id: "ts3", name: "Flask", imageUrl: "https://cdn.simpleicons.org/flask/FFFFFF" },
     { id: "ts4", name: "React", imageUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
     { id: "ts5", name: "Node.js", imageUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
     { id: "ts6", name: "Postgres", imageUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" },
     { id: "ts7", name: "Docker", imageUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" },
     { id: "ts8", name: "Git", imageUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
-    { id: "ts9", name: "GitHub", imageUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" },
+    { id: "ts9", name: "GitHub", imageUrl: "https://cdn.simpleicons.org/github/FFFFFF" },
     { id: "ts10", name: "GCP", imageUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" },
     { id: "ts11", name: "VS Code", imageUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" },
     { id: "ts12", name: "TypeScript", imageUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
@@ -155,12 +155,12 @@ export const PORTFOLIO_DATA = {
   aiTools: [
     { id: "ai1", name: "OpenAI", imageUrl: "https://cdn.jsdelivr.net/npm/@lobehub/icons-static-png@latest/dark/openai.png" },
     { id: "ai2", name: "Hugging Face", imageUrl: "https://huggingface.co/front/assets/huggingface_logo-noborder.svg" },
-    { id: "ai3", name: "Claude Code", imageUrl: "https://cdn.jsdelivr.net/npm/@lobehub/icons-static-png@latest/dark/claude.png" },
-    { id: "ai4", name: "Google AI Studio", imageUrl: "https://cdn.simpleicons.org/googlegemini" },
+    { id: "ai3", name: "Claude Code", imageUrl: "https://cdn.simpleicons.org/claude/D97757" },
+    { id: "ai4", name: "Google AI Studio", imageUrl: "https://cdn.simpleicons.org/googlegemini/8AB4F8" },
     { id: "ai5", name: "Cursor", imageUrl: "https://cdn.simpleicons.org/cursor/white" },
     { id: "ai6", name: "n8n Automation", imageUrl: "https://cdn.simpleicons.org/n8n" },
     { id: "ai7", name: "Groq", imageUrl: "https://cdn.jsdelivr.net/npm/@lobehub/icons-static-png@latest/dark/groq.png" },
-    { id: "ai8", name: "LangChain", imageUrl: "https://cdn.simpleicons.org/langchain" },
+    { id: "ai8", name: "LangChain", imageUrl: "https://cdn.simpleicons.org/langchain/FFFFFF" },
     { id: "ai9", name: "FastAPI", imageUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" }
   ],
   experience: [
