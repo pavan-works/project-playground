@@ -950,7 +950,7 @@ const CodeSnippet = () => (
 
 const CONTACT_LINKS = [
   {
-    label: "Email",
+    label: "Mail",
     value: "pulipavan696@gmail.com",
     href: "mailto:pulipavan696@gmail.com",
     icon: Mail,
