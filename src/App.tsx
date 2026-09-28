@@ -479,19 +479,19 @@ const StackCard = ({ skill, idx }: { skill: any; idx: number }) => (
       <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(circle_at_50%_0%,rgba(52,211,153,0.12),transparent_70%)]" />
       <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-24 h-16 bg-yellow-400/10 blur-2xl opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
 
-      <div className="relative w-14 h-14 md:w-16 md:h-16 rounded-xl bg-white/[0.06] border border-white/10 flex items-center justify-center transition-all duration-500 group-hover:border-white/20 group-hover:scale-105">
+      <div className="relative w-14 h-14 md:w-16 md:h-16 rounded-xl bg-[var(--stack-icon-surface)] border border-[var(--stack-icon-border)] flex items-center justify-center transition-all duration-500 group-hover:border-[var(--border-hover)] group-hover:scale-105">
         {skill.imageUrl ? (
           <img
             src={skill.imageUrl}
             alt={skill.name}
-            className="w-8 h-8 md:w-9 md:h-9 object-contain"
+            className={`w-10 h-10 md:w-11 md:h-11 object-contain ${skill.name === "Groq" ? "brightness-0 invert" : ""}`}
             referrerPolicy="no-referrer"
           />
         ) : (
           <div className="w-8 h-8 bg-white/10 rounded-lg animate-pulse" />
         )}
       </div>
-      <h3 className="relative text-[11px] md:text-xs font-mono tracking-wider text-white/50 group-hover:text-white/90 transition-colors text-center leading-tight">
+      <h3 className="relative text-[11px] md:text-xs font-mono tracking-wider text-[var(--stack-label)] group-hover:text-[var(--text)] transition-colors text-center leading-tight">
         {skill.name}
       </h3>
     </div>
