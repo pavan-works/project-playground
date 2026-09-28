@@ -1201,6 +1201,7 @@ export default function PortfolioLanding() {
         <Expertise />
         <Works />
         <CodeSnippet />
+        <Contact />
       </main>
       <Footer />
       
