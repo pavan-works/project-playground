@@ -11,25 +11,28 @@
 | Field | Value |
 |---|---|
 | **Full Name** | Solige Pullaiah |
-| **Portfolio Alias** | Puli Pavan |
+| **Display Name (website)** | **Solige Pullaiah** *(confirmed)* |
+| **Portfolio Alias** | Puli Pavan *(handle/alias only — not the display name)* |
+| **GitHub** | [github.com/puli-pro](https://github.com/puli-pro) |
+| **Profile / Avatar Photo** | `src/assets/portrait-smile.png` *(used on site)* — sources: `src/assets/logos/placed_puli.png`, `src/assets/logos/profile_photo.jpeg` |
 | **Email** | pulipavan696@gmail.com |
 | **LinkedIn** | [linkedin.com/in/solige-pullaiah-478462270](https://www.linkedin.com/in/solige-pullaiah-478462270) |
 | **Location** | Nandyal, Andhra Pradesh, India |
-| **Current Role** | AI Intern — Hrud.ai, Visakhapatnam |
+| **Current Role** | **AI Engineer** — Hrud.ai, Visakhapatnam *(confirmed by owner; see https://hrud.ai/team)* |
 
 ---
 
 ## Professional Summary
 
-AI Intern with a strong focus on Artificial Intelligence, Machine Learning, and real-world problem solving. Passionate about building impactful, production-ready AI systems. Experienced in systems modeling, data preprocessing, neural networks, and deep learning pipelines. Eager to bridge research and real-world application.
+AI Engineer at Hrud.ai with a strong focus on Artificial Intelligence, Machine Learning, and real-world problem solving. Passionate about building impactful, production-ready AI systems. Experienced in systems modeling, data preprocessing, neural networks, and deep learning pipelines. Eager to bridge research and real-world application.
 
 ---
 
 ## Experience
 
-### Hrud.ai — AI Intern
+### Hrud.ai — AI Engineer
 **January 2026 – Present (6 months)** | Visakhapatnam, Andhra Pradesh, India
-- Working as AI Intern focused on ML and problem solving
+- Working as AI Engineer: production LLM systems, RAG pipelines and autonomous agents
 - Building impactful, real-world AI solutions
 - Domain: Artificial Intelligence, Machine Learning, Systems Modeling
 
@@ -99,7 +102,7 @@ Based on the design reference and LinkedIn summary:
 
 - **Tone:** Confident, technical, passionate
 - **Tagline options (placeholder — confirm with user):**
-  - *"AI Intern | ML Engineer | Building Real-World AI Systems"*
+  - *"AI Engineer | ML Engineer | Building Real-World AI Systems"*
   - *"Passionate About Building Impactful, Real-World AI Solutions"*
   - *"Systems Thinking. Machine Learning. Real Impact."*
 
@@ -111,7 +114,7 @@ Based on the design reference and LinkedIn summary:
 |---|---|
 | Email | pulipavan696@gmail.com |
 | LinkedIn | linkedin.com/in/solige-pullaiah-478462270 |
-| GitHub | *(not provided — add when available)* |
+| GitHub | [github.com/puli-pro](https://github.com/puli-pro) (`@puli-pro`) |
 | Behance / Portfolio | *(not provided — add when available)* |
 
 ---
@@ -136,7 +139,7 @@ Bio:       I'M SOLIGE PULLAIAH — THE AI ENGINEER WHO LIVES AND
            OR BUILDING IMPACTFUL AI SOLUTIONS, INNOVATION FUELS
            EVERYTHING I DO.
 Links:     linkedin.com/in/solige-pullaiah-478462270
-           [GitHub when available]
+           github.com/puli-pro
 ```
 
 ### Outro ("Thanks for Watching")
@@ -152,9 +155,9 @@ Socials:   LinkedIn: linkedin.com/in/solige-pullaiah-478462270
 
 Before implementation, confirm or supply:
 
-- [ ] Preferred display name on website: "Solige Pullaiah", "Puli Pavan", or other?
-- [ ] Profile/avatar photo
-- [ ] GitHub profile URL
+- [x] Preferred display name on website: **"Solige Pullaiah"** ("Puli Pavan" stays only as an alias/handle)
+- [x] Profile/avatar photo: `portrait-smile.png` (hero, live), `placed_puli.png` and `profile_photo.jpeg` (source photos; `portrait-smile.png` is a composite of both)
+- [x] GitHub profile URL: https://github.com/puli-pro
 - [ ] Project list with names, descriptions, links, and cover images
 - [ ] Preferred portfolio section categories (see suggested list above)
 - [ ] Personal tagline for hero page vertical labels

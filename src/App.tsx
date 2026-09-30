@@ -1085,7 +1085,7 @@ const Footer = () => (
           <div className="flex flex-col gap-4 text-sm font-mono tracking-widest uppercase text-[var(--rv-muted)]/60">
             <a href="https://www.linkedin.com/in/solige-pullaiah-478462270" target="_blank" rel="noreferrer" className="hover:text-[var(--gold)] transition-colors">LinkedIn</a>
             <a href="#" className="hover:text-[var(--gold)] transition-colors">Twitter</a>
-            <a href="#" className="hover:text-[var(--gold)] transition-colors">Github</a>
+            <a href="https://github.com/puli-pro" target="_blank" rel="noreferrer" className="hover:text-[var(--gold)] transition-colors">Github</a>
             <a href="mailto:pulipavan696@gmail.com" className="hover:text-[var(--gold)] transition-colors">Email</a>
           </div>
         </div>
