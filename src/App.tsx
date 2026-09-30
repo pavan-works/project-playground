@@ -10,12 +10,10 @@
 
 import { motion, AnimatePresence, useScroll, useTransform, useSpring } from "motion/react";
 import { 
-  ArrowUpRight, 
-  Menu, 
-  Github, 
-  Twitter, 
-  Linkedin, 
-  Mail,
+  ArrowUpRight,
+  Menu,
+  Github,
+  Twitter,
   Zap,
   Cpu,
   Globe,
@@ -35,8 +33,9 @@ import {
 import { useState, useEffect, useRef, useMemo } from "react";
 import { InfiniteGallery } from "./components/InfiniteGallery";
 import { PORTFOLIO_DATA, JOURNEY, JOURNEY_QUOTE, type Project } from "./data";
-import portraitCutout from "./assets/portrait-cutout.png";
+import portraitCutout from "./assets/portrait-smile.png";
 import { AnimatedNav } from "./components/AnimatedNav";
+import logoGmail from "./assets/logos/gmail.svg";
 
 
 const Hero = () => {
@@ -80,8 +79,8 @@ const Hero = () => {
       <motion.img
         src={portraitCutout}
         alt="Solige Pullaiah"
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
+        initial={{ y: 40 }}
+        animate={{ y: 0 }}
         transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
         className="absolute bottom-16 md:bottom-14 left-1/2 -translate-x-1/2 h-[62vh] md:h-[72vh] w-auto object-contain object-bottom z-40 pointer-events-none select-none drop-shadow-[0_20px_60px_rgba(0,0,0,0.7)]"
       />
@@ -471,20 +470,20 @@ const StackCard = ({ skill, idx }: { skill: any; idx: number }) => (
     className="group relative rounded-2xl p-[1px] cursor-crosshair transition-transform duration-500 hover:-translate-y-1.5"
     style={{
       background:
-        "linear-gradient(160deg, rgba(52,211,153,0.35) 0%, rgba(255,255,255,0.06) 35%, rgba(255,255,255,0.04) 60%, rgba(250,204,21,0.30) 100%)",
+        "linear-gradient(160deg, rgba(52,211,153,0.75) 0%, rgba(255,255,255,0.22) 35%, rgba(255,255,255,0.18) 60%, rgba(250,204,21,0.70) 100%)",
     }}
   >
-    <div className="relative h-full w-full rounded-2xl bg-[#0d1117]/95 flex flex-col items-center justify-center gap-4 py-8 px-4 overflow-hidden">
+    <div className="relative h-full w-full rounded-2xl bg-[#1a222c]/95 flex flex-col items-center justify-center gap-4 py-8 px-4 overflow-hidden">
       {/* hover glow */}
-      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(circle_at_50%_0%,rgba(52,211,153,0.12),transparent_70%)]" />
-      <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-24 h-16 bg-yellow-400/10 blur-2xl opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(circle_at_50%_0%,rgba(52,211,153,0.28),transparent_70%)]" />
+      <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-24 h-16 bg-yellow-400/25 blur-2xl opacity-80 group-hover:opacity-100 transition-opacity duration-500" />
 
       <div className="relative w-14 h-14 md:w-16 md:h-16 rounded-xl bg-[var(--stack-icon-surface)] border border-[var(--stack-icon-border)] flex items-center justify-center transition-all duration-500 group-hover:border-[var(--border-hover)] group-hover:scale-105">
         {skill.imageUrl ? (
           <img
             src={skill.imageUrl}
             alt={skill.name}
-            className={`w-10 h-10 md:w-11 md:h-11 object-contain ${skill.name === "Groq" ? "brightness-0 invert" : ""}`}
+            className={`${skill.name === "LangChain" ? "w-full h-auto p-0.5" : "w-10 h-10 md:w-11 md:h-11"} object-contain `}
             referrerPolicy="no-referrer"
           />
         ) : (
@@ -953,21 +952,21 @@ const CONTACT_LINKS = [
     label: "Mail",
     value: "pulipavan696@gmail.com",
     href: "mailto:pulipavan696@gmail.com",
-    icon: Mail,
+    logo: logoGmail,
     hint: "Fastest way to reach me",
   },
   {
     label: "LinkedIn",
     value: "in/solige-pullaiah",
     href: "https://www.linkedin.com/in/solige-pullaiah-478462270",
-    icon: Linkedin,
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg",
     hint: "Professional timeline",
   },
   {
     label: "GitHub",
     value: "@puli-pro",
     href: "https://github.com/puli-pro",
-    icon: Github,
+    logo: "https://cdn.simpleicons.org/github/FFFFFF",
     hint: "Where the code lives",
   },
 ];
@@ -1000,14 +999,17 @@ const Contact = () => (
           <span className="text-[var(--gold)] font-mono text-xs tracking-[0.5em] uppercase">Get In Touch</span>
           <span className="w-14 h-px bg-gradient-to-l from-transparent to-[var(--gold)]" />
         </div>
-        <h2 className="text-6xl md:text-8xl font-headline font-bold tracking-tighter leading-[0.95] mb-8">
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-[var(--gold-light)] via-[var(--indigo-light)] to-[var(--gold)]">
-            Let's Build Something
-          </span>
+        <h2 className="text-6xl md:text-8xl font-headline font-bold tracking-tighter leading-[0.95] mb-10">
+          Let's Build <span className="text-white/10 italic">Something</span>
         </h2>
-        <p className="text-[var(--rv-muted)] text-base md:text-lg max-w-xl leading-relaxed">
-          Open to AI/ML internships, full-time roles &amp; meaningful collaborations.
-        </p>
+
+        <div className="flex items-center gap-6 max-w-2xl mx-auto">
+          <span className="hidden sm:block h-px flex-1 bg-gradient-to-r from-transparent to-white/15" />
+          <p className="text-[var(--rv-muted)] text-base md:text-lg leading-relaxed shrink-0">
+            Open to AI/ML internships, full-time roles &amp; meaningful collaborations.
+          </p>
+          <span className="hidden sm:block h-px flex-1 bg-gradient-to-l from-transparent to-white/15" />
+        </div>
       </motion.div>
     </div>
 
@@ -1022,22 +1024,27 @@ const Contact = () => (
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: i * 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="group relative border border-white/10 bg-white/[0.02] backdrop-blur-sm rounded-2xl px-8 py-6 overflow-hidden transition-all duration-500 hover:border-[var(--gold)]/50 hover:bg-white/[0.04] hover:-translate-y-1.5"
+          className="group relative border border-white/25 bg-white/[0.08] backdrop-blur-sm rounded-2xl px-8 py-6 overflow-hidden transition-all duration-500 hover:border-[var(--gold)]/50 hover:bg-white/[0.12] hover:-translate-y-1.5"
         >
           {/* Hover glow */}
           <div className="absolute -top-20 -right-20 w-52 h-52 bg-[var(--gold)]/10 rounded-full blur-[80px] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
           <div className="relative flex items-center gap-4">
-            <span className="shrink-0 w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center group-hover:border-[var(--gold)]/40 group-hover:scale-105 transition-all duration-300">
-              <c.icon className="w-[18px] h-[18px] text-[var(--rv-muted)] group-hover:text-[var(--gold)] transition-colors" />
+            <span className="shrink-0 w-14 h-14 rounded-xl border border-white/30 bg-white/15 flex items-center justify-center p-0 overflow-hidden group-hover:border-[var(--gold)]/40 group-hover:scale-105 transition-all duration-300">
+              <img
+                src={c.logo}
+                alt={c.label}
+                className="w-full h-full object-contain p-1"
+                referrerPolicy="no-referrer"
+              />
             </span>
-            <span className="text-base md:text-lg font-headline font-bold tracking-tight text-white/85 group-hover:text-white transition-colors break-all text-left">
+            <span className="text-base md:text-lg font-headline font-bold tracking-tight text-white group-hover:text-[var(--gold)] transition-colors break-all text-left">
               {c.value}
             </span>
-            <ArrowUpRight className="ml-auto w-4 h-4 shrink-0 text-white/20 group-hover:text-[var(--gold)] group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" />
+            <ArrowUpRight className="ml-auto w-4 h-4 shrink-0 text-white/60 group-hover:text-[var(--gold)] group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" />
           </div>
 
-          <span className="relative block mt-3 text-[10px] font-mono tracking-[0.3em] uppercase text-[var(--rv-muted)]/50 group-hover:text-[var(--rv-muted)]/80 transition-colors">
+          <span className="relative block mt-3 text-[10px] font-mono tracking-[0.3em] uppercase text-white/70 group-hover:text-white transition-colors">
             {c.label} : {c.hint}
           </span>
         </motion.a>

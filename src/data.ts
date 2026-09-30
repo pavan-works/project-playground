@@ -5,6 +5,15 @@ import j4 from "./assets/journey-4.jpg";
 import j5 from "./assets/journey-5.jpg";
 import j6 from "./assets/journey-6.jpg";
 
+import logoFlask from "./assets/logos/flask.svg";
+import logoNodejs from "./assets/logos/nodejs.svg";
+import logoVercel from "./assets/logos/vercel.svg";
+import logoSqlite from "./assets/logos/sqlite.svg";
+import logoCursor from "./assets/logos/cursor.svg";
+import logoGroq from "./assets/logos/groq.svg";
+import logoRailway from "./assets/logos/railway.svg";
+import logoLangchain from "./assets/logos/langchain.png";
+
 export interface Project {
   id: string;
   title: string;
@@ -138,9 +147,9 @@ export const PORTFOLIO_DATA = {
   techStack: [
     { id: "ts1", name: "Python", imageUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
     { id: "ts2", name: "TensorFlow", imageUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" },
-    { id: "ts3", name: "Flask", imageUrl: "https://cdn.simpleicons.org/flask/FFFFFF" },
+    { id: "ts3", name: "Flask", imageUrl: logoFlask },
     { id: "ts4", name: "React", imageUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
-    { id: "ts5", name: "Node.js", imageUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
+    { id: "ts5", name: "Node.js", imageUrl: logoNodejs },
     { id: "ts6", name: "Postgres", imageUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" },
     { id: "ts7", name: "Docker", imageUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" },
     { id: "ts8", name: "Git", imageUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
@@ -148,19 +157,19 @@ export const PORTFOLIO_DATA = {
     { id: "ts10", name: "GCP", imageUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" },
     { id: "ts11", name: "VS Code", imageUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" },
     { id: "ts12", name: "TypeScript", imageUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
-    { id: "ts13", name: "Vercel", imageUrl: "https://assets.vercel.com/image/upload/v1588805858/repositories/vercel/logo.png" },
-    { id: "ts14", name: "SQLite", imageUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg" },
-    { id: "ts15", name: "Railway", imageUrl: "https://railway.app/brand/logo-light.svg" }
+    { id: "ts13", name: "Vercel", imageUrl: logoVercel },
+    { id: "ts14", name: "SQLite", imageUrl: logoSqlite },
+    { id: "ts15", name: "Railway", imageUrl: logoRailway }
   ],
   aiTools: [
     { id: "ai1", name: "OpenAI", imageUrl: "https://cdn.jsdelivr.net/npm/@lobehub/icons-static-png@latest/dark/openai.png" },
     { id: "ai2", name: "Hugging Face", imageUrl: "https://huggingface.co/front/assets/huggingface_logo-noborder.svg" },
     { id: "ai3", name: "Claude Code", imageUrl: "https://cdn.simpleicons.org/claude/D97757" },
     { id: "ai4", name: "Google AI Studio", imageUrl: "https://cdn.simpleicons.org/googlegemini/8AB4F8" },
-    { id: "ai5", name: "Cursor", imageUrl: "https://cdn.simpleicons.org/cursor/white" },
+    { id: "ai5", name: "Cursor", imageUrl: logoCursor },
     { id: "ai6", name: "n8n Automation", imageUrl: "https://cdn.simpleicons.org/n8n" },
-    { id: "ai7", name: "Groq", imageUrl: "https://cdn.jsdelivr.net/npm/@lobehub/icons-static-png@latest/dark/groq.png" },
-    { id: "ai8", name: "LangChain", imageUrl: "https://cdn.simpleicons.org/langchain/FFFFFF" },
+    { id: "ai7", name: "Groq", imageUrl: logoGroq },
+    { id: "ai8", name: "LangChain", imageUrl: logoLangchain },
     { id: "ai9", name: "FastAPI", imageUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" }
   ],
   experience: [

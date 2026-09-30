@@ -27,9 +27,9 @@
   --rv-muted: #a3a3a3; /* Muted text from Ravindra's resume */
   --border-rv: rgba(255, 255, 255, 0.05);
   --border-hover: rgba(34, 211, 238, 0.3);
-  --stack-icon-surface: #222a31;
-  --stack-icon-border: rgba(255, 255, 255, 0.18);
-  --stack-label: #d4d4d4;
+  --stack-icon-surface: #3a4650;
+  --stack-icon-border: rgba(255, 255, 255, 0.35);
+  --stack-label: #ffffff;
 }
 
 body {
