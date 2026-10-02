@@ -35,6 +35,7 @@ import { InfiniteGallery } from "./components/InfiniteGallery";
 import { PORTFOLIO_DATA, JOURNEY, JOURNEY_QUOTE, type Project } from "./data";
 import portraitCutout from "./assets/portrait-smile.png";
 import { AnimatedNav } from "./components/AnimatedNav";
+import { Skillset } from "./components/Skillset";
 import logoGmail from "./assets/logos/gmail.svg";
 
 
@@ -521,6 +522,8 @@ const Expertise = () => {
           <div className="w-12 h-px bg-[var(--gold)]" />
           <span className="text-[var(--gold)] font-mono text-xs tracking-[0.5em] uppercase">03 / Tech Stack</span>
         </motion.div>
+
+        <Skillset />
 
         <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-9 gap-4 md:gap-5 mb-24">
           {(PORTFOLIO_DATA as any).techStack.map((skill: any, idx: number) => (

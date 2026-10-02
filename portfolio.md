@@ -482,7 +482,7 @@ Data shape: `SKILLSET = [{ title, items: [[skillName, whereUsed], …] }]`.
 **Keep** the existing logo-tile grids (Tech Stack / APIs & AI Tools) as a **visual strip under the cards** — logos for recognition, cards for depth.
 
 To do:
-- [ ] Add `SKILLSET` to `data.ts` + a `SkillsetCard` component (dot, title, rows with `whereUsed`).
+- [x] **DONE (2026-10-01):** `SKILLSET` in `data.ts` + `src/components/Skillset.tsx` (spotlight bento cards, marquee, rows with "where used"; shown at the top of the Expertise section above the logo grids). Categories: AI & ML (ML, DL, NLP, RAG, LLMs, Agents, Prompt Engineering), Languages (Python), Databases (Supabase, PostgreSQL, SQLite, MySQL + vector: Pinecone, FAISS & Chroma), Cloud & DevOps (Azure, Vercel, GitHub).
 - [ ] ❓ OWNER fill the "where used" blanks or delete rows you can't back with a project.
 - [ ] Row hover state (cursor ring grows, row highlights) like the reference's `.sr-row`.
 

@@ -109,3 +109,14 @@ body::before {
   transform: translateY(-4px);
   box-shadow: 0 10px 30px -10px var(--gold-dim);
 }
+
+/* ---- Skillset ---- */
+@keyframes skillMarquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.skill-marquee-track { animation: skillMarquee 38s linear infinite; }
+.skill-marquee:hover .skill-marquee-track { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) {
+  .skill-marquee-track { animation: none; }
+}

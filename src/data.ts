@@ -283,3 +283,63 @@ export const PORTFOLIO_DATA = {
     }
   ]
 };
+
+/* Skillset: [skill, where it was used (optional), tag (optional)] */
+export type SkillRow = [name: string, whereUsed?: string, tag?: string];
+export interface SkillCategory {
+  id: string;
+  title: string;
+  blurb: string;
+  icon: "brain" | "code" | "database" | "cloud";
+  items: SkillRow[];
+}
+
+export const SKILLSET: SkillCategory[] = [
+  {
+    id: "ai",
+    title: "AI & Machine Learning",
+    blurb: "From classical ML to LLM agents shipped in production.",
+    icon: "brain",
+    items: [
+      ["Machine Learning", "CodeForces — +12% model performance"],
+      ["Deep Learning", "LaMaTEPP, SyncVerse"],
+      ["NLP", "LaMaTEPP — Indic machine translation"],
+      ["RAG", "Ollama Document Assistant, Hrud.ai"],
+      ["LLMs", "Hrud.ai (Gemini), Ollama"],
+      ["Agents", "AI Job Intelligence Agent, Hrud.ai"],
+      ["Prompt Engineering", "RAG & agent workflows"],
+    ],
+  },
+  {
+    id: "lang",
+    title: "Languages",
+    blurb: "My primary language for ML, LLM and backend work.",
+    icon: "code",
+    items: [["Python", "ML, DL, NLP, RAG, agents, FastAPI"]],
+  },
+  {
+    id: "db",
+    title: "Databases",
+    blurb: "Relational stores and vector search for retrieval.",
+    icon: "database",
+    items: [
+      ["Supabase", "AI Job Intelligence Agent, Hrud.ai", "SQL"],
+      ["PostgreSQL", "Supabase backends", "SQL"],
+      ["SQLite", "", "SQL"],
+      ["MySQL", "", "SQL"],
+      ["Pinecone", "", "Vector"],
+      ["FAISS & Chroma", "Ollama Document Assistant", "Vector"],
+    ],
+  },
+  {
+    id: "cloud",
+    title: "Cloud & DevOps",
+    blurb: "Shipping and versioning what I build.",
+    icon: "cloud",
+    items: [
+      ["Microsoft Azure", ""],
+      ["Vercel", ""],
+      ["GitHub", "github.com/puli-pro"],
+    ],
+  },
+];
