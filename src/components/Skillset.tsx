@@ -113,7 +113,7 @@ const SpotlightCard = ({
               background: "rgba(var(--rgb),0.08)",
             }}
           >
-            {String(cat.items.length).padStart(2, "0")}
+            {String(index + 1).padStart(2, "0")}
           </span>
         </header>
 

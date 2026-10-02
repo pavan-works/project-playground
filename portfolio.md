@@ -499,7 +499,7 @@ Pullaiah-specific copy (ML-flavoured; edit freely):
 | 03 | **Build & Evaluate** | Train / integrate the model, build the API and data layer, then measure it properly (BLEU/COMET, retrieval quality, latency) and iterate with stakeholders. |
 | 04 | **Deploy & Improve** | Containerise and ship (Vercel / Railway / cloud), monitor real usage, and keep improving. |
 
-- [ ] Build the `Process` section (rotated cards via CSS `--r`, absolutely positioned ≥ md, static stack < md).
+- [x] **DONE (2026-10-02):** `src/components/Process.tsx` + `PROCESS_STEPS` / `PROCESS_LENSES` in `data.ts`, placed after Expertise (`#process`). Owner's flow: Understand the Problem → Plan the Architecture → Check What Already Exists (reuse/adapt/build; loop back to Step 02 if helpful) → Design → Build & Evaluate → Deploy & Improve. Customised beyond the plan: 6 steps instead of 4, a **lens switcher** (Research Paper · ML/DL/NLP · RAG · Agents) that changes each step's "In practice" text, per-step "Output" artifact, a feedback-loop banner and a scroll-drawn progress line (dark theme, no rotated cards).
 - [ ] ❓ OWNER confirm the 4 step names/wording match how you really work.
 
 ### 16.5 What I have done — Projects, Research, Work (content plan)
@@ -572,7 +572,7 @@ Light band, pill "Core Competencies", 3-column emoji cards. Only claims backed b
 | 🚀 | **Ownership** | Takes ideas from paper/prototype to a running system. ❓ OWNER confirm |
 | ⏱️ | **Time management** | Balanced final-year studies, research and an industry role. ❓ OWNER confirm |
 
-- [ ] Add `SOFT_SKILLS` to `data.ts` + `SoftSkillCard`; delete any card the owner does not want.
+- [x] **DONE (2026-10-02):** `SOFT_SKILLS` in `data.ts` + `SoftSkills` in `src/components/SoftSkillsAchievements.tsx` (`#soft-skills`). Built **only from resume-backed evidence**: Leadership, Public Speaking, Event Anchoring, End-to-End Ownership, each card listing its evidence. The unconfirmed cards from the table above (Communication, Collaboration, Time management) were intentionally **left out**; add them to `SOFT_SKILLS` if the owner confirms.
 
 ### 16.9 Achievements
 
@@ -585,7 +585,8 @@ Card grid (award icon, same component as certifications) — **from the resume**
 
 Also show **Certifications**: CCNA: Introduction to Networks (Cisco). ❓ OWNER add any others — only CCNA is listed in `about_me.md`.
 
-- [ ] Add `ACHIEVEMENTS` + `CERTS` arrays; build `AchievementGrid` on the accent band with count-up highlights ("3rd place hackathon", "2 papers under review", "Top 2000 / 2.53 lakh").
+- [x] **DONE (2026-10-02):** `ACHIEVEMENTS` in `data.ts` + `Achievements` component (`#achievements`, bento grid, 3rd-place card featured). Both sections sit after Works.
+- [ ] Remaining: certifications grid (CCNA is only in `about_me.md`, not the resume) and optional count-up stats.
 - [ ] ❓ OWNER add dates, hackathon organiser and proof links (certificate/photo) if available.
 
 ### 16.10 Those Who Shaped Me — including "on my own"
@@ -621,10 +622,11 @@ Current: 3 link cards only. Target (matches the reference):
 5. **Phase 2 (recommended):** real delivery without opening a mail app — Formspree / EmailJS / a Supabase edge function (already in the owner's stack) storing messages in a `messages` table + email notification. Add a honeypot field and rate limiting.
 6. "Available for opportunities" badge in the footer + a spinning "Open to work" hero badge linking to `#contact`.
 
-- [ ] Add the `Contact` form component + validation + `mailto` builder; keep the existing `CONTACT_LINKS` cards.
+- [x] **DONE (2026-10-02):** `src/components/ContactForm.tsx` under the existing link cards. Fields: first name, last name, email-or-phone, message (280 chars), permission checkbox; validation; floating labels. **Delivery: as a normal text to +91 93466 80696** — on a phone, Send opens the SMS app with the message prefilled to that number; on desktop it shows the composed text with *Open SMS app / WhatsApp / Email / Copy* buttons. Side panel offers Text, WhatsApp, Call, Email. Phone number lives in `CONTACT_PHONE` (`data.ts`).
+- [ ] Limitation / next: a browser cannot silently send an SMS, so the *visitor* sends the text from their own device. Fully automatic delivery from any device needs an SMS provider (Twilio / MSG91 / Fast2SMS) behind a serverless function (e.g. Vercel `/api/contact`) with API keys in env vars — owner must create that account.
 - [ ] Add a left **social rail** (mail / LinkedIn / GitHub / resume icons), fixed on desktop.
 - [ ] Footer: giant name letters, columns (role/stack line, "B.Tech CSE", availability), links (Email, LinkedIn, GitHub, Resume, Back to top). Fix the Twitter placeholder (§11).
-- [ ] ❓ OWNER confirm whether to show the phone number (the resume has one; the site currently does not).
+- [x] Phone number shown on the site (owner confirmed: +91 93466 80696, used for contact texts).
 
 ### 16.12 Resume, SEO, accessibility (from the reference's "chrome")
 

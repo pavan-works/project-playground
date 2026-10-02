@@ -36,6 +36,9 @@ import { PORTFOLIO_DATA, JOURNEY, JOURNEY_QUOTE, type Project } from "./data";
 import portraitCutout from "./assets/portrait-smile.png";
 import { AnimatedNav } from "./components/AnimatedNav";
 import { Skillset } from "./components/Skillset";
+import { Process } from "./components/Process";
+import { ContactForm } from "./components/ContactForm";
+import { SoftSkills, Achievements } from "./components/SoftSkillsAchievements";
 import logoGmail from "./assets/logos/gmail.svg";
 
 
@@ -1053,6 +1056,8 @@ const Contact = () => (
         </motion.a>
       ))}
     </div>
+
+    <ContactForm />
   </section>
 );
 
@@ -1185,7 +1190,10 @@ export default function PortfolioLanding() {
         <About />
         <Experience />
         <Expertise />
+        <Process />
         <Works />
+        <Achievements />
+        <SoftSkills />
         <CodeSnippet />
         <Contact />
       </main>

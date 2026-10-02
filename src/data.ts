@@ -343,3 +343,198 @@ export const SKILLSET: SkillCategory[] = [
     ],
   },
 ];
+
+/* My Process — one lens per kind of work; every step has a description per lens */
+export type ProcessLensId = "paper" | "mldl" | "rag" | "agent";
+
+export const PROCESS_LENSES: { id: ProcessLensId; label: string; hint: string }[] = [
+  { id: "paper", label: "Research Paper", hint: "Hypothesis → method → ablations → write-up" },
+  { id: "mldl", label: "ML · DL · NLP", hint: "Data → model → training → metrics" },
+  { id: "rag", label: "RAG", hint: "Ingest → retrieve → re-rank → grounded answer" },
+  { id: "agent", label: "Agents", hint: "Plan → tools → memory → guardrails" },
+];
+
+export interface ProcessStep {
+  id: string;
+  title: string;
+  summary: string;
+  output: string;
+  icon: "target" | "network" | "telescope" | "design" | "flask" | "rocket";
+  practice: Record<ProcessLensId, string>;
+}
+
+export const PROCESS_STEPS: ProcessStep[] = [
+  {
+    id: "understand",
+    title: "Understand the Problem",
+    summary: "I start by understanding the problem clearly — the users, the data, the constraints, and what success actually means.",
+    output: "Problem brief + success metrics",
+    icon: "target",
+    practice: {
+      paper: "Read the problem statement and the related work, find the gap, and write a testable hypothesis plus the metrics that would prove it.",
+      mldl: "Frame it as a learning task — inputs, outputs, available data, constraints — and pick the metric that really matters (BLEU/COMET, F1, latency…).",
+      rag: "Pin down what knowledge is needed, who asks the questions, and what a grounded, cited answer must look like.",
+      agent: "Define the task boundaries, the tools the agent needs, and where it must stop or hand over to a human.",
+    },
+  },
+  {
+    id: "plan",
+    title: "Plan the Architecture",
+    summary: "Then I draft an architecture plan on paper before touching code: components, data flow, baselines and how I'll evaluate.",
+    output: "Architecture sketch + evaluation plan",
+    icon: "network",
+    practice: {
+      paper: "Sketch the proposed method end to end — components, data flow, and the baseline it has to beat.",
+      mldl: "Draft the pipeline: data prep → model family → training and evaluation loop, with a first guess at the compute budget.",
+      rag: "Draft ingestion → chunking → embeddings → retrieval → re-ranking → generation, and how each part will be measured.",
+      agent: "Draft the plan → retrieve → analyze → act loop, with memory, tool calls and failure handling.",
+    },
+  },
+  {
+    id: "survey",
+    title: "Check What Already Exists",
+    summary: "Before building, I check existing architectures, papers and open-source models. If something helps, I update the plan instead of reinventing it.",
+    output: "Reuse / adapt / build decision log",
+    icon: "telescope",
+    practice: {
+      paper: "Study existing architectures, papers and released code. Reuse or adapt what is proven; invent only what is missing.",
+      mldl: "Look for open-source models and checkpoints (Hugging Face, GitHub) — fine-tune, add adapters, or train from scratch?",
+      rag: "Compare embedding models, vector stores and re-rankers that already exist, and benchmark them before committing.",
+      agent: "Review agent frameworks and tool-use patterns that already work, and reuse them rather than rebuilding orchestration.",
+    },
+  },
+  {
+    id: "design",
+    title: "Design",
+    summary: "With the plan updated, I lock the final design: models, prompts, data and the experiments that will prove it works.",
+    output: "Final design + experiment protocol",
+    icon: "design",
+    practice: {
+      paper: "Lock the final method — the novel parts (adapters, memory, cross-modal attention…), the ablations to run and the experiment protocol.",
+      mldl: "Finalise architecture, loss, data splits, augmentation and the hyper-parameter search space.",
+      rag: "Finalise chunking, embedding model, index, retrieval strategy, prompts and citation format.",
+      agent: "Finalise the agent graph, prompts, tool schemas, memory and guardrails.",
+    },
+  },
+  {
+    id: "build",
+    title: "Build & Evaluate",
+    summary: "I build it, then measure it honestly against baselines — not just the headline number — and iterate until it holds up.",
+    output: "Results table + error analysis",
+    icon: "flask",
+    practice: {
+      paper: "Implement, run baselines and ablations, and report the numbers properly (BLEU, chrF, BERTScore, COMET; LSE-D, LSE-C, SSIM).",
+      mldl: "Train, validate and tune; compare against baselines and study the errors, not only the headline metric.",
+      rag: "Measure retrieval quality and answer grounding; fix chunking and prompts until the answers hold up.",
+      agent: "Test end-to-end tasks, tool failures and edge cases; iterate with stakeholders until the behaviour is reliable.",
+    },
+  },
+  {
+    id: "deploy",
+    title: "Deploy & Improve",
+    summary: "I ship it, watch how it behaves with real use, and keep improving — and the findings feed the next problem.",
+    output: "Live system + write-up",
+    icon: "rocket",
+    practice: {
+      paper: "Write it up, release the code, and refine with reviewer and community feedback.",
+      mldl: "Package the model behind an API (FastAPI / Docker), monitor latency and drift, and retrain when it degrades.",
+      rag: "Ship the pipeline, watch real queries, and keep improving the corpus, retrieval and prompts.",
+      agent: "Deploy with logging and guardrails, review real traces, and tighten the agent where it fails.",
+    },
+  },
+];
+
+/* Professional Soft Skills — only what the resume supports */
+export interface SoftSkill {
+  id: string;
+  title: string;
+  text: string;
+  evidence: string[];
+  icon: "leader" | "speaker" | "mic" | "ownership";
+}
+
+export const SOFT_SKILLS: SoftSkill[] = [
+  {
+    id: "leadership",
+    title: "Leadership",
+    text: "I step up to lead teams and keep delivery on track — from hackathon sprints to AI engineering work.",
+    evidence: ["Team Lead — Sign2Speak Hackathon (3rd place)", "Team Lead — Hrud.ai internship, led AI engineering projects"],
+    icon: "leader",
+  },
+  {
+    id: "speaking",
+    title: "Public Speaking",
+    text: "Comfortable explaining ideas to a live audience, and recognised for it in competitions.",
+    evidence: ["2nd Prize — Elocution Competition", "Top 2000 in Super Speaker Season 2 (of 2.53 lakh participants)"],
+    icon: "speaker",
+  },
+  {
+    id: "anchoring",
+    title: "Event Anchoring",
+    text: "Hosting technical and cultural events has made me calm on stage and quick to read a room.",
+    evidence: ["Anchored multiple technical and cultural events"],
+    icon: "mic",
+  },
+  {
+    id: "ownership",
+    title: "End-to-End Ownership",
+    text: "I take ideas all the way from design and training to deployment instead of stopping at a notebook.",
+    evidence: ["Designs, trains and deploys end-to-end ML and LLM-based systems", "Production AI systems at Hrud.ai"],
+    icon: "ownership",
+  },
+];
+
+/* Achievements — from Resume-pullaiah.md (Leadership & Achievements) */
+export interface Achievement {
+  id: string;
+  headline: string;
+  title: string;
+  detail: string;
+  icon: "medal" | "mic" | "award" | "users" | "stage";
+  featured?: boolean;
+}
+
+export const ACHIEVEMENTS: Achievement[] = [
+  {
+    id: "a1",
+    headline: "3rd",
+    title: "Sign2Speak Hackathon",
+    detail: "Secured 3rd place as Team Lead.",
+    icon: "medal",
+    featured: true,
+  },
+  {
+    id: "a2",
+    headline: "Top 2000",
+    title: "Super Speaker Season 2",
+    detail: "Ranked in the top 2000 among 2.53 lakh participants.",
+    icon: "mic",
+  },
+  {
+    id: "a3",
+    headline: "2nd",
+    title: "Elocution Competition",
+    detail: "Won 2nd prize.",
+    icon: "award",
+  },
+  {
+    id: "a4",
+    headline: "Lead",
+    title: "Hrud.ai Internship",
+    detail: "Team Lead — led AI engineering projects.",
+    icon: "users",
+  },
+  {
+    id: "a5",
+    headline: "Host",
+    title: "Technical & Cultural Events",
+    detail: "Anchored multiple technical and cultural events.",
+    icon: "stage",
+  },
+];
+
+/* Contact — messages are delivered to this number as a normal text (SMS) */
+export const CONTACT_PHONE = {
+  e164: "+919346680696",
+  display: "+91 93466 80696",
+};
