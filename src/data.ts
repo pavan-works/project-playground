@@ -240,19 +240,19 @@ export const PORTFOLIO_DATA = {
       visual: "mt",
       category: "Machine Translation",
       image: "https://images.unsplash.com/photo-1546410531-bb4caa6b424d?q=80&w=2071&auto=format&fit=crop",
-      tags: ["NLP", "MoE Adapters", "Indic Languages"],
+      tags: ["NLP", "MoE Adapters", "English → Telugu · Tamil"],
       link: "https://drive.google.com/file/d/1gcfma9LE3QO_0Wp2W44VPUcQNWXahw4G/view?usp=sharing",
       subtitle: "Low-Resource Indic Machine Translation — manuscript under review",
       year: "Mar 2025 – Present",
       role: "First Author — Model design, experimentation, evaluation",
       paperUrl: "https://drive.google.com/file/d/1gcfma9LE3QO_0Wp2W44VPUcQNWXahw4G/view?usp=sharing",
       overview:
-        "Proposes a lightweight, adapter-enhanced, memory-augmented machine translation system tailored for low-resource Indic languages. Combines MoE adapters, document-level memory, and MLM regularization to improve coherence, with an inference stack that pairs MMCBS+ beam search with MBR reranking.",
+        "Proposes a lightweight, adapter-enhanced, memory-augmented machine translation system tailored for low-resource Indic languages, translating from English into Telugu and Tamil. Combines MoE adapters, document-level memory, and MLM regularization to improve coherence, with an inference stack that pairs MMCBS+ beam search with MBR reranking.",
       highlights: [
         "MoE adapters + document-memory + MLM regularization for improved cross-sentence coherence",
         "MMCBS+ with linguistically informed beam search and MBR reranking at inference time",
         "Evaluated on BLEU, chrF, BERTScore, and COMET",
-        "Estimated +5–10 BLEU improvement over mBART baselines on low-resource Indic pairs"
+        "Estimated +5–10 BLEU improvement over mBART baselines on the English → Telugu and English → Tamil pairs"
       ],
       tech: ["PyTorch", "Hugging Face Transformers", "mBART", "MoE Adapters", "COMET", "BLEU"],
       metrics: [
@@ -547,6 +547,7 @@ export const CONTACT_PHONE = {
 /* Work Experience — Hrud.ai projects (summarised from the owner's notes) */
 export interface WorkProject {
   id: string;
+  visual?: "galaxy" | "devtools" | "chatbot" | "career" | "interview" | "pulse" | "delivery";
   title: string;
   kind: string;
   summary: string;
@@ -560,6 +561,7 @@ export interface WorkProject {
 export const WORK_PROJECTS: WorkProject[] = [
   {
     id: "w-galaxy",
+    visual: "galaxy",
     title: "Job Galaxy SaaS & Admin Console",
     kind: "SaaS product",
     summary:
@@ -580,6 +582,7 @@ export const WORK_PROJECTS: WorkProject[] = [
   },
   {
     id: "w-devtools",
+    visual: "devtools",
     title: "DevTools Control Center",
     kind: "Internal platform",
     summary: "One control plane for GitHub, Vercel, Supabase and CI/CD, with role-based access.",
@@ -593,6 +596,7 @@ export const WORK_PROJECTS: WorkProject[] = [
   },
   {
     id: "w-chatbot",
+    visual: "chatbot",
     title: "NCPL Website — AI Chatbot",
     kind: "AI chatbot",
     summary: "A voice and text bot that guides site visitors using the company's own FAQs and courses.",
@@ -606,6 +610,7 @@ export const WORK_PROJECTS: WorkProject[] = [
   },
   {
     id: "w-career",
+    visual: "career",
     title: "Career Advisor Bot",
     kind: "AI chatbot",
     summary: "An eligibility-driven counselling bot that suggests tailored IT learning paths.",
@@ -618,6 +623,7 @@ export const WORK_PROJECTS: WorkProject[] = [
   },
   {
     id: "w-ntrview",
+    visual: "interview",
     title: "NTRview Log",
     kind: "Interview prep",
     summary: "Schedule interviews and practise in dedicated rooms tailored to the interviewer.",
@@ -629,6 +635,7 @@ export const WORK_PROJECTS: WorkProject[] = [
   },
   {
     id: "w-pulse",
+    visual: "pulse",
     title: "Pulse Celebrations v2",
     kind: "Team product · v2",
     summary: "An existing team product (v1). I helped shape v2, not just build it.",
@@ -640,6 +647,7 @@ export const WORK_PROJECTS: WorkProject[] = [
   },
   {
     id: "w-xen",
+    visual: "delivery",
     title: "Xencomedical — Client Project",
     kind: "Client work",
     summary: "A client project assigned to me, with requirements sent by email.",

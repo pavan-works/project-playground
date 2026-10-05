@@ -586,7 +586,7 @@ const ProjectCard = ({
         className="pointer-events-none absolute -top-24 -right-24 w-72 h-72 rounded-full blur-[100px] opacity-0 group-hover:opacity-60 transition-opacity duration-700"
         style={{ background: accentVar }}
       />
-      <div className={`relative shrink-0 overflow-hidden ${item.visual ? "aspect-[5/3]" : "aspect-video"}`}>
+      <div className={`relative shrink-0 overflow-hidden ${item.visual ? "h-64 md:h-72" : "aspect-video"}`}>
         {item.visual ? (
           <ProjectVisual kind={item.visual} className="absolute inset-0 pt-9" />
         ) : (
@@ -618,7 +618,7 @@ const ProjectCard = ({
       </div>
       <div className="relative p-10 md:p-12 pt-6 flex flex-col h-full">
         <h3
-          className="text-4xl md:text-5xl font-headline font-bold tracking-tighter mb-3 leading-none transition-colors duration-500"
+          className="text-3xl sm:text-4xl md:text-5xl font-headline font-bold tracking-tighter mb-3 leading-none transition-colors duration-500"
         >
           {item.visual && (
             <span
@@ -650,8 +650,8 @@ const ProjectCard = ({
         {item.metrics && item.metrics.length > 0 && (
           <div className="grid grid-cols-3 gap-3 mb-6">
             {item.metrics.slice(0, 3).map((m) => (
-              <div key={m.label} className="rounded-2xl bg-white/[0.03] border border-white/5 px-4 py-3">
-                <div className="text-base font-headline font-bold" style={{ color: accentVar }}>{m.value}</div>
+              <div key={m.label} className="min-w-0 rounded-2xl bg-white/[0.03] border border-white/5 px-3 py-3">
+                <div className="text-sm md:text-base font-headline font-bold break-words" style={{ color: accentVar }}>{m.value}</div>
                 <div className="text-[9px] font-mono uppercase tracking-[0.2em] text-white/30 mt-1">{m.label}</div>
               </div>
             ))}
@@ -705,13 +705,43 @@ const DetailModal = ({
     <AnimatePresence>
       {item && (
         <motion.div
+          key="bar"
+          initial={{ opacity: 0, y: -16 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -16 }}
+          transition={{ duration: 0.3 }}
+          className="fixed inset-x-0 top-0 z-[120] flex items-center justify-between gap-4 border-b border-white/15 bg-black/80 px-4 py-3 backdrop-blur-xl md:px-8"
+        >
+          <button
+            type="button"
+            onClick={onClose}
+            className="group inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-4 py-2 font-mono text-xs tracking-wider text-white transition-all hover:border-white/60 hover:bg-white/20"
+          >
+            <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
+            Back to Works
+          </button>
+          <span className="hidden truncate font-mono text-[11px] tracking-[0.25em] text-white/60 sm:block">
+            {item.title}
+          </span>
+          <button
+            type="button"
+            onClick={onClose}
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/30 bg-white/10 text-white transition-all hover:bg-white hover:text-black"
+            aria-label="Close"
+          >
+            <X className="h-5 w-5" />
+          </button>
+        </motion.div>
+      )}
+      {item && (
+        <motion.div
           key="backdrop"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
           onClick={onClose}
-          className="fixed inset-0 z-[100] bg-black/70 backdrop-blur-xl flex items-start md:items-center justify-center overflow-y-auto px-4 py-10 md:py-16"
+          className="fixed inset-0 z-[100] bg-black/70 backdrop-blur-xl flex items-start md:items-center justify-center overflow-y-auto px-4 pb-10 pt-24 md:pb-16 md:pt-28"
         >
           <motion.div
             key="panel"
@@ -722,27 +752,6 @@ const DetailModal = ({
             onClick={(e) => e.stopPropagation()}
             className="relative w-full max-w-5xl bg-[var(--rv-card)] border border-white/10 rounded-[2.5rem] overflow-hidden shadow-[0_60px_120px_rgba(0,0,0,0.7)]"
           >
-            <div className="sticky top-0 z-30 flex items-center justify-between gap-4 border-b border-white/10 bg-[var(--rv-card)]/90 px-5 py-3 backdrop-blur-xl md:px-8">
-              <button
-                type="button"
-                onClick={onClose}
-                className="group inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/[0.06] px-4 py-2 font-mono text-xs tracking-wider text-white transition-all hover:border-white/50 hover:bg-white/15"
-              >
-                <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
-                Back to Works
-              </button>
-              <span className="hidden truncate font-mono text-[11px] tracking-[0.25em] text-white/50 sm:block">
-                {item.category}
-              </span>
-              <button
-                type="button"
-                onClick={onClose}
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/[0.06] text-white transition-all hover:bg-white hover:text-black"
-                aria-label="Close"
-              >
-                <X className="h-5 w-5" />
-              </button>
-            </div>
 
             {/* Hero image */}
             <div className="relative min-h-[22rem] md:aspect-[21/9] overflow-hidden">

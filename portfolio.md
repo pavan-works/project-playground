@@ -661,3 +661,5 @@ Current: 3 link cards only. Target (matches the reference):
 - [ ] Contact: show phone? preferred delivery for messages (mailto vs backend)?
 - [x] Palette decision: **stay in the current dark theme** (confirmed).
 - [ ] Latest resume PDF and the final tagline for the hero role rotator (e.g., *AI Engineer · ML Researcher · GenAI Builder*).
+
+> **Update 2026-10-05:** all 7 Hrud.ai work cards now have animated visuals (`ProjectVisual.tsx`: galaxy, devtools, chatbot, career, interview, pulse, delivery). Project cards in Works use a fixed visual height (`h-64 md:h-72`) instead of an aspect ratio, which removed the large empty gap under the visual.

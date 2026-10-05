@@ -154,3 +154,11 @@ body::before {
 @media (prefers-reduced-motion: reduce) {
   .pv-pulse,.pv-ping,.pv-flow,.pv-docs,.pv-dot,.pv-hit,.pv-draw,.pv-type,.pv-node,.pv-bar,.pv-expert,.pv-appear,.pv-wave,.pv-mouth { animation: none; }
 }
+
+@keyframes pvCheck { 0%,62% { stroke-dashoffset: 40; } 76%,92% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 40; } }
+@keyframes pvLine { 0%,10% { stroke-dashoffset: 320; } 55%,92% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 320; } }
+@keyframes pvLight { 0%,8% { fill: rgba(255,255,255,.07); } 14%,70% { fill: rgba(34,211,238,.65); } 100% { fill: rgba(255,255,255,.07); } }
+.pv-check { stroke-dasharray: 40; animation: pvCheck 7s ease-in-out infinite; }
+.pv-line { stroke-dasharray: 320; animation: pvLine 7s ease-in-out infinite; }
+.pv-light { animation: pvLight 7s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .pv-check,.pv-line,.pv-light { animation: none; } }

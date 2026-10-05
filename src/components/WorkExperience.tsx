@@ -2,6 +2,7 @@ import { useRef, type MouseEvent } from "react";
 import { motion } from "motion/react";
 import { ArrowUpRight, Briefcase } from "lucide-react";
 import { WORK_PROJECTS, type WorkProject } from "../data";
+import { ProjectVisual } from "./ProjectVisual";
 
 const ACCENTS = ["34,211,238", "99,102,241", "16,185,129", "250,204,21"];
 
@@ -28,7 +29,7 @@ const ProjectCard = ({ p, index }: { p: WorkProject; index: number }) => {
       <div
         ref={ref}
         onMouseMove={onMove}
-        className="group relative h-full overflow-hidden rounded-3xl border border-white/15 bg-[#0b1017]/90 p-7 transition-all duration-500 hover:-translate-y-1.5 hover:border-[rgba(var(--rgb),0.6)] md:p-8"
+        className="group relative h-full overflow-hidden rounded-3xl border border-white/15 bg-[#0b1017]/90 transition-all duration-500 hover:-translate-y-1.5 hover:border-[rgba(var(--rgb),0.6)]"
         style={{ "--rgb": rgb } as React.CSSProperties}
       >
         <div
@@ -47,7 +48,10 @@ const ProjectCard = ({ p, index }: { p: WorkProject; index: number }) => {
           {String(index + 1).padStart(2, "0")}
         </span>
 
-        <div className="relative flex h-full flex-col">
+        {p.visual && (
+          <ProjectVisual kind={p.visual} className="h-52 w-full shrink-0 border-b border-white/10 md:h-56" />
+        )}
+        <div className="relative flex h-full flex-col p-7 md:p-8">
           <span
             className="mb-4 inline-flex w-fit items-center gap-2 rounded-full border px-3 py-1 font-mono text-[10px] uppercase tracking-[0.25em]"
             style={{
