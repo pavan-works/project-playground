@@ -2,7 +2,7 @@
 
 > Consolidated master document for the `project-playground` repository: what the portfolio is, everything built so far, how to run/edit/extend it, and what is still pending.
 > Compiled from: `README.md`, `about_me.md`, `Resume-pullaiah.md`, `Ravindra_portfolio.md`, `21st_dev.md`, `AGENTS.md`, `src/data.ts`, `src/App.tsx`, `src/index.css`, config files, `stitch_modern_glow_portfolio/`, and the git history.
-> Last updated: 2026-09-30.
+> Last updated: 2026-10-06.
 
 ---
 
@@ -38,7 +38,7 @@
 | Framework | React 19 + TypeScript + Vite 6 + Tailwind CSS 4 + Motion |
 | Dev URL | `http://localhost:3000` |
 | Theme decision | Stay in the current dark theme (confirmed); v2 plan in §16 |
-| Status | Fully rendered single page (all 10 sections working); content polish, real links, SEO and deployment still pending (see §11) |
+| Status | Skillset, Process, Work Experience (Hrud.ai), Selected Works (animated), Achievements, Soft Skills and Contact (SMS form) are **built**; **My Journey (timeline) and Those Who Shaped Me are pending**; SEO, resume PDF, deployment and real screenshots still pending (see §11 and §16) |
 | Theme | Dark "deep space", cyan (`--gold` token) + indigo + emerald accents |
 
 ---
@@ -148,8 +148,14 @@ project-playground/
 │  ├─ App.tsx                 ALL sections + PortfolioLanding (default export) ~1200 lines
 │  ├─ data.ts                 PORTFOLIO_DATA, JOURNEY, JOURNEY_QUOTE, types
 │  ├─ index.css               tokens, fonts, glass-panel, dot-pattern, btn-primary…
-│  ├─ components/AnimatedNav.tsx      floating pill nav
+│  ├─ components/AnimatedNav.tsx      floating pill nav + top-right "Hire Me"
 │  ├─ components/InfiniteGallery.tsx  Three.js infinite image gallery (journey)
+│  ├─ components/Skillset.tsx         My Skillset (spotlight bento cards + marquee)
+│  ├─ components/Process.tsx          My Process (6 steps, lens switcher, loop callout)
+│  ├─ components/WorkExperience.tsx   Hrud.ai role + 7 project cards + CodeForces strip
+│  ├─ components/ProjectVisual.tsx    11 animated SVG visuals (keyframes in index.css, .pv-*)
+│  ├─ components/SoftSkillsAchievements.tsx  Achievements + Professional Soft Skills
+│  ├─ components/ContactForm.tsx      message form -> prefilled SMS / WhatsApp / email
 │  ├─ hooks/use-mobile.tsx
 │  ├─ lib/error-capture.ts  error-page.ts  lovable-error-reporting.ts
 │  └─ assets/
@@ -181,20 +187,25 @@ npm run lint         # tsc --noEmit
 
 ## 6. Page architecture — section by section
 
-`PortfolioLanding` (bottom of `src/App.tsx`) shows a 2-second loading screen, then renders: `AnimatedNav` → `Hero` → `About` → `Experience` → `Expertise` → `Works` → `CodeSnippet` → `Contact` → `Footer`.
+`PortfolioLanding` (bottom of `src/App.tsx`) shows a 2-second loading screen, then renders: `AnimatedNav` → `Hero` → `About` → `WorkExperience` → `Experience` (journey) → `Expertise` (Skillset + logos) → `Process` → `Works` → `Achievements` → `SoftSkills` → `CodeSnippet` → `Contact` (links + form) → `Footer`.
 
 | # | Section (`id`) | What it contains | Status |
 |---|---|---|---|
 | 0 | **Loading screen** | Animated "Portfolio" title reveal, ~2 s | ✅ |
-| – | **AnimatedNav** | Floating pill nav: Home, About, Experience, Expertise, Works; "SP" monogram links to `#home` | ✅ |
-| 1 | **Hero** (`#home`) | Huge "AI ⭧ Engineer" solid headline + outlined "& ML Researcher" behind the portrait (`z-30` text, `z-40` portrait); "based in Visakhapatnam"; "Worked with" row (Hrud.ai, CodeForces, OpenAI, HuggingFace, Supabase) | ✅ |
-| 2 | **About** (`#about`, "01 / Profile") | Summary, stats (15+ systems shipped · 2 papers in review · 12% gain @ CodeForces · ∞ curiosity), identity panel, 4 focus cards (RAG & Retrieval, Agentic Systems, Applied Research, Production ML), CTA to `#works` | ✅ |
-| 3 | **Experience** (`#experience`) | "The Journey": pull-quote, `ActiveStopPanel` (period/title/place/kind/caption/description/marker) + Three.js `InfiniteGallery` of 6 stops; visitors can **+ Add your own images** (stored in `localStorage["journey-custom-images"]`, per-browser) and Reset | ✅ |
-| 4 | **Expertise** (`#expertise`, "03 / Tech Stack") | 15-tile Tech Stack grid + 9-tile "APIs & AI Tools" grid via `StackCard` | ✅ |
-| 5 | **Works** (`#works`) | Engineering Projects (2) + Research Publications (2) as `ProjectCard`s → `DetailModal` (overview, highlights, metrics, tech, GitHub/paper links) | ✅ (placeholder cover images) |
-| 6 | **CodeSnippet** | Decorative fake terminal code block ending in `bridge.synthesize()` | ✅ (cosmetic) |
-| 7 | **Contact** (`#contact`, "Get In Touch") | "Let's Build Something"; 3 cards from `CONTACT_LINKS`: Mail (Gmail logo), LinkedIn, GitHub | ✅ |
-| 8 | **Footer** | Monogram, © 2026 line, Navigation links (Home/About/Expertise/Works), Connect links (LinkedIn/Twitter/Github/Email), "Status: Available" badge | ⚠ Twitter & Github links are `#` |
+| – | **AnimatedNav** | Floating pill nav (Home, About, Experience, Expertise, Works) that collapses on scroll + fixed top-right **Hire Me** button → `#contact` (phones: shown when the nav is collapsed) | ✅ |
+| 1 | **Hero** (`#home`) | "AI ⭧ Engineer" + outlined "& ML Researcher" behind the smiling portrait; location; "Worked with" row | ✅ |
+| 2 | **About** (`#about`) | Summary, stats, identity panel, 4 focus cards | ⚠ confirm the "15+ systems shipped" stat |
+| 3 | **Work Experience** (`#experience`) | "Shipped at Hrud.ai": role card + 7 cards, each with an animated visual: **DevTools Control Center (featured, with the per-seat cost problem + formula)**, Job Galaxy SaaS & Admin Console, NCPL Website AI Chatbot, Career Advisor Bot, NTRview Log, Pulse Celebrations v2, Xencomedical client project; CodeForces strip (+12%) | ✅ |
+| 4 | **Journey** (`#journey`) | Pull-quote, active-stop panel, Three.js `InfiniteGallery` (6 stops, visitor image upload via `localStorage`) | ⚠ plan 16.7 (vertical timeline + new milestones) pending |
+| 5 | **Expertise** (`#expertise`) | **My Skillset** (4 spotlight cards: AI & ML, Languages, Databases, Cloud & DevOps, each row with "where used"; cards numbered 01–04) + "Tools & Platforms" logo grid + "APIs & AI Tools" | ✅ |
+| 6 | **Process** (`#process`) | 6 steps + lens switcher (Research Paper / ML·DL·NLP / RAG / Agents) + "found something useful? update the plan" loop banner + scroll-drawn progress line | ✅ |
+| 7 | **Works** (`#works`) | Engineering Projects (Ollama Document Assistant, AI Job Intelligence Agent) + Research Publications (LaMaTEPP, SyncVerse) as `ProjectCard`s with animated visuals; `DetailModal` (portal, full-width animation on top, floating Back to Works + close, click outside to close) | ✅ (no real screenshots yet) |
+| 8 | **Achievements** (`#achievements`) | Bento grid: 3rd place Sign2Speak (featured), Top 2000 Super Speaker S2, 2nd prize elocution, Hrud.ai team lead, event anchoring | ✅ |
+| 9 | **Soft Skills** (`#soft-skills`) | Leadership, Public Speaking, Event Anchoring, End-to-End Ownership — each with resume-backed evidence only | ✅ |
+| 10 | **CodeSnippet** | Decorative fake terminal | ✅ (cosmetic) |
+| 11 | **Contact** (`#contact`, "Get In Touch") | Mail / LinkedIn / GitHub cards + **ContactForm** (first/last name, email-or-phone, message ≤ 280, consent) delivering as a **text to +91 93466 80696** (SMS prefilled on phones; Open SMS / WhatsApp / Email / Copy on desktop) + Text / WhatsApp / Call / Email panel | ✅ (see limitation in §16.11) |
+| 12 | **Footer** | Monogram, © line, nav links, connect links (GitHub → puli-pro), availability badge | ⚠ Twitter link still `#` |
+| – | **Not built yet** | **Those Who Shaped Me** (people + "On my own") and the new **My Journey** timeline | ⏳ needs owner input |
 
 ### Hero details
 - Portrait: `src/assets/portrait-smile.png`, `absolute bottom-16 md:bottom-14`, `h-[62vh] md:h-[72vh]`, `z-40`, centred.
@@ -214,7 +225,7 @@ npm run lint         # tsc --noEmit
 
 ## 7. Content model (`src/data.ts`)
 
-Everything the site displays lives here (single place to edit content).
+Everything the site displays lives here (single place to edit content). Newer exports: `SKILLSET`, `PROCESS_LENSES` / `PROCESS_STEPS`, `WORK_PROJECTS` (with `visual`, `problem`, `featured`), `SOFT_SKILLS`, `ACHIEVEMENTS`, `CONTACT_PHONE`; `Project` has an optional `visual` key (`rag` | `agents` | `mt` | `lipsync`).
 
 - **Types:** `Project`, `Skill`, `Experience`, `JourneyStop`.
 - **`JOURNEY_QUOTE`** — pull-quote + caption for the journey section.
@@ -308,6 +319,19 @@ Built so far:
 10. **Hero portrait replaced** with the smiling composite (complete shoulders); removed opacity fade so heading text no longer shows through the face during load.
 11. Pushed to GitHub `main` (commit `9620453`).
 12. This `portfolio.md` consolidation.
+13. **Confirmed profile facts** (display name Solige Pullaiah, GitHub puli-pro, role AI Engineer at Hrud.ai, stay in the dark theme) recorded in `about_me.md` / this file; footer GitHub link fixed.
+14. **My Skillset** (`Skillset.tsx`): spotlight bento cards, "where used" rows, marquee; badges numbered 01–04.
+15. **My Process** (`Process.tsx`): owner's flow as six steps, lens switcher, feedback-loop banner.
+16. **Achievements** and **Professional Soft Skills** (resume-backed only).
+17. **Contact form** delivering as a text to +91 93466 80696 (SMS / WhatsApp / email fallbacks).
+18. **Work Experience** (Hrud.ai): seven projects from the owner's notes; DevTools Control Center first with the per-seat cost problem (platforms × price per seat × developers); Job Galaxy second.
+19. **Animated project visuals** (`ProjectVisual.tsx`, 11 kinds): Works (RAG, job-search agent find→match→apply, English→Telugu/Tamil MoE translation, speech→lip-sync) and the seven Hrud.ai cards.
+20. **Project detail view fixes:** rendered through a portal (was hidden under the floating nav), floating Back-to-Works/close buttons in the empty corners (a full-width bar overlapped the animation; sticky bars also failed inside blurred/transformed parents), animation on its own full-width area above the title, centring bug that clipped the top of tall panels fixed (`my-auto`), card visuals fixed-height so there is no empty gap.
+21. **Styling fix:** `ProjectVisual` no longer sets `relative`, which was overriding `absolute inset-0` and letting the SVG overflow/crop on wide screens.
+22. **Sentence-case headings** (removed forced uppercase from section titles).
+23. **Top-right "Hire Me" button** in `AnimatedNav`.
+
+Recent commits: `bff2397` Hire Me + DevTools first + floating buttons → `725ec69` Hrud.ai visuals + job agent/LaMaTEPP animations → `07adcdb` animated visuals + Back button → `04088f6` Work Experience → `1d6a9ec` Process/Achievements/Soft Skills/Contact → `c6c6eaf` Skillset → `eecdc39` docs. Latest local changes (modal hero layout + visual positioning fix) are committed with the doc update.
 
 ---
 
@@ -317,15 +341,15 @@ Built so far:
 - [x] ~~Footer GitHub link~~ now points to `https://github.com/puli-pro`.
 - [ ] **Footer Twitter link** is still `href="#"` → remove it or add a real handle.
 - [ ] **`index.html` metadata:** title is "My Google AI Studio App" → set proper `<title>`, description, favicon, Open Graph/Twitter card tags, `theme-color`.
-- [ ] **Real project cover images:** `projects[]` / `researchPapers[]` use Unsplash stock URLs; replace with screenshots/diagrams (a `src/assets/project-1..4.jpg` set already exists but is unused).
+- [ ] **Real project screenshots:** animated visuals now represent each project, but `projects[]` / `researchPapers[]` still carry Unsplash fallback images (unused when `visual` is set); add real screenshots/diagrams to case studies when available.
 - [ ] **SyncVerse links:** no `github`/`paperUrl` yet; add if/when public (the `DetailModal` handles missing links).
 - [ ] **Verify claims:** "15+ Systems shipped" in `ABOUT_STATS` is not supported by resume; confirm or change.
 - [ ] **Deploy** (Vercel/Lovable/Cloud Run) and put the live URL in README + resume.
 - [ ] **Resume download:** add `public/Resume-pullaiah.pdf` + a "Download Resume" button (hero or contact).
-- [ ] Commit/decide on the uncommitted `README.md` rewrite, and add `portfolio.md`.
+- [x] `README.md` and `portfolio.md` committed and kept up to date.
 
 ### Content to add (from resume, not yet on site)
-- [ ] Leadership & achievements (Sign2Speak 3rd place, Super Speaker Top 2000, elocution 2nd prize, anchoring)
+- [x] Leadership & achievements — done (Achievements + Soft Skills sections).
 - [ ] Certification (CCNA: Introduction to Networks)
 - [ ] Skills not shown as tiles: PyTorch, scikit-learn, XGBoost, OpenCV, YOLOv8, MLflow, Optuna, SHAP/LIME, Hugging Face Transformers (consider PyTorch/OpenCV/Supabase/Gemini tiles)
 - [ ] Education block with scores (partially present in journey markers)
@@ -360,9 +384,11 @@ Built so far:
 | Token `--gold` is actually cyan | `index.css` | Rename to `--accent` (touches many usages) |
 | Hero portrait is a composite; fine detail near the collar/hair edge may show slight artefacts on large screens | `portrait-smile.png` | Replace with a single studio smiling shot when available |
 | Hero portrait loads after text on slow networks | `Hero` | Preload the image or hold the loader until decoded |
-| Vite dev server was already on port 3000 (external process); `preview_start` can't reuse it | local env | Use the existing server or change port |
+| Vite dev server stops between sessions; the preview tab can become hidden (screenshots/animations freeze while `document.hidden`) | local env | Restart with `npm run dev` / preview_start; verify with the tab visible |
+| `.relative` + `.absolute` on the same element: Tailwind picked `relative` and broke `inset-0` (fixed in `ProjectVisual`) | components | Pass positioning from the caller; do not put it in the base class |
+| `position: fixed` children are trapped by ancestors with `backdrop-filter`/`transform` (this broke the first Back bar) | modals | Render fixed controls as siblings of the blurred backdrop (portal) |
 | Windows CRLF warnings on commit | git autocrlf | Add `.gitattributes` (`* text=auto eol=lf`) |
-| `README.md` describes the app accurately but was never committed | working tree | Commit after review |
+| ~~`README.md` never committed~~ **Resolved** — README and portfolio.md are committed | — | — |
 
 ---
 
@@ -412,6 +438,22 @@ Best fits for this portfolio: **command palette**, **bento grid** for About/skil
 ## 16. To Do — Portfolio v2 plan (based on the `portfolio_dhanush.html` reference)
 
 > **Reference reviewed:** `E:\portfolio_dhanush.html` — a single-file portfolio (vanilla JS + GSAP/ScrollTrigger + Lenis) for another AI engineer. It is used here **only as a structure / interaction / layout reference**. Do **not** copy its text, name, photo, red brand colour or embedded resume. All content below is Pullaiah's own, taken from `Resume-pullaiah.md`, `about_me.md` and `src/data.ts`. Items marked **❓ OWNER** need facts only the owner can supply — nothing is invented.
+
+### 16.0 Status summary (2026-10-06)
+
+| Plan section | Status |
+|---|---|
+| 16.3 My Skillset | ✅ built |
+| 16.4 My Process | ✅ built |
+| 16.5 Projects / papers / work (cards, animated visuals, case-study view) | ✅ built; ⏳ real screenshots, SyncVerse links, Sign2Speak project, extra metrics from owner |
+| 16.6 Work Experience | ✅ built (Hrud.ai 7 projects + CodeForces) |
+| 16.7 My Journey (vertical timeline, new milestones) | ⏳ pending (owner dates for Sign2Speak, Super Speaker, graduation) |
+| 16.8 Professional Soft Skills | ✅ built (resume-backed only) |
+| 16.9 Achievements | ✅ built (certifications / CCNA not added) |
+| 16.10 Those Who Shaped Me | ⏳ not started (needs people + "on my own" list) |
+| 16.11 Contact Me | ✅ built (SMS delivery limited to the visitor's device; provider-based auto-SMS pending account/keys) |
+| 16.12 Resume PDF / SEO / a11y | ⏳ pending |
+| Top-right Hire Me | ✅ built |
 
 ### 16.1 What the reference does (analysis)
 

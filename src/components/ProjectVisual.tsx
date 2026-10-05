@@ -451,7 +451,7 @@ export const ProjectVisual = ({ kind, className = "" }: { kind: VisualKind; clas
   const Visual = MAP[kind];
   return (
     <div
-      className={`pv relative flex items-center justify-center overflow-hidden bg-[#06090d] ${className}`}
+      className={`pv flex items-center justify-center overflow-hidden bg-[#06090d] ${className}`}
       style={{
         backgroundImage:
           "radial-gradient(circle at 50% 0%, rgba(34,211,238,0.10), transparent 60%), linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px)",

@@ -739,7 +739,7 @@ const DetailModal = ({
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
           onClick={onClose}
-          className="fixed inset-0 z-[100] bg-black/70 backdrop-blur-xl flex items-start md:items-center justify-center overflow-y-auto px-4 pb-10 pt-16 md:py-16"
+          className="fixed inset-0 z-[100] bg-black/70 backdrop-blur-xl flex items-start justify-center overflow-y-auto px-4 pb-10 pt-16 md:py-16"
         >
           <motion.div
             key="panel"
@@ -748,37 +748,48 @@ const DetailModal = ({
             exit={{ opacity: 0, y: 20, scale: 0.98 }}
             transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
             onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-5xl bg-[var(--rv-card)] border border-white/10 rounded-[2.5rem] overflow-hidden shadow-[0_60px_120px_rgba(0,0,0,0.7)]"
+            className="relative my-auto w-full max-w-5xl bg-[var(--rv-card)] border border-white/10 rounded-[2.5rem] overflow-hidden shadow-[0_60px_120px_rgba(0,0,0,0.7)]"
           >
 
-            {/* Hero image */}
-            <div className="relative min-h-[22rem] md:aspect-[21/9] overflow-hidden">
-              {item.visual ? (
-                <ProjectVisual kind={item.visual} className="absolute inset-0 pb-40 pt-2 opacity-90 md:pb-36" />
-              ) : (
-                <img src={item.image} alt={item.title} className="w-full h-full object-cover opacity-60" />
-              )}
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[var(--rv-card)] via-[var(--rv-card)]/40 to-transparent" />
-              <div className="absolute bottom-8 left-8 md:left-12 right-8 md:right-12">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-2 h-2 rounded-full animate-pulse" style={{ background: accentVar }} />
-                  <span
-                    className="text-[10px] font-mono tracking-[0.4em] uppercase"
-                    style={{ color: accentVar }}
-                  >
-                    {item.category}
-                  </span>
+            {/* Hero: animated visual first (fully visible), then the title block */}
+            {item.visual ? (
+              <div>
+                <ProjectVisual kind={item.visual} className="h-64 w-full border-b border-white/10 sm:h-72 md:h-80" />
+                <div className="px-8 pt-8 md:px-12 md:pt-10">
+                  <div className="mb-4 flex items-center gap-3">
+                    <div className="h-2 w-2 animate-pulse rounded-full" style={{ background: accentVar }} />
+                    <span className="font-mono text-[10px] uppercase tracking-[0.4em]" style={{ color: accentVar }}>
+                      {item.category}
+                    </span>
+                  </div>
+                  <h2 className="font-headline text-4xl font-black leading-none tracking-tighter md:text-6xl">
+                    {item.title}
+                  </h2>
+                  {item.subtitle && (
+                    <p className="mt-4 max-w-2xl text-base font-light text-white/70 md:text-lg">{item.subtitle}</p>
+                  )}
                 </div>
-                <h2 className="text-4xl md:text-6xl font-headline font-black tracking-tighter leading-none">
-                  {item.title}
-                </h2>
-                {item.subtitle && (
-                  <p className="mt-4 text-white/70 text-base md:text-lg font-light max-w-2xl">
-                    {item.subtitle}
-                  </p>
-                )}
               </div>
-            </div>
+            ) : (
+              <div className="relative aspect-[21/9] min-h-[22rem] overflow-hidden">
+                <img src={item.image} alt={item.title} className="h-full w-full object-cover opacity-60" />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[var(--rv-card)] via-[var(--rv-card)]/40 to-transparent" />
+                <div className="absolute bottom-8 left-8 right-8 md:left-12 md:right-12">
+                  <div className="mb-4 flex items-center gap-3">
+                    <div className="h-2 w-2 animate-pulse rounded-full" style={{ background: accentVar }} />
+                    <span className="font-mono text-[10px] uppercase tracking-[0.4em]" style={{ color: accentVar }}>
+                      {item.category}
+                    </span>
+                  </div>
+                  <h2 className="font-headline text-4xl font-black leading-none tracking-tighter md:text-6xl">
+                    {item.title}
+                  </h2>
+                  {item.subtitle && (
+                    <p className="mt-4 max-w-2xl text-base font-light text-white/70 md:text-lg">{item.subtitle}</p>
+                  )}
+                </div>
+              </div>
+            )}
 
             {/* Content */}
             <div className="p-8 md:p-12 grid grid-cols-1 md:grid-cols-3 gap-10">

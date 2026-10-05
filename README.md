@@ -68,8 +68,14 @@ project-playground/
 │   ├── index.css                 # Global styles, Tailwind layer, CSS custom properties/theme
 │   ├── vite-env.d.ts              # Vite/TS ambient types
 │   ├── components/
-│   │   ├── AnimatedNav.tsx        # Sticky/animated top navigation bar
-│   │   └── InfiniteGallery.tsx    # Infinite-scrolling / drag-driven image gallery for the journey section
+│   │   ├── AnimatedNav.tsx        # Floating pill nav + top-right "Hire Me" button
+│   │   ├── InfiniteGallery.tsx    # Infinite-scrolling / drag-driven image gallery for the journey section
+│   │   ├── Skillset.tsx           # "My Skillset" spotlight cards + marquee
+│   │   ├── Process.tsx            # "My Process" with lens switcher
+│   │   ├── WorkExperience.tsx     # Hrud.ai role + project cards (with animated visuals)
+│   │   ├── ProjectVisual.tsx      # 11 animated SVG project visuals (Works + Work Experience)
+│   │   ├── SoftSkillsAchievements.tsx  # Achievements + Professional Soft Skills
+│   │   └── ContactForm.tsx        # Message form -> prefilled SMS / WhatsApp / email
 │   ├── hooks/
 │   │   └── use-mobile.tsx         # Responsive/viewport detection hook
 │   ├── lib/
@@ -87,25 +93,29 @@ project-playground/
 The page (`PortfolioLanding` in [src/App.tsx](src/App.tsx)) renders, top to bottom:
 
 1. **Loading screen** — an animated "Portfolio" logo/title reveal shown for ~2 seconds on load.
-2. **`AnimatedNav`** — sticky navigation with section links.
-3. **`Hero`** (`#home`) — full-height intro with a large "AI Engineer & ML Researcher" headline, portrait cutout, location, and a row of companies/tools worked with.
-4. **`About`** (`#about`) — profile summary, key stats (systems shipped, papers in review, model gain, curiosity), an "Identity" info panel, and 4 focus-area cards (RAG & Retrieval, Agentic Systems, Applied Research, Production ML).
-5. **`Experience`** (`#experience`) — "The Journey" timeline: a quote, an active-stop detail panel (`ActiveStopPanel`), and the `InfiniteGallery` component that lets the visitor scrub through career/education milestones (and optionally add their own images, stored in `localStorage`).
-6. **`Expertise`** (`#expertise`) — tech-stack grid and "APIs & AI Tools" grid, each rendered from `PORTFOLIO_DATA.techStack` / `PORTFOLIO_DATA.aiTools`.
-7. **`Works`** (`#works`) — "Selected Works": Engineering Projects and Research Publications, each rendered as `ProjectCard`s that open a `DetailModal` with overview, highlights, metrics, tech stack, and links (GitHub / paper).
-8. **`CodeSnippet`** — a decorative fake "terminal" code block for visual flavor.
-9. **`Contact`** (`#contact`) — call-to-action with Mail / LinkedIn / GitHub ([github.com/puli-pro](https://github.com/puli-pro)) links.
-10. **`Footer`** — logo, navigation/social links, and an "Available" status badge.
+2. **`AnimatedNav`** — floating pill navigation that collapses on scroll, plus a **Hire Me** button fixed at the top right (links to `#contact`; on phones it appears once the menu collapses).
+3. **`Hero`** (`#home`) — full-height intro with a large "AI Engineer & ML Researcher" headline behind the smiling portrait (`portrait-smile.png`), location, and a row of companies/tools worked with.
+4. **`About`** (`#about`) — profile summary, key stats, an "Identity" panel and 4 focus-area cards (RAG & Retrieval, Agentic Systems, Applied Research, Production ML).
+5. **`WorkExperience`** (`#experience`) — "Shipped at Hrud.ai": the AI Engineer role card, seven project cards (DevTools Control Center first, Job Galaxy, NCPL chatbot, Career Advisor Bot, NTRview Log, Pulse Celebrations v2, Xencomedical), each with an **animated visual**, plus a CodeForces strip.
+6. **`Experience`** (`#journey`) — "The Journey": quote, active-stop panel and the Three.js `InfiniteGallery` (visitors can add their own images, stored in `localStorage`).
+7. **`Expertise`** (`#expertise`) — **My Skillset** (`Skillset`: AI & ML, Languages, Databases, Cloud & DevOps as spotlight cards with "where I used it", plus a skills marquee) followed by the logo grids "Tools & Platforms" / "APIs & AI Tools".
+8. **`Process`** (`#process`) — "My Process": six steps (Understand the Problem → Plan the Architecture → Check What Already Exists → Design → Build & Evaluate → Deploy & Improve) with a lens switcher (Research Paper · ML/DL/NLP · RAG · Agents) and a feedback-loop callout.
+9. **`Works`** (`#works`) — "Selected Works": Engineering Projects and Research Publications as `ProjectCard`s with animated visuals (RAG pipeline, job-search agent, English→Telugu/Tamil translation, speech→lip-sync). Opening one shows a full-width animation, details, and floating **Back to Works** / close buttons (clicking the empty area also closes).
+10. **`Achievements`** (`#achievements`) and **`SoftSkills`** (`#soft-skills`) — built only from facts in the resume.
+11. **`CodeSnippet`** — a decorative fake "terminal" code block for visual flavor.
+12. **`Contact`** (`#contact`) — Mail / LinkedIn / GitHub cards plus the **`ContactForm`**: first/last name, email-or-phone, message and consent; sending opens a prefilled **text (SMS) to +91 93466 80696** (WhatsApp / email / copy fallbacks on desktop). Side panel: Text, WhatsApp, Call, Email.
+13. **`Footer`** — logo, navigation/social links (GitHub → `github.com/puli-pro`), and an "Available" status badge.
 
 ## Content Model
 
 All editable site content lives in **[src/data.ts](src/data.ts)** — this is the single place to update to change what the site displays:
 
+- `SKILLSET`, `PROCESS_STEPS` / `PROCESS_LENSES`, `WORK_PROJECTS`, `SOFT_SKILLS`, `ACHIEVEMENTS` and `CONTACT_PHONE` — content for the newer sections (Skillset, Process, Work Experience, Soft Skills, Achievements, Contact).
 - `PORTFOLIO_DATA` — name, alias, role, location, summary, `techStack[]`, `aiTools[]`, `experience[]`, `projects[]`, and `researchPapers[]` (the latter two share the `Project` interface: title, category, image, tags, subtitle, year, role, overview, highlights, tech, metrics, github/paperUrl links).
 - `JOURNEY` — an array of `JourneyStop` objects (education/work/research milestones) driving the Experience/timeline section, each with a period, title, place, kind, caption, description, optional marker/badge, and an imported image.
 - `JOURNEY_QUOTE` — the pull-quote shown next to the journey timeline.
 
-Background/reference material used to compile this content lives in [about_me.md](about_me.md) (marked as the source of truth for personal info), [Resume-pullaiah.md](Resume-pullaiah.md), and [Ravindra_portfolio.md](Ravindra_portfolio.md).
+A consolidated status document (what is built, pending work, design plan, how-tos) lives in [portfolio.md](portfolio.md). Background/reference material used to compile this content lives in [about_me.md](about_me.md) (marked as the source of truth for personal info), [Resume-pullaiah.md](Resume-pullaiah.md), and [Ravindra_portfolio.md](Ravindra_portfolio.md).
 
 ## Getting Started
 

@@ -16,6 +16,7 @@
 | **GitHub** | [github.com/puli-pro](https://github.com/puli-pro) |
 | **Profile / Avatar Photo** | `src/assets/portrait-smile.png` *(used on site)* — sources: `src/assets/logos/placed_puli.png`, `src/assets/logos/profile_photo.jpeg` |
 | **Email** | pulipavan696@gmail.com |
+| **Phone (contact texts)** | +91 93466 80696 — shown on the site; messages from the contact form arrive as a text to this number |
 | **LinkedIn** | [linkedin.com/in/solige-pullaiah-478462270](https://www.linkedin.com/in/solige-pullaiah-478462270) |
 | **Location** | Nandyal, Andhra Pradesh, India |
 | **Current Role** | **AI Engineer** — Hrud.ai, Visakhapatnam *(confirmed by owner; see https://hrud.ai/team)* |
@@ -158,9 +159,15 @@ Before implementation, confirm or supply:
 - [x] Preferred display name on website: **"Solige Pullaiah"** ("Puli Pavan" stays only as an alias/handle)
 - [x] Profile/avatar photo: `portrait-smile.png` (hero, live), `placed_puli.png` and `profile_photo.jpeg` (source photos; `portrait-smile.png` is a composite of both)
 - [x] GitHub profile URL: https://github.com/puli-pro
-- [ ] Project list with names, descriptions, links, and cover images
+- [x] Project list: Ollama LLM Document Assistant, AI Job Intelligence Agent, LaMaTEPP (English → Telugu/Tamil MT), SyncVerse, plus Hrud.ai work — DevTools Control Center, Job Galaxy SaaS & Admin Console, NCPL Website AI Chatbot, Career Advisor Bot, NTRview Log, Pulse Celebrations v2, Xencomedical client project (all on the site with animated visuals; real screenshots still wanted)
 - [ ] Preferred portfolio section categories (see suggested list above)
 - [ ] Personal tagline for hero page vertical labels
 - [ ] Designer/personal monogram or logo (for sticker badge on About + Outro pages)
-- [ ] Additional certifications, achievements, or recognitions
+- [x] Achievements shown on the site (from the resume): 3rd place Sign2Speak Hackathon (Team Lead), Top 2000 of 2.53 lakh in Super Speaker S2, 2nd prize Elocution, Hrud.ai internship team lead, event anchoring. Certifications: only CCNA (not yet shown)
 - [ ] Any publications, research papers, or blog posts
+
+---
+
+## Website status (kept in sync with `portfolio.md`)
+
+Built: Skillset, Process, Work Experience (Hrud.ai), Selected Works with animated visuals, Achievements, Professional Soft Skills, Contact form (text message to the phone above), top-right "Hire Me". Pending: My Journey timeline, "Those Who Shaped Me", resume PDF/SEO, deployment. Details and the to-do plan: see [portfolio.md](portfolio.md).
