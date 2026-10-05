@@ -167,7 +167,7 @@ export const Skillset = () => (
         <span className="w-1.5 h-1.5 rounded-full bg-[var(--gold)] animate-pulse" />
         Technical Stack
       </span>
-      <h2 className="mt-6 font-headline font-extrabold uppercase tracking-tight leading-[0.95] text-5xl md:text-7xl text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-white/40">
+      <h2 className="mt-6 font-headline font-extrabold tracking-tight leading-[0.95] text-5xl md:text-7xl text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-white/40">
         My Skillset
       </h2>
       <p className="mt-5 max-w-2xl text-base md:text-lg text-white/65 leading-relaxed">

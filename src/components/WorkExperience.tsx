@@ -141,7 +141,7 @@ export const WorkExperience = () => (
           <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--gold)]" />
           Work Experience
         </span>
-        <h2 className="mt-6 bg-gradient-to-b from-white via-white to-white/40 bg-clip-text font-headline text-4xl font-extrabold uppercase leading-[0.98] tracking-tight text-transparent md:text-7xl">
+        <h2 className="mt-6 bg-gradient-to-b from-white via-white to-white/40 bg-clip-text font-headline text-4xl font-extrabold leading-[0.98] tracking-tight text-transparent md:text-7xl">
           Shipped at Hrud.ai
         </h2>
         <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/70 md:text-lg">

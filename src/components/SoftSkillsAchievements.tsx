@@ -90,7 +90,7 @@ export const SoftSkills = () => (
         className="mb-14 flex flex-col items-center text-center"
       >
         <Pill>Core Competencies</Pill>
-        <h2 className="mt-6 bg-gradient-to-b from-white via-white to-white/40 bg-clip-text font-headline text-4xl font-extrabold uppercase leading-[0.98] tracking-tight text-transparent md:text-7xl">
+        <h2 className="mt-6 bg-gradient-to-b from-white via-white to-white/40 bg-clip-text font-headline text-4xl font-extrabold leading-[0.98] tracking-tight text-transparent md:text-7xl">
           Professional Soft Skills
         </h2>
         <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/70 md:text-lg">
@@ -170,7 +170,7 @@ export const Achievements = () => (
         className="mb-14 flex flex-col items-center text-center"
       >
         <Pill>Recognition</Pill>
-        <h2 className="mt-6 bg-gradient-to-b from-white via-white to-white/40 bg-clip-text font-headline text-4xl font-extrabold uppercase leading-[0.98] tracking-tight text-transparent md:text-7xl">
+        <h2 className="mt-6 bg-gradient-to-b from-white via-white to-white/40 bg-clip-text font-headline text-4xl font-extrabold leading-[0.98] tracking-tight text-transparent md:text-7xl">
           Achievements
         </h2>
         <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/70 md:text-lg">

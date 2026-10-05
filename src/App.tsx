@@ -29,14 +29,17 @@ import {
   FileText,
   ExternalLink,
   X,
+  ArrowLeft,
 } from "lucide-react";
 import { useState, useEffect, useRef, useMemo } from "react";
+import { createPortal } from "react-dom";
 import { InfiniteGallery } from "./components/InfiniteGallery";
 import { PORTFOLIO_DATA, JOURNEY, JOURNEY_QUOTE, type Project } from "./data";
 import portraitCutout from "./assets/portrait-smile.png";
 import { AnimatedNav } from "./components/AnimatedNav";
 import { Skillset } from "./components/Skillset";
 import { Process } from "./components/Process";
+import { ProjectVisual } from "./components/ProjectVisual";
 import { WorkExperience } from "./components/WorkExperience";
 import { ContactForm } from "./components/ContactForm";
 import { SoftSkills, Achievements } from "./components/SoftSkillsAchievements";
@@ -583,23 +586,29 @@ const ProjectCard = ({
         className="pointer-events-none absolute -top-24 -right-24 w-72 h-72 rounded-full blur-[100px] opacity-0 group-hover:opacity-60 transition-opacity duration-700"
         style={{ background: accentVar }}
       />
-      <div className="aspect-video relative overflow-hidden">
-        <img
-          src={item.image}
-          alt={item.title}
-          loading="lazy"
-          className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 opacity-40 grayscale group-hover:grayscale-0 group-hover:opacity-80"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-[var(--rv-card)] via-transparent to-transparent" />
+      <div className={`relative shrink-0 overflow-hidden ${item.visual ? "aspect-[5/3]" : "aspect-video"}`}>
+        {item.visual ? (
+          <ProjectVisual kind={item.visual} className="absolute inset-0 pt-9" />
+        ) : (
+          <img
+            src={item.image}
+            alt={item.title}
+            loading="lazy"
+            className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 opacity-40 grayscale group-hover:grayscale-0 group-hover:opacity-80"
+          />
+        )}
+        {!item.visual && <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[var(--rv-card)] via-transparent to-transparent" />}
         <div className="absolute top-8 left-8 flex items-center gap-3">
           <div className="w-2 h-2 rounded-full animate-pulse" style={{ background: accentVar }} />
           <span className="text-[10px] font-mono text-white/60 tracking-[0.3em] uppercase">
             {item.category}
           </span>
         </div>
-        <span className="absolute bottom-6 left-8 font-headline font-bold text-6xl leading-none text-white/10 group-hover:text-white/20 transition-colors duration-500">
-          0{index + 1}
-        </span>
+        {!item.visual && (
+          <span className="absolute bottom-6 left-8 font-headline font-bold text-6xl leading-none text-white/10 group-hover:text-white/20 transition-colors duration-500">
+            0{index + 1}
+          </span>
+        )}
         <div
           className="absolute top-8 right-8 w-14 h-14 rounded-full glass-panel border border-white/10 flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:rotate-45"
           style={{ background: `${accent === "gold" ? "rgba(245,158,11,0.15)" : "rgba(16,185,129,0.15)"}` }}
@@ -611,6 +620,14 @@ const ProjectCard = ({
         <h3
           className="text-4xl md:text-5xl font-headline font-bold tracking-tighter mb-3 leading-none transition-colors duration-500"
         >
+          {item.visual && (
+            <span
+              className="mr-3 font-headline font-extrabold italic text-transparent"
+              style={{ WebkitTextStroke: "1.5px rgba(255,255,255,0.3)" }}
+            >
+              {String(index + 1).padStart(2, "0")}
+            </span>
+          )}
           {item.title}
         </h3>
         {item.subtitle && (
@@ -683,7 +700,8 @@ const DetailModal = ({
   const accentVar = accent === "gold" ? "var(--gold)" : "var(--emerald)";
   const accentSoft = accent === "gold" ? "rgba(245,158,11,0.15)" : "rgba(16,185,129,0.15)";
 
-  return (
+  if (typeof document === "undefined") return null;
+  return createPortal(
     <AnimatePresence>
       {item && (
         <motion.div
@@ -704,19 +722,36 @@ const DetailModal = ({
             onClick={(e) => e.stopPropagation()}
             className="relative w-full max-w-5xl bg-[var(--rv-card)] border border-white/10 rounded-[2.5rem] overflow-hidden shadow-[0_60px_120px_rgba(0,0,0,0.7)]"
           >
-            <button
-              type="button"
-              onClick={onClose}
-              className="absolute top-6 right-6 z-20 w-12 h-12 rounded-full bg-black/60 border border-white/10 flex items-center justify-center text-white hover:bg-white hover:text-black transition-all duration-300"
-              aria-label="Close"
-            >
-              <X className="w-5 h-5" />
-            </button>
+            <div className="sticky top-0 z-30 flex items-center justify-between gap-4 border-b border-white/10 bg-[var(--rv-card)]/90 px-5 py-3 backdrop-blur-xl md:px-8">
+              <button
+                type="button"
+                onClick={onClose}
+                className="group inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/[0.06] px-4 py-2 font-mono text-xs tracking-wider text-white transition-all hover:border-white/50 hover:bg-white/15"
+              >
+                <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
+                Back to Works
+              </button>
+              <span className="hidden truncate font-mono text-[11px] tracking-[0.25em] text-white/50 sm:block">
+                {item.category}
+              </span>
+              <button
+                type="button"
+                onClick={onClose}
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/[0.06] text-white transition-all hover:bg-white hover:text-black"
+                aria-label="Close"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
 
             {/* Hero image */}
-            <div className="relative aspect-[21/9] overflow-hidden">
-              <img src={item.image} alt={item.title} className="w-full h-full object-cover opacity-60" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[var(--rv-card)] via-[var(--rv-card)]/40 to-transparent" />
+            <div className="relative min-h-[22rem] md:aspect-[21/9] overflow-hidden">
+              {item.visual ? (
+                <ProjectVisual kind={item.visual} className="absolute inset-0 pb-40 pt-2 opacity-90 md:pb-36" />
+              ) : (
+                <img src={item.image} alt={item.title} className="w-full h-full object-cover opacity-60" />
+              )}
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[var(--rv-card)] via-[var(--rv-card)]/40 to-transparent" />
               <div className="absolute bottom-8 left-8 md:left-12 right-8 md:right-12">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-2 h-2 rounded-full animate-pulse" style={{ background: accentVar }} />
@@ -855,7 +890,8 @@ const DetailModal = ({
           </motion.div>
         </motion.div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 };
 

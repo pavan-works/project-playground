@@ -19,6 +19,7 @@ export interface Project {
   title: string;
   category: string;
   image: string;
+  visual?: "rag" | "agents" | "mt" | "lipsync";
   link?: string;
   tags?: string[];
   subtitle?: string;
@@ -190,6 +191,7 @@ export const PORTFOLIO_DATA = {
     {
       id: "p1",
       title: "Ollama LLM Document Assistant",
+      visual: "rag",
       category: "RAG System",
       image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=2070&auto=format&fit=crop",
       link: "https://github.com/puli-pro/Ollama-llm-document-assistant",
@@ -211,6 +213,7 @@ export const PORTFOLIO_DATA = {
     {
       id: "p2",
       title: "AI Job Intelligence Agent",
+      visual: "agents",
       category: "Multi-Agent System",
       image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=2070&auto=format&fit=crop",
       link: "https://github.com/puli-pro/agents",
@@ -234,6 +237,7 @@ export const PORTFOLIO_DATA = {
     {
       id: "r1",
       title: "LaMaTEPP",
+      visual: "mt",
       category: "Machine Translation",
       image: "https://images.unsplash.com/photo-1546410531-bb4caa6b424d?q=80&w=2071&auto=format&fit=crop",
       tags: ["NLP", "MoE Adapters", "Indic Languages"],
@@ -260,6 +264,7 @@ export const PORTFOLIO_DATA = {
     {
       id: "r2",
       title: "SyncVerse",
+      visual: "lipsync",
       category: "Lip-Sync Generation",
       image: "https://images.unsplash.com/photo-1516110833967-0b5716ca1387?q=80&w=2070&auto=format&fit=crop",
       tags: ["Computer Vision", "Multimodal", "wav2vec2.0"],

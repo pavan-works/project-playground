@@ -532,7 +532,7 @@ The site must state clearly, per item: **problem → solution → architecture �
 To do:
 - [ ] ❓ OWNER answer the tables above (one message is enough; it can then be turned into `data.ts`).
 - [ ] Extend the `Project` type: `problem`, `solution`, `architecture: string[]`, `contribution`, `results`, `links.live`, `links.github`, `featured`, `visual`.
-- [ ] Replace Unsplash covers with real screenshots or the animated mock-UI previews the reference uses (a small looping SVG/JS mock per project: retrieval flow for RAG, agent pipeline for the Job Agent, alignment waveform for SyncVerse).
+- [x] **DONE (2026-10-05):** animated mock-UI previews in `src/components/ProjectVisual.tsx` (keyframes in `index.css`, `visual` field in `data.ts`): RAG pipeline (Ollama Document Assistant), plan→retrieve→analyze→rank agents (AI Job Agent), MoE-adapter translation (LaMaTEPP), waveform→lips (SyncVerse). Used on the cards and the detail view. Also: detail view moved to a portal (it was hidden under the floating nav), sticky **Back to Works** bar; section headings are sentence case. Original item: replace Unsplash covers with real screenshots or the animated mock-UI previews the reference uses (a small looping SVG/JS mock per project: retrieval flow for RAG, agent pipeline for the Job Agent, alignment waveform for SyncVerse).
 - [ ] Build the sticky-stack `ProjectStack` + slide-over `CaseStudy` with `#project/<id>` routing and Esc/focus-trap.
 - [ ] Optional **"Beyond the code"** strip for non-code work (public speaking / anchoring / hackathon leadership).
 

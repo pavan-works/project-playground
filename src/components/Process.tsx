@@ -163,7 +163,7 @@ export const Process = () => {
               <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--gold)]" />
               My Process
             </span>
-            <h2 className="mt-6 font-headline text-3xl font-extrabold uppercase leading-[1.02] tracking-tight text-white md:text-5xl [overflow-wrap:anywhere]">
+            <h2 className="mt-6 font-headline text-3xl font-extrabold leading-[1.02] tracking-tight text-white md:text-5xl [overflow-wrap:anywhere]">
               Here&apos;s how I turn ideas into{" "}
               <span className="bg-gradient-to-r from-[var(--gold)] to-[var(--indigo-light)] bg-clip-text text-transparent">
                 real-world applications

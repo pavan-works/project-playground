@@ -120,3 +120,37 @@ body::before {
 @media (prefers-reduced-motion: reduce) {
   .skill-marquee-track { animation: none; }
 }
+
+/* ---- Animated project visuals ---- */
+.pv svg * { transform-box: fill-box; }
+@keyframes pvPulse { 0%,100% { opacity: .35; } 50% { opacity: 1; } }
+@keyframes pvPing { 0% { transform: scale(.6); opacity: .9; } 100% { transform: scale(3); opacity: 0; } }
+@keyframes pvFlow { to { stroke-dashoffset: -24; } }
+@keyframes pvDocs { 0%,8% { opacity: 0; transform: translateX(-14px); } 18%,92% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+@keyframes pvDotIn { 0%,14% { opacity: 0; transform: scale(0); } 26%,100% { opacity: .55; transform: scale(1); } }
+@keyframes pvHit { 0%,34% { fill: #64748b; transform: scale(1); } 44%,88% { fill: #22d3ee; transform: scale(1.9); } 100% { fill: #64748b; transform: scale(1); } }
+@keyframes pvDraw { 0%,36% { stroke-dashoffset: 120; opacity: 0; } 48%,88% { stroke-dashoffset: 0; opacity: 1; } 100% { opacity: 0; } }
+@keyframes pvType { 0%,52% { transform: scaleX(0); } 70%,92% { transform: scaleX(1); } 100% { transform: scaleX(0); } }
+@keyframes pvNode { 0%,3% { fill: rgba(255,255,255,.06); stroke: rgba(255,255,255,.25); } 6%,22% { fill: rgba(34,211,238,.28); stroke: #22d3ee; } 28%,100% { fill: rgba(255,255,255,.06); stroke: rgba(255,255,255,.25); } }
+@keyframes pvBar { 0%,70% { transform: scaleX(0); } 82%,94% { transform: scaleX(1); } 100% { transform: scaleX(0); } }
+@keyframes pvExpert { 0%,100% { fill: rgba(255,255,255,.06); stroke: rgba(255,255,255,.25); } 12%,30% { fill: rgba(16,185,129,.4); stroke: #10b981; } }
+@keyframes pvAppear { 0%,55% { opacity: 0; transform: translateX(-10px); } 68%,92% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+@keyframes pvWave { 0%,100% { transform: scaleY(.2); } 50% { transform: scaleY(1); } }
+@keyframes pvMouth { 0%,100% { transform: scaleY(.25); } 50% { transform: scaleY(1.7); } }
+.pv-pulse { animation: pvPulse 2.4s ease-in-out infinite; }
+.pv-ping { transform-origin: center; animation: pvPing 2s ease-out infinite; }
+.pv-flow { stroke-dasharray: 6 6; animation: pvFlow 1s linear infinite; }
+.pv-docs { animation: pvDocs 7s ease-in-out infinite; }
+.pv-dot { transform-origin: center; animation: pvDotIn 7s ease-out infinite; }
+.pv-hit { transform-origin: center; animation: pvHit 7s ease-in-out infinite; }
+.pv-draw { stroke-dasharray: 120; animation: pvDraw 7s ease-in-out infinite; }
+.pv-type { transform-origin: left center; animation: pvType 7s ease-in-out infinite; }
+.pv-node { animation: pvNode 7s ease-in-out infinite; }
+.pv-bar { transform-origin: left center; animation: pvBar 7s ease-in-out infinite; }
+.pv-expert { animation: pvExpert 7s ease-in-out infinite; }
+.pv-appear { animation: pvAppear 7s ease-in-out infinite; }
+.pv-wave { transform-origin: center; animation: pvWave 1.3s ease-in-out infinite; }
+.pv-mouth { transform-origin: center; animation: pvMouth 1.3s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .pv-pulse,.pv-ping,.pv-flow,.pv-docs,.pv-dot,.pv-hit,.pv-draw,.pv-type,.pv-node,.pv-bar,.pv-expert,.pv-appear,.pv-wave,.pv-mouth { animation: none; }
+}
