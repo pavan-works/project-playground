@@ -556,9 +556,29 @@ export interface WorkProject {
   tags: string[];
   links?: { label: string; href: string }[];
   featured?: boolean;
+  problem?: { text: string; formula: string };
 }
 
 export const WORK_PROJECTS: WorkProject[] = [
+  {
+    id: "w-devtools",
+    visual: "devtools",
+    title: "DevTools Control Center",
+    kind: "Internal platform",
+    summary: "One control plane for GitHub, Vercel, Supabase and CI/CD, with role-based access, so the whole team can see the status of development and the data in one place.",
+    problem: {
+      text: "The team struggled to see the status of development and the data across tools, and every platform charges per seat (around $20 each).",
+      formula: "platforms × price per seat × number of developers",
+    },
+    points: [
+      "Manages 100+ repositories and 55 Supabase projects in one place.",
+      "A 7-check policy engine automates branch cleanup.",
+      "Health monitoring alerts on integration downgrades or expirations.",
+    ],
+    stats: ["100+ repos", "55 Supabase projects"],
+    tags: ["GitHub", "Vercel", "Supabase", "CI/CD", "RBAC"],
+    featured: true,
+  },
   {
     id: "w-galaxy",
     visual: "galaxy",
@@ -578,21 +598,6 @@ export const WORK_PROJECTS: WorkProject[] = [
       { label: "jobgalaxy.app", href: "https://jobgalaxy.app/" },
       { label: "Admin console", href: "https://admin-galaxy-saas.vercel.app/" },
     ],
-    featured: true,
-  },
-  {
-    id: "w-devtools",
-    visual: "devtools",
-    title: "DevTools Control Center",
-    kind: "Internal platform",
-    summary: "One control plane for GitHub, Vercel, Supabase and CI/CD, with role-based access.",
-    points: [
-      "Manages 100+ repositories and 55 Supabase projects in one place.",
-      "A 7-check policy engine automates branch cleanup.",
-      "Health monitoring alerts on integration downgrades or expirations.",
-    ],
-    stats: ["100+ repos", "55 Supabase projects"],
-    tags: ["GitHub", "Vercel", "Supabase", "CI/CD", "RBAC"],
   },
   {
     id: "w-chatbot",

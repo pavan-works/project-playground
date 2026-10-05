@@ -706,27 +706,25 @@ const DetailModal = ({
       {item && (
         <motion.div
           key="bar"
-          initial={{ opacity: 0, y: -16 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -16 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
-          className="fixed inset-x-0 top-0 z-[120] flex items-center justify-between gap-4 border-b border-white/15 bg-black/80 px-4 py-3 backdrop-blur-xl md:px-8"
+          className="pointer-events-none fixed inset-x-0 top-0 z-[120] flex items-start justify-between p-3 md:p-6"
         >
           <button
             type="button"
             onClick={onClose}
-            className="group inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-4 py-2 font-mono text-xs tracking-wider text-white transition-all hover:border-white/60 hover:bg-white/20"
+            className="group pointer-events-auto inline-flex items-center gap-2 rounded-full border border-white/30 bg-black/70 px-4 py-2.5 font-mono text-xs tracking-wider text-white shadow-lg backdrop-blur-md transition-all hover:border-white/60 hover:bg-white/20"
           >
             <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
-            Back to Works
+            <span className="hidden sm:inline">Back to Works</span>
+            <span className="sm:hidden">Back</span>
           </button>
-          <span className="hidden truncate font-mono text-[11px] tracking-[0.25em] text-white/60 sm:block">
-            {item.title}
-          </span>
           <button
             type="button"
             onClick={onClose}
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/30 bg-white/10 text-white transition-all hover:bg-white hover:text-black"
+            className="pointer-events-auto flex h-10 w-10 items-center justify-center rounded-full border border-white/30 bg-black/70 text-white shadow-lg backdrop-blur-md transition-all hover:bg-white hover:text-black"
             aria-label="Close"
           >
             <X className="h-5 w-5" />
@@ -741,7 +739,7 @@ const DetailModal = ({
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
           onClick={onClose}
-          className="fixed inset-0 z-[100] bg-black/70 backdrop-blur-xl flex items-start md:items-center justify-center overflow-y-auto px-4 pb-10 pt-24 md:pb-16 md:pt-28"
+          className="fixed inset-0 z-[100] bg-black/70 backdrop-blur-xl flex items-start md:items-center justify-center overflow-y-auto px-4 pb-10 pt-16 md:py-16"
         >
           <motion.div
             key="panel"

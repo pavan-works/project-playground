@@ -124,6 +124,16 @@ export function AnimatedNav() {
           <Menu className="w-5 h-5 text-white" />
         </motion.div>
       </motion.nav>
+
+      {/* Hire Me — top right, like the reference. On small screens it only shows while the nav is collapsed. */}
+      <a
+        href="#contact"
+        className={`pointer-events-auto absolute right-4 top-1 md:right-8 items-center gap-2 rounded-full bg-[var(--gold)] px-5 h-12 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-black shadow-[0_0_30px_-8px_rgba(34,211,238,0.9)] transition-all hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_0_36px_-4px_rgba(255,255,255,0.8)] ${
+          isExpanded ? "hidden md:inline-flex" : "inline-flex"
+        }`}
+      >
+        Hire Me
+      </a>
     </div>
   );
 }
