@@ -538,3 +538,112 @@ export const CONTACT_PHONE = {
   e164: "+919346680696",
   display: "+91 93466 80696",
 };
+
+/* Work Experience — Hrud.ai projects (summarised from the owner's notes) */
+export interface WorkProject {
+  id: string;
+  title: string;
+  kind: string;
+  summary: string;
+  points: string[];
+  stats?: string[];
+  tags: string[];
+  links?: { label: string; href: string }[];
+  featured?: boolean;
+}
+
+export const WORK_PROJECTS: WorkProject[] = [
+  {
+    id: "w-galaxy",
+    title: "Job Galaxy SaaS & Admin Console",
+    kind: "SaaS product",
+    summary:
+      "The company's SaaS that connects an external product with the internal platform and sends users fresh jobs every day.",
+    points: [
+      "Daily job feeds by each user's country, role and experience — countries and roles are pulled live from the internal platform.",
+      "Built a demand monitor that tracks supply vs demand and alerts search specialists the chosen number of days ahead (set in Jobs-feed settings).",
+      "Split the admin console into its own deployment to shrink the public attack surface, with MRR, ARPU and retention analytics.",
+      "Hardened with server-side authorization, login lockout backoff and strict CSP headers.",
+    ],
+    stats: ["194 backend CI tests"],
+    tags: ["Supabase", "Vercel", "CI", "Analytics", "Security"],
+    links: [
+      { label: "jobgalaxy.app", href: "https://jobgalaxy.app/" },
+      { label: "Admin console", href: "https://admin-galaxy-saas.vercel.app/" },
+    ],
+    featured: true,
+  },
+  {
+    id: "w-devtools",
+    title: "DevTools Control Center",
+    kind: "Internal platform",
+    summary: "One control plane for GitHub, Vercel, Supabase and CI/CD, with role-based access.",
+    points: [
+      "Manages 100+ repositories and 55 Supabase projects in one place.",
+      "A 7-check policy engine automates branch cleanup.",
+      "Health monitoring alerts on integration downgrades or expirations.",
+    ],
+    stats: ["100+ repos", "55 Supabase projects"],
+    tags: ["GitHub", "Vercel", "Supabase", "CI/CD", "RBAC"],
+  },
+  {
+    id: "w-chatbot",
+    title: "NCPL Website — AI Chatbot",
+    kind: "AI chatbot",
+    summary: "A voice and text bot that guides site visitors using the company's own FAQs and courses.",
+    points: [
+      "Grounded retrieval over company FAQs and courses, so answers stay on-topic.",
+      "Pre-rendered 26 previously uncrawled pages to improve SEO.",
+      "Added a native careers and blog backend module.",
+    ],
+    stats: ["26 pages pre-rendered"],
+    tags: ["Retrieval", "Voice + text", "SEO"],
+  },
+  {
+    id: "w-career",
+    title: "Career Advisor Bot",
+    kind: "AI chatbot",
+    summary: "An eligibility-driven counselling bot that suggests tailored IT learning paths.",
+    points: [
+      "Collects the user's profile first, then recommends a learning path.",
+      "Fixed critical production serverless session errors.",
+      "Server-side key management with per-user rate limits.",
+    ],
+    tags: ["LLM", "Serverless", "Rate limiting"],
+  },
+  {
+    id: "w-ntrview",
+    title: "NTRview Log",
+    kind: "Interview prep",
+    summary: "Schedule interviews and practise in dedicated rooms tailored to the interviewer.",
+    points: [
+      "Upload an interviewer profile PDF to customise the prep scenario.",
+      "Simulates real interview conditions step by step: live audio recording, instant silence checks, transcript and AI feedback.",
+    ],
+    tags: ["Audio", "Transcription", "AI feedback"],
+  },
+  {
+    id: "w-pulse",
+    title: "Pulse Celebrations v2",
+    kind: "Team product · v2",
+    summary: "An existing team product (v1). I helped shape v2, not just build it.",
+    points: [
+      "Planned the new v2 mockups and the new Supabase database architecture.",
+      "Integrated the database with the v2 mockup and shipped it to live users.",
+    ],
+    tags: ["Supabase", "Architecture", "UI mockups"],
+  },
+  {
+    id: "w-xen",
+    title: "Xencomedical — Client Project",
+    kind: "Client work",
+    summary: "A client project assigned to me, with requirements sent by email.",
+    points: [
+      "Delivered all requested changes in two days, then sent them for testing.",
+      "Approved by the client, who was very pleased with the result.",
+    ],
+    stats: ["2-day delivery"],
+    tags: ["Client delivery", "Web"],
+    links: [{ label: "xencomedical.com", href: "http://xencomedical.com/" }],
+  },
+];

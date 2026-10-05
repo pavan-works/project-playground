@@ -37,6 +37,7 @@ import portraitCutout from "./assets/portrait-smile.png";
 import { AnimatedNav } from "./components/AnimatedNav";
 import { Skillset } from "./components/Skillset";
 import { Process } from "./components/Process";
+import { WorkExperience } from "./components/WorkExperience";
 import { ContactForm } from "./components/ContactForm";
 import { SoftSkills, Achievements } from "./components/SoftSkillsAchievements";
 import logoGmail from "./assets/logos/gmail.svg";
@@ -377,7 +378,7 @@ const Experience = () => {
   };
 
   return (
-    <section id="experience" className="relative overflow-hidden bg-white/[0.01] py-40">
+    <section id="journey" className="relative overflow-hidden bg-white/[0.01] py-40">
       <div className="absolute inset-0 dot-pattern opacity-10" />
       <div className="absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
@@ -1188,6 +1189,7 @@ export default function PortfolioLanding() {
       <main className="relative z-10">
         <Hero />
         <About />
+        <WorkExperience />
         <Experience />
         <Expertise />
         <Process />

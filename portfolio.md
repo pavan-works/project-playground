@@ -546,7 +546,7 @@ Cards to render (from resume / `data.ts`):
 1. **AI Engineer — Hrud.ai (Hybrid)**, *Jan 2026 – Present*. Contributions: production LLM systems (Gemini); RAG pipelines (embeddings + vector search + external knowledge); autonomous agents with memory and tool integration; scalable Supabase (PostgreSQL) backend. Tech: Gemini, RAG, Supabase, PostgreSQL, FastAPI, Python. Badge: **CURRENT**. (Role confirmed as **AI Engineer** — listed on https://hrud.ai/team; so the card badge should read **CURRENT / FULL-TIME-STYLE ROLE**, not "Internship", and the section lead line must not call it an internship.)
 2. **AI/ML Intern — CodeForces (Remote)**, *May 2024 – Aug 2024*. Contributions: real-world ML/DL applications; preprocessing + feature engineering + neural-network experiments. Metric: **+12%** model performance. Tech: Python, ML/DL, feature engineering. Badge: **INTERNSHIP**.
 
-- [ ] Build `ExperienceCard` (date, badge, contributions, metric, tech chips) and replace the current plain experience list.
+- [x] **DONE (2026-10-05):** `src/components/WorkExperience.tsx` + `WORK_PROJECTS` in `data.ts` (`#experience`; the old journey section is now `#journey`). Hrud.ai role card + 7 concise project cards from the owner's notes: Job Galaxy SaaS & Admin Console (featured, merges the two Job Galaxy notes), DevTools Control Center, NCPL Website AI Chatbot, Career Advisor Bot, NTRview Log, Pulse Celebrations v2, Xencomedical client project; plus a CodeForces strip (+12%). Facts only from the owner's text; tech tags limited to what was stated.
 - [ ] Update the sub-title copy to *"Internships where I shipped AI into real applications."* (adjust if Hrud.ai is full-time).
 
 ### 16.7 My Journey — "From school to shipping AI products."
