@@ -58,6 +58,7 @@ const collapsedIconVariants = {
 
 export function AnimatedNav() {
   const [isExpanded, setExpanded] = React.useState(true);
+  const [showMobileActions, setShowMobileActions] = React.useState(false);
   const { scrollY } = useScroll();
   const lastScrollY = React.useRef(0);
   const scrollPositionOnCollapse = React.useRef(0);
@@ -74,6 +75,10 @@ export function AnimatedNav() {
     ) {
       setExpanded(true);
     }
+    // phones: reveal the action bar only while scrolling up (and not at the very top)
+    if (latest < 300) setShowMobileActions(false);
+    else if (latest < previous - 4) setShowMobileActions(true);
+    else if (latest > previous + 4) setShowMobileActions(false);
     lastScrollY.current = latest;
   });
 
@@ -126,11 +131,9 @@ export function AnimatedNav() {
         </motion.div>
       </motion.nav>
 
-      {/* Resume + Hire Me — top right. On small screens they only show while the nav is collapsed. */}
+      {/* Resume + Hire Me — top right on tablet/desktop. */}
       <div
-        className={`pointer-events-auto absolute right-4 top-1 md:right-8 items-center gap-2 ${
-          isExpanded ? "hidden md:flex" : "flex"
-        }`}
+        className="pointer-events-auto absolute right-8 top-1 hidden items-center gap-2 md:flex"
       >
         <ResumeButton
           label="Resume"
@@ -143,6 +146,27 @@ export function AnimatedNav() {
           Hire Me
         </a>
       </div>
+
+      {/* Phones: slim action bar that slides in on scroll-up and away on scroll-down */}
+      <motion.div
+        initial={false}
+        animate={{ y: showMobileActions ? 0 : 90, opacity: showMobileActions ? 1 : 0 }}
+        transition={{ type: "spring", damping: 24, stiffness: 260 }}
+        style={{ pointerEvents: showMobileActions ? "auto" : "none" }}
+        className="fixed bottom-4 left-1/2 z-[70] flex -translate-x-1/2 items-center gap-2 rounded-full border border-white/25 bg-black/85 p-1.5 shadow-[0_12px_40px_rgba(0,0,0,0.6)] backdrop-blur-xl md:hidden"
+        aria-hidden={!showMobileActions}
+      >
+        <ResumeButton
+          label="Resume"
+          className="inline-flex h-10 items-center gap-2 whitespace-nowrap rounded-full border-2 border-[var(--gold)] px-4 font-mono text-[11px] font-semibold uppercase tracking-[0.15em] text-[var(--gold)]"
+        />
+        <a
+          href="#contact"
+          className="inline-flex h-10 items-center whitespace-nowrap rounded-full bg-[var(--gold)] px-5 font-mono text-[11px] font-semibold uppercase tracking-[0.15em] text-black"
+        >
+          Hire Me
+        </a>
+      </motion.div>
     </div>
   );
 }

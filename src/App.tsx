@@ -1071,14 +1071,14 @@ const Contact = () => (
           <span className="text-[var(--gold)] font-mono text-xs tracking-[0.5em] uppercase">Get In Touch</span>
           <span className="w-14 h-px bg-gradient-to-l from-transparent to-[var(--gold)]" />
         </div>
-        <h2 className="text-6xl md:text-8xl font-headline font-bold tracking-tighter leading-[0.95] mb-10">
-          Let's Build <span className="text-white/35 italic">Something</span>
+        <h2 className="mb-10 bg-gradient-to-b from-white via-white to-white/40 bg-clip-text font-headline text-4xl font-extrabold leading-[0.98] tracking-tight text-transparent md:text-7xl">
+          Let's Build Something
         </h2>
 
         <div className="flex items-center gap-6 max-w-2xl mx-auto">
           <span className="hidden sm:block h-px flex-1 bg-gradient-to-r from-transparent to-white/15" />
-          <p className="text-[var(--rv-muted)] text-base md:text-lg leading-relaxed shrink-0">
-            Open to AI/ML internships, full-time roles &amp; meaningful collaborations.
+          <p className="text-[var(--rv-muted)] text-base md:text-lg leading-relaxed sm:shrink-0 text-center">
+            Open to AI/ML internships, full-time roles, freelance projects &amp; meaningful collaborations.
           </p>
           <span className="hidden sm:block h-px flex-1 bg-gradient-to-l from-transparent to-white/15" />
         </div>
