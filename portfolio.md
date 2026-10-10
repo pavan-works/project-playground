@@ -368,6 +368,9 @@ Recent commits (newest first, abridged): `d3933ae` portfolio overwritten → `d0
 - [x] **Deployed** on Vercel (https://soligepullaiah.vercel.app/); URL added to README and SEO tags.
 - [x] Live URL added to `Resume-pullaiah.md`. [ ] Still to add it to the resume PDF (owner).
 - [x] **Resume download:** PDF in `public/` + modal with Download (nav, About, Contact) — done (item 32).
+- [ ] **Contact delivery — Approach 4** (Vercel `/api/contact` + Resend; honeypot + validation + rate limit; `wa.me` / `sms:` / `tel:` links): full plan in [`Contact_Form_Plan.md`](Contact_Form_Plan.md) — see §16.17.
+- [ ] **Contact delivery fallback — Approach 1** (Web3Forms) if delivery is needed immediately (same plan file, §4).
+- [ ] *(Later, optional)* **SMS notification via Twilio / MSG91 / Fast2SMS** on top of the email flow — steps kept in [`Contact_Form_Plan.md`](Contact_Form_Plan.md) §5.
 - [ ] **Animated mascot** (from the "Make Your Own Mascot" guide): full plan in [`Mascot_Plan.md`](Mascot_Plan.md) — see §16.16.
 - [ ] **Growth & Projects at Hrud.ai layout:** decide between the options in §16.15 and implement.
 - [ ] **Vercel project count** for the DevTools Control Center card/visual (owner to supply the number).
@@ -480,6 +483,7 @@ Best fits for this portfolio: **command palette**, **bento grid** for About/skil
 | 16.10 Those Who Shaped Me | ⏳ not started (needs people + "on my own" list) |
 | 16.11 Contact Me | ✅ built (SMS delivery limited to the visitor's device; provider-based auto-SMS pending account/keys) |
 | 16.12 Resume PDF / SEO / a11y | ✅ resume modal + PDF, SEO/OG/JSON-LD; ⏳ og:image/favicon/canonical, skip link, focus rings, reduced-motion audit |
+| 16.17 Contact delivery (Approach 4: Vercel function + Resend) | ⏳ planned — see [`Contact_Form_Plan.md`](Contact_Form_Plan.md) (needs Resend account / Vercel env vars) |
 | 16.16 Animated mascot | ⏳ planned — see [`Mascot_Plan.md`](Mascot_Plan.md) (needs owner decisions) |
 | 16.15 Growth and Projects at Hrud.ai | 🟡 first version built (growth card under the role card); **layout decision pending** — see §16.15 |
 | Top-right Hire Me | ✅ built |
@@ -694,7 +698,7 @@ Current: 3 link cards only. Target (matches the reference):
 6. "Available for opportunities" badge in the footer + a spinning "Open to work" hero badge linking to `#contact`.
 
 - [x] **DONE (2026-10-02):** `src/components/ContactForm.tsx` under the existing link cards. Fields: first name, last name, email-or-phone, message (280 chars), permission checkbox; validation; floating labels. **Delivery: as a normal text to +91 93466 80696** — on a phone, Send opens the SMS app with the message prefilled to that number; on desktop it shows the composed text with *Open SMS app / WhatsApp / Email / Copy* buttons. Side panel offers Text, WhatsApp, Call, Email. Phone number lives in `CONTACT_PHONE` (`data.ts`).
-- [ ] Limitation / next: a browser cannot silently send an SMS, so the *visitor* sends the text from their own device. Fully automatic delivery from any device needs an SMS provider (Twilio / MSG91 / Fast2SMS) behind a serverless function (e.g. Vercel `/api/contact`) with API keys in env vars — owner must create that account.
+- [ ] **Superseded by §16.17 (2026-10-11):** the plan is now email delivery through a Vercel function + Resend, not Twilio. Old note: a browser cannot silently send an SMS, so the *visitor* sends the text from their own device. Fully automatic delivery from any device needs an SMS provider (Twilio / MSG91 / Fast2SMS) behind a serverless function (e.g. Vercel `/api/contact`) with API keys in env vars — owner must create that account.
 - [ ] Add a left **social rail** (mail / LinkedIn / GitHub / resume icons), fixed on desktop.
 - [ ] Footer: giant name letters, columns (role/stack line, "B.Tech CSE", availability), links (Email, LinkedIn, GitHub, Resume, Back to top). Fix the Twitter placeholder (§11).
 - [x] Phone number shown on the site (owner confirmed: +91 93466 80696, used for contact texts).
@@ -793,4 +797,26 @@ Current: 3 link cards only. Target (matches the reference):
 **Bonus:** exporting a PNG/SVG of the mascot can also provide the missing **`og:image`** and **favicon** (see §11).
 
 **Owner decisions needed:** mascot name and starter, body colour (cyan `#22d3ee` recommended), placement (every page vs. hero/contact only), speech bubble yes/no, whether the repo is public (AGPL), mascot on the loader or not.
+
+### 16.17 "Let's Build Something" — contact delivery from any device (planning)
+
+**Full plan: [`Contact_Form_Plan.md`](Contact_Form_Plan.md).** The previous idea (Twilio SMS via a serverless function, §16.11) is replaced by an email-first approach.
+
+**Approaches compared (2026-10-11):**
+| # | Approach | Verdict |
+|---|---|---|
+| 1 | **Web3Forms** — free, no backend (≈250/month); key visible in the page, limited control | **Fallback** if delivery must go live immediately |
+| 2 | **EmailJS** — browser SDK (≈200/month); keys visible in the browser | Not planned |
+| 3 | **FormSubmit** — no-account hack; email exposed, least reliable | Skip |
+| 4 | **Vercel function `/api/contact` + Resend** — keys private, real validation, honest success/error states, extensible | **Chosen** |
+
+**Approach 4 summary:** keep the existing UI; add `api/contact.ts` (validate + honeypot + rate limiting + Resend email); form states sending / success / error (success only after Resend accepts the email); keep the SMS / WhatsApp / Email / Copy panel as a fallback and add `wa.me`, `sms:` and `tel:` links; env vars `RESEND_API_KEY`, `CONTACT_TO` in Vercel (never in code); test on mobile + desktop (success, invalid input, failed request).
+
+**Deliberately avoided:** database / Supabase (initially), paid SMS / Twilio, redesign, exposed keys, claiming delivery before the server confirms it.
+
+**Kept for later:** the earlier Twilio / SMS plan (account setup, trial limits, India DLT caveat, env vars, best-effort SMS after the email) is preserved as an optional step in `Contact_Form_Plan.md` §5.
+
+**Owner to do:** create a free Resend account and add `RESEND_API_KEY` + `CONTACT_TO` in Vercel; confirm the destination email; decide whether the phone number stays public and whether to ship Web3Forms first.
+
+**Order with other work:** build this before the mascot (§16.16); the mascot can later play `celebrate` / `confused` on form success / error.
 
