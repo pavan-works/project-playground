@@ -91,7 +91,7 @@ export function AnimatedNav() {
         initial="expanded"
         animate={isExpanded ? "expanded" : "collapsed"}
         onClick={handleNavClick}
-        className="pointer-events-auto relative flex items-center gap-1 h-14 overflow-hidden rounded-full border border-white/10 bg-black/60 backdrop-blur-xl px-2 shadow-[0_20px_60px_rgba(0,0,0,0.6)]"
+        className="pointer-events-auto relative flex items-center gap-1 h-14 overflow-hidden rounded-full border border-white/25 bg-black/85 backdrop-blur-xl px-2 max-w-full shadow-[0_20px_60px_rgba(0,0,0,0.6)]"
         style={{ cursor: isExpanded ? "default" : "pointer" }}
       >
         <motion.a
@@ -110,7 +110,7 @@ export function AnimatedNav() {
               href={item.href}
               variants={itemVariants}
               onClick={(e) => e.stopPropagation()}
-              className="whitespace-nowrap text-[11px] font-mono uppercase tracking-[0.25em] text-[var(--rv-muted)] hover:text-[var(--gold)] transition-colors px-3 py-2"
+              className={`whitespace-nowrap text-[10.5px] md:text-xs font-mono font-medium uppercase tracking-[0.06em] md:tracking-[0.2em] text-white/90 hover:text-[var(--gold)] transition-colors px-1.5 md:px-3 py-2 ${item.name === "Home" ? "hidden md:inline-block" : ""}`}
             >
               {item.name}
             </motion.a>
@@ -134,7 +134,7 @@ export function AnimatedNav() {
       >
         <ResumeButton
           label="Resume"
-          className="inline-flex h-12 items-center gap-2 rounded-full border border-white/30 bg-black/50 px-4 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-white backdrop-blur-md transition-all hover:-translate-y-0.5 hover:border-[var(--gold)] md:px-5"
+          className="inline-flex h-12 items-center gap-2 rounded-full border-2 border-[var(--gold)] bg-[#0b1017] px-4 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--gold)] shadow-[0_0_24px_-8px_rgba(34,211,238,0.8)] transition-all hover:-translate-y-0.5 hover:bg-[var(--gold)] hover:text-black md:px-5"
         />
         <a
           href="#contact"

@@ -103,7 +103,7 @@ const SpotlightCard = ({
             <h3 className="font-headline text-xl md:text-2xl font-bold tracking-tight text-white leading-tight">
               {cat.title}
             </h3>
-            <p className="mt-1 text-sm text-white/80 leading-snug">{cat.blurb}</p>
+            <p className="mt-1 text-sm text-white/90 leading-snug">{cat.blurb}</p>
           </div>
           <span
             className="ml-auto shrink-0 font-mono text-[11px] tracking-[0.25em] px-2.5 py-1 rounded-full border"
@@ -136,13 +136,13 @@ const SpotlightCard = ({
                   {name}
                 </span>
                 {tag && (
-                  <span className="ml-auto font-mono text-[11px] tracking-[0.2em] uppercase px-2 py-0.5 rounded-full bg-white/10 text-white/70">
+                  <span className="ml-auto font-mono text-[11px] tracking-[0.2em] uppercase px-2 py-0.5 rounded-full bg-white/10 text-white/83">
                     {tag}
                   </span>
                 )}
               </div>
               {where && (
-                <em className="pl-4 text-xs not-italic text-white/76 leading-snug">
+                <em className="pl-4 text-xs not-italic text-white/86 leading-snug">
                   <span className="italic">{where}</span>
                 </em>
               )}
@@ -163,14 +163,14 @@ export const Skillset = () => (
       transition={{ duration: 0.7 }}
       className="flex flex-col items-center text-center mb-14"
     >
-      <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/15 bg-white/[0.06] font-mono text-[11px] tracking-[0.3em] uppercase text-white/80">
+      <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/15 bg-white/[0.06] font-mono text-[11px] tracking-[0.3em] uppercase text-white/90">
         <span className="w-1.5 h-1.5 rounded-full bg-[var(--gold)] animate-pulse" />
         Technical Stack
       </span>
       <h2 className="mt-6 font-headline font-extrabold tracking-tight leading-[0.95] text-5xl md:text-7xl text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-white/40">
         My Skillset
       </h2>
-      <p className="mt-5 max-w-2xl text-base md:text-lg text-white/65 leading-relaxed">
+      <p className="mt-5 max-w-2xl text-base md:text-lg text-white/80 leading-relaxed">
         The models, languages, databases and cloud services I build with — and where I&apos;ve used them.
       </p>
     </motion.div>
@@ -188,7 +188,7 @@ export const Skillset = () => (
         {[...MARQUEE_ITEMS, ...MARQUEE_ITEMS].map((n, i) => (
           <span
             key={`${n}-${i}`}
-            className="whitespace-nowrap rounded-full border border-white/15 bg-white/[0.06] px-5 py-2 font-mono text-xs tracking-wider text-white/85"
+            className="whitespace-nowrap rounded-full border border-white/15 bg-white/[0.06] px-5 py-2 font-mono text-xs tracking-wider text-white/92"
           >
             {n}
           </span>
@@ -204,7 +204,7 @@ export const Skillset = () => (
 
     <div className="mt-20 mb-4 flex items-center gap-4">
       <div className="h-px flex-1 bg-gradient-to-r from-transparent to-white/15" />
-      <span className="font-mono text-[11px] tracking-[0.4em] uppercase text-white/80">
+      <span className="font-mono text-[11px] tracking-[0.4em] uppercase text-white/90">
         Tools &amp; Platforms
       </span>
       <div className="h-px flex-1 bg-gradient-to-l from-transparent to-white/15" />

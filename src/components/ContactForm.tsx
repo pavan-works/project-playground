@@ -47,7 +47,7 @@ const Field = ({
     {children}
     <label
       htmlFor={id}
-      className="pointer-events-none absolute left-4 top-4 origin-left text-sm text-white/80 transition-all duration-200 peer-focus:-translate-y-3 peer-focus:scale-75 peer-focus:text-[var(--gold)] peer-[:not(:placeholder-shown)]:-translate-y-3 peer-[:not(:placeholder-shown)]:scale-75"
+      className="pointer-events-none absolute left-4 top-4 origin-left text-sm text-white/90 transition-all duration-200 peer-focus:-translate-y-3 peer-focus:scale-75 peer-focus:text-[var(--gold)] peer-[:not(:placeholder-shown)]:-translate-y-3 peer-[:not(:placeholder-shown)]:scale-75"
     >
       {label}
     </label>
@@ -117,14 +117,14 @@ export const ContactForm = () => {
             "radial-gradient(460px circle at 0% 0%, rgba(34,211,238,0.14), transparent 60%)",
         }}
       >
-        <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.3em] text-white/80">
+        <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.3em] text-white/90">
           <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" />
           Reach me directly
         </span>
         <h3 className="mt-5 font-headline text-2xl font-bold leading-tight text-white md:text-3xl">
           Your message lands on my phone as a text.
         </h3>
-        <p className="mt-3 text-sm leading-relaxed text-white/70">
+        <p className="mt-3 text-sm leading-relaxed text-white/83">
           Write it on the right, hit send, and it opens as a prefilled text to{" "}
           <b className="text-white">{CONTACT_PHONE.display}</b>. Prefer another channel? Use these.
         </p>
@@ -136,7 +136,7 @@ export const ContactForm = () => {
           >
             <MessageSquareText className="h-5 w-5 text-[var(--gold)]" />
             <span className="text-sm font-medium text-white">Text (SMS)</span>
-            <span className="ml-auto font-mono text-xs text-white/80">{CONTACT_PHONE.display}</span>
+            <span className="ml-auto font-mono text-xs text-white/90">{CONTACT_PHONE.display}</span>
           </a>
           <a
             href={waHref("Hi Pullaiah, I found you through your portfolio.")}
@@ -146,7 +146,7 @@ export const ContactForm = () => {
           >
             <MessageCircle className="h-5 w-5 text-emerald-400" />
             <span className="text-sm font-medium text-white">WhatsApp</span>
-            <span className="ml-auto font-mono text-xs text-white/80">chat</span>
+            <span className="ml-auto font-mono text-xs text-white/90">chat</span>
           </a>
           <a
             href={`tel:${CONTACT_PHONE.e164}`}
@@ -154,7 +154,7 @@ export const ContactForm = () => {
           >
             <Phone className="h-5 w-5 text-[var(--indigo-light)]" />
             <span className="text-sm font-medium text-white">Call</span>
-            <span className="ml-auto font-mono text-xs text-white/80">{CONTACT_PHONE.display}</span>
+            <span className="ml-auto font-mono text-xs text-white/90">{CONTACT_PHONE.display}</span>
           </a>
           <a
             href={`mailto:${EMAIL}`}
@@ -162,7 +162,7 @@ export const ContactForm = () => {
           >
             <Mail className="h-5 w-5 text-rose-300" />
             <span className="text-sm font-medium text-white">Email</span>
-            <span className="ml-auto truncate font-mono text-xs text-white/80">{EMAIL}</span>
+            <span className="ml-auto truncate font-mono text-xs text-white/90">{EMAIL}</span>
           </a>
         </div>
       </motion.aside>
@@ -182,7 +182,7 @@ export const ContactForm = () => {
           <span className="font-mono text-[11px] uppercase tracking-[0.35em] text-[var(--gold)]">
             Send a message
           </span>
-          <span className="font-mono text-[11px] tracking-[0.2em] text-white/75">
+          <span className="font-mono text-[11px] tracking-[0.2em] text-white/86">
             → TEXT TO {CONTACT_PHONE.display}
           </span>
         </div>
@@ -232,13 +232,13 @@ export const ContactForm = () => {
                 onChange={(e) => set("message", e.target.value)}
               />
             </Field>
-            <div className="mt-1 text-right font-mono text-[11px] tracking-wider text-white/75">
+            <div className="mt-1 text-right font-mono text-[11px] tracking-wider text-white/86">
               {f.message.length}/{MAX_MESSAGE}
             </div>
           </div>
         </div>
 
-        <label className="mt-4 flex cursor-pointer items-start gap-3 text-sm text-white/80">
+        <label className="mt-4 flex cursor-pointer items-start gap-3 text-sm text-white/90">
           <input
             type="checkbox"
             checked={f.ok}
@@ -257,7 +257,7 @@ export const ContactForm = () => {
             Send message
             <Send className="h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
           </button>
-          <p className="max-w-xs text-xs leading-snug text-white/76">
+          <p className="max-w-xs text-xs leading-snug text-white/86">
             Sending opens your messaging app with the text ready, addressed to my number.
           </p>
         </div>
@@ -278,7 +278,7 @@ export const ContactForm = () => {
                 <p className="mt-3 rounded-xl bg-black/30 p-3 text-sm leading-relaxed text-white/90">
                   {sent}
                 </p>
-                <p className="mt-3 text-xs leading-relaxed text-white/70">
+                <p className="mt-3 text-xs leading-relaxed text-white/83">
                   On a phone your texting app should have opened. If nothing opened (for example on a
                   computer), send it with one of these:
                 </p>

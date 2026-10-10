@@ -42,7 +42,7 @@ import { Process } from "./components/Process";
 import { ProjectVisual } from "./components/ProjectVisual";
 import { WorkExperience } from "./components/WorkExperience";
 import { ContactForm } from "./components/ContactForm";
-import { ResumeButton } from "./components/ResumeModal";
+import { ResumeButton, ResumeModal } from "./components/ResumeModal";
 import { SoftSkills, Achievements } from "./components/SoftSkillsAchievements";
 import logoGmail from "./assets/logos/gmail.svg";
 
@@ -100,7 +100,7 @@ const Hero = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6, duration: 0.8 }}
-          className="text-white/70 text-sm md:text-base font-sans"
+          className="text-white/83 text-sm md:text-base font-sans"
         >
           based in {PORTFOLIO_DATA.location}.
         </motion.div>
@@ -111,9 +111,9 @@ const Hero = () => {
           transition={{ delay: 0.8, duration: 0.8 }}
           className="flex items-center gap-4 md:gap-6 flex-wrap"
         >
-          <span className="text-[11px] font-mono text-white/65 tracking-[0.4em] uppercase hidden md:inline">Worked with</span>
+          <span className="text-[11px] font-mono text-white/80 tracking-[0.4em] uppercase hidden md:inline">Worked with</span>
           {["Hrud.ai", "CodeForces", "OpenAI", "HuggingFace", "Supabase"].map((c) => (
-            <span key={c} className="text-white/75 text-xs font-headline tracking-wide">
+            <span key={c} className="text-white/86 text-xs font-headline tracking-wide">
               {c}
             </span>
           ))}
@@ -137,7 +137,9 @@ const ABOUT_FOCUS = [
   { title: "Production ML", desc: "FastAPI services, vector stores, Docker, and pipelines that survive real traffic." },
 ];
 
-const About = () => (
+const About = () => {
+  const [resumeOpen, setResumeOpen] = useState(false);
+  return (
   <section id="about" className="py-40 px-6 md:px-14 relative overflow-hidden">
     <div className="absolute -top-40 -left-40 w-96 h-96 bg-[var(--gold)]/10 rounded-full blur-[120px] pointer-events-none" />
     <div className="absolute bottom-0 right-0 w-[420px] h-[420px] bg-[var(--indigo)]/10 rounded-full blur-[150px] pointer-events-none" />
@@ -162,9 +164,9 @@ const About = () => (
       >
         <h2 className="text-6xl md:text-8xl font-headline font-bold mb-10 leading-[0.9] tracking-tighter">
           Engineering the <br />
-          <span className="italic font-display font-light text-white/80">Neural</span> Future
+          <span className="italic font-display font-light text-white/90">Neural</span> Future
         </h2>
-        <p className="text-lg md:text-xl text-white/75 leading-relaxed mb-10 font-light max-w-2xl">
+        <p className="text-lg md:text-xl text-white/86 leading-relaxed mb-10 font-light max-w-2xl">
           {PORTFOLIO_DATA.summary}
         </p>
 
@@ -182,21 +184,26 @@ const About = () => (
               <div className="text-4xl md:text-5xl font-headline font-bold tracking-tighter text-white group-hover:text-[var(--gold)] transition-colors duration-500">
                 {s.value}
               </div>
-              <div className="mt-2 text-[11px] font-mono uppercase tracking-[0.25em] text-white/65">{s.label}</div>
+              <div className="mt-2 text-[11px] font-mono uppercase tracking-[0.25em] text-white/80">{s.label}</div>
             </motion.div>
           ))}
         </div>
 
         <div className="flex flex-wrap items-center gap-6">
-          <button className="group relative px-10 py-5 bg-white text-black rounded-full font-bold overflow-hidden transition-all duration-500 hover:scale-105 active:scale-95 shadow-[0_20px_40px_rgba(255,255,255,0.15)]">
+          <button
+            type="button"
+            onClick={() => setResumeOpen(true)}
+            className="group relative px-10 py-5 bg-white text-black rounded-full font-bold overflow-hidden transition-all duration-500 hover:scale-105 active:scale-95 shadow-[0_20px_40px_rgba(255,255,255,0.15)]"
+          >
             <div className="absolute inset-0 bg-gradient-to-r from-[var(--gold)] to-[var(--indigo)] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             <span className="relative z-10 flex items-center gap-3 group-hover:text-white transition-colors duration-500 uppercase tracking-widest text-xs">
               Download Resume <ArrowUpRight className="w-5 h-5" />
             </span>
           </button>
+          <ResumeModal open={resumeOpen} onClose={() => setResumeOpen(false)} />
           <a
             href="#works"
-            className="text-[11px] font-mono uppercase tracking-[0.35em] text-white/70 hover:text-[var(--gold)] transition-colors"
+            className="text-[11px] font-mono uppercase tracking-[0.35em] text-white/83 hover:text-[var(--gold)] transition-colors"
           >
             See the work →
           </a>
@@ -227,7 +234,7 @@ const About = () => (
               ["Also known as", PORTFOLIO_DATA.alias],
             ].map(([k, v]) => (
               <div key={k as string} className="flex items-baseline justify-between gap-6 py-4">
-                <span className="text-[11px] font-mono text-white/65 tracking-[0.25em] uppercase shrink-0">{k}</span>
+                <span className="text-[11px] font-mono text-white/80 tracking-[0.25em] uppercase shrink-0">{k}</span>
                 <span className="text-base md:text-lg font-light text-right">{v}</span>
               </div>
             ))}
@@ -245,7 +252,7 @@ const About = () => (
               transition={{ delay: 0.15 + i * 0.07 }}
               className="group relative p-6 rounded-3xl bg-[var(--rv-card)] border border-white/5 hover:border-[var(--gold)]/40 transition-all duration-500 hover:-translate-y-1"
             >
-              <span className="text-[11px] font-mono text-white/65 tracking-[0.3em]">0{i + 1}</span>
+              <span className="text-[11px] font-mono text-white/80 tracking-[0.3em]">0{i + 1}</span>
               <h4 className="mt-3 text-lg font-headline font-bold tracking-tight group-hover:text-[var(--gold)] transition-colors">
                 {f.title}
               </h4>
@@ -256,7 +263,8 @@ const About = () => (
       </div>
     </div>
   </section>
-);
+  );
+};
 
 const KIND_META: Record<string, { label: string; Icon: typeof Activity }> = {
   education: { label: "Education", Icon: Layers },
@@ -291,7 +299,7 @@ const ActiveStopPanel = ({ index }: { index: number }) => {
           </span>
 
           <div className="flex flex-wrap items-center gap-3">
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/10 px-3 py-1 text-[11px] font-mono uppercase tracking-[0.25em] text-white/75">
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/10 px-3 py-1 text-[11px] font-mono uppercase tracking-[0.25em] text-white/86">
               <Icon className="h-3 w-3" />
               {meta.label}
             </span>
@@ -311,7 +319,7 @@ const ActiveStopPanel = ({ index }: { index: number }) => {
           <h4 className="mt-6 font-headline text-4xl md:text-5xl font-bold tracking-tighter leading-none">
             {stop.title}
           </h4>
-          <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.2em] text-white/70">{stop.place}</p>
+          <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.2em] text-white/83">{stop.place}</p>
 
           <p className="mt-6 font-display text-xl md:text-2xl italic leading-snug" style={{ color: accent }}>
             “{stop.caption}”
@@ -326,7 +334,7 @@ const ActiveStopPanel = ({ index }: { index: number }) => {
               style={{ width: `${((index + 1) / JOURNEY.length) * 100}%`, background: accent }}
             />
           </div>
-          <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.3em] text-white/65">
+          <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.3em] text-white/80">
             Stop {index + 1} of {JOURNEY.length}
           </p>
         </motion.div>
@@ -421,7 +429,7 @@ const Experience = () => {
             transition={{ duration: 0.9, delay: 0.15 }}
             className="border-l border-[var(--emerald)]/40 pl-6"
           >
-            <p className="font-display text-2xl md:text-3xl italic leading-snug text-white/85">
+            <p className="font-display text-2xl md:text-3xl italic leading-snug text-white/92">
               “{JOURNEY_QUOTE.text}”
             </p>
             <footer className="mt-5 max-w-xl text-sm font-light leading-relaxed text-[var(--rv-muted)]">
@@ -430,7 +438,7 @@ const Experience = () => {
           </motion.blockquote>
         </div>
 
-        <div className="mt-10 flex items-center gap-6 font-mono text-[11px] uppercase tracking-[0.3em] text-white/70">
+        <div className="mt-10 flex items-center gap-6 font-mono text-[11px] uppercase tracking-[0.3em] text-white/83">
           <span>{JOURNEY.length} stops</span>
           <span className="h-px w-8 bg-white/15" />
           <span>2010 → now</span>
@@ -450,7 +458,7 @@ const Experience = () => {
 
 
             <div className="flex items-center gap-4">
-              <label className="cursor-pointer font-mono text-[11px] uppercase tracking-[0.25em] text-white/72 transition-colors hover:text-[var(--emerald)]">
+              <label className="cursor-pointer font-mono text-[11px] uppercase tracking-[0.25em] text-white/84 transition-colors hover:text-[var(--emerald)]">
                 + Add your own images
                 <input type="file" accept="image/*" multiple className="hidden" onChange={handleAddImages} />
               </label>
@@ -458,7 +466,7 @@ const Experience = () => {
                 <button
                   type="button"
                   onClick={clearCustomImages}
-                  className="font-mono text-[11px] uppercase tracking-[0.25em] text-white/65 hover:text-white/70"
+                  className="font-mono text-[11px] uppercase tracking-[0.25em] text-white/80 hover:text-white/83"
                 >
                   Reset ({customImages.length})
                 </button>
@@ -601,12 +609,12 @@ const ProjectCard = ({
         {!item.visual && <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[var(--rv-card)] via-transparent to-transparent" />}
         <div className="absolute top-8 left-8 flex items-center gap-3">
           <div className="w-2 h-2 rounded-full animate-pulse" style={{ background: accentVar }} />
-          <span className="text-[11px] font-mono text-white/80 tracking-[0.3em] uppercase">
+          <span className="text-[11px] font-mono text-white/90 tracking-[0.3em] uppercase">
             {item.category}
           </span>
         </div>
         {!item.visual && (
-          <span className="absolute bottom-6 left-8 font-headline font-bold text-6xl leading-none text-white/35 group-hover:text-white/65 transition-colors duration-500">
+          <span className="absolute bottom-6 left-8 font-headline font-bold text-6xl leading-none text-white/35 group-hover:text-white/80 transition-colors duration-500">
             0{index + 1}
           </span>
         )}
@@ -641,7 +649,7 @@ const ProjectCard = ({
             {item.tags.map((t) => (
               <span
                 key={t}
-                className="text-[11px] font-mono uppercase tracking-[0.2em] px-3 py-1.5 rounded-full border border-white/10 text-white/75 group-hover:border-white/20 transition-colors"
+                className="text-[11px] font-mono uppercase tracking-[0.2em] px-3 py-1.5 rounded-full border border-white/10 text-white/86 group-hover:border-white/20 transition-colors"
               >
                 {t}
               </span>
@@ -653,7 +661,7 @@ const ProjectCard = ({
             {item.metrics.slice(0, 3).map((m) => (
               <div key={m.label} className="min-w-0 rounded-2xl bg-white/[0.03] border border-white/5 px-3 py-3">
                 <div className="text-sm md:text-base font-headline font-bold break-words" style={{ color: accentVar }}>{m.value}</div>
-                <div className="text-[11px] font-mono uppercase tracking-[0.2em] text-white/65 mt-1">{m.label}</div>
+                <div className="text-[11px] font-mono uppercase tracking-[0.2em] text-white/80 mt-1">{m.label}</div>
               </div>
             ))}
           </div>
@@ -666,7 +674,7 @@ const ProjectCard = ({
             View Case Study →
           </span>
           {item.year && (
-            <span className="ml-auto text-[11px] font-mono text-white/65 tracking-widest">
+            <span className="ml-auto text-[11px] font-mono text-white/80 tracking-widest">
               {item.year}
             </span>
           )}
@@ -767,7 +775,7 @@ const DetailModal = ({
                     {item.title}
                   </h2>
                   {item.subtitle && (
-                    <p className="mt-4 max-w-2xl text-base font-light text-white/70 md:text-lg">{item.subtitle}</p>
+                    <p className="mt-4 max-w-2xl text-base font-light text-white/83 md:text-lg">{item.subtitle}</p>
                   )}
                 </div>
               </div>
@@ -786,7 +794,7 @@ const DetailModal = ({
                     {item.title}
                   </h2>
                   {item.subtitle && (
-                    <p className="mt-4 max-w-2xl text-base font-light text-white/70 md:text-lg">{item.subtitle}</p>
+                    <p className="mt-4 max-w-2xl text-base font-light text-white/83 md:text-lg">{item.subtitle}</p>
                   )}
                 </div>
               </div>
@@ -797,8 +805,8 @@ const DetailModal = ({
               <div className="md:col-span-2 space-y-10">
                 {item.overview && (
                   <div>
-                    <span className="text-[11px] font-mono text-white/65 tracking-[0.4em] uppercase">Overview</span>
-                    <p className="mt-4 text-white/75 leading-relaxed text-base md:text-lg font-light">
+                    <span className="text-[11px] font-mono text-white/80 tracking-[0.4em] uppercase">Overview</span>
+                    <p className="mt-4 text-white/86 leading-relaxed text-base md:text-lg font-light">
                       {item.overview}
                     </p>
                   </div>
@@ -806,12 +814,12 @@ const DetailModal = ({
 
                 {item.highlights && item.highlights.length > 0 && (
                   <div>
-                    <span className="text-[11px] font-mono text-white/65 tracking-[0.4em] uppercase">
+                    <span className="text-[11px] font-mono text-white/80 tracking-[0.4em] uppercase">
                       Key Highlights
                     </span>
                     <ul className="mt-4 space-y-3">
                       {item.highlights.map((h, i) => (
-                        <li key={i} className="flex gap-4 text-white/70 leading-relaxed">
+                        <li key={i} className="flex gap-4 text-white/83 leading-relaxed">
                           <span
                             className="mt-2 shrink-0 w-2 h-2 rounded-full"
                             style={{ background: accentVar }}
@@ -825,7 +833,7 @@ const DetailModal = ({
 
                 {item.metrics && item.metrics.length > 0 && (
                   <div>
-                    <span className="text-[11px] font-mono text-white/65 tracking-[0.4em] uppercase">Results</span>
+                    <span className="text-[11px] font-mono text-white/80 tracking-[0.4em] uppercase">Results</span>
                     <div className="mt-4 grid grid-cols-3 gap-3">
                       {item.metrics.map((m) => (
                         <div
@@ -835,7 +843,7 @@ const DetailModal = ({
                           <div className="font-headline text-2xl md:text-3xl font-bold" style={{ color: accentVar }}>
                             {m.value}
                           </div>
-                          <div className="mt-2 text-[11px] font-mono text-white/70 tracking-widest uppercase">
+                          <div className="mt-2 text-[11px] font-mono text-white/83 tracking-widest uppercase">
                             {m.label}
                           </div>
                         </div>
@@ -848,24 +856,24 @@ const DetailModal = ({
               <aside className="space-y-8">
                 {item.role && (
                   <div>
-                    <span className="text-[11px] font-mono text-white/65 tracking-[0.4em] uppercase">Role</span>
-                    <p className="mt-3 text-white/80 text-sm leading-relaxed">{item.role}</p>
+                    <span className="text-[11px] font-mono text-white/80 tracking-[0.4em] uppercase">Role</span>
+                    <p className="mt-3 text-white/90 text-sm leading-relaxed">{item.role}</p>
                   </div>
                 )}
                 {item.year && (
                   <div>
-                    <span className="text-[11px] font-mono text-white/65 tracking-[0.4em] uppercase">Timeline</span>
-                    <p className="mt-3 text-white/80 text-sm">{item.year}</p>
+                    <span className="text-[11px] font-mono text-white/80 tracking-[0.4em] uppercase">Timeline</span>
+                    <p className="mt-3 text-white/90 text-sm">{item.year}</p>
                   </div>
                 )}
                 {item.tech && item.tech.length > 0 && (
                   <div>
-                    <span className="text-[11px] font-mono text-white/65 tracking-[0.4em] uppercase">Stack</span>
+                    <span className="text-[11px] font-mono text-white/80 tracking-[0.4em] uppercase">Stack</span>
                     <div className="mt-3 flex flex-wrap gap-2">
                       {item.tech.map((t) => (
                         <span
                           key={t}
-                          className="px-3 py-1.5 rounded-full text-[11px] font-mono tracking-widest uppercase text-white/70 border"
+                          className="px-3 py-1.5 rounded-full text-[11px] font-mono tracking-widest uppercase text-white/83 border"
                           style={{ borderColor: accentSoft, background: accentSoft }}
                         >
                           {t}
@@ -883,10 +891,10 @@ const DetailModal = ({
                       rel="noreferrer"
                       className="group flex items-center justify-between gap-3 px-5 py-4 rounded-full border border-white/10 hover:border-white/40 transition-colors"
                     >
-                      <span className="flex items-center gap-3 text-sm font-mono tracking-widest uppercase text-white/80">
+                      <span className="flex items-center gap-3 text-sm font-mono tracking-widest uppercase text-white/90">
                         <Github className="w-4 h-4" /> GitHub
                       </span>
-                      <ExternalLink className="w-4 h-4 text-white/70 group-hover:text-white transition-colors" />
+                      <ExternalLink className="w-4 h-4 text-white/83 group-hover:text-white transition-colors" />
                     </a>
                   )}
                   {item.paperUrl && (
@@ -929,14 +937,14 @@ const Works = () => {
       transition={{ duration: 0.7 }}
       className="mb-24 flex flex-col items-center text-center"
     >
-      <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-4 py-1.5 font-mono text-[11px] uppercase tracking-[0.3em] text-white/80">
+      <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-4 py-1.5 font-mono text-[11px] uppercase tracking-[0.3em] text-white/90">
         <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--gold)]" />
         Portfolio
       </span>
       <h2 className="mt-6 bg-gradient-to-b from-white via-white to-white/40 bg-clip-text font-headline text-4xl font-extrabold leading-[0.98] tracking-tight text-transparent md:text-7xl">
         Selected Works
       </h2>
-      <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/70 md:text-lg">
+      <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/83 md:text-lg">
         A curated collection of neural artifacts and computational experiments executed with absolute precision.
       </p>
     </motion.div>
@@ -946,7 +954,7 @@ const Works = () => {
       <div className="flex items-center gap-4 mb-12">
         <span className="text-[var(--gold)] font-mono text-xs tracking-[0.4em] uppercase">Engineering Projects</span>
         <div className="h-px flex-1 bg-gradient-to-r from-[var(--gold)]/30 to-transparent" />
-        <span className="text-[11px] font-mono text-white/65 tracking-[0.3em]">
+        <span className="text-[11px] font-mono text-white/80 tracking-[0.3em]">
           {String(PORTFOLIO_DATA.projects.length).padStart(2, "0")} ITEMS
         </span>
       </div>
@@ -962,7 +970,7 @@ const Works = () => {
       <div className="flex items-center gap-4 mb-12">
         <span className="text-[var(--emerald)] font-mono text-xs tracking-[0.4em] uppercase">Research Publications</span>
         <div className="h-px flex-1 bg-gradient-to-r from-[var(--emerald)]/30 to-transparent" />
-        <span className="text-[11px] font-mono text-white/65 tracking-[0.3em]">
+        <span className="text-[11px] font-mono text-white/80 tracking-[0.3em]">
           {String(PORTFOLIO_DATA.researchPapers.length).padStart(2, "0")} ITEMS
         </span>
       </div>
@@ -1111,10 +1119,10 @@ const Contact = () => (
             <span className="text-base md:text-lg font-headline font-bold tracking-tight text-white group-hover:text-[var(--gold)] transition-colors break-all text-left">
               {c.value}
             </span>
-            <ArrowUpRight className="ml-auto w-4 h-4 shrink-0 text-white/80 group-hover:text-[var(--gold)] group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" />
+            <ArrowUpRight className="ml-auto w-4 h-4 shrink-0 text-white/90 group-hover:text-[var(--gold)] group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" />
           </div>
 
-          <span className="relative block mt-3 text-[11px] font-mono tracking-[0.3em] uppercase text-white/70 group-hover:text-white transition-colors">
+          <span className="relative block mt-3 text-[11px] font-mono tracking-[0.3em] uppercase text-white/83 group-hover:text-white transition-colors">
             {c.label} : {c.hint}
           </span>
         </motion.a>
@@ -1136,7 +1144,7 @@ const Footer = () => (
           </div>
           <h3 className="text-3xl font-headline font-bold tracking-tighter">Solige Pullaiah</h3>
         </div>
-        <p className="max-w-sm text-white/75 text-xs md:text-[13px] font-mono tracking-[0.12em] leading-relaxed">
+        <p className="max-w-sm text-white/90 text-[13px] md:text-sm font-mono tracking-[0.04em] leading-relaxed">
           © 2026 Solige Pullaiah / AI Portfolio. All neural rights reserved. Designed for the future of intelligence.
         </p>
         <p className="text-[var(--gold-light)] text-base font-display italic">Thank you for visiting my portfolio ✦</p>
@@ -1144,8 +1152,8 @@ const Footer = () => (
 
       <div className="grid grid-cols-2 gap-24">
         <div className="flex flex-col gap-6">
-          <span className="text-[11px] font-mono text-white/70 tracking-widest uppercase">Navigation</span>
-          <div className="flex flex-col gap-4 text-sm font-mono tracking-widest uppercase text-white/85">
+          <span className="text-[11px] font-mono text-white/83 tracking-widest uppercase">Navigation</span>
+          <div className="flex flex-col gap-4 text-sm font-mono tracking-widest uppercase text-white/92">
             <a href="#home" className="hover:text-[var(--gold)] transition-colors">Home</a>
             <a href="#about" className="hover:text-[var(--gold)] transition-colors">About</a>
             <a href="#expertise" className="hover:text-[var(--gold)] transition-colors">Expertise</a>
@@ -1153,10 +1161,10 @@ const Footer = () => (
           </div>
         </div>
         <div className="flex flex-col gap-6">
-          <span className="text-[11px] font-mono text-white/70 tracking-widest uppercase">Connect</span>
-          <div className="flex flex-col gap-4 text-sm font-mono tracking-widest uppercase text-white/85">
+          <span className="text-[11px] font-mono text-white/83 tracking-widest uppercase">Connect</span>
+          <div className="flex flex-col gap-4 text-sm font-mono tracking-widest uppercase text-white/92">
             <a href="https://www.linkedin.com/in/solige-pullaiah-478462270" target="_blank" rel="noreferrer" className="hover:text-[var(--gold)] transition-colors">LinkedIn</a>
-            <a href="#" className="hover:text-[var(--gold)] transition-colors">Twitter</a>
+            <a href="https://x.com/puli_pullaiah" target="_blank" rel="noreferrer" className="hover:text-[var(--gold)] transition-colors">Twitter</a>
             <a href="https://github.com/puli-pro" target="_blank" rel="noreferrer" className="hover:text-[var(--gold)] transition-colors">Github</a>
             <a href="mailto:pulipavan696@gmail.com" className="hover:text-[var(--gold)] transition-colors">Email</a>
           </div>
@@ -1167,7 +1175,7 @@ const Footer = () => (
         <span className="text-[11px] font-mono text-[var(--gold)] tracking-[0.5em] uppercase">Status: Available</span>
         <div className="flex items-center gap-4 border border-white/10 px-6 py-3 rounded-full bg-white/5 backdrop-blur-sm">
           <div className="w-2 h-2 bg-[var(--emerald)] rounded-full animate-pulse shadow-[0_0_10px_rgba(16,185,129,0.5)]" />
-          <span className="text-[11px] font-mono text-white/80 uppercase tracking-widest">VSP, India / Remote</span>
+          <span className="text-[11px] font-mono text-white/90 uppercase tracking-widest">Hyderabad, India / Remote</span>
         </div>
       </div>
     </div>
@@ -1223,7 +1231,7 @@ export default function PortfolioLanding() {
         >
           <h2 className="text-3xl md:text-6xl font-headline font-bold tracking-tighter mb-4 flex items-baseline justify-center gap-4">
             <span className="text-white">{PORTFOLIO_DATA.name.split(' ')[0]}</span>
-            <span className="text-white/70">{PORTFOLIO_DATA.name.split(' ')[1]}</span>
+            <span className="text-white/83">{PORTFOLIO_DATA.name.split(' ')[1]}</span>
           </h2>
           <div className="flex items-center justify-center gap-6 mb-6">
             <div className="h-[1px] w-12 md:w-24 bg-white/10" />

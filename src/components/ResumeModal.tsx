@@ -57,7 +57,7 @@ export const ResumeModal = ({ open, onClose }: { open: boolean; onClose: () => v
                   href={RESUME_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hidden items-center gap-2 rounded-full border border-white/25 px-4 py-2 font-mono text-[11px] uppercase tracking-[0.18em] text-white/85 transition-colors hover:border-[var(--gold)] hover:text-white sm:inline-flex"
+                  className="hidden items-center gap-2 rounded-full border border-white/25 px-4 py-2 font-mono text-[11px] uppercase tracking-[0.18em] text-white/92 transition-colors hover:border-[var(--gold)] hover:text-white sm:inline-flex"
                 >
                   <ExternalLink className="h-4 w-4" /> Open
                 </a>
@@ -65,7 +65,7 @@ export const ResumeModal = ({ open, onClose }: { open: boolean; onClose: () => v
                   type="button"
                   onClick={onClose}
                   aria-label="Close resume"
-                  className="flex h-9 w-9 items-center justify-center rounded-full border border-white/25 text-white/85 transition-colors hover:border-[var(--gold)] hover:text-white"
+                  className="flex h-9 w-9 items-center justify-center rounded-full border border-white/25 text-white/92 transition-colors hover:border-[var(--gold)] hover:text-white"
                 >
                   <X className="h-4 w-4" />
                 </button>
@@ -76,7 +76,7 @@ export const ResumeModal = ({ open, onClose }: { open: boolean; onClose: () => v
               title="Solige Pullaiah resume"
               className="min-h-0 w-full flex-1 bg-white"
             />
-            <p className="border-t border-white/10 px-4 py-2 text-center font-mono text-[11px] text-white/70 md:hidden">
+            <p className="border-t border-white/10 px-4 py-2 text-center font-mono text-[11px] text-white/83 md:hidden">
               Preview not showing? Use Download or Open above.
             </p>
           </motion.div>

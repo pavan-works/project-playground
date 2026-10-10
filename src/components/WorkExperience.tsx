@@ -67,14 +67,14 @@ const ProjectCard = ({ p, index }: { p: WorkProject; index: number }) => {
           <h3 className="font-headline text-xl font-bold leading-tight tracking-tight text-white md:text-2xl">
             {p.title}
           </h3>
-          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-white/70">{p.summary}</p>
+          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-white/83">{p.summary}</p>
 
           {p.problem && (
             <div className="mt-5 rounded-2xl border border-amber-300/40 bg-amber-300/[0.07] p-4">
               <div className="font-mono text-[11px] uppercase tracking-[0.3em] text-amber-200">
                 The problem
               </div>
-              <p className="mt-2 text-[13px] leading-relaxed text-white/85">{p.problem.text}</p>
+              <p className="mt-2 text-[13px] leading-relaxed text-white/92">{p.problem.text}</p>
               <div className="mt-3 inline-flex flex-wrap items-center gap-2 rounded-xl border border-white/15 bg-black/30 px-3 py-2 font-mono text-[12px] text-white">
                 <span className="text-amber-200">total cost</span>
                 <span>=</span>
@@ -85,7 +85,7 @@ const ProjectCard = ({ p, index }: { p: WorkProject; index: number }) => {
 
           <ul className={`mt-5 grid gap-2.5 ${p.featured ? "md:grid-cols-2" : ""}`}>
             {p.points.map((pt) => (
-              <li key={pt} className="flex items-start gap-2.5 text-[13px] leading-snug text-white/85">
+              <li key={pt} className="flex items-start gap-2.5 text-[13px] leading-snug text-white/92">
                 <span
                   className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full"
                   style={{ background: `rgb(${rgb})` }}
@@ -113,7 +113,7 @@ const ProjectCard = ({ p, index }: { p: WorkProject; index: number }) => {
               {p.tags.map((t) => (
                 <li
                   key={t}
-                  className="rounded-full bg-white/10 px-2.5 py-1 font-mono text-[11px] tracking-wider text-white/75"
+                  className="rounded-full bg-white/10 px-2.5 py-1 font-mono text-[11px] tracking-wider text-white/86"
                 >
                   {t}
                 </li>
@@ -155,14 +155,14 @@ export const WorkExperience = () => (
         transition={{ duration: 0.7 }}
         className="mb-12 flex flex-col items-center text-center"
       >
-        <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-4 py-1.5 font-mono text-[11px] uppercase tracking-[0.3em] text-white/80">
+        <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-4 py-1.5 font-mono text-[11px] uppercase tracking-[0.3em] text-white/90">
           <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--gold)]" />
           Work Experience
         </span>
         <h2 className="mt-6 bg-gradient-to-b from-white via-white to-white/40 bg-clip-text font-headline text-4xl font-extrabold leading-[0.98] tracking-tight text-transparent md:text-7xl">
           Shipped at Hrud.ai
         </h2>
-        <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/70 md:text-lg">
+        <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/83 md:text-lg">
           AI and full-stack products that real users and clients depend on.
         </p>
       </motion.div>
@@ -189,7 +189,7 @@ export const WorkExperience = () => (
           <h3 className="mt-1 font-headline text-2xl font-bold text-white md:text-3xl">
             AI Engineer — Hrud.ai
           </h3>
-          <p className="mt-2 max-w-3xl text-sm leading-relaxed text-white/70">
+          <p className="mt-2 max-w-3xl text-sm leading-relaxed text-white/83">
             Building production-grade AI systems with LLMs, RAG pipelines and agents, plus the
             platforms, SaaS products and client work around them.
           </p>
@@ -220,11 +220,11 @@ export const WorkExperience = () => (
         transition={{ duration: 0.7 }}
         className="mt-8 flex flex-col gap-3 rounded-3xl border border-white/15 bg-white/[0.04] p-6 md:flex-row md:items-center md:gap-6"
       >
-        <div className="font-mono text-[11px] uppercase tracking-[0.3em] text-white/80">
+        <div className="font-mono text-[11px] uppercase tracking-[0.3em] text-white/90">
           May – Aug 2024 · Internship
         </div>
         <div className="font-headline text-lg font-bold text-white">AI/ML Intern — CodeForces</div>
-        <p className="text-sm text-white/70 md:ml-auto md:max-w-xl">
+        <p className="text-sm text-white/83 md:ml-auto md:max-w-xl">
           ML and deep learning for real-world tasks: data preprocessing, feature engineering and
           neural-network experiments — improved model performance by{" "}
           <b className="text-white">12%</b>.

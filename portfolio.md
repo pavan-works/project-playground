@@ -204,7 +204,7 @@ npm run lint         # tsc --noEmit
 | 9 | **Soft Skills** (`#soft-skills`) | Leadership, Public Speaking, Event Anchoring, End-to-End Ownership — each with resume-backed evidence only | ✅ |
 | 10 | **CodeSnippet** | Decorative fake terminal | ✅ (cosmetic) |
 | 11 | **Contact** (`#contact`, "Get In Touch") | Mail / LinkedIn / GitHub cards + **ContactForm** (first/last name, email-or-phone, message ≤ 280, consent) delivering as a **text to +91 93466 80696** (SMS prefilled on phones; Open SMS / WhatsApp / Email / Copy on desktop) + Text / WhatsApp / Call / Email panel | ✅ (see limitation in §16.11) |
-| 12 | **Footer** | Monogram, © line, nav links, connect links (GitHub → puli-pro), availability badge | ⚠ Twitter link still `#` |
+| 12 | **Footer** | Monogram, © line, nav links, connect links (GitHub → puli-pro), availability badge | ✅ Twitter/X → https://x.com/puli_pullaiah |
 | – | **Not built yet** | **Those Who Shaped Me** (people + "On my own") and the new **My Journey** timeline | ⏳ needs owner input |
 
 ### Hero details
@@ -340,7 +340,7 @@ Recent commits: `bff2397` Hire Me + DevTools first + floating buttons → `725ec
 
 ### High priority (before sharing the portfolio)
 - [x] ~~Footer GitHub link~~ now points to `https://github.com/puli-pro`.
-- [ ] **Footer Twitter link** is still `href="#"` → remove it or add a real handle.
+- [x] ~~Footer Twitter link~~ now points to https://x.com/puli_pullaiah.
 - [ ] **`index.html` metadata:** title is "My Google AI Studio App" → set proper `<title>`, description, favicon, Open Graph/Twitter card tags, `theme-color`.
 - [ ] **Real project screenshots:** animated visuals now represent each project, but `projects[]` / `researchPapers[]` still carry Unsplash fallback images (unused when `visual` is set); add real screenshots/diagrams to case studies when available.
 - [ ] **SyncVerse links:** no `github`/`paperUrl` yet; add if/when public (the `DetailModal` handles missing links).
