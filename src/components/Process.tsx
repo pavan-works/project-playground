@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useScroll, useSpring } from "motion/react";
 import {
   Target,
@@ -73,7 +73,7 @@ const StepCard = ({
               STEP {String(index + 1).padStart(2, "0")}
             </span>
             <span className="h-px w-8 bg-white/20" />
-            <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-white/55">
+            <span className="font-mono text-[11px] tracking-[0.25em] uppercase text-white/76">
               Output · {step.output}
             </span>
           </div>
@@ -87,7 +87,7 @@ const StepCard = ({
 
           {/* lens-specific practice */}
           <div className="mt-6 rounded-2xl border border-white/10 bg-white/[0.04] p-4 md:p-5">
-            <div className="mb-2 flex items-center gap-2 font-mono text-[10px] tracking-[0.3em] uppercase text-[var(--gold)]">
+            <div className="mb-2 flex items-center gap-2 font-mono text-[11px] tracking-[0.3em] uppercase text-[var(--gold)]">
               <span className="h-1.5 w-1.5 rounded-full bg-[var(--gold)]" />
               In practice · {lensMeta.label}
             </div>
@@ -142,10 +142,24 @@ export const Process = () => {
     target: listRef,
     offset: ["start 70%", "end 60%"],
   });
+  const [active, setActive] = useState(0);
+  useEffect(() => {
+    const els = PROCESS_STEPS.map((st) => document.getElementById(`process-${st.id}`));
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) setActive(els.indexOf(e.target as HTMLElement));
+        });
+      },
+      { rootMargin: "-40% 0px -50% 0px" },
+    );
+    els.forEach((el) => el && io.observe(el));
+    return () => io.disconnect();
+  }, []);
   const fill = useSpring(scrollYProgress, { stiffness: 120, damping: 30, mass: 0.3 });
 
   return (
-    <section id="process" className="relative overflow-hidden bg-[var(--surface)] py-32 md:py-40">
+    <section id="process" className="relative overflow-x-clip bg-[var(--surface)] py-32 md:py-40">
       <div className="absolute inset-0 dot-pattern opacity-[0.08]" />
       <div className="absolute left-1/2 top-0 h-px w-full -translate-x-1/2 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
       <div className="pointer-events-none absolute -left-40 top-1/3 h-[480px] w-[480px] rounded-full bg-[var(--indigo)]/10 blur-[150px]" />
@@ -177,7 +191,7 @@ export const Process = () => {
 
             {/* lens switcher */}
             <div className="mt-8">
-              <div className="mb-3 font-mono text-[10px] uppercase tracking-[0.3em] text-white/50">
+              <div className="mb-3 font-mono text-[11px] uppercase tracking-[0.3em] text-white/75">
                 See the process through…
               </div>
               <div
@@ -210,19 +224,41 @@ export const Process = () => {
               </p>
             </div>
 
-            {/* mini flow */}
-            <ol className="mt-10 hidden gap-2 lg:grid">
-              {PROCESS_STEPS.map((s, i) => (
-                <li
-                  key={s.id}
-                  className="flex items-center gap-3 font-mono text-xs tracking-wider text-white/60"
-                >
-                  <span className="text-[var(--gold)]">{String(i + 1).padStart(2, "0")}</span>
-                  <span className="h-px w-6 bg-white/20" />
-                  {s.title}
-                </li>
-              ))}
-            </ol>
+            {/* live step tracker */}
+            <div className="mt-10 rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+              <div className="mb-3 flex items-center justify-between font-mono text-[11px] uppercase tracking-[0.3em] text-white/75">
+                <span>You are at</span>
+                <span className="text-[var(--gold)]">
+                  {String(active + 1).padStart(2, "0")} / {String(PROCESS_STEPS.length).padStart(2, "0")}
+                </span>
+              </div>
+              <ol className="grid gap-1">
+                {PROCESS_STEPS.map((s, i) => (
+                  <li key={s.id}>
+                    <a
+                      href={`#process-${s.id}`}
+                      className={`flex items-center gap-3 rounded-lg px-3 py-2 font-mono text-xs tracking-wider transition-all duration-300 ${
+                        i === active
+                          ? "bg-[var(--gold)]/15 text-white"
+                          : "text-white/70 hover:text-white"
+                      }`}
+                    >
+                      <span className={i === active ? "text-[var(--gold)]" : "text-white/50"}>
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <span className={`h-px transition-all duration-300 ${i === active ? "w-10 bg-[var(--gold)]" : "w-5 bg-white/20"}`} />
+                      {s.title}
+                    </a>
+                  </li>
+                ))}
+              </ol>
+              <div className="mt-3 h-1 overflow-hidden rounded-full bg-white/10">
+                <div
+                  className="h-full rounded-full bg-gradient-to-r from-[var(--gold)] to-emerald-400 transition-all duration-500"
+                  style={{ width: `${((active + 1) / PROCESS_STEPS.length) * 100}%` }}
+                />
+              </div>
+            </div>
           </motion.div>
         </div>
 
@@ -237,7 +273,7 @@ export const Process = () => {
 
           <div className="grid gap-8">
             {PROCESS_STEPS.map((step, i) => (
-              <div key={step.id} className="grid gap-8">
+              <div key={step.id} id={`process-${step.id}`} className="grid gap-8">
                 <StepCard step={step} index={i} lens={lens} />
                 {step.id === "survey" && <LoopBanner />}
               </div>

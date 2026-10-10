@@ -29,7 +29,7 @@ const ACH_ICONS: Record<Achievement["icon"], LucideIcon> = {
   stage: Megaphone,
 };
 
-const SOFT_ACCENT = ["34,211,238", "99,102,241", "16,185,129", "250,204,21"];
+const SOFT_ACCENT = ["34,211,238", "129,140,248", "16,185,129", "250,204,21"];
 
 const Pill = ({ children }: { children: React.ReactNode }) => (
   <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-4 py-1.5 font-mono text-[11px] uppercase tracking-[0.3em] text-white/80">
@@ -125,7 +125,7 @@ export const SoftSkills = () => (
                     >
                       <Icon className="h-7 w-7" strokeWidth={1.7} />
                     </span>
-                    <span className="font-mono text-[11px] tracking-[0.3em] text-white/40">
+                    <span className="font-mono text-[11px] tracking-[0.3em] text-white/70">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                   </div>
@@ -181,7 +181,7 @@ export const Achievements = () => (
       <div className="grid gap-5 md:grid-cols-6">
         {ACHIEVEMENTS.map((a, i) => {
           const Icon = ACH_ICONS[a.icon];
-          const rgb = a.featured ? "250,204,21" : i % 2 ? "99,102,241" : "34,211,238";
+          const rgb = a.featured ? "250,204,21" : i % 2 ? "129,140,248" : "34,211,238";
           return (
             <motion.div
               key={a.id}
@@ -212,7 +212,7 @@ export const Achievements = () => (
                       <Icon className={a.featured ? "h-8 w-8" : "h-7 w-7"} strokeWidth={1.7} />
                     </span>
                     {a.featured && (
-                      <span className="rounded-full border border-yellow-300/50 bg-yellow-300/10 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.25em] text-yellow-200">
+                      <span className="rounded-full border border-yellow-300/50 bg-yellow-300/10 px-3 py-1 font-mono text-[11px] uppercase tracking-[0.25em] text-yellow-200">
                         Podium
                       </span>
                     )}

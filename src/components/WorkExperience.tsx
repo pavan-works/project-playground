@@ -4,7 +4,7 @@ import { ArrowUpRight, Briefcase } from "lucide-react";
 import { WORK_PROJECTS, type WorkProject } from "../data";
 import { ProjectVisual } from "./ProjectVisual";
 
-const ACCENTS = ["34,211,238", "99,102,241", "16,185,129", "250,204,21"];
+const ACCENTS = ["34,211,238", "129,140,248", "16,185,129", "250,204,21"];
 
 const ProjectCard = ({ p, index }: { p: WorkProject; index: number }) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -53,7 +53,7 @@ const ProjectCard = ({ p, index }: { p: WorkProject; index: number }) => {
         )}
         <div className="relative flex h-full flex-col p-7 md:p-8">
           <span
-            className="mb-4 inline-flex w-fit items-center gap-2 rounded-full border px-3 py-1 font-mono text-[10px] uppercase tracking-[0.25em]"
+            className="mb-4 inline-flex w-fit items-center gap-2 rounded-full border px-3 py-1 font-mono text-[11px] uppercase tracking-[0.25em]"
             style={{
               color: `rgb(${rgb})`,
               borderColor: `rgba(${rgb},0.45)`,
@@ -71,7 +71,7 @@ const ProjectCard = ({ p, index }: { p: WorkProject; index: number }) => {
 
           {p.problem && (
             <div className="mt-5 rounded-2xl border border-amber-300/40 bg-amber-300/[0.07] p-4">
-              <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-amber-200">
+              <div className="font-mono text-[11px] uppercase tracking-[0.3em] text-amber-200">
                 The problem
               </div>
               <p className="mt-2 text-[13px] leading-relaxed text-white/85">{p.problem.text}</p>
@@ -113,7 +113,7 @@ const ProjectCard = ({ p, index }: { p: WorkProject; index: number }) => {
               {p.tags.map((t) => (
                 <li
                   key={t}
-                  className="rounded-full bg-white/10 px-2.5 py-1 font-mono text-[10px] tracking-wider text-white/75"
+                  className="rounded-full bg-white/10 px-2.5 py-1 font-mono text-[11px] tracking-wider text-white/75"
                 >
                   {t}
                 </li>
@@ -176,7 +176,7 @@ export const WorkExperience = () => (
         className="mb-8 flex flex-col gap-5 rounded-3xl border border-white/20 bg-[#0b1017]/90 p-7 md:flex-row md:items-center md:p-8"
         style={{
           backgroundImage:
-            "radial-gradient(520px circle at 0% 0%, rgba(99,102,241,0.18), transparent 60%)",
+            "radial-gradient(520px circle at 0% 0%, rgba(129,140,248,0.18), transparent 60%)",
         }}
       >
         <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-[var(--indigo-light)]/60 bg-[var(--indigo)]/15 text-[var(--indigo-light)]">
@@ -220,7 +220,7 @@ export const WorkExperience = () => (
         transition={{ duration: 0.7 }}
         className="mt-8 flex flex-col gap-3 rounded-3xl border border-white/15 bg-white/[0.04] p-6 md:flex-row md:items-center md:gap-6"
       >
-        <div className="font-mono text-[11px] uppercase tracking-[0.3em] text-white/60">
+        <div className="font-mono text-[11px] uppercase tracking-[0.3em] text-white/80">
           May – Aug 2024 · Internship
         </div>
         <div className="font-headline text-lg font-bold text-white">AI/ML Intern — CodeForces</div>

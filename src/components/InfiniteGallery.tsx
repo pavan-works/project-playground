@@ -258,10 +258,10 @@ export const InfiniteGallery = ({
         <Scene images={images} visibleCount={10} onActiveChange={onActiveChange} interactedRef={interactedRef} />
       </Canvas>
       <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 flex flex-col items-center gap-2 px-6 pb-2 text-center">
-        <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-white/40">
+        <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-white/70">
           Use mouse wheel, arrow keys, or touch to navigate
         </p>
-        <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-white/20">
+        <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-white/65">
           {paused ? "Auto-play resumes after 3 seconds of inactivity" : "Auto-playing"}
         </p>
       </div>

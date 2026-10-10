@@ -330,6 +330,7 @@ Built so far:
 21. **Styling fix:** `ProjectVisual` no longer sets `relative`, which was overriding `absolute inset-0` and letting the SVG overflow/crop on wide screens.
 22. **Sentence-case headings** (removed forced uppercase from section titles).
 23. **Top-right "Hire Me" button** in `AnimatedNav`.
+24. **Readability / contrast pass (2026-10-06):** a script measured text contrast across the whole page (59 failing text elements before, 0 real failures after). Faint text utilities were raised (`text-white/10-30` → `/35-65`, `/40-60` → `/70-80`, muted-with-alpha → `/90`), 9-10px labels → 11px, the indigo accent used for text lightened (`129,140,248`), SVG labels inside project visuals enlarged and brightened, and the footer © line, links and "thank you" line made clearer (sentence case, tighter tracking). Rule going forward: no text below `white/65` (or 11px) unless purely decorative.
 
 Recent commits: `bff2397` Hire Me + DevTools first + floating buttons → `725ec69` Hrud.ai visuals + job agent/LaMaTEPP animations → `07adcdb` animated visuals + Back button → `04088f6` Work Experience → `1d6a9ec` Process/Achievements/Soft Skills/Contact → `c6c6eaf` Skillset → `eecdc39` docs. Latest local changes (modal hero layout + visual positioning fix) are committed with the doc update.
 

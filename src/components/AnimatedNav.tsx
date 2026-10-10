@@ -109,7 +109,7 @@ export function AnimatedNav() {
               href={item.href}
               variants={itemVariants}
               onClick={(e) => e.stopPropagation()}
-              className="whitespace-nowrap text-[10px] font-mono uppercase tracking-[0.25em] text-[var(--rv-muted)] hover:text-[var(--gold)] transition-colors px-3 py-2"
+              className="whitespace-nowrap text-[11px] font-mono uppercase tracking-[0.25em] text-[var(--rv-muted)] hover:text-[var(--gold)] transition-colors px-3 py-2"
             >
               {item.name}
             </motion.a>

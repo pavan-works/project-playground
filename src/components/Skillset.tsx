@@ -21,7 +21,7 @@ const SPAN: Record<string, string> = {
 const ACCENT: Record<string, string> = {
   ai: "34,211,238",
   lang: "250,204,21",
-  db: "99,102,241",
+  db: "129,140,248",
   cloud: "16,185,129",
 };
 
@@ -103,10 +103,10 @@ const SpotlightCard = ({
             <h3 className="font-headline text-xl md:text-2xl font-bold tracking-tight text-white leading-tight">
               {cat.title}
             </h3>
-            <p className="mt-1 text-sm text-white/60 leading-snug">{cat.blurb}</p>
+            <p className="mt-1 text-sm text-white/80 leading-snug">{cat.blurb}</p>
           </div>
           <span
-            className="ml-auto shrink-0 font-mono text-[10px] tracking-[0.25em] px-2.5 py-1 rounded-full border"
+            className="ml-auto shrink-0 font-mono text-[11px] tracking-[0.25em] px-2.5 py-1 rounded-full border"
             style={{
               color: "rgb(var(--rgb))",
               borderColor: "rgba(var(--rgb),0.4)",
@@ -136,13 +136,13 @@ const SpotlightCard = ({
                   {name}
                 </span>
                 {tag && (
-                  <span className="ml-auto font-mono text-[9px] tracking-[0.2em] uppercase px-2 py-0.5 rounded-full bg-white/10 text-white/70">
+                  <span className="ml-auto font-mono text-[11px] tracking-[0.2em] uppercase px-2 py-0.5 rounded-full bg-white/10 text-white/70">
                     {tag}
                   </span>
                 )}
               </div>
               {where && (
-                <em className="pl-4 text-xs not-italic text-white/55 leading-snug">
+                <em className="pl-4 text-xs not-italic text-white/76 leading-snug">
                   <span className="italic">{where}</span>
                 </em>
               )}
@@ -204,7 +204,7 @@ export const Skillset = () => (
 
     <div className="mt-20 mb-4 flex items-center gap-4">
       <div className="h-px flex-1 bg-gradient-to-r from-transparent to-white/15" />
-      <span className="font-mono text-[11px] tracking-[0.4em] uppercase text-white/60">
+      <span className="font-mono text-[11px] tracking-[0.4em] uppercase text-white/80">
         Tools &amp; Platforms
       </span>
       <div className="h-px flex-1 bg-gradient-to-l from-transparent to-white/15" />
