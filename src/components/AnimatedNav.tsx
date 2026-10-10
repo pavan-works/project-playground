@@ -1,6 +1,7 @@
 import * as React from "react";
 import { motion, useScroll, useMotionValueEvent } from "motion/react";
 import { Menu } from "lucide-react";
+import { ResumeButton } from "./ResumeModal";
 
 const navItems = [
   { name: "Home", href: "#home" },
@@ -125,15 +126,23 @@ export function AnimatedNav() {
         </motion.div>
       </motion.nav>
 
-      {/* Hire Me — top right, like the reference. On small screens it only shows while the nav is collapsed. */}
-      <a
-        href="#contact"
-        className={`pointer-events-auto absolute right-4 top-1 md:right-8 items-center gap-2 rounded-full bg-[var(--gold)] px-5 h-12 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-black shadow-[0_0_30px_-8px_rgba(34,211,238,0.9)] transition-all hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_0_36px_-4px_rgba(255,255,255,0.8)] ${
-          isExpanded ? "hidden md:inline-flex" : "inline-flex"
+      {/* Resume + Hire Me — top right. On small screens they only show while the nav is collapsed. */}
+      <div
+        className={`pointer-events-auto absolute right-4 top-1 md:right-8 items-center gap-2 ${
+          isExpanded ? "hidden md:flex" : "flex"
         }`}
       >
-        Hire Me
-      </a>
+        <ResumeButton
+          label="Resume"
+          className="inline-flex h-12 items-center gap-2 rounded-full border border-white/30 bg-black/50 px-4 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-white backdrop-blur-md transition-all hover:-translate-y-0.5 hover:border-[var(--gold)] md:px-5"
+        />
+        <a
+          href="#contact"
+          className="inline-flex h-12 items-center gap-2 rounded-full bg-[var(--gold)] px-5 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-black shadow-[0_0_30px_-8px_rgba(34,211,238,0.9)] transition-all hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_0_36px_-4px_rgba(255,255,255,0.8)]"
+        >
+          Hire Me
+        </a>
+      </div>
     </div>
   );
 }

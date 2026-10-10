@@ -42,6 +42,7 @@ import { Process } from "./components/Process";
 import { ProjectVisual } from "./components/ProjectVisual";
 import { WorkExperience } from "./components/WorkExperience";
 import { ContactForm } from "./components/ContactForm";
+import { ResumeButton } from "./components/ResumeModal";
 import { SoftSkills, Achievements } from "./components/SoftSkillsAchievements";
 import logoGmail from "./assets/logos/gmail.svg";
 
@@ -1072,6 +1073,12 @@ const Contact = () => (
             Open to AI/ML internships, full-time roles &amp; meaningful collaborations.
           </p>
           <span className="hidden sm:block h-px flex-1 bg-gradient-to-l from-transparent to-white/15" />
+        </div>
+        <div className="mt-8 flex justify-center">
+          <ResumeButton
+            label="View & download resume"
+            className="inline-flex items-center gap-2 rounded-full border border-[var(--gold)]/60 bg-[var(--gold)]/10 px-6 py-3 font-mono text-xs font-semibold uppercase tracking-[0.2em] text-white transition-all hover:-translate-y-0.5 hover:bg-[var(--gold)] hover:text-black"
+          />
         </div>
       </motion.div>
     </div>
