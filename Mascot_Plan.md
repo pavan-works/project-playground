@@ -12,7 +12,7 @@ A free browser-based studio, **Bible Strong Avatar Lab** (`avatars.bible-strong.
 
 - **10 starter characters:** Strobi (round ball), Freddy (block with ears), Citrus (drop), Nova (bean), Grok bot (black ball), Sunee (sun with dots), Kirby (puffy), Cloudee (cloud), Cubee (soft cube), Onee (soft blob).
 - **Faces are eyes only** (no mouth). Personality comes from body shape, colour and eye size / spacing / tilt.
-- **23 ready animations** (e.g. sleeping, waking, idle, listening, thinking, searching, working, excited, bored, suspicious, angry, drowsy, happy, curious, confused, surprised, proud, shy, sad, laughing, scared, playful, celebrate) and **27 expression presets**.
+- **23 ready animations** (all of them: sleeping, waking, idle, listening, thinking, searching, working, excited, bored, suspicious, angry, drowsy, happy, curious, confused, surprised, proud, shy, sad, laughing, scared, playful, celebrate) and **27 expression presets**.
 - The mascot is **drawn with code (SVG)**, so it stays sharp at any size.
 - Output options: a picture (PNG/SVG), a small `.avatar.json` file for any website, a ready React demo (.zip), an "instructions for AI" text, or a backup of the whole Studio project.
 - Three paths in the guide: **A** just a picture (≈10 min), **B** live on a website (≈20 min), **C** run the Studio locally (optional).
@@ -31,7 +31,9 @@ Requirements: laptop + Chrome, ChatGPT or Claude (to plan the character), Node.j
 
 ## 3. Step-by-step plan
 
-### Step 1 — Plan the mascot on paper (≈ 5 min)
+> **Timing:** the guide says "about 20 minutes" in total (Path B) and "Plan it first. Two minutes." for Step 1. The other per-step times below are our own estimates, not from the guide.
+
+### Step 1 — Plan the mascot on paper (guide: about 2 minutes)
 Ask ChatGPT/Claude for a one-page **mascot card** (name, which starter to copy, body/eye colours, eye shape, 5 animations and when each plays, 3 places to use it, a checklist of Studio tabs). Give it:
 - **Brand/page:** Solige Pullaiah — AI Engineer & ML Researcher portfolio.
 - **What I do:** builds RAG, LLM-agent and multimodal AI systems.
@@ -42,26 +44,31 @@ Ask ChatGPT/Claude for a one-page **mascot card** (name, which starter to copy, 
 
 **Decisions needed from the owner:** mascot **name**, which **starter** (round ball "Strobi" and cloud "Cloudee" fit an AI/"neural" feel), final **body colour** (cyan recommended so it matches the site), personality line.
 
-### Step 2 — Build it in the Studio (≈ 10 min)
-1. Open `avatars.bible-strong.app` on a laptop (progress saves in the browser automatically).
-2. Double-click the chosen starter → set body colour, size and roundness from the card; drag on the canvas to move/rotate.
+### Step 2 — Build it in the Studio (our estimate ≈ 10 min)
+The Studio's bottom bar has 5 tabs: your **avatar**, **Pose**, **Expressions**, **Animations**, **Export**. Use a laptop (a phone screen is too small to edit comfortably).
+1. Open `avatars.bible-strong.app` (no sign-up; progress saves in the browser automatically).
+2. In the avatar grid, **double-click** the chosen starter to edit it (or tap **+** to start a new one). Changes made in the avatar editor are **permanent**; the **Pose** tab is only for trying a temporary pose. Set body colour, size and roundness from the card; drag the character on the canvas to move/rotate; any label marked ↔ can be dragged left/right to change its number. Extra simple shapes (like ears) can be added.
 3. Spend most of the time on the **eyes** (width, height, spacing, tilt) — close-together eyes look cute, tilted-in eyes look cheeky.
-4. **Expressions** and **Animations**: tweak presets or make a new animation on the timeline (hold times, loop / play once / ping-pong). Blinking is automatic.
+4. **Expressions** has 27 ready presets (double-click one to tweak it, or save your own). **Animations** has 23 ready ones; to make a new one, put expressions on a timeline, set how long each holds, and choose loop / play once / ping-pong. Blinking is automatic.
 5. **Back up:** Export → *Studio project* → save the backup file (work lives only in this browser; clearing history or switching laptops loses it).
 
-### Step 3 — Export (≈ 2 min)
-- Choose format **React / TypeScript** (this site is React + TS).
+### Step 3 — Export (our estimate ≈ 2 min)
+- Choose format **React / TypeScript** (this site is React + TS). (*JavaScript / ESM* is for non-React sites.)
 - Under *Animations to export* → **Customize** → keep **only** the animations we use (see §4) to keep the file small.
-- Download the **`.avatar.json` definition**. Optional: also export a PNG/SVG (Photo Mode, transparent background) for the favicon / social share image.
+- Download the **`.avatar.json` definition** (one small file with the mascot and its animations).
+- Other export choices in the guide: *Photo Mode → Take a picture* (PNG or SVG; transparent, solid or gradient background, any size) — useful for the favicon / social share image; *Download React demo (.zip)* (a ready project; run with `npm install` + `npm run dev`, usually `localhost:5173`); *Copy instruction for AI* (setup steps to paste into the coding tool); *Studio project* (backup).
 
 ### Step 4 — Put it on the site (with Claude Code)
 - Place the file at `src/assets/mascot.avatar.json`.
 - Package used by the guide: **`@bible-strong/avatar-react`** (React/Next.js; `createAvatar(definition)` + one import of `@bible-strong/avatar-react/styles.css`). Non-React alternative: `@bible-strong/avatar-web`.
 - Docs: github.com/smontlouis/bible-strong-avatar-lab.
+- What the AI will write (guide's simplified React example): `npm install @bible-strong/avatar-react react react-dom`, then `import { createAvatar } from '@bible-strong/avatar-react'`, `import '@bible-strong/avatar-react/styles.css'`, `import definition from './avatar.avatar.json'`, `const Mascot = createAvatar(definition)` and `<Mascot defaultAnimation="idle" size={120} />`. (For a site without React or a build tool, the guide uses `@bible-strong/avatar-web` with `createAvatar('#mascot', { definition, defaultAnimation: 'idle' })`, loaded from a CDN with an import map and the JSON fetched first — not needed here.)
 - Ask the AI coding tool to: read the JSON and list its animation names first; mount the mascot in a small client component; start on `idle`; show a **still expression** if the visitor prefers reduced motion; make sure it **never covers a button on phones**.
 
 ### Step 5 — Make it react to visitors
 Use the controller API described in the guide: `play(animation)`, `pause()`, `stop()`, `setExpression(expression)`, `getState()` and the `onAnimationEnd` callback. **Only use animation names that exist in the exported JSON.**
+
+The guide's reaction rules: on page open play `waking`, then switch to `idle` when it ends (or after 2 seconds if it loops); no mouse, scroll or typing for 30 seconds → `drowsy`, then `sleeping`, and any movement wakes it up; no layout jumps; tap instead of hover on phones; reactions off if the visitor prefers reduced motion.
 
 ### Step 6 — Optional "level up"
 A small **speech bubble** next to the mascot showing one short tip for each section the visitor scrolls to (turns it from decoration into a guide).
@@ -90,7 +97,7 @@ Animations to keep when exporting (to stay small): **waking, idle, excited, cele
 
 ## 5. Rules for placing it on this site
 
-1. **Bottom-left** on desktop (bottom-right is taken by nothing today, but the phone action bar is bottom-centre — see below), ≈ 96–120 px wide.
+1. **Bottom-left** on desktop, ≈ 96–120 px wide (the guide's own example uses bottom-right at 120 px; we choose bottom-left because the phone Resume / Hire Me action bar is bottom-centre — see below).
 2. **Phones:** smaller (≈ 64–80 px), placed so it **does not overlap** the bottom Resume / Hire Me pill (which slides in on scroll-up), the nav, or form buttons. Guide's own rule: "on phones it must not cover any button" and "make the mascot smaller on screens under 480 px".
 3. **No layout jumps** (fixed-position element, reserved size).
 4. **`prefers-reduced-motion`:** show a still expression only and turn all reactions off.
@@ -123,7 +130,8 @@ Animations to keep when exporting (to stay small): **waking, idle, excited, cele
 
 - The Studio **and its packages are AGPL-3.0**. The guide says this is fine for learning, personal and open-source projects, but using it in a closed-source or paid product can require you to share your own code. **Read the licence / ask the author before shipping** — this portfolio's repo is on GitHub (public or private? owner to confirm) and the site is publicly served, so check what AGPL requires here.
 - **Credit the maker:** Stéphane Montlouis-Calixte (@_smontlouis) and the Bible Strong Avatar Lab repo (add a line in the footer or README, and star the repo).
-- Screenshots in the guide belong to its author; do not reuse them on the site.
+- Other good-to-know points from the guide: back up often (Export → Studio project); the mascot is drawn with code (SVG), so it is sharp at any size; keep it light by exporting only the animations you use.
+- The guide's own credit line says its screenshots are of avatars.bible-strong.app and are used to explain the tool; do not reuse the guide's screenshots on the portfolio.
 
 ---
 
