@@ -143,8 +143,8 @@ export const PORTFOLIO_DATA = {
   name: "Solige Pullaiah",
   alias: "Puli Pavan",
   role: "AI Engineer",
-  location: "Visakhapatnam, India",
-  summary: "Final-year AI Engineering student focused on designing, training, and deploying end-to-end ML and LLM-based systems. Specialized in RAG pipelines, transformer models, and production-ready AI solutions.",
+  location: "Hyderabad, India",
+  summary: "AI Engineer with hands-on experience in designing, training, and deploying end-to-end ML and LLM-based systems, spanning NLP, Computer Vision, and multimodal learning. Skilled in building retrieval-augmented (RAG) pipelines, transformer-based models, and production-ready AI systems using PyTorch, TensorFlow, Hugging Face, and OpenCV. Seeking AI/ML Engineer roles to develop scalable intelligent systems and applied AI solutions.",
   techStack: [
     { id: "ts1", name: "Python", imageUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
     { id: "ts2", name: "TensorFlow", imageUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" },

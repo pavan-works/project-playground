@@ -32,7 +32,7 @@
 | Item | Value |
 |---|---|
 | Project | Single-page, animation-heavy AI/ML engineer portfolio |
-| Owner | **Solige Pullaiah** (alias **Puli Pavan**) — AI Engineer, Visakhapatnam, India |
+| Owner | **Solige Pullaiah** (alias **Puli Pavan**) — AI Engineer, Hyderabad, India |
 | Repo | `https://github.com/pavan-works/project-playground` (branch `main`) |
 | Origin | Scaffolded in **Google AI Studio**; connected to **Lovable** for git-synced editing |
 | Framework | React 19 + TypeScript + Vite 6 + Tailwind CSS 4 + Motion |
@@ -57,7 +57,7 @@
 | GitHub | https://github.com/puli-pro (handle `@puli-pro`) — confirmed |
 | Website display name | **Solige Pullaiah** — confirmed ("Puli Pavan" is only an alias/handle) |
 | Profile / avatar photos | `portrait-smile.png` (live hero), `placed_puli.png`, `profile_photo.jpeg` — confirmed |
-| Location | Visakhapatnam, India (about_me.md still says Nandyal, AP — see §12) |
+| Location | Hyderabad, India (owner-confirmed 2026-10-11; resume PDF still says Visakhapatnam) |
 
 ### Objective
 Final-year AI Engineering student who designs, trains and deploys end-to-end ML and LLM-based systems across NLP, computer vision and multimodal learning. Builds RAG pipelines, transformer models and production-ready AI systems (PyTorch, TensorFlow, Hugging Face, OpenCV). Seeking **AI/ML Engineer** roles.

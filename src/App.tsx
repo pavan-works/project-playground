@@ -90,7 +90,7 @@ const Hero = () => {
         initial={{ y: 40 }}
         animate={{ y: 0 }}
         transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
-        className="absolute bottom-16 md:bottom-14 left-1/2 -translate-x-1/2 h-[54vh] md:h-[48vh] w-auto object-contain object-bottom z-40 pointer-events-none select-none drop-shadow-[0_20px_60px_rgba(0,0,0,0.7)]"
+        className="absolute bottom-16 md:bottom-14 left-1/2 -translate-x-1/2 h-[62vh] md:h-[72vh] w-auto object-contain object-bottom z-40 pointer-events-none select-none drop-shadow-[0_20px_60px_rgba(0,0,0,0.7)]"
       />
 
       {/* Bottom meta row */}
@@ -163,7 +163,7 @@ const About = () => (
           Engineering the <br />
           <span className="italic font-display font-light text-white/80">Neural</span> Future
         </h2>
-        <p className="text-xl md:text-2xl text-[var(--rv-muted)] leading-relaxed mb-10 font-light max-w-2xl">
+        <p className="text-lg md:text-xl text-white/75 leading-relaxed mb-10 font-light max-w-2xl">
           {PORTFOLIO_DATA.summary}
         </p>
 

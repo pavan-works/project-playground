@@ -19,7 +19,7 @@
 | **Phone (contact texts)** | +91 93466 80696 — shown on the site; messages from the contact form arrive as a text to this number |
 | **LinkedIn** | [linkedin.com/in/solige-pullaiah-478462270](https://www.linkedin.com/in/solige-pullaiah-478462270) |
 | **Location** | Nandyal, Andhra Pradesh, India |
-| **Current Role** | **AI Engineer** — Hrud.ai, Visakhapatnam *(confirmed by owner; see https://hrud.ai/team)* |
+| **Current Role** | **AI Engineer** — Hrud.ai, Hyderabad *(confirmed by owner; see https://hrud.ai/team)* |
 
 ---
 
@@ -32,7 +32,7 @@ AI Engineer at Hrud.ai with a strong focus on Artificial Intelligence, Machine L
 ## Experience
 
 ### Hrud.ai — AI Engineer
-**January 2026 – Present (6 months)** | Visakhapatnam, Andhra Pradesh, India
+**January 2026 – Present (6 months)** | Hyderabad, India
 - Working as AI Engineer: production LLM systems, RAG pipelines and autonomous agents
 - Building impactful, real-world AI solutions
 - Domain: Artificial Intelligence, Machine Learning, Systems Modeling
