@@ -1227,7 +1227,7 @@ export default function PortfolioLanding() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.8 }}
-          className="text-center z-30 mt-20 md:mt-28"
+          className="text-center z-30 mt-28 md:mt-48"
         >
           <h2 className="text-3xl md:text-6xl font-headline font-bold tracking-tighter mb-4 flex items-baseline justify-center gap-4">
             <span className="text-white">{PORTFOLIO_DATA.name.split(' ')[0]}</span>
