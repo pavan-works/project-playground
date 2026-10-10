@@ -2,7 +2,7 @@
 
 > Consolidated master document for the `project-playground` repository: what the portfolio is, everything built so far, how to run/edit/extend it, and what is still pending.
 > Compiled from: `README.md`, `about_me.md`, `Resume-pullaiah.md`, `Ravindra_portfolio.md`, `21st_dev.md`, `AGENTS.md`, `src/data.ts`, `src/App.tsx`, `src/index.css`, config files, `stitch_modern_glow_portfolio/`, and the git history.
-> Last updated: 2026-10-06.
+> Last updated: 2026-10-11.
 
 ---
 
@@ -23,7 +23,7 @@
 13. [Ideas backlog](#13-ideas-backlog-from-21st_devmd)
 14. [How-to recipes](#14-how-to-recipes)
 15. [Rules & conventions](#15-rules--conventions)
-16. [To Do — Portfolio v2 plan](#16-to-do--portfolio-v2-plan-based-on-the-portfolio_dhanushhtml-reference)
+16. [To Do — Portfolio v2 plan](#16-to-do--portfolio-v2-plan-based-on-the-portfolio_dhanushhtml-reference) — incl. [16.15 Growth and Projects at Hrud.ai](#1615-growth-and-projects-at-hrudai--planning--implementation)
 
 ---
 
@@ -36,9 +36,10 @@
 | Repo | `https://github.com/pavan-works/project-playground` (branch `main`) |
 | Origin | Scaffolded in **Google AI Studio**; connected to **Lovable** for git-synced editing |
 | Framework | React 19 + TypeScript + Vite 6 + Tailwind CSS 4 + Motion |
+| Live URL | https://soligepullaiah.vercel.app/ (Vercel, deployed 2026-10-11) |
 | Dev URL | `http://localhost:3000` |
 | Theme decision | Stay in the current dark theme (confirmed); v2 plan in §16 |
-| Status | Skillset, Process, Work Experience (Hrud.ai), Selected Works (animated), Achievements, Soft Skills and Contact (SMS form) are **built**; **My Journey (timeline) and Those Who Shaped Me are pending**; SEO, resume PDF, deployment and real screenshots still pending (see §11 and §16) |
+| Status | Skillset, Process, Work Experience (Hrud.ai), Selected Works (animated), Achievements, Soft Skills and Contact (SMS form) are **built**; **My Journey (timeline) and Those Who Shaped Me are pending**; resume modal + PDF, SEO/OG/JSON-LD tags, X link and Hyderabad location are **done**; deployment, real screenshots and the **Growth & Projects at Hrud.ai layout decision (§16.15)** are pending (see §11 and §16) |
 | Theme | Dark "deep space", cyan (`--gold` token) + indigo + emerald accents |
 
 ---
@@ -152,7 +153,8 @@ project-playground/
 │  ├─ components/InfiniteGallery.tsx  Three.js infinite image gallery (journey)
 │  ├─ components/Skillset.tsx         My Skillset (spotlight bento cards + marquee)
 │  ├─ components/Process.tsx          My Process (6 steps, lens switcher, loop callout)
-│  ├─ components/WorkExperience.tsx   Hrud.ai role + 7 project cards + CodeForces strip
+│  ├─ components/WorkExperience.tsx   Hrud.ai role card + growth path (`GrowthPath`) + 7 project cards + CodeForces strip
+│  ├─ components/ResumeModal.tsx      resume preview + Download modal, `ResumeButton` (nav, About, Contact)
 │  ├─ components/ProjectVisual.tsx    11 animated SVG visuals (keyframes in index.css, .pv-*)
 │  ├─ components/SoftSkillsAchievements.tsx  Achievements + Professional Soft Skills
 │  ├─ components/ContactForm.tsx      message form -> prefilled SMS / WhatsApp / email
@@ -180,7 +182,7 @@ npm run lint         # tsc --noEmit
 
 - `.env.local` (copy of `.env.example`): `GEMINI_API_KEY` (only needed if server-side Gemini is added), `APP_URL`. **Never commit real keys** (`.env*` is git-ignored except `.env.example`).
 - `DISABLE_HMR=true` turns off HMR + file watching (AI Studio agent quirk). Leave unset locally.
-- **Deployment:** no production deploy configured yet. Options: Vercel (static Vite build), Lovable publish, Cloud Run via AI Studio. See §11.
+- **Deployment:** deployed on **Vercel** at https://soligepullaiah.vercel.app/ (auto-deploys from GitHub `main`). Earlier note (kept for reference): no production deploy was configured. Options: Vercel (static Vite build), Lovable publish, Cloud Run via AI Studio. See §11.
 - **Git:** remote `origin` → `pavan-works/project-playground`, branch `main`. Because Lovable syncs this branch, use normal commits/pushes only — **no force-push, rebase, amend or squash of pushed commits**.
 
 ---
@@ -332,7 +334,23 @@ Built so far:
 23. **Top-right "Hire Me" button** in `AnimatedNav`.
 24. **Readability / contrast pass (2026-10-06):** a script measured text contrast across the whole page (59 failing text elements before, 0 real failures after). Faint text utilities were raised (`text-white/10-30` → `/35-65`, `/40-60` → `/70-80`, muted-with-alpha → `/90`), 9-10px labels → 11px, the indigo accent used for text lightened (`129,140,248`), SVG labels inside project visuals enlarged and brightened, and the footer © line, links and "thank you" line made clearer (sentence case, tighter tracking). Rule going forward: no text below `white/65` (or 11px) unless purely decorative.
 
-Recent commits: `bff2397` Hire Me + DevTools first + floating buttons → `725ec69` Hrud.ai visuals + job agent/LaMaTEPP animations → `07adcdb` animated visuals + Back button → `04088f6` Work Experience → `1d6a9ec` Process/Achievements/Soft Skills/Contact → `c6c6eaf` Skillset → `eecdc39` docs. Latest local changes (modal hero layout + visual positioning fix) are committed with the doc update.
+25. **DevTools Control Center visual redesigned (2026-10-10):** hub (developer + `</>`) with an orbit of Vercel, GitHub (real logo path) and Supabase nodes, orbiting dots, RBAC role chips, the 7 branch-policy checks, auto branch cleanup, integration-health bar and the expiry/downgrade alert. Based on `src/assets/logos/DevTools_Image.png` (redrawn in SVG, site colours). **Vercel project count still missing** (owner has not given the number).
+26. **Selected Works heading** restyled to match the other section titles (centred pill + gradient heading + lead line).
+27. **My Process left column fixed:** `overflow-hidden` on the section stopped the sticky intro from pinning, leaving empty space beside steps 3–6. Now `overflow-x-clip`, plus a live "You are at 03 / 06" step tracker (click to jump, progress bar).
+28. **Hero heading fit:** "AI ↗ Engineer" / "& ML Researcher" were wider than the screen (text 1668px in a 1319px box on a laptop). Sizes reduced to `9.4–9.6vw` / `7.1vw`; portrait size/position restored to the original (`h-[62vh] md:h-[72vh]`, head overlaps the heading by design).
+29. **SEO (`index.html`):** real `<title>`, description, author, `theme-color`, Open Graph, Twitter card and JSON-LD `Person` (Hrud.ai, Vignan's, Hyderabad, email, LinkedIn/GitHub/X). Still missing: `og:image`, `og:url`, canonical, favicon (need a deployed URL, a share image and an icon).
+30. **Location changed to Hyderabad, India** (hero line, SEO description + JSON-LD, README, about_me, footer status "Hyderabad, India / Remote"). The resume PDF / `Resume-pullaiah.md` and the college (Vignan's, Visakhapatnam) are unchanged.
+31. **About paragraph** replaced with the owner's new objective text ("AI Engineer with hands-on experience…") and restyled (`text-lg md:text-xl text-white/75`).
+32. **Resume:** `Resume-pullaiah.md` rewritten to match `Solige_Pullaiah_Resume_AI.pdf`; PDF copied to `public/` (served at `/Solige_Pullaiah_Resume_AI.pdf`); **resume modal** (`ResumeModal.tsx`: PDF preview, Download, Open, Esc / click-outside close). Opened from the nav "Resume" button, the About "Download Resume" button (it previously had no action) and a "View & download resume" button in Contact. On phones the preview may not render, so a fallback line points to Download/Open.
+33. **Contrast pass 2:** `--rv-muted` `#a3a3a3` → `#cdd2da`; every `text-white/NN` raised one or two steps (65→80, 70→83, 75→86, 80→90, 85→92); footer © line 13–14px / 90% with normal tracking. Audit over the fully scrolled page: 0 text items under 4.5:1 (skips text still fading in and text over images).
+34. **Nav on phones:** the nav was 401px wide in a 326px space ("Works" cut off). "Home" is hidden below `md` (the SP logo goes home) and spacing tightened; links `white/90`, bar darker with a clearer border. The Resume button next to Hire Me restyled (solid dark, 2px cyan border) so it reads as a button.
+35. **Phone action bar:** top-right Resume / Hire Me are desktop/tablet only; on phones a slim bottom pill (Resume + Hire Me) slides in on **scroll-up** and away on scroll-down, and stays hidden near the top (< 300px).
+36. **Footer:** Twitter → https://x.com/puli_pullaiah (new tab); also added to JSON-LD `sameAs`.
+37. **Contact heading** ("Let's Build Something") restyled to match other titles; tagline now "Open to AI/ML internships, full-time roles, freelance projects & meaningful collaborations." (wraps and centres on phones).
+38. **Loader lockup:** more space between the "Portfolio" lockup and the name so the name no longer overlaps the tail of the script "f" (name block margin `mt-28 md:mt-48`).
+39. **Growth path at Hrud.ai (first version):** `GROWTH_STAGES` in `data.ts` + `GrowthPath` in `WorkExperience.tsx` — four selectable stages (AI Intern → AI Team Lead → DevOps & Architecture Engineer → AI Research Engineer) with a detail panel, placed under the role card. **Layout is under discussion — see §16.15.** Descriptions were written from resume facts only; no dates.
+
+Recent commits (newest first, abridged): `d3933ae` portfolio overwritten → `d0e517a` Let's Build + fixed buttons → `502f8da` font colours, twitter links → `8c2b74a` About summary, Hyderabad, SEO → `a7e73f3` components/assets/config → `040dfad` project view + docs → `bff2397` Hire Me + DevTools first. Items 33–39 may still be uncommitted; run `git status`.
 
 ---
 
@@ -341,12 +359,18 @@ Recent commits: `bff2397` Hire Me + DevTools first + floating buttons → `725ec
 ### High priority (before sharing the portfolio)
 - [x] ~~Footer GitHub link~~ now points to `https://github.com/puli-pro`.
 - [x] ~~Footer Twitter link~~ now points to https://x.com/puli_pullaiah.
-- [ ] **`index.html` metadata:** title is "My Google AI Studio App" → set proper `<title>`, description, favicon, Open Graph/Twitter card tags, `theme-color`.
+- [x] **`index.html` metadata:** title, description, Open Graph, Twitter card, JSON-LD, `theme-color` done (item 29).
+- [x] `og:url`, canonical and JSON-LD `url` added (2026-10-11, live URL https://soligepullaiah.vercel.app/).
+- [ ] Still to add to `index.html`: `og:image` (needs a 1200×630 share image in `public/`) and a favicon.
 - [ ] **Real project screenshots:** animated visuals now represent each project, but `projects[]` / `researchPapers[]` still carry Unsplash fallback images (unused when `visual` is set); add real screenshots/diagrams to case studies when available.
 - [ ] **SyncVerse links:** no `github`/`paperUrl` yet; add if/when public (the `DetailModal` handles missing links).
 - [ ] **Verify claims:** "15+ Systems shipped" in `ABOUT_STATS` is not supported by resume; confirm or change.
-- [ ] **Deploy** (Vercel/Lovable/Cloud Run) and put the live URL in README + resume.
-- [ ] **Resume download:** add `public/Resume-pullaiah.pdf` + a "Download Resume" button (hero or contact).
+- [x] **Deployed** on Vercel (https://soligepullaiah.vercel.app/); URL added to README and SEO tags.
+- [x] Live URL added to `Resume-pullaiah.md`. [ ] Still to add it to the resume PDF (owner).
+- [x] **Resume download:** PDF in `public/` + modal with Download (nav, About, Contact) — done (item 32).
+- [ ] **Animated mascot** (from the "Make Your Own Mascot" guide): full plan in [`Mascot_Plan.md`](Mascot_Plan.md) — see §16.16.
+- [ ] **Growth & Projects at Hrud.ai layout:** decide between the options in §16.15 and implement.
+- [ ] **Vercel project count** for the DevTools Control Center card/visual (owner to supply the number).
 - [x] `README.md` and `portfolio.md` committed and kept up to date.
 
 ### Content to add (from resume, not yet on site)
@@ -380,7 +404,9 @@ Recent commits: `bff2397` Hire Me + DevTools first + floating buttons → `725ec
 
 | Issue | Where | Suggested fix |
 |---|---|---|
-| Location conflict: "Nandyal, AP" vs "Visakhapatnam" | `about_me.md` vs resume/`data.ts` | Update `about_me.md` (only when owner confirms; the file says not to edit without new info) |
+| Location: site now says **Hyderabad** (owner-confirmed 2026-10-11) but the resume PDF / `Resume-pullaiah.md` still say Visakhapatnam | resume files | Owner to update the PDF; then update `Resume-pullaiah.md` and re-copy to `public/` |
+| Role title: site/resume say **AI Engineer**; owner describes a growth path ending as **AI Research Engineer** | Work Experience role card, resume, SEO | Decide whether to rename (see §16.15 open questions) |
+| Preview pane stops animating when the app window is hidden (`AnimatePresence` transitions look stuck, screenshots time out) | local testing | Click/screenshot to wake the pane; not a code bug |
 | ~~Role conflict: "AI Intern" vs "AI Engineer" at Hrud.ai~~ **Resolved** — owner confirmed **AI Engineer** | `about_me.md` updated | — |
 | Token `--gold` is actually cyan | `index.css` | Rename to `--accent` (touches many usages) |
 | Hero portrait is a composite; fine detail near the collar/hair edge may show slight artefacts on large screens | `portrait-smile.png` | Replace with a single studio smiling shot when available |
@@ -440,7 +466,7 @@ Best fits for this portfolio: **command palette**, **bento grid** for About/skil
 
 > **Reference reviewed:** `E:\portfolio_dhanush.html` — a single-file portfolio (vanilla JS + GSAP/ScrollTrigger + Lenis) for another AI engineer. It is used here **only as a structure / interaction / layout reference**. Do **not** copy its text, name, photo, red brand colour or embedded resume. All content below is Pullaiah's own, taken from `Resume-pullaiah.md`, `about_me.md` and `src/data.ts`. Items marked **❓ OWNER** need facts only the owner can supply — nothing is invented.
 
-### 16.0 Status summary (2026-10-06)
+### 16.0 Status summary (2026-10-11)
 
 | Plan section | Status |
 |---|---|
@@ -453,7 +479,9 @@ Best fits for this portfolio: **command palette**, **bento grid** for About/skil
 | 16.9 Achievements | ✅ built (certifications / CCNA not added) |
 | 16.10 Those Who Shaped Me | ⏳ not started (needs people + "on my own" list) |
 | 16.11 Contact Me | ✅ built (SMS delivery limited to the visitor's device; provider-based auto-SMS pending account/keys) |
-| 16.12 Resume PDF / SEO / a11y | ⏳ pending |
+| 16.12 Resume PDF / SEO / a11y | ✅ resume modal + PDF, SEO/OG/JSON-LD; ⏳ og:image/favicon/canonical, skip link, focus rings, reduced-motion audit |
+| 16.16 Animated mascot | ⏳ planned — see [`Mascot_Plan.md`](Mascot_Plan.md) (needs owner decisions) |
+| 16.15 Growth and Projects at Hrud.ai | 🟡 first version built (growth card under the role card); **layout decision pending** — see §16.15 |
 | Top-right Hire Me | ✅ built |
 
 ### 16.1 What the reference does (analysis)
@@ -706,3 +734,63 @@ Current: 3 link cards only. Target (matches the reference):
 - [ ] Latest resume PDF and the final tagline for the hero role rotator (e.g., *AI Engineer · ML Researcher · GenAI Builder*).
 
 > **Update 2026-10-05:** all 7 Hrud.ai work cards now have animated visuals (`ProjectVisual.tsx`: galaxy, devtools, chatbot, career, interview, pulse, delivery). Project cards in Works use a fixed visual height (`h-64 md:h-72`) instead of an aspect ratio, which removed the large empty gap under the visual.
+
+### 16.15 Growth and Projects at Hrud.ai — planning & implementation
+
+**Goal:** show the owner's career growth at Hrud.ai (**AI Intern → AI Team Lead → DevOps & Architecture Engineer → promoted to AI Research Engineer**) near the Work Experience section, with a single click per stage (like the lens buttons in My Process), **without it getting mixed up with the 7 project cards**.
+
+#### Where we are (implemented)
+- `GROWTH_STAGES` in `src/data.ts` (id, label, short, summary, points) and `GrowthPath` in `src/components/WorkExperience.tsx`.
+- Placed directly under the role card ("AI Engineer — Hrud.ai") and above the project grid. Four pill buttons with arrows; opens on the latest stage ("Current"), the others show "Step N of 4"; the panel cross-fades.
+- Stage text is built **only from resume facts** (Gemini / RAG / Supabase; Team Lead; the control plane across 100+ repos and 55 Supabase projects, 194 CI tests, role-based access; applying new AI techniques to live projects). **No dates.**
+- **Problem the owner raised (screenshot, 2026-10-11):** the role card, the growth card and the project cards are all full-width cards with the same border and weight, so the growth path feels mixed into the projects.
+
+#### Options discussed
+| # | Option | How it works | Pros | Cons |
+|---|---|---|---|---|
+| A | **Merged career block + divider** *(designer's first recommendation)* | One card = role header + stat chips + a connected track (dots on a line, current stage glowing, "Promoted" mark) with the stage detail inline. Then a section break "Projects I shipped · 7" before the grid. The career block is full width with a left accent bar and no hover lift; project cards keep their grid and visuals. Phones: vertical track with the line on the left. | Everything visible without clicks; clear hierarchy ("me" vs "what I built") | Longer scroll; more design work |
+| B | **Two-tab switch** *(owner's idea)* — "Role & Growth at Hrud.ai" / "Projects at Hrud.ai (7)" | One segmented pill switch under the heading. Tab 1: role card + growth track + detail. Tab 2: project grid only. Sliding cyan highlight, cross-fade, min-height to avoid page jump, arrow-key navigation, proper tab roles, full-width switch on phones. | Cleanest separation; shorter page; consistent with the My Process lens buttons | One tab is hidden until clicked, so some visitors never see it |
+| C | **Slim horizontal strip above the role card** | Growth path as a compact strip (not a card) above the role card, one click per stage, short text. | Minimal change; does not compete with the projects | Smaller, easier to miss |
+| D | **Move it into "My Journey" (§16.7)** | Treat growth as milestones in the pending vertical timeline. | Natural place for the career story | Far from the Hrud.ai section the owner wanted it next to |
+| E | **Separate section after the projects** | Own section below the project grid. | Clear separation | Breaks the expected "role → what I did there" flow |
+
+**Designer's refinements if B is chosen:**
+1. **Default to the Projects tab** (recruiters skim; the projects are the strongest content). If the owner prefers the career story first, default to Role & Growth.
+2. Keep **one line of role context** above the switch ("AI Engineer · Hrud.ai · Jan 2026 – Present") so it is clear whose work it is in either tab.
+3. Show the **count on the button** ("Projects at Hrud.ai · 7") so it signals more content behind the click.
+4. Stage names visible on the track itself (the full path is visible without clicking); vertical list on phones.
+
+**Trade-off summary:** B (tabs) = cleaner and shorter; A (merged block) = everything visible. Owner leaning: **B** (suggested 2026-10-11); to be discussed.
+
+#### Implementation plan (once a layout is chosen)
+1. Decide the layout (A / B / C …) and, if B, the **default tab**.
+2. If B: add a `TabSwitch` (segmented control, `role="tablist"`, sliding highlight via `layoutId`), put the role card + `GrowthPath` in tab 1 and the project grid in tab 2, keep a `min-height` on the container (no storage needed).
+3. If A: merge `GrowthPath` into the role card, add the track (dots + line, vertical on phones), add the "Projects I shipped · 7" divider, remove the hover lift from the career block.
+4. Make sure the nav "Experience" link still lands on the section heading.
+5. Re-run the contrast audit; test at 375px and 1366px; test keyboard navigation.
+6. Update this document and `README.md`.
+
+#### Open questions for the owner
+- [ ] Which layout (A, B, C, D, E) and which default tab?
+- [ ] **Dates** for each stage (e.g. "Jan 2026 – …"). None were given, so none are shown.
+- [ ] Review the stage descriptions in `GROWTH_STAGES` (written from the resume; correct or extend them with what really changed at each step).
+- [ ] Should the role card title change from **"AI Engineer — Hrud.ai"** to **"AI Research Engineer — Hrud.ai"** (current role after the promotion)? If yes: update the site, `Resume-pullaiah.md`, the SEO / JSON-LD `jobTitle`, and the PDF.
+- [ ] Is "AI Intern" the correct first title at Hrud.ai? (The resume says "Team Lead — Hrud.ai Internship".)
+- [ ] Vercel project count for the DevTools Control Center card.
+
+### 16.16 Animated mascot — planning
+
+**Source:** `D:\Downloads\Make-Your-Own-Mascot.pdf` (free guide, Oct 2026). **Full, detailed plan: [`Mascot_Plan.md`](Mascot_Plan.md).**
+
+**Idea in one paragraph:** design a small animated, eyes-only character in the free Bible Strong Avatar Lab (browser studio, 10 starters, 23 animations, no login), export it as a tiny `.avatar.json`, mount it on the site with `@bible-strong/avatar-react`, and make it react to visitors (waking → idle on load, excited on Hire Me / Resume hover, celebrate when the contact form is sent, confused on errors, drowsy → sleeping after 30 s of inactivity, laughing on click). Optional: a speech bubble with a short tip per section.
+
+**Steps (summary):** 1) plan a "mascot card" with ChatGPT/Claude → 2) build it in the Studio and back up the project → 3) export React/TypeScript JSON with only the needed animations → 4) add `src/assets/mascot.avatar.json` + package + component → 5) wire reactions (loader end, nav buttons, `ContactForm`, idle timer, click) → 6) optional speech bubble → 7) QA at 375 px / 1366 px, reduced-motion, contrast, licence credit.
+
+**Site rules:** bottom-left, ~110 px (≈72 px on phones), must not cover the phone Resume / Hire Me bar or any button, no layout jumps, still expression for `prefers-reduced-motion`, tap instead of hover on touch, lazy-loaded after the loader.
+
+**Risks / flags:** the Studio and its packages are **AGPL-3.0** (check implications before shipping; credit the maker); the character is stored only in the browser, so **export the Studio project backup**; only use animation names present in the exported JSON.
+
+**Bonus:** exporting a PNG/SVG of the mascot can also provide the missing **`og:image`** and **favicon** (see §11).
+
+**Owner decisions needed:** mascot name and starter, body colour (cyan `#22d3ee` recommended), placement (every page vs. hero/contact only), speech bubble yes/no, whether the repo is public (AGPL), mascot on the loader or not.
+

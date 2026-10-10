@@ -1,7 +1,7 @@
-import { useRef, type MouseEvent } from "react";
-import { motion } from "motion/react";
-import { ArrowUpRight, Briefcase } from "lucide-react";
-import { WORK_PROJECTS, type WorkProject } from "../data";
+import { useRef, useState, type MouseEvent } from "react";
+import { AnimatePresence, motion } from "motion/react";
+import { ArrowRight, ArrowUpRight, Briefcase, TrendingUp } from "lucide-react";
+import { GROWTH_STAGES, WORK_PROJECTS, type WorkProject } from "../data";
 import { ProjectVisual } from "./ProjectVisual";
 
 const ACCENTS = ["34,211,238", "129,140,248", "16,185,129", "250,204,21"];
@@ -142,6 +142,76 @@ const ProjectCard = ({ p, index }: { p: WorkProject; index: number }) => {
   );
 };
 
+const GrowthPath = () => {
+  const [active, setActive] = useState(GROWTH_STAGES.length - 1);
+  const stage = GROWTH_STAGES[active];
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.7 }}
+      className="mb-8 rounded-3xl border border-white/20 bg-[#0b1017]/90 p-6 md:p-8"
+    >
+      <div className="mb-4 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.3em] text-[var(--gold)]">
+        <TrendingUp className="h-4 w-4" />
+        My growth at Hrud.ai
+      </div>
+
+      <div role="tablist" aria-label="Growth at Hrud.ai" className="flex flex-wrap items-center gap-2">
+        {GROWTH_STAGES.map((g, i) => {
+          const isActive = i === active;
+          return (
+            <div key={g.id} className="flex items-center gap-2">
+              <button
+                role="tab"
+                aria-selected={isActive}
+                type="button"
+                onClick={() => setActive(i)}
+                className={`rounded-full border px-4 py-2 font-mono text-xs tracking-wider transition-all duration-300 ${
+                  isActive
+                    ? "border-[var(--gold)] bg-[var(--gold)] text-black shadow-[0_0_24px_-4px_rgba(34,211,238,0.8)]"
+                    : "border-white/25 bg-white/[0.05] text-white/90 hover:border-[var(--gold)]/60 hover:text-white"
+                }`}
+              >
+                {g.label}
+              </button>
+              {i < GROWTH_STAGES.length - 1 && <ArrowRight className="hidden h-4 w-4 text-white/60 sm:block" />}
+            </div>
+          );
+        })}
+      </div>
+
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.div
+          key={stage.id}
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -8 }}
+          transition={{ duration: 0.25 }}
+          className="mt-6 rounded-2xl border border-white/10 bg-white/[0.04] p-5"
+        >
+          <div className="flex flex-wrap items-center gap-3">
+            <h4 className="font-headline text-xl font-bold text-white md:text-2xl">{stage.label}</h4>
+            <span className="rounded-full border border-emerald-400/50 bg-emerald-400/10 px-3 py-0.5 font-mono text-[11px] uppercase tracking-[0.2em] text-emerald-300">
+              {active === GROWTH_STAGES.length - 1 ? "Current" : `Step ${active + 1} of ${GROWTH_STAGES.length}`}
+            </span>
+          </div>
+          <p className="mt-2 text-sm leading-relaxed text-white/90 md:text-base">{stage.summary}</p>
+          <ul className="mt-3 grid gap-2 text-sm leading-relaxed text-white/90">
+            {stage.points.map((pt) => (
+              <li key={pt} className="flex gap-2">
+                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--gold)]" />
+                {pt}
+              </li>
+            ))}
+          </ul>
+        </motion.div>
+      </AnimatePresence>
+    </motion.div>
+  );
+};
+
 export const WorkExperience = () => (
   <section id="experience" className="relative overflow-hidden bg-[var(--bg)] py-32 md:py-40">
     <div className="absolute inset-0 dot-pattern opacity-[0.08]" />
@@ -205,6 +275,8 @@ export const WorkExperience = () => (
           ))}
         </ul>
       </motion.div>
+
+      <GrowthPath />
 
       <div className="grid gap-5 md:grid-cols-2">
         {WORK_PROJECTS.map((p, i) => (

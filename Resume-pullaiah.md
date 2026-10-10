@@ -1,7 +1,7 @@
 # **SOLIGE PULLAIAH**
 
 \+91 9346680696 ⋄ Visakhapatnam, India  
-[pulipavan696@gmail.com](mailto:pulipavan696@gmail.com) ⋄ [LinkedIn](https://www.linkedin.com/in/solige-pullaiah-478462270/) ⋄ [GitHub](https://github.com/puli-pro) ⋄ Portfolio
+[pulipavan696@gmail.com](mailto:pulipavan696@gmail.com) ⋄ [LinkedIn](https://www.linkedin.com/in/solige-pullaiah-478462270/) ⋄ [GitHub](https://github.com/puli-pro) ⋄ [Portfolio](https://soligepullaiah.vercel.app/)
 
 ## **OBJECTIVE**
 

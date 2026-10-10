@@ -665,3 +665,56 @@ export const WORK_PROJECTS: WorkProject[] = [
     links: [{ label: "xencomedical.com", href: "http://xencomedical.com/" }],
   },
 ];
+
+
+/* ---------- Growth path at Hrud.ai (wording from the resume; no dates invented) ---------- */
+export interface GrowthStage {
+  id: string;
+  label: string;
+  short: string;
+  summary: string;
+  points: string[];
+}
+
+export const GROWTH_STAGES: GrowthStage[] = [
+  {
+    id: "intern",
+    label: "AI Intern",
+    short: "Started",
+    summary: "Joined Hrud.ai and started building real AI features on the team's stack.",
+    points: [
+      "LLMs (Gemini), RAG pipelines and Supabase (PostgreSQL) backends.",
+      "Learned how production AI products are built, tested and shipped.",
+    ],
+  },
+  {
+    id: "lead",
+    label: "AI Team Lead",
+    short: "Leading",
+    summary: "Took ownership of design and delivery of AI projects, from idea to production.",
+    points: [
+      "Led AI engineering projects as Team Lead.",
+      "Designed user-first features, such as a voice/text AI assistant for website visitors.",
+    ],
+  },
+  {
+    id: "devops",
+    label: "DevOps & Architecture Engineer",
+    short: "Platform",
+    summary: "Built the structural backbone the rest of the ecosystem runs on.",
+    points: [
+      "Central control plane across 100+ repositories and 55 Supabase projects, with role-based access.",
+      "Automated health monitoring, and 194 automated CI tests with server-side authorization.",
+    ],
+  },
+  {
+    id: "research",
+    label: "AI Research Engineer",
+    short: "Promoted",
+    summary: "Promoted to bring research depth into production AI.",
+    points: [
+      "Applying new AI techniques to live projects.",
+      "Connecting different parts of a product to create more value.",
+    ],
+  },
+];

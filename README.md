@@ -2,6 +2,7 @@
 
 A single-page, animation-heavy personal portfolio site for **Solige Pullaiah** (alias *Puli Pavan*; the website display name is **Solige Pullaiah**), an AI Engineer based in Hyderabad, India. The site is built as a modern "AI/neural" themed landing page showcasing profile info, career journey, tech stack, engineering projects, and research publications.
 
+Live site: [https://soligepullaiah.vercel.app/](https://soligepullaiah.vercel.app/)  
 Live editor: [AI Studio project](https://ai.studio/apps/6a11c31a-ba6a-49e2-b5f5-d35f0bd7e0d5)
 
 ---
