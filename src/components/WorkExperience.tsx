@@ -1,4 +1,4 @@
-import { useRef, useState, type MouseEvent } from "react";
+import { useRef, useState, type KeyboardEvent, type MouseEvent } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { ArrowRight, ArrowUpRight, Briefcase, TrendingUp } from "lucide-react";
 import { GROWTH_STAGES, WORK_PROJECTS, type WorkProject } from "../data";
@@ -212,7 +212,27 @@ const GrowthPath = () => {
   );
 };
 
-export const WorkExperience = () => (
+type WorkTab = "role" | "projects";
+
+const TABS: { id: WorkTab; label: string }[] = [
+  { id: "role", label: "Role & Growth at Hrud.ai" },
+  { id: "projects", label: `Projects at Hrud.ai (${WORK_PROJECTS.length})` },
+];
+
+export const WorkExperience = () => {
+  // Opens on Projects (strongest content); Role & Growth is one click away.
+  const [tab, setTab] = useState<WorkTab>("projects");
+
+  const onTabKey = (e: KeyboardEvent<HTMLButtonElement>) => {
+    if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
+      e.preventDefault();
+      const next = tab === "role" ? "projects" : "role";
+      setTab(next);
+      document.getElementById(`work-tab-${next}`)?.focus();
+    }
+  };
+
+  return (
   <section id="experience" className="relative overflow-hidden bg-[var(--bg)] py-32 md:py-40">
     <div className="absolute inset-0 dot-pattern opacity-[0.08]" />
     <div className="pointer-events-none absolute -right-40 top-20 h-[480px] w-[480px] rounded-full bg-[var(--indigo)]/10 blur-[150px]" />
@@ -235,8 +255,62 @@ export const WorkExperience = () => (
         <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/83 md:text-lg">
           AI and full-stack products that real users and clients depend on.
         </p>
+        <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.25em] text-[var(--gold)]">
+          AI Engineer · Hrud.ai · Jan 2026 – Present
+        </p>
       </motion.div>
 
+      {/* two-tab switch */}
+      <div className="mb-10 flex justify-center">
+        <div
+          role="tablist"
+          aria-label="Work at Hrud.ai"
+          className="relative flex w-full max-w-xl rounded-full border border-white/25 bg-[#0b1017]/90 p-1.5 md:w-auto"
+        >
+          {TABS.map((t) => {
+            const active = tab === t.id;
+            return (
+              <button
+                key={t.id}
+                id={`work-tab-${t.id}`}
+                role="tab"
+                type="button"
+                aria-selected={active}
+                aria-controls={`work-panel-${t.id}`}
+                tabIndex={active ? 0 : -1}
+                onClick={() => setTab(t.id)}
+                onKeyDown={onTabKey}
+                className={`relative z-10 flex-1 rounded-full px-4 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.12em] transition-colors md:flex-none md:px-7 md:text-xs md:tracking-[0.18em] ${
+                  active ? "text-black" : "text-white/90 hover:text-white"
+                }`}
+              >
+                {active && (
+                  <motion.span
+                    layoutId="work-tab-highlight"
+                    transition={{ type: "spring", damping: 28, stiffness: 320 }}
+                    className="absolute inset-0 -z-10 rounded-full bg-[var(--gold)] shadow-[0_0_24px_-4px_rgba(34,211,238,0.8)]"
+                  />
+                )}
+                {t.label}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      <div className="min-h-[34rem]">
+      <AnimatePresence mode="wait" initial={false}>
+      {tab === "role" ? (
+      <motion.div
+        key="role"
+        id="work-panel-role"
+        role="tabpanel"
+        aria-labelledby="work-tab-role"
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -12 }}
+        transition={{ duration: 0.25 }}
+      >
       {/* role card */}
       <motion.div
         initial={{ opacity: 0, y: 24 }}
@@ -277,11 +351,25 @@ export const WorkExperience = () => (
       </motion.div>
 
       <GrowthPath />
-
-      <div className="grid gap-5 md:grid-cols-2">
+      </motion.div>
+      ) : (
+      <motion.div
+        key="projects"
+        id="work-panel-projects"
+        role="tabpanel"
+        aria-labelledby="work-tab-projects"
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -12 }}
+        transition={{ duration: 0.25 }}
+        className="grid gap-5 md:grid-cols-2"
+      >
         {WORK_PROJECTS.map((p, i) => (
           <ProjectCard key={p.id} p={p} index={i} />
         ))}
+      </motion.div>
+      )}
+      </AnimatePresence>
       </div>
 
       {/* CodeForces */}
@@ -304,4 +392,5 @@ export const WorkExperience = () => (
       </motion.div>
     </div>
   </section>
-);
+  );
+};
