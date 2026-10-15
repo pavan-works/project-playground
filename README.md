@@ -93,7 +93,7 @@ project-playground/
 
 The page (`PortfolioLanding` in [src/App.tsx](src/App.tsx)) renders, top to bottom:
 
-1. *(The old 2-second "Portfolio" loading screen was removed on 2026-10-15; the page renders immediately.)*
+1. **Loading screen** — an animated "Portfolio" logo/title reveal with the name, shown for ~2 seconds on load (kept by owner request).
 2. **`AnimatedNav`** — floating pill navigation that collapses on scroll, plus a **Hire Me** button fixed at the top right (links to `#contact`; on phones it appears once the menu collapses).
 3. **`Hero`** (`#home`) — full-height intro with a large "AI Engineer & ML Researcher" headline behind the smiling portrait (`portrait-smile.png`), location, and a row of companies/tools worked with.
 4. **`About`** (`#about`) — profile summary, key stats, an "Identity" panel and 4 focus-area cards (RAG & Retrieval, Agentic Systems, Applied Research, Production ML).

@@ -350,9 +350,9 @@ Built so far:
 38. **Loader lockup:** more space between the "Portfolio" lockup and the name so the name no longer overlaps the tail of the script "f" (name block margin `mt-28 md:mt-48`).
 39. **Growth path at Hrud.ai (first version):** `GROWTH_STAGES` in `data.ts` + `GrowthPath` in `WorkExperience.tsx` — four selectable stages (AI Intern → AI Team Lead → DevOps & Architecture Engineer → AI Research Engineer) with a detail panel, placed under the role card. **Layout is under discussion — see §16.15.** Descriptions were written from resume facts only; no dates.
 
-40. **Hrud.ai two-tab switch (2026-10-11):** `WorkExperience.tsx` now has a segmented switch with a sliding cyan highlight — **Role & Growth at Hrud.ai** (role card + growth track) and **Projects at Hrud.ai (7)** (project grid only). Opens on Projects. One context line above the switch ("AI Engineer · Hrud.ai · Jan 2026 – Present"); count on the Projects button; `role="tablist"` / `tab` / `tabpanel`, arrow-key navigation, cross-fade, `min-h-[34rem]` to limit page jump. The CodeForces strip stays below the tabs (different employer).
+40. **Hrud.ai two-tab switch (2026-10-11):** `WorkExperience.tsx` now has a segmented switch with a sliding cyan highlight — **Role & Growth at Hrud.ai** (role card + growth track) and **Projects at Hrud.ai (7)** (project grid only). Opens on Role & Growth (changed 2026-10-15 at the owner's request). One context line above the switch ("AI Engineer · Hrud.ai · Jan 2026 – Present"); count on the Projects button; `role="tablist"` / `tab` / `tabpanel`, arrow-key navigation, cross-fade, `min-h-[34rem]` to limit page jump. The CodeForces strip stays below the tabs (different employer).
 
-41. **Audit UX/technical fixes (2026-10-15):** "Visit hrud.ai" link (https://hrud.ai/) on the growth panel and the role-card company name in **Role & Growth at Hrud.ai**; 3D gallery no longer traps the page scroll or listens to arrow keys globally (focus-to-activate, Esc to leave, autoplay off for reduced motion); **2-second splash removed**; three.js lazy-loaded via `React.lazy` + IntersectionObserver (initial JS 396 → 160 KB gzipped); hero portrait PNG 742 KB → WebP 119 KB; `public/favicon.ico`, `favicon.svg`, `apple-touch-icon.png`, `icon-192.png` and a 1200×630 `og-image.jpg` + og/twitter image tags; global `:focus-visible` ring, skip-to-content link, `<MotionConfig reducedMotion="user">` + CSS reduced-motion rule, `role="dialog"` / focus trap / focus restore on the project detail view.
+41. **Audit UX/technical fixes (2026-10-15):** "Visit hrud.ai" link (https://hrud.ai/) on the growth panel and the role-card company name in **Role & Growth at Hrud.ai**; 3D gallery no longer traps the page scroll or listens to arrow keys globally (focus-to-activate, Esc to leave, autoplay off for reduced motion); 2-second splash briefly removed, then **restored at the owner's request** (owner wants the "Portfolio" + name loader kept); three.js lazy-loaded via `React.lazy` + IntersectionObserver (initial JS 396 → 160 KB gzipped); hero portrait PNG 742 KB → WebP 119 KB; `public/favicon.ico`, `favicon.svg`, `apple-touch-icon.png`, `icon-192.png` and a 1200×630 `og-image.jpg` + og/twitter image tags; global `:focus-visible` ring, skip-to-content link, `<MotionConfig reducedMotion="user">` + CSS reduced-motion rule, `role="dialog"` / focus trap / focus restore on the project detail view.
 
 Recent commits (newest first, abridged): `d3933ae` portfolio overwritten → `d0e517a` Let's Build + fixed buttons → `502f8da` font colours, twitter links → `8c2b74a` About summary, Hyderabad, SEO → `a7e73f3` components/assets/config → `040dfad` project view + docs → `bff2397` Hire Me + DevTools first. Items 33–39 may still be uncommitted; run `git status`.
 
@@ -489,7 +489,7 @@ Best fits for this portfolio: **command palette**, **bento grid** for About/skil
 | 16.12 Resume PDF / SEO / a11y | ✅ resume modal + PDF, SEO/OG/JSON-LD; ⏳ og:image/favicon/canonical, skip link, focus rings, reduced-motion audit |
 | 16.17 Contact delivery (Approach 4: Vercel function + Resend) | ⏳ planned — see [`Contact_Form_Plan.md`](Contact_Form_Plan.md) (needs Resend account / Vercel env vars) |
 | 16.16 Animated mascot | ⏳ planned — see [`Mascot_Plan.md`](Mascot_Plan.md) (needs owner decisions) |
-| 16.15 Growth and Projects at Hrud.ai | ✅ **Option B built (2026-10-11):** two-tab switch "Role & Growth at Hrud.ai" / "Projects at Hrud.ai (7)"; opens on Projects — see §16.15 |
+| 16.15 Growth and Projects at Hrud.ai | ✅ **Option B built (2026-10-11):** two-tab switch "Role & Growth at Hrud.ai" / "Projects at Hrud.ai (7)"; opens on Role & Growth — see §16.15 |
 | Top-right Hire Me | ✅ built |
 
 ### 16.1 What the reference does (analysis)
@@ -770,7 +770,7 @@ Current: 3 link cards only. Target (matches the reference):
 
 **Trade-off summary:** B (tabs) = cleaner and shorter; A (merged block) = everything visible.
 
-**DECISION (2026-10-11): Option B built.** Two-tab switch — Tab 1 "Role & Growth at Hrud.ai", Tab 2 "Projects at Hrud.ai (7)". It **opens on Projects** (designer's recommendation); to open on Role & Growth instead, change the initial state in `WorkExperience.tsx` (`useState<WorkTab>("projects")` → `"role"`). The refinements 2–4 below were applied (role context line, count on the button, tab roles / arrow keys).
+**DECISION (2026-10-11): Option B built.** Two-tab switch — Tab 1 "Role & Growth at Hrud.ai", Tab 2 "Projects at Hrud.ai (7)". It **opens on Role & Growth** (owner's choice, 2026-10-15; previously opened on Projects). The initial state is `useState<WorkTab>("role")` in `WorkExperience.tsx`. The refinements 2–4 below were applied (role context line, count on the button, tab roles / arrow keys).
 
 #### Implementation plan (once a layout is chosen)
 1. Decide the layout (A / B / C …) and, if B, the **default tab**.

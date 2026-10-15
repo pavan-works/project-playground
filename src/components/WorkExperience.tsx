@@ -233,8 +233,8 @@ const TABS: { id: WorkTab; label: string }[] = [
 ];
 
 export const WorkExperience = () => {
-  // Opens on Projects (strongest content); Role & Growth is one click away.
-  const [tab, setTab] = useState<WorkTab>("projects");
+  // Opens on Role & Growth (owner's choice); Projects is one click away.
+  const [tab, setTab] = useState<WorkTab>("role");
 
   const onTabKey = (e: KeyboardEvent<HTMLButtonElement>) => {
     if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
