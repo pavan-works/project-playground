@@ -50,6 +50,42 @@ body::before {
   opacity: 0.05;
 }
 
+/* ---- Accessibility ---- */
+@layer base {
+  /* visible keyboard focus everywhere (mouse clicks don't trigger it) */
+  :focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+}
+
+.skip-link {
+  position: fixed;
+  left: 1rem;
+  top: -4rem;
+  z-index: 200;
+  padding: 0.75rem 1.25rem;
+  border-radius: 9999px;
+  background: var(--gold);
+  color: #000;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: top 0.2s ease;
+}
+.skip-link:focus { top: 1rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 .glass-panel {
   background: rgba(15, 23, 42, 0.7);
   backdrop-filter: blur(24px);

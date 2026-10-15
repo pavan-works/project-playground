@@ -352,6 +352,8 @@ Built so far:
 
 40. **Hrud.ai two-tab switch (2026-10-11):** `WorkExperience.tsx` now has a segmented switch with a sliding cyan highlight — **Role & Growth at Hrud.ai** (role card + growth track) and **Projects at Hrud.ai (7)** (project grid only). Opens on Projects. One context line above the switch ("AI Engineer · Hrud.ai · Jan 2026 – Present"); count on the Projects button; `role="tablist"` / `tab` / `tabpanel`, arrow-key navigation, cross-fade, `min-h-[34rem]` to limit page jump. The CodeForces strip stays below the tabs (different employer).
 
+41. **Audit UX/technical fixes (2026-10-15):** "Visit hrud.ai" link (https://hrud.ai/) on the growth panel and the role-card company name in **Role & Growth at Hrud.ai**; 3D gallery no longer traps the page scroll or listens to arrow keys globally (focus-to-activate, Esc to leave, autoplay off for reduced motion); **2-second splash removed**; three.js lazy-loaded via `React.lazy` + IntersectionObserver (initial JS 396 → 160 KB gzipped); hero portrait PNG 742 KB → WebP 119 KB; `public/favicon.ico`, `favicon.svg`, `apple-touch-icon.png`, `icon-192.png` and a 1200×630 `og-image.jpg` + og/twitter image tags; global `:focus-visible` ring, skip-to-content link, `<MotionConfig reducedMotion="user">` + CSS reduced-motion rule, `role="dialog"` / focus trap / focus restore on the project detail view.
+
 Recent commits (newest first, abridged): `d3933ae` portfolio overwritten → `d0e517a` Let's Build + fixed buttons → `502f8da` font colours, twitter links → `8c2b74a` About summary, Hyderabad, SEO → `a7e73f3` components/assets/config → `040dfad` project view + docs → `bff2397` Hire Me + DevTools first. Items 33–39 may still be uncommitted; run `git status`.
 
 ---
@@ -363,7 +365,7 @@ Recent commits (newest first, abridged): `d3933ae` portfolio overwritten → `d0
 - [x] ~~Footer Twitter link~~ now points to https://x.com/puli_pullaiah.
 - [x] **`index.html` metadata:** title, description, Open Graph, Twitter card, JSON-LD, `theme-color` done (item 29).
 - [x] `og:url`, canonical and JSON-LD `url` added (2026-10-11, live URL https://soligepullaiah.vercel.app/).
-- [ ] Still to add to `index.html`: `og:image` (needs a 1200×630 share image in `public/`) and a favicon.
+- [x] `og:image` (`public/og-image.jpg`, 1200×630) and favicon set added (2026-10-15).
 - [ ] **Real project screenshots:** animated visuals now represent each project, but `projects[]` / `researchPapers[]` still carry Unsplash fallback images (unused when `visual` is set); add real screenshots/diagrams to case studies when available.
 - [ ] **SyncVerse links:** no `github`/`paperUrl` yet; add if/when public (the `DetailModal` handles missing links).
 - [ ] **Verify claims:** "15+ Systems shipped" in `ABOUT_STATS` is not supported by resume; confirm or change.

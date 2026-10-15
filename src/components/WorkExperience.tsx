@@ -4,7 +4,9 @@ import { ArrowRight, ArrowUpRight, Briefcase, TrendingUp } from "lucide-react";
 import { GROWTH_STAGES, WORK_PROJECTS, type WorkProject } from "../data";
 import { ProjectVisual } from "./ProjectVisual";
 
-const ACCENTS = ["34,211,238", "129,140,248", "16,185,129", "250,204,21"];
+const HRUDAI_URL = "https://hrud.ai/";
+
+const ACCENTS =["34,211,238", "129,140,248", "16,185,129", "250,204,21"];
 
 const ProjectCard = ({ p, index }: { p: WorkProject; index: number }) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -153,9 +155,20 @@ const GrowthPath = () => {
       transition={{ duration: 0.7 }}
       className="mb-8 rounded-3xl border border-white/20 bg-[#0b1017]/90 p-6 md:p-8"
     >
-      <div className="mb-4 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.3em] text-[var(--gold)]">
-        <TrendingUp className="h-4 w-4" />
-        My growth at Hrud.ai
+      <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+        <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.3em] text-[var(--gold)]">
+          <TrendingUp className="h-4 w-4" />
+          My growth at Hrud.ai
+        </div>
+        <a
+          href={HRUDAI_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 rounded-full border border-white/25 bg-white/[0.05] px-3 py-1.5 font-mono text-[11px] tracking-wider text-white/90 transition-colors hover:border-[var(--gold)]/60 hover:text-white"
+        >
+          Visit hrud.ai
+          <ArrowUpRight className="h-3.5 w-3.5" />
+        </a>
       </div>
 
       <div role="tablist" aria-label="Growth at Hrud.ai" className="flex flex-wrap items-center gap-2">
@@ -331,7 +344,16 @@ export const WorkExperience = () => {
             Jan 2026 – Present · Current
           </div>
           <h3 className="mt-1 font-headline text-2xl font-bold text-white md:text-3xl">
-            AI Engineer — Hrud.ai
+            AI Engineer —{" "}
+            <a
+              href={HRUDAI_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 underline decoration-[var(--gold)]/50 underline-offset-4 transition-colors hover:text-[var(--gold)]"
+            >
+              Hrud.ai
+              <ArrowUpRight className="h-5 w-5" />
+            </a>
           </h3>
           <p className="mt-2 max-w-3xl text-sm leading-relaxed text-white/83">
             Building production-grade AI systems with LLMs, RAG pipelines and agents, plus the

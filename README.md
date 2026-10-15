@@ -93,12 +93,12 @@ project-playground/
 
 The page (`PortfolioLanding` in [src/App.tsx](src/App.tsx)) renders, top to bottom:
 
-1. **Loading screen** — an animated "Portfolio" logo/title reveal shown for ~2 seconds on load.
+1. *(The old 2-second "Portfolio" loading screen was removed on 2026-10-15; the page renders immediately.)*
 2. **`AnimatedNav`** — floating pill navigation that collapses on scroll, plus a **Hire Me** button fixed at the top right (links to `#contact`; on phones it appears once the menu collapses).
 3. **`Hero`** (`#home`) — full-height intro with a large "AI Engineer & ML Researcher" headline behind the smiling portrait (`portrait-smile.png`), location, and a row of companies/tools worked with.
 4. **`About`** (`#about`) — profile summary, key stats, an "Identity" panel and 4 focus-area cards (RAG & Retrieval, Agentic Systems, Applied Research, Production ML).
 5. **`WorkExperience`** (`#experience`) — "Shipped at Hrud.ai": the AI Engineer role card, seven project cards (DevTools Control Center first, Job Galaxy, NCPL chatbot, Career Advisor Bot, NTRview Log, Pulse Celebrations v2, Xencomedical), each with an **animated visual**, plus a CodeForces strip.
-6. **`Experience`** (`#journey`) — "The Journey": quote, active-stop panel and the Three.js `InfiniteGallery` (visitors can add their own images, stored in `localStorage`).
+6. **`Experience`** (`#journey`) — "The Journey": quote, active-stop panel and the Three.js `InfiniteGallery`, lazy-loaded in its own chunk when the section nears the viewport. The wheel and arrow keys only move it after the visitor clicks/focuses it (Esc releases it); autoplay is off under reduced motion. Visitors can add their own images, stored in `localStorage`.
 7. **`Expertise`** (`#expertise`) — **My Skillset** (`Skillset`: AI & ML, Languages, Databases, Cloud & DevOps as spotlight cards with "where I used it", plus a skills marquee) followed by the logo grids "Tools & Platforms" / "APIs & AI Tools".
 8. **`Process`** (`#process`) — "My Process": six steps (Understand the Problem → Plan the Architecture → Check What Already Exists → Design → Build & Evaluate → Deploy & Improve) with a lens switcher (Research Paper · ML/DL/NLP · RAG · Agents) and a feedback-loop callout.
 9. **`Works`** (`#works`) — "Selected Works": Engineering Projects and Research Publications as `ProjectCard`s with animated visuals (RAG pipeline, job-search agent, English→Telugu/Tamil translation, speech→lip-sync). Opening one shows a full-width animation, details, and floating **Back to Works** / close buttons (clicking the empty area also closes).

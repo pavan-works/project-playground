@@ -63,14 +63,17 @@ function Scene({
   visibleCount,
   onActiveChange,
   interactedRef,
+  velocity,
+  autoplay,
 }: {
   images: string[];
   visibleCount: number;
   onActiveChange: (i: number) => void;
   interactedRef: React.MutableRefObject<number>;
+  velocity: React.MutableRefObject<number>;
+  autoplay: boolean;
 }) {
   const textures = useTexture(images);
-  const velocity = useRef(0);
   const activeRef = useRef(-1);
 
   const materials = useMemo(
@@ -96,31 +99,9 @@ function Scene({
 
   const meshRefs = useRef<(THREE.Mesh | null)[]>([]);
 
-  useEffect(() => {
-    const onWheel = (e: WheelEvent) => {
-      e.preventDefault();
-      const dy = e.deltaY * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? 100 : 1);
-      velocity.current += dy * 0.012;
-      interactedRef.current = Date.now();
-    };
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "ArrowUp" || e.key === "ArrowLeft") velocity.current -= 2;
-      else if (e.key === "ArrowDown" || e.key === "ArrowRight") velocity.current += 2;
-      else return;
-      interactedRef.current = Date.now();
-    };
-    const canvas = document.querySelector<HTMLCanvasElement>("[data-journey-gallery] canvas");
-    canvas?.addEventListener("wheel", onWheel, { passive: false });
-    window.addEventListener("keydown", onKey);
-    return () => {
-      canvas?.removeEventListener("wheel", onWheel);
-      window.removeEventListener("keydown", onKey);
-    };
-  }, [interactedRef]);
-
   useFrame((state, delta) => {
     const idle = Date.now() - interactedRef.current > 3000;
-    if (idle) velocity.current += 0.35 * delta;
+    if (autoplay && idle) velocity.current += 0.35 * delta;
     velocity.current *= 0.94;
 
     const time = state.clock.getElapsedTime();
@@ -202,6 +183,9 @@ function Scene({
   );
 }
 
+const prefersReducedMotion = () =>
+  typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
 export const InfiniteGallery = ({
   images,
   onActiveChange,
@@ -213,7 +197,11 @@ export const InfiniteGallery = ({
 }) => {
   const [supported, setSupported] = useState(true);
   const [paused, setPaused] = useState(false);
+  const [focused, setFocused] = useState(false);
+  const [autoplay] = useState(() => !prefersReducedMotion());
   const interactedRef = useRef(0);
+  const velocity = useRef(0);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     try {
@@ -225,13 +213,41 @@ export const InfiniteGallery = ({
   }, []);
 
   useEffect(() => {
+    if (!autoplay) return;
     const id = setInterval(() => setPaused(Date.now() - interactedRef.current < 3000), 500);
     return () => clearInterval(id);
-  }, []);
+  }, [autoplay]);
+
+  // The wheel only drives the gallery after the visitor has clicked/focused it,
+  // so scrolling the page past it never stalls.
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const onWheel = (e: WheelEvent) => {
+      if (document.activeElement !== el) return;
+      e.preventDefault();
+      const dy = e.deltaY * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? 100 : 1);
+      velocity.current += dy * 0.012;
+      interactedRef.current = Date.now();
+    };
+    el.addEventListener("wheel", onWheel, { passive: false });
+    return () => el.removeEventListener("wheel", onWheel);
+  }, [supported]);
 
   const noteInteraction = useCallback(() => {
     interactedRef.current = Date.now();
   }, []);
+
+  const onKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === "ArrowUp" || e.key === "ArrowLeft") velocity.current -= 2;
+    else if (e.key === "ArrowDown" || e.key === "ArrowRight") velocity.current += 2;
+    else if (e.key === "Escape") {
+      containerRef.current?.blur();
+      return;
+    } else return;
+    e.preventDefault();
+    interactedRef.current = Date.now();
+  };
 
   if (!supported) {
     return (
@@ -249,23 +265,42 @@ export const InfiniteGallery = ({
 
   return (
     <div
+      ref={containerRef}
       data-journey-gallery
-      onPointerDown={noteInteraction}
+      tabIndex={0}
+      role="region"
+      aria-roledescription="gallery"
+      aria-label="Journey gallery. Use arrow keys to move between stops, Escape to leave."
+      onPointerDown={() => {
+        noteInteraction();
+        containerRef.current?.focus({ preventScroll: true });
+      }}
       onTouchStart={noteInteraction}
-      className={`relative ${className}`}
+      onKeyDown={onKeyDown}
+      onFocus={() => setFocused(true)}
+      onBlur={() => setFocused(false)}
+      className={`relative rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)] ${className}`}
     >
       <Canvas camera={{ position: [0, 0, 10], fov: 55 }} dpr={[1, 2]} gl={{ antialias: true, alpha: true }}>
-        <Scene images={images} visibleCount={10} onActiveChange={onActiveChange} interactedRef={interactedRef} />
+        <Scene
+          images={images}
+          visibleCount={10}
+          onActiveChange={onActiveChange}
+          interactedRef={interactedRef}
+          velocity={velocity}
+          autoplay={autoplay}
+        />
       </Canvas>
       <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 flex flex-col items-center gap-2 px-6 pb-2 text-center">
         <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-white/83">
-          Use mouse wheel, arrow keys, or touch to navigate
+          {focused
+            ? "Mouse wheel or arrow keys to navigate · Esc to leave"
+            : "Click the gallery, then use the mouse wheel or arrow keys"}
         </p>
         <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-white/80">
-          {paused ? "Auto-play resumes after 3 seconds of inactivity" : "Auto-playing"}
+          {!autoplay ? "Auto-play off (reduced motion)" : paused ? "Auto-play resumes after 3 seconds of inactivity" : "Auto-playing"}
         </p>
       </div>
-
     </div>
   );
 };

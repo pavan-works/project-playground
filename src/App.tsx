@@ -8,7 +8,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { motion, AnimatePresence, useScroll, useTransform, useSpring } from "motion/react";
+import { motion, AnimatePresence, MotionConfig, useScroll, useTransform, useSpring } from "motion/react";
 import { 
   ArrowUpRight,
   Menu,
@@ -31,11 +31,10 @@ import {
   X,
   ArrowLeft,
 } from "lucide-react";
-import { useState, useEffect, useRef, useMemo } from "react";
+import { useState, useEffect, useRef, useMemo, lazy, Suspense } from "react";
 import { createPortal } from "react-dom";
-import { InfiniteGallery } from "./components/InfiniteGallery";
 import { PORTFOLIO_DATA, JOURNEY, JOURNEY_QUOTE, type Project } from "./data";
-import portraitCutout from "./assets/portrait-smile.png";
+import portraitCutout from "./assets/portrait-smile.webp";
 import { AnimatedNav } from "./components/AnimatedNav";
 import { Skillset } from "./components/Skillset";
 import { Process } from "./components/Process";
@@ -45,6 +44,49 @@ import { ContactForm } from "./components/ContactForm";
 import { ResumeButton, ResumeModal } from "./components/ResumeModal";
 import { SoftSkills, Achievements } from "./components/SoftSkillsAchievements";
 import logoGmail from "./assets/logos/gmail.svg";
+
+// three.js is only needed by the Journey gallery: load it in its own chunk,
+// and only once the gallery is close to the viewport.
+const InfiniteGallery = lazy(() =>
+  import("./components/InfiniteGallery").then((m) => ({ default: m.InfiniteGallery })),
+);
+
+const GalleryPlaceholder = ({ className }: { className: string }) => (
+  <div className={`flex items-center justify-center rounded-2xl border border-white/10 bg-white/[0.02] ${className}`}>
+    <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-white/70">Loading gallery…</span>
+  </div>
+);
+
+const LazyGallery = (props: { images: string[]; onActiveChange: (i: number) => void; className: string }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [near, setNear] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || near) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setNear(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: "800px 0px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [near]);
+  return (
+    <div ref={ref} className="flex min-w-0 flex-1 flex-col">
+      {near ? (
+        <Suspense fallback={<GalleryPlaceholder className={props.className} />}>
+          <InfiniteGallery {...props} />
+        </Suspense>
+      ) : (
+        <GalleryPlaceholder className={props.className} />
+      )}
+    </div>
+  );
+};
 
 
 const Hero = () => {
@@ -450,7 +492,7 @@ const Experience = () => {
             <ActiveStopPanel index={activeStop} />
           </div>
           <div className="flex min-w-0 flex-col gap-3">
-            <InfiniteGallery
+            <LazyGallery
               images={galleryImages}
               onActiveChange={setActiveStop}
               className="min-h-[360px] w-full flex-1 md:min-h-[440px]"
@@ -693,16 +735,43 @@ const DetailModal = ({
   onClose: () => void;
   accent: "gold" | "emerald";
 }) => {
+  const closeRef = useRef<HTMLButtonElement>(null);
+
   useEffect(() => {
     if (!item) return;
+    const previouslyFocused = document.activeElement as HTMLElement | null;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape") {
+        onClose();
+        return;
+      }
+      if (e.key !== "Tab") return;
+      // keep keyboard focus inside the dialog (close bar + panel)
+      const focusables = Array.from(
+        document.querySelectorAll<HTMLElement>(
+          "[data-detail-modal] a[href], [data-detail-modal] button:not([disabled])",
+        ),
+      );
+      if (!focusables.length) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      const inside = focusables.includes(document.activeElement as HTMLElement);
+      if (e.shiftKey && (document.activeElement === first || !inside)) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && (document.activeElement === last || !inside)) {
+        e.preventDefault();
+        first.focus();
+      }
     };
     document.body.style.overflow = "hidden";
     window.addEventListener("keydown", onKey);
+    const t = setTimeout(() => closeRef.current?.focus({ preventScroll: true }), 50);
     return () => {
+      clearTimeout(t);
       document.body.style.overflow = "";
       window.removeEventListener("keydown", onKey);
+      previouslyFocused?.focus?.({ preventScroll: true });
     };
   }, [item, onClose]);
 
@@ -719,6 +788,7 @@ const DetailModal = ({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
+          data-detail-modal
           className="pointer-events-none fixed inset-x-0 top-0 z-[120] flex items-start justify-between p-3 md:p-6"
         >
           <button
@@ -731,6 +801,7 @@ const DetailModal = ({
             <span className="sm:hidden">Back</span>
           </button>
           <button
+            ref={closeRef}
             type="button"
             onClick={onClose}
             className="pointer-events-auto flex h-10 w-10 items-center justify-center rounded-full border border-white/30 bg-black/70 text-white shadow-lg backdrop-blur-md transition-all hover:bg-white hover:text-black"
@@ -748,10 +819,14 @@ const DetailModal = ({
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
           onClick={onClose}
+          data-detail-modal
           className="fixed inset-0 z-[100] bg-black/70 backdrop-blur-xl flex items-start justify-center overflow-y-auto px-4 pb-10 pt-16 md:py-16"
         >
           <motion.div
             key="panel"
+            role="dialog"
+            aria-modal="true"
+            aria-label={item.title}
             initial={{ opacity: 0, y: 40, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.98 }}
@@ -1183,81 +1258,12 @@ const Footer = () => (
 );
 
 export default function PortfolioLanding() {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 2000);
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (loading) {
-    return (
-      <div className="fixed inset-0 bg-[var(--bg)] flex flex-col items-center justify-center z-[100] overflow-hidden px-4">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] bg-[var(--gold)]/5 rounded-full blur-[140px] pointer-events-none" />
-
-        {/* Port f olio lockup */}
-        <div className="relative flex items-center justify-center h-[220px] md:h-[380px] w-full max-w-[1400px]">
-          <motion.h1
-            initial={{ opacity: 0, x: -60 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="text-[90px] md:text-[280px] font-display italic font-black text-white leading-none tracking-tighter absolute left-1/2 -translate-x-full -translate-y-[18%]"
-          >
-            Port
-          </motion.h1>
-          <motion.span
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="z-30 absolute left-1/2 -translate-x-[42%] translate-y-[20%] text-[130px] md:text-[500px] font-script italic text-[var(--gold)] leading-none drop-shadow-[0_0_80px_rgba(34,211,238,0.5)]"
-          >
-            f
-          </motion.span>
-          <motion.h1
-            initial={{ opacity: 0, x: 60 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="text-[90px] md:text-[280px] font-display italic font-black text-white leading-none tracking-tighter absolute left-1/2 translate-x-0 translate-y-[52%]"
-          >
-            olio
-          </motion.h1>
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6, duration: 0.8 }}
-          className="text-center z-30 mt-28 md:mt-48"
-        >
-          <h2 className="text-3xl md:text-6xl font-headline font-bold tracking-tighter mb-4 flex items-baseline justify-center gap-4">
-            <span className="text-white">{PORTFOLIO_DATA.name.split(' ')[0]}</span>
-            <span className="text-white/83">{PORTFOLIO_DATA.name.split(' ')[1]}</span>
-          </h2>
-          <div className="flex items-center justify-center gap-6 mb-6">
-            <div className="h-[1px] w-12 md:w-24 bg-white/10" />
-            <p className="text-[var(--rv-muted)] font-mono text-[8px] md:text-[11px] tracking-[0.5em] uppercase max-w-2xl">
-              Architecting the future of human-AI collaboration through <span className="text-[var(--gold)] font-bold">neural synthesis</span>
-            </p>
-            <div className="h-[1px] w-12 md:w-24 bg-white/10" />
-          </div>
-
-          <div className="mt-8 mx-auto w-48 h-[1px] bg-white/5 relative overflow-hidden">
-            <motion.div
-              initial={{ left: '-100%' }}
-              animate={{ left: '100%' }}
-              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute inset-y-0 w-1/2 bg-[var(--gold)]/40"
-            />
-          </div>
-        </motion.div>
-      </div>
-    );
-  }
-
   return (
+    <MotionConfig reducedMotion="user">
     <div className="bg-[var(--bg)] text-[var(--rv-muted)] min-h-screen selection:bg-[var(--gold)] selection:text-black">
+      <a href="#main" className="skip-link">Skip to content</a>
       <AnimatedNav />
-      <main className="relative z-10">
+      <main id="main" tabIndex={-1} className="relative z-10 outline-none">
         <Hero />
         <About />
         <WorkExperience />
@@ -1275,6 +1281,7 @@ export default function PortfolioLanding() {
       {/* Global Vignette */}
       <div className="fixed inset-0 pointer-events-none bg-radial-[circle_at_center,_transparent_0%,_var(--bg)_95%] opacity-50 z-40" />
     </div>
+    </MotionConfig>
   );
 }
 
