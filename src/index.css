@@ -86,6 +86,31 @@ body::before {
   }
 }
 
+/* ---- Contact form: keep autofilled fields in the dark theme ----
+   Browsers paint their own light background/text on autofilled inputs; an inset
+   shadow covers that background and text-fill-color restores the white text.
+   #191d23 = the field's rendered fill (white/6% over the 90%-opaque #0b1017 card). */
+.contact-input:-webkit-autofill,
+.contact-input:-webkit-autofill:hover,
+.contact-input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #ffffff;
+  caret-color: #ffffff;
+  -webkit-box-shadow: 0 0 0 1000px #191d23 inset;
+  box-shadow: 0 0 0 1000px #191d23 inset;
+  transition: background-color 9999s ease-out 0s;
+}
+.contact-input:autofill {
+  -webkit-text-fill-color: #ffffff;
+  caret-color: #ffffff;
+  box-shadow: 0 0 0 1000px #191d23 inset;
+}
+.contact-input:-webkit-autofill:focus,
+.contact-input:autofill:focus {
+  /* keep the cyan focus ring visible on top of the cover */
+  -webkit-box-shadow: 0 0 0 1000px #20252a inset, 0 0 0 2px rgba(34, 211, 238, 0.6);
+  box-shadow: 0 0 0 1000px #20252a inset, 0 0 0 2px rgba(34, 211, 238, 0.6);
+}
+
 .glass-panel {
   background: rgba(15, 23, 42, 0.7);
   backdrop-filter: blur(24px);

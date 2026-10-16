@@ -57,7 +57,7 @@ const Field = ({
 );
 
 const inputCls =
-  "peer w-full rounded-xl border border-white/20 bg-white/[0.06] px-4 pb-2 pt-6 text-[15px] text-white placeholder-transparent outline-none transition-colors focus:border-[var(--gold)] focus-visible:ring-2 focus-visible:ring-[var(--gold)]/60 focus:bg-white/[0.09]";
+  "contact-input peer w-full rounded-xl border border-white/20 bg-white/[0.06] px-4 pb-2 pt-6 text-[15px] text-white placeholder-transparent outline-none transition-colors focus:border-[var(--gold)] focus-visible:ring-2 focus-visible:ring-[var(--gold)]/60 focus:bg-white/[0.09]";
 
 export const ContactForm = () => {
   const [f, setF] = useState<Fields>({ first: "", last: "", reach: "", message: "", ok: false });
