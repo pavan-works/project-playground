@@ -1,8 +1,10 @@
-import { useMemo, useState, type FormEvent } from "react";
+import { useMemo, useRef, useState, type FormEvent } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import {
+  AlertTriangle,
   Check,
   Copy,
+  Loader2,
   Mail,
   MessageCircle,
   MessageSquareText,
@@ -16,11 +18,10 @@ const EMAIL = "pulipavan696@gmail.com";
 
 type Fields = { first: string; last: string; reach: string; message: string; ok: boolean };
 type Errors = Partial<Record<keyof Fields, string>>;
+type Status = "idle" | "sending" | "sent" | "error";
 
-const isMobileDevice = () =>
-  typeof navigator !== "undefined" &&
-  (/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) ||
-    (navigator.maxTouchPoints > 1 && window.innerWidth < 900));
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const isPhone = (v: string) => /^[+\d][\d\s().-]{5,}$/.test(v) && v.replace(/\D/g, "").length >= 7;
 
 const isIOS = () =>
   typeof navigator !== "undefined" && /iPhone|iPad|iPod/i.test(navigator.userAgent);
@@ -61,8 +62,11 @@ const inputCls =
 export const ContactForm = () => {
   const [f, setF] = useState<Fields>({ first: "", last: "", reach: "", message: "", ok: false });
   const [errors, setErrors] = useState<Errors>({});
-  const [sent, setSent] = useState<string | null>(null);
+  const [status, setStatus] = useState<Status>("idle");
+  const [serverError, setServerError] = useState("");
   const [copied, setCopied] = useState(false);
+  const [company, setCompany] = useState(""); // honeypot: hidden from people, bots fill it in
+  const startedAt = useRef(Date.now());
 
   const set = <K extends keyof Fields>(k: K, v: Fields[K]) => {
     setF((p) => ({ ...p, [k]: v }));
@@ -78,24 +82,73 @@ export const ContactForm = () => {
   const validate = (): Errors => {
     const e: Errors = {};
     if (!f.first.trim()) e.first = "Please add your first name.";
-    if (f.reach.trim().length < 5) e.reach = "Add an email or phone number so I can reply.";
+    const reach = f.reach.trim();
+    if (!reach) e.reach = "Add an email or phone number so I can reply.";
+    else if (!(EMAIL_RE.test(reach) || isPhone(reach))) e.reach = "Enter a valid email address or phone number.";
     if (f.message.trim().length < 5) e.message = "Write a short message.";
     if (!f.ok) e.ok = "Please tick the permission box so I can reply.";
     return e;
   };
 
-  const onSubmit = (ev: FormEvent) => {
+  const onSubmit = async (ev: FormEvent) => {
     ev.preventDefault();
+    if (status === "sending") return;
     const e = validate();
     setErrors(e);
     if (Object.keys(e).length) return;
-    setSent(composed);
-    if (isMobileDevice()) window.location.href = smsHref(composed);
+
+    setStatus("sending");
+    setServerError("");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          first: f.first,
+          last: f.last,
+          reach: f.reach,
+          message: f.message,
+          consent: f.ok,
+          company,
+          startedAt: startedAt.current,
+        }),
+        signal: AbortSignal.timeout(15_000),
+      });
+      const out = (await res.json().catch(() => null)) as
+        | { ok?: boolean; error?: string; fields?: Partial<Record<string, string>> }
+        | null;
+      // success only when the server confirms the email service accepted the message
+      if (res.ok && out?.ok) {
+        setStatus("sent");
+        return;
+      }
+      if (out?.fields) {
+        const { consent, ...rest } = out.fields;
+        setErrors({ ...rest, ...(consent ? { ok: consent } : {}) } as Errors);
+      }
+      setServerError(out?.error ?? "Your message could not be delivered right now.");
+      setStatus("error");
+    } catch {
+      setServerError(
+        typeof navigator !== "undefined" && !navigator.onLine
+          ? "You seem to be offline."
+          : "Your message could not be delivered right now.",
+      );
+      setStatus("error");
+    }
+  };
+
+  const reset = () => {
+    setF({ first: "", last: "", reach: "", message: "", ok: false });
+    setErrors({});
+    setServerError("");
+    setStatus("idle");
+    startedAt.current = Date.now();
   };
 
   const copy = async () => {
     try {
-      await navigator.clipboard.writeText(sent ?? composed);
+      await navigator.clipboard.writeText(composed);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
@@ -122,11 +175,12 @@ export const ContactForm = () => {
           Reach me directly
         </span>
         <h3 className="mt-5 font-headline text-2xl font-bold leading-tight text-white md:text-3xl">
-          Your message lands on my phone as a text.
+          Your message lands straight in my inbox.
         </h3>
         <p className="mt-3 text-sm leading-relaxed text-white/83">
-          Write it on the right, hit send, and it opens as a prefilled text to{" "}
-          <b className="text-white">{CONTACT_PHONE.display}</b>. Prefer another channel? Use these.
+          Write it on the right and hit send: it is delivered to my email from any device, no app
+          needed. Prefer another channel? Text, WhatsApp or call me on{" "}
+          <b className="text-white">{CONTACT_PHONE.display}</b>.
         </p>
 
         <div className="mt-6 grid gap-3">
@@ -183,8 +237,21 @@ export const ContactForm = () => {
             Send a message
           </span>
           <span className="font-mono text-[11px] tracking-[0.2em] text-white/86">
-            → TEXT TO {CONTACT_PHONE.display}
+            → STRAIGHT TO MY INBOX
           </span>
+        </div>
+
+        {/* honeypot: off-screen, skipped by keyboard and screen readers */}
+        <div aria-hidden="true" className="absolute -left-[9999px] h-px w-px overflow-hidden">
+          <label htmlFor="c-company">Company</label>
+          <input
+            id="c-company"
+            name="company"
+            tabIndex={-1}
+            autoComplete="off"
+            value={company}
+            onChange={(e) => setCompany(e.target.value)}
+          />
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2">
@@ -252,56 +319,95 @@ export const ContactForm = () => {
         <div className="mt-6 flex flex-wrap items-center gap-4">
           <button
             type="submit"
-            className="group inline-flex items-center gap-2.5 rounded-full bg-[var(--gold)] px-7 py-3.5 font-mono text-xs font-semibold uppercase tracking-[0.2em] text-black shadow-[0_0_30px_-6px_rgba(34,211,238,0.8)] transition-all hover:-translate-y-0.5 hover:shadow-[0_0_40px_-4px_rgba(34,211,238,1)]"
+            disabled={status === "sending"}
+            className="group inline-flex items-center gap-2.5 rounded-full bg-[var(--gold)] px-7 py-3.5 font-mono text-xs font-semibold uppercase tracking-[0.2em] text-black shadow-[0_0_30px_-6px_rgba(34,211,238,0.8)] transition-all hover:-translate-y-0.5 hover:shadow-[0_0_40px_-4px_rgba(34,211,238,1)] disabled:cursor-wait disabled:opacity-70 disabled:hover:translate-y-0"
           >
-            Send message
-            <Send className="h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+            {status === "sending" ? "Sending…" : "Send message"}
+            {status === "sending" ? (
+              <Loader2 className="h-4 w-4 animate-spin" />
+            ) : (
+              <Send className="h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+            )}
           </button>
           <p className="max-w-xs text-xs leading-snug text-white/86">
-            Sending opens your messaging app with the text ready, addressed to my number.
+            Delivered straight to my email inbox.
           </p>
         </div>
 
-        <AnimatePresence>
-          {sent && (
+        <p className="sr-only" aria-live="polite">
+          {status === "sending" ? "Sending your message…" : ""}
+        </p>
+
+        <AnimatePresence mode="wait">
+          {status === "sent" && (
             <motion.div
+              key="sent"
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               className="overflow-hidden"
+              role="status"
               aria-live="polite"
             >
               <div className="mt-6 rounded-2xl border border-emerald-400/50 bg-emerald-400/[0.08] p-5">
                 <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.25em] text-emerald-300">
-                  <Check className="h-4 w-4" /> Message ready
+                  <Check className="h-4 w-4" /> Message sent
                 </div>
-                <p className="mt-3 rounded-xl bg-black/30 p-3 text-sm leading-relaxed text-white/90">
-                  {sent}
+                <p className="mt-3 text-sm leading-relaxed text-white/90">
+                  Thanks, {f.first.trim()}! Your message is in my inbox, and I will reply to{" "}
+                  <b className="text-white">{f.reach.trim()}</b> soon.
                 </p>
+                <button
+                  type="button"
+                  onClick={reset}
+                  className="mt-4 inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-2 text-xs font-medium text-white transition-colors hover:bg-white/20"
+                >
+                  Send another message
+                </button>
+              </div>
+            </motion.div>
+          )}
+
+          {status === "error" && (
+            <motion.div
+              key="error"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              className="overflow-hidden"
+              role="alert"
+            >
+              <div className="mt-6 rounded-2xl border border-rose-300/50 bg-rose-400/[0.08] p-5">
+                <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.25em] text-rose-200">
+                  <AlertTriangle className="h-4 w-4" /> Not sent
+                </div>
+                <p className="mt-3 text-sm leading-relaxed text-white/90">{serverError}</p>
                 <p className="mt-3 text-xs leading-relaxed text-white/83">
-                  On a phone your texting app should have opened. If nothing opened (for example on a
-                  computer), send it with one of these:
+                  You can send the same message yourself with one of these:
+                </p>
+                <p className="mt-3 rounded-xl bg-black/30 p-3 text-sm leading-relaxed text-white/90">
+                  {composed}
                 </p>
                 <div className="mt-3 flex flex-wrap gap-2.5">
                   <a
-                    href={smsHref(sent)}
+                    href={smsHref(composed)}
                     className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-2 text-xs font-medium text-white transition-colors hover:bg-white/20"
                   >
-                    <MessageSquareText className="h-4 w-4" /> Open SMS app
+                    <MessageSquareText className="h-4 w-4" /> Text (SMS)
                   </a>
                   <a
-                    href={waHref(sent)}
+                    href={waHref(composed)}
                     target="_blank"
                     rel="noreferrer"
                     className="inline-flex items-center gap-2 rounded-full border border-emerald-400/50 bg-emerald-400/10 px-4 py-2 text-xs font-medium text-emerald-200 transition-colors hover:bg-emerald-400/20"
                   >
-                    <MessageCircle className="h-4 w-4" /> Send on WhatsApp
+                    <MessageCircle className="h-4 w-4" /> WhatsApp
                   </a>
                   <a
-                    href={`mailto:${EMAIL}?subject=${encodeURIComponent("Portfolio enquiry")}&body=${encodeURIComponent(sent)}`}
+                    href={`mailto:${EMAIL}?subject=${encodeURIComponent("Portfolio enquiry")}&body=${encodeURIComponent(composed)}`}
                     className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-2 text-xs font-medium text-white transition-colors hover:bg-white/20"
                   >
-                    <Mail className="h-4 w-4" /> Email instead
+                    <Mail className="h-4 w-4" /> Email app
                   </a>
                   <button
                     type="button"

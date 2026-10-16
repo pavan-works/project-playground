@@ -354,6 +354,7 @@ Built so far:
 
 41. **Audit UX/technical fixes (2026-10-15):** "Visit hrud.ai" link (https://hrud.ai/) on the growth panel and the role-card company name in **Role & Growth at Hrud.ai**; 3D gallery no longer traps the page scroll or listens to arrow keys globally (focus-to-activate, Esc to leave, autoplay off for reduced motion); 2-second splash briefly removed, then **restored at the owner's request** (owner wants the "Portfolio" + name loader kept); three.js lazy-loaded via `React.lazy` + IntersectionObserver (initial JS 396 → 160 KB gzipped); hero portrait PNG 742 KB → WebP 119 KB; `public/favicon.ico`, `favicon.svg`, `apple-touch-icon.png`, `icon-192.png` and a 1200×630 `og-image.jpg` + og/twitter image tags; global `:focus-visible` ring, skip-to-content link, `<MotionConfig reducedMotion="user">` + CSS reduced-motion rule, `role="dialog"` / focus trap / focus restore on the project detail view.
 42. **Journey photo panel (2026-10-16):** the Three.js `InfiniteGallery` is replaced by `JourneySlides.tsx` — the active stop's photo fills the right-hand box at the same height as the stop card (`object-cover`, crossfade), autoplays forward 1 → 6 and loops (pauses on hover/focus and for reduced motion), with dots, prev/next buttons and arrow keys when focused. The card always matches the photo; visitor photos come after the 6 stops (card stays on stop 6 while one is shown). three.js is no longer loaded by the page (the `three` / `@react-three/*` packages are still in `package.json`).
+43. **Contact delivery — Approach 4 (2026-10-16):** the "Let's Build Something" form now emails messages to the owner through `api/contact.ts` (Vercel function + Resend) instead of opening the visitor's SMS app; server-side validation, honeypot, minimum fill time and rate limiting; honest sending / sent / error states, with the SMS / WhatsApp / Email / Copy panel offered when delivery fails. Env vars documented in `.env.example`.
 
 Recent commits (newest first, abridged): `d3933ae` portfolio overwritten → `d0e517a` Let's Build + fixed buttons → `502f8da` font colours, twitter links → `8c2b74a` About summary, Hyderabad, SEO → `a7e73f3` components/assets/config → `040dfad` project view + docs → `bff2397` Hire Me + DevTools first. Items 33–39 may still be uncommitted; run `git status`.
 
@@ -373,7 +374,7 @@ Recent commits (newest first, abridged): `d3933ae` portfolio overwritten → `d0
 - [x] **Deployed** on Vercel (https://soligepullaiah.vercel.app/); URL added to README and SEO tags.
 - [x] Live URL added to `Resume-pullaiah.md`. [ ] Still to add it to the resume PDF (owner).
 - [x] **Resume download:** PDF in `public/` + modal with Download (nav, About, Contact) — done (item 32).
-- [ ] **Contact delivery — Approach 4** (Vercel `/api/contact` + Resend; honeypot + validation + rate limit; `wa.me` / `sms:` / `tel:` links): full plan in [`Contact_Form_Plan.md`](Contact_Form_Plan.md) — see §16.17.
+- [x] **Contact delivery — Approach 4** built (2026-10-16): `api/contact.ts` + `ContactForm.tsx` — see §16.17. [ ] **Owner:** add `RESEND_API_KEY` + `CONTACT_TO` in Vercel and redeploy, then send a real test message.
 - [ ] **Contact delivery fallback — Approach 1** (Web3Forms) if delivery is needed immediately (same plan file, §4).
 - [ ] *(Later, optional)* **SMS notification via Twilio / MSG91 / Fast2SMS** on top of the email flow — steps kept in [`Contact_Form_Plan.md`](Contact_Form_Plan.md) §5.
 - [ ] **Animated mascot** (from the "Make Your Own Mascot" guide): full plan in [`Mascot_Plan.md`](Mascot_Plan.md) — see §16.16.
@@ -488,7 +489,7 @@ Best fits for this portfolio: **command palette**, **bento grid** for About/skil
 | 16.10 Those Who Shaped Me | ⏳ not started (needs people + "on my own" list) |
 | 16.11 Contact Me | ✅ built (SMS delivery limited to the visitor's device; provider-based auto-SMS pending account/keys) |
 | 16.12 Resume PDF / SEO / a11y | ✅ resume modal + PDF, SEO/OG/JSON-LD; ⏳ og:image/favicon/canonical, skip link, focus rings, reduced-motion audit |
-| 16.17 Contact delivery (Approach 4: Vercel function + Resend) | ⏳ planned — see [`Contact_Form_Plan.md`](Contact_Form_Plan.md) (needs Resend account / Vercel env vars) |
+| 16.17 Contact delivery (Approach 4: Vercel function + Resend) | ✅ built (2026-10-16); ⏳ goes live once the owner adds `RESEND_API_KEY` + `CONTACT_TO` in Vercel — see [`Contact_Form_Plan.md`](Contact_Form_Plan.md) |
 | 16.16 Animated mascot | ⏳ planned — see [`Mascot_Plan.md`](Mascot_Plan.md) (needs owner decisions) |
 | 16.15 Growth and Projects at Hrud.ai | ✅ **Option B built (2026-10-11):** two-tab switch "Role & Growth at Hrud.ai" / "Projects at Hrud.ai (7)"; opens on Role & Growth — see §16.15 |
 | Top-right Hire Me | ✅ built |
@@ -806,6 +807,8 @@ Current: 3 link cards only. Target (matches the reference):
 **Owner decisions needed:** mascot name and starter, body colour (cyan `#22d3ee` recommended), placement (every page vs. hero/contact only), speech bubble yes/no, whether the repo is public (AGPL), mascot on the loader or not.
 
 ### 16.17 "Let's Build Something" — contact delivery from any device (planning)
+
+**Status (2026-10-16): built.** `api/contact.ts` (Vercel function: JSON-only, validation, honeypot `company`, ≥ 3 s time-to-submit, best-effort 5 / 10 min per-IP limit, Resend REST call, `{ ok: true }` only after Resend returns an id; logs status only, never message bodies) and `ContactForm.tsx` (sending / sent / error states, fallback panel on error). `npm run dev` also serves `/api/contact` through a small plugin in `vite.config.ts`, reading keys from `.env.local`. Live delivery needs the owner's `RESEND_API_KEY` + `CONTACT_TO` in Vercel.
 
 **Full plan: [`Contact_Form_Plan.md`](Contact_Form_Plan.md).** The previous idea (Twilio SMS via a serverless function, §16.11) is replaced by an email-first approach.
 

@@ -2,7 +2,7 @@
 
 > Goal: visitors can message the owner **from any device**, and the message reaches the owner's inbox without relying on the visitor's own SMS / WhatsApp app.
 > Site: https://soligepullaiah.vercel.app/ (Vercel). Form: `src/components/ContactForm.tsx`. Section: "Let's Build Something" in `src/App.tsx` (Contact).
-> Status: **planned — not started.** Tracked in `portfolio.md` §16.17 and the pending list in §11.
+> Status: **built (2026-10-16) — waiting for the owner's Resend key in Vercel to go live.** Code: `api/contact.ts` + `src/components/ContactForm.tsx` (+ a dev-only `/api/contact` route in `vite.config.ts`). Tracked in `portfolio.md` §16.17.
 > Written: 2026-10-11.
 
 ---
@@ -102,14 +102,14 @@ Visitors can contact the owner from any device using the method they prefer. The
 
 ## 6. Checklist
 
-- [ ] Owner creates a Resend account and adds `RESEND_API_KEY` and `CONTACT_TO` in Vercel (never share the key in chat or commit it).
+- [ ] **Owner:** create a Resend account and add `RESEND_API_KEY` and `CONTACT_TO` in Vercel (never share the key in chat or commit it), then redeploy.
 - [ ] Confirm the destination email (`pulipavan696@gmail.com`).
-- [ ] Add `api/contact.ts` (validation, honeypot, rate limit, Resend).
-- [ ] Wire `ContactForm.tsx` (sending / success / error, honeypot, fallback buttons).
-- [ ] Add `wa.me`, `sms:` and `tel:` direct-contact links.
-- [ ] Test: success, invalid input, honeypot, rate limit, failed request, offline — on phone and desktop.
+- [x] Add `api/contact.ts` (validation, honeypot, minimum time-to-submit, best-effort per-IP rate limit 5 / 10 min, Resend via its REST API — no SDK dependency).
+- [x] Wire `ContactForm.tsx` (sending / success / error, honeypot, fallback SMS / WhatsApp / Email / Copy panel on error).
+- [x] `wa.me`, `sms:` and `tel:` direct-contact links (side panel, already present).
+- [x] Tested locally (2026-10-16): invalid input → 422 with field errors, honeypot / instant submit → 400, GET → 405, rate limit → 429, keys missing → 503, Resend rejecting the key → 502; UI sending / success (mocked reply) / error states. [ ] Still to test after deploy: a real delivery, and on a phone.
 - [ ] Send a real test message after deploy and confirm it arrives.
-- [ ] Update `portfolio.md` (§11, §16.11, §16.17), `README.md` and the change log.
+- [x] Update `portfolio.md`, `README.md` and the change log.
 - [ ] (Optional) Turnstile / Upstash rate limiting if spam appears.
 - [ ] (Later, optional) SMS notification via Twilio / MSG91 / Fast2SMS — see §5.
 - [ ] (Later, optional) mascot reaction: `celebrate` on success, `confused` on error — see `Mascot_Plan.md`.

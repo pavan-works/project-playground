@@ -52,7 +52,8 @@ project-playground/
 ├── index.html                  # Vite entry HTML
 ├── metadata.json                # AI Studio app metadata (name, description)
 ├── package.json                  # Scripts & dependencies
-├── vite.config.ts                # Vite + Tailwind + React plugin config
+├── vite.config.ts                # Vite + Tailwind + React config (+ dev-only /api/contact route)
+├── api/contact.ts                # Vercel serverless function: contact form → email via Resend
 ├── tsconfig.json                 # TypeScript config
 ├── components.json               # shadcn/ui-style component config
 ├── .env.example                  # Environment variable template (Gemini API key, App URL)
@@ -76,7 +77,7 @@ project-playground/
 │   │   ├── WorkExperience.tsx     # Hrud.ai role + project cards (with animated visuals)
 │   │   ├── ProjectVisual.tsx      # 11 animated SVG project visuals (Works + Work Experience)
 │   │   ├── SoftSkillsAchievements.tsx  # Achievements + Professional Soft Skills
-│   │   └── ContactForm.tsx        # Message form -> prefilled SMS / WhatsApp / email
+│   │   └── ContactForm.tsx        # Message form -> /api/contact (email via Resend), SMS/WhatsApp fallback
 │   ├── hooks/
 │   │   └── use-mobile.tsx         # Responsive/viewport detection hook
 │   ├── lib/
@@ -104,7 +105,7 @@ The page (`PortfolioLanding` in [src/App.tsx](src/App.tsx)) renders, top to bott
 9. **`Works`** (`#works`) — "Selected Works": Engineering Projects and Research Publications as `ProjectCard`s with animated visuals (RAG pipeline, job-search agent, English→Telugu/Tamil translation, speech→lip-sync). Opening one shows a full-width animation, details, and floating **Back to Works** / close buttons (clicking the empty area also closes).
 10. **`Achievements`** (`#achievements`) and **`SoftSkills`** (`#soft-skills`) — built only from facts in the resume.
 11. **`CodeSnippet`** — a decorative fake "terminal" code block for visual flavor.
-12. **`Contact`** (`#contact`) — Mail / LinkedIn / GitHub cards plus the **`ContactForm`**: first/last name, email-or-phone, message and consent; sending opens a prefilled **text (SMS) to +91 93466 80696** (WhatsApp / email / copy fallbacks on desktop). Side panel: Text, WhatsApp, Call, Email.
+12. **`Contact`** (`#contact`) — Mail / LinkedIn / GitHub cards plus the **`ContactForm`**: first/last name, email-or-phone, message and consent. Sending posts to **`/api/contact`** ([api/contact.ts](api/contact.ts), a Vercel serverless function) which validates it, blocks bots and emails it to the owner through **Resend**; if delivery fails the form offers SMS / WhatsApp / email / copy instead. Side panel: Text, WhatsApp, Call, Email.
 13. **`Footer`** — logo, navigation/social links (GitHub → `github.com/puli-pro`), and an "Available" status badge.
 
 ## Content Model
@@ -156,6 +157,7 @@ Defined in [package.json](package.json):
 - **Environment variables** ([.env.example](.env.example)):
   - `GEMINI_API_KEY` — used for calls to the Gemini API via `@google/genai`, if/when server-side AI features are added.
   - `APP_URL` — the hosted URL of the app, auto-injected by AI Studio's Cloud Run deployment.
+  - `RESEND_API_KEY`, `CONTACT_TO`, optional `CONTACT_FROM` — used by the contact form's serverless function. Set them in **Vercel → Project → Settings → Environment Variables**; for local testing put them in `.env.local` (git-ignored) and `npm run dev` serves `/api/contact` too. Without them the form shows a clear "not set up yet" error plus the direct-contact links.
 - **Styling/theme:** Tailwind CSS 4 is configured through the Vite plugin (no separate `tailwind.config.js`); design tokens (colors like `--gold`, `--indigo`, `--emerald`, `--bg`, `--rv-muted`, `--rv-card`, fonts) are defined as CSS custom properties in [src/index.css](src/index.css) and consumed throughout [src/App.tsx](src/App.tsx).
 - **Local-only persistence:** Custom images a visitor uploads to the journey gallery are saved to `localStorage` (`journey-custom-images`) and are per-browser only, not shared or synced anywhere.
 
