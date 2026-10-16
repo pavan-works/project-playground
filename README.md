@@ -38,7 +38,7 @@ The app was originally scaffolded via **Google AI Studio** (see [metadata.json](
 | Styling | [Tailwind CSS 4](https://tailwindcss.com/) (via `@tailwindcss/vite`) |
 | Animation | [Motion](https://motion.dev/) (`motion/react`, the successor to Framer Motion) |
 | Icons | [lucide-react](https://lucide.dev/) |
-| 3D / WebGL (available, optional) | [Three.js](https://threejs.org/) via `@react-three/fiber` and `@react-three/drei` |
+| 3D / WebGL (installed, currently unused) | [Three.js](https://threejs.org/) via `@react-three/fiber` and `@react-three/drei` |
 | AI/Server (available, optional) | [`@google/genai`](https://www.npmjs.com/package/@google/genai) (Gemini API client), `express`, `dotenv` |
 | Package manager | [Bun](https://bun.sh/) (`bun.lock`, `bunfig.toml`) — npm also works |
 | Linting/Type-checking | `tsc --noEmit`, ESLint (`eslint.config.js`), Prettier (`.prettierrc`) |
@@ -70,7 +70,7 @@ project-playground/
 │   ├── vite-env.d.ts              # Vite/TS ambient types
 │   ├── components/
 │   │   ├── AnimatedNav.tsx        # Floating pill nav + top-right "Hire Me" button
-│   │   ├── InfiniteGallery.tsx    # Infinite-scrolling / drag-driven image gallery for the journey section
+│   │   ├── JourneySlides.tsx      # Journey photo panel: full-size photo per stop, autoplay, dots/arrows
 │   │   ├── Skillset.tsx           # "My Skillset" spotlight cards + marquee
 │   │   ├── Process.tsx            # "My Process" with lens switcher
 │   │   ├── WorkExperience.tsx     # Hrud.ai role + project cards (with animated visuals)
@@ -98,7 +98,7 @@ The page (`PortfolioLanding` in [src/App.tsx](src/App.tsx)) renders, top to bott
 3. **`Hero`** (`#home`) — full-height intro with a large "AI Engineer & ML Researcher" headline behind the smiling portrait (`portrait-smile.png`), location, and a row of companies/tools worked with.
 4. **`About`** (`#about`) — profile summary, key stats, an "Identity" panel and 4 focus-area cards (RAG & Retrieval, Agentic Systems, Applied Research, Production ML).
 5. **`WorkExperience`** (`#experience`) — "Shipped at Hrud.ai": the AI Engineer role card, seven project cards (DevTools Control Center first, Job Galaxy, NCPL chatbot, Career Advisor Bot, NTRview Log, Pulse Celebrations v2, Xencomedical), each with an **animated visual**, plus a CodeForces strip.
-6. **`Experience`** (`#journey`) — "The Journey": quote, active-stop panel and the Three.js `InfiniteGallery`, lazy-loaded in its own chunk when the section nears the viewport. The wheel and arrow keys only move it after the visitor clicks/focuses it (Esc releases it); autoplay is off under reduced motion. Visitors can add their own images, stored in `localStorage`.
+6. **`Experience`** (`#journey`) — "The Journey": quote, the active-stop card and, beside it, `JourneySlides`: that stop's photo filling a box of the same height, autoplaying forward 1 → 6 (dots, prev/next, arrow keys; pauses on hover and for reduced motion). Visitors can add their own images (stored in `localStorage`, shown after the 6 stops).
 7. **`Expertise`** (`#expertise`) — **My Skillset** (`Skillset`: AI & ML, Languages, Databases, Cloud & DevOps as spotlight cards with "where I used it", plus a skills marquee) followed by the logo grids "Tools & Platforms" / "APIs & AI Tools".
 8. **`Process`** (`#process`) — "My Process": six steps (Understand the Problem → Plan the Architecture → Check What Already Exists → Design → Build & Evaluate → Deploy & Improve) with a lens switcher (Research Paper · ML/DL/NLP · RAG · Agents) and a feedback-loop callout.
 9. **`Works`** (`#works`) — "Selected Works": Engineering Projects and Research Publications as `ProjectCard`s with animated visuals (RAG pipeline, job-search agent, English→Telugu/Tamil translation, speech→lip-sync). Opening one shows a full-width animation, details, and floating **Back to Works** / close buttons (clicking the empty area also closes).
@@ -176,4 +176,4 @@ To personalize or update the portfolio:
 2. **Images** → add/replace files in [src/assets/](src/assets/) and update the corresponding `import`s in `data.ts` / `App.tsx`.
 3. **Section layout, copy, or styling** → edit the relevant section component in [src/App.tsx](src/App.tsx) (e.g. `Hero`, `About`, `Contact`) or the shared color/typography tokens in [src/index.css](src/index.css).
 4. **Navigation** → edit [src/components/AnimatedNav.tsx](src/components/AnimatedNav.tsx).
-5. **Journey gallery behavior** → edit [src/components/InfiniteGallery.tsx](src/components/InfiniteGallery.tsx).
+5. **Journey photo panel** → edit [src/components/JourneySlides.tsx](src/components/JourneySlides.tsx).

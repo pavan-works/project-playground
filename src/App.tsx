@@ -31,11 +31,12 @@ import {
   X,
   ArrowLeft,
 } from "lucide-react";
-import { useState, useEffect, useRef, useMemo, lazy, Suspense } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { createPortal } from "react-dom";
 import { PORTFOLIO_DATA, JOURNEY, JOURNEY_QUOTE, type Project } from "./data";
 import portraitCutout from "./assets/portrait-smile.webp";
 import { AnimatedNav } from "./components/AnimatedNav";
+import { JourneySlides } from "./components/JourneySlides";
 import { Skillset } from "./components/Skillset";
 import { Process } from "./components/Process";
 import { ProjectVisual } from "./components/ProjectVisual";
@@ -44,50 +45,6 @@ import { ContactForm } from "./components/ContactForm";
 import { ResumeButton, ResumeModal } from "./components/ResumeModal";
 import { SoftSkills, Achievements } from "./components/SoftSkillsAchievements";
 import logoGmail from "./assets/logos/gmail.svg";
-
-// three.js is only needed by the Journey gallery: load it in its own chunk,
-// and only once the gallery is close to the viewport.
-const InfiniteGallery = lazy(() =>
-  import("./components/InfiniteGallery").then((m) => ({ default: m.InfiniteGallery })),
-);
-
-const GalleryPlaceholder = ({ className }: { className: string }) => (
-  <div className={`flex items-center justify-center rounded-2xl border border-white/10 bg-white/[0.02] ${className}`}>
-    <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-white/70">Loading gallery…</span>
-  </div>
-);
-
-const LazyGallery = (props: { images: string[]; onActiveChange: (i: number) => void; className: string }) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const [near, setNear] = useState(false);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el || near) return;
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setNear(true);
-          io.disconnect();
-        }
-      },
-      { rootMargin: "800px 0px" },
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, [near]);
-  return (
-    <div ref={ref} className="flex min-w-0 flex-1 flex-col">
-      {near ? (
-        <Suspense fallback={<GalleryPlaceholder className={props.className} />}>
-          <InfiniteGallery {...props} />
-        </Suspense>
-      ) : (
-        <GalleryPlaceholder className={props.className} />
-      )}
-    </div>
-  );
-};
-
 
 const Hero = () => {
   return (
@@ -386,7 +343,9 @@ const ActiveStopPanel = ({ index }: { index: number }) => {
 };
 
 const Experience = () => {
-  const [activeStop, setActiveStop] = useState(0);
+  // slide = photo shown on the right; visitor photos come after the 6 stops,
+  // and while one of them is shown the card stays on the last stop
+  const [slide, setSlide] = useState(0);
   const [customImages, setCustomImages] = useState<string[]>(() => {
     try {
       return JSON.parse(localStorage.getItem("journey-custom-images") || "[]");
@@ -397,8 +356,17 @@ const Experience = () => {
 
   const galleryImages = useMemo(() => {
     const base = JOURNEY.map((s) => s.image!).filter(Boolean);
-    return customImages.length > 0 ? [...customImages, ...base] : base;
+    // visitor images go after the journey stops so image N always matches stop N
+    return [...base, ...customImages];
   }, [customImages]);
+  const galleryLabels = useMemo(
+    () => [
+      ...JOURNEY.map((s) => `Stop ${JOURNEY.indexOf(s) + 1}: ${s.title}`),
+      ...customImages.map((_, i) => `Your photo ${i + 1}`),
+    ],
+    [customImages],
+  );
+  const activeStop = Math.min(slide, JOURNEY.length - 1);
 
   const handleAddImages = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files || []);
@@ -427,6 +395,7 @@ const Experience = () => {
   };
 
   const clearCustomImages = () => {
+    setSlide((s) => Math.min(s, JOURNEY.length - 1));
     setCustomImages([]);
     localStorage.removeItem("journey-custom-images");
   };
@@ -486,34 +455,35 @@ const Experience = () => {
           <span>2010 → now</span>
         </div>
 
-        {/* Full-bleed active stop + 3D gallery: use the black space at both viewport edges */}
+        {/* Active stop card + its photo at the same height */}
         <div className="mt-16 grid grid-cols-1 items-stretch gap-8 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-12">
           <div className="flex min-w-0">
             <ActiveStopPanel index={activeStop} />
           </div>
-          <div className="flex min-w-0 flex-col gap-3">
-            <LazyGallery
+          <div className="flex min-w-0">
+            <JourneySlides
               images={galleryImages}
-              onActiveChange={setActiveStop}
-              className="min-h-[360px] w-full flex-1 md:min-h-[440px]"
+              labels={galleryLabels}
+              index={slide}
+              onChange={setSlide}
+              overlay={
+                <>
+                  <label className="cursor-pointer rounded-full border border-white/25 bg-black/55 px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.2em] text-white/90 backdrop-blur-md transition-colors hover:border-[var(--emerald)] hover:text-[var(--emerald)]">
+                    + Add your own images
+                    <input type="file" accept="image/*" multiple className="sr-only" onChange={handleAddImages} />
+                  </label>
+                  {customImages.length > 0 && (
+                    <button
+                      type="button"
+                      onClick={clearCustomImages}
+                      className="rounded-full border border-white/25 bg-black/55 px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.2em] text-white/90 backdrop-blur-md hover:text-white"
+                    >
+                      Reset ({customImages.length})
+                    </button>
+                  )}
+                </>
+              }
             />
-
-
-            <div className="flex items-center gap-4">
-              <label className="cursor-pointer font-mono text-[11px] uppercase tracking-[0.25em] text-white/84 transition-colors hover:text-[var(--emerald)]">
-                + Add your own images
-                <input type="file" accept="image/*" multiple className="hidden" onChange={handleAddImages} />
-              </label>
-              {customImages.length > 0 && (
-                <button
-                  type="button"
-                  onClick={clearCustomImages}
-                  className="font-mono text-[11px] uppercase tracking-[0.25em] text-white/80 hover:text-white/83"
-                >
-                  Reset ({customImages.length})
-                </button>
-              )}
-            </div>
           </div>
         </div>
       </div>

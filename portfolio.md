@@ -115,7 +115,7 @@ Final-year AI Engineering student who designs, trains and deploys end-to-end ML 
 | Styling | Tailwind CSS 4 via `@tailwindcss/vite` | No `tailwind.config.js`; tokens in `src/index.css` |
 | Animation | `motion` (Framer Motion successor) | `initial/animate/whileInView` throughout |
 | Icons | `lucide-react` | |
-| 3D | `three`, `@react-three/fiber`, `@react-three/drei` | **Actively used** by `InfiniteGallery.tsx` (custom shader "cloth" planes) |
+| 3D | `three`, `@react-three/fiber`, `@react-three/drei` | Installed but **no longer used** (the Journey 3D gallery was replaced by `JourneySlides.tsx` on 2026-10-16) |
 | Server/AI | `express`, `dotenv`, `@google/genai` | Installed, **not wired into the page** |
 | Package manager | Bun (`bun.lock`, `bunfig.toml`); npm also works (`package-lock.json` exists, untracked) |
 | Quality | `tsc --noEmit` (`npm run lint`), ESLint, Prettier | |
@@ -150,7 +150,7 @@ project-playground/
 │  ├─ data.ts                 PORTFOLIO_DATA, JOURNEY, JOURNEY_QUOTE, types
 │  ├─ index.css               tokens, fonts, glass-panel, dot-pattern, btn-primary…
 │  ├─ components/AnimatedNav.tsx      floating pill nav + top-right "Hire Me"
-│  ├─ components/InfiniteGallery.tsx  Three.js infinite image gallery (journey)
+│  ├─ components/JourneySlides.tsx    Journey photo panel (full-size photo per stop, autoplay, dots/arrows)
 │  ├─ components/Skillset.tsx         My Skillset (spotlight bento cards + marquee)
 │  ├─ components/Process.tsx          My Process (6 steps, lens switcher, loop callout)
 │  ├─ components/WorkExperience.tsx   Hrud.ai role card + growth path (`GrowthPath`) + 7 project cards + CodeForces strip
@@ -353,6 +353,7 @@ Built so far:
 40. **Hrud.ai two-tab switch (2026-10-11):** `WorkExperience.tsx` now has a segmented switch with a sliding cyan highlight — **Role & Growth at Hrud.ai** (role card + growth track) and **Projects at Hrud.ai (7)** (project grid only). Opens on Role & Growth (changed 2026-10-15 at the owner's request). One context line above the switch ("AI Engineer · Hrud.ai · Jan 2026 – Present"); count on the Projects button; `role="tablist"` / `tab` / `tabpanel`, arrow-key navigation, cross-fade, `min-h-[34rem]` to limit page jump. The CodeForces strip stays below the tabs (different employer).
 
 41. **Audit UX/technical fixes (2026-10-15):** "Visit hrud.ai" link (https://hrud.ai/) on the growth panel and the role-card company name in **Role & Growth at Hrud.ai**; 3D gallery no longer traps the page scroll or listens to arrow keys globally (focus-to-activate, Esc to leave, autoplay off for reduced motion); 2-second splash briefly removed, then **restored at the owner's request** (owner wants the "Portfolio" + name loader kept); three.js lazy-loaded via `React.lazy` + IntersectionObserver (initial JS 396 → 160 KB gzipped); hero portrait PNG 742 KB → WebP 119 KB; `public/favicon.ico`, `favicon.svg`, `apple-touch-icon.png`, `icon-192.png` and a 1200×630 `og-image.jpg` + og/twitter image tags; global `:focus-visible` ring, skip-to-content link, `<MotionConfig reducedMotion="user">` + CSS reduced-motion rule, `role="dialog"` / focus trap / focus restore on the project detail view.
+42. **Journey photo panel (2026-10-16):** the Three.js `InfiniteGallery` is replaced by `JourneySlides.tsx` — the active stop's photo fills the right-hand box at the same height as the stop card (`object-cover`, crossfade), autoplays forward 1 → 6 and loops (pauses on hover/focus and for reduced motion), with dots, prev/next buttons and arrow keys when focused. The card always matches the photo; visitor photos come after the 6 stops (card stays on stop 6 while one is shown). three.js is no longer loaded by the page (the `three` / `@react-three/*` packages are still in `package.json`).
 
 Recent commits (newest first, abridged): `d3933ae` portfolio overwritten → `d0e517a` Let's Build + fixed buttons → `502f8da` font colours, twitter links → `8c2b74a` About summary, Hyderabad, SEO → `a7e73f3` components/assets/config → `040dfad` project view + docs → `bff2397` Hire Me + DevTools first. Items 33–39 may still be uncommitted; run `git status`.
 
