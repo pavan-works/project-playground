@@ -73,7 +73,7 @@ const StepCard = ({
               STEP {String(index + 1).padStart(2, "0")}
             </span>
             <span className="h-px w-8 bg-white/20" />
-            <span className="font-mono text-[11px] tracking-[0.25em] uppercase text-white/86">
+            <span className="font-mono text-[11px] tracking-[0.25em] uppercase text-white/95">
               Output · {step.output}
             </span>
           </div>
@@ -81,7 +81,7 @@ const StepCard = ({
           <h3 className="font-headline text-2xl md:text-4xl font-extrabold tracking-tight text-white">
             {step.title}
           </h3>
-          <p className="mt-3 max-w-2xl text-sm md:text-base leading-relaxed text-white/86">
+          <p className="mt-3 max-w-2xl text-sm md:text-base leading-relaxed text-white/95">
             {step.summary}
           </p>
 
@@ -183,7 +183,7 @@ export const Process = () => {
                 real-world applications
               </span>
             </h2>
-            <p className="mt-5 max-w-xl text-base leading-relaxed text-white/83 md:text-lg">
+            <p className="mt-5 max-w-xl text-base leading-relaxed text-white/95 md:text-lg">
               A structured, practical approach to taking an AI idea from a problem statement to a
               system people can use — whether it ends as a research paper, a trained model, a RAG
               pipeline or an agent.
@@ -191,7 +191,7 @@ export const Process = () => {
 
             {/* lens switcher */}
             <div className="mt-6">
-              <div className="mb-3 font-mono text-[11px] uppercase tracking-[0.3em] text-white/86">
+              <div className="mb-3 font-mono text-[11px] uppercase tracking-[0.3em] text-white/95">
                 See the process through…
               </div>
               <div
@@ -226,7 +226,7 @@ export const Process = () => {
 
             {/* live step tracker */}
             <div className="mt-6 rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-              <div className="mb-3 flex items-center justify-between font-mono text-[11px] uppercase tracking-[0.3em] text-white/86">
+              <div className="mb-3 flex items-center justify-between font-mono text-[11px] uppercase tracking-[0.3em] text-white/95">
                 <span>You are at</span>
                 <span className="text-[var(--gold)]">
                   {String(active + 1).padStart(2, "0")} / {String(PROCESS_STEPS.length).padStart(2, "0")}
@@ -240,10 +240,10 @@ export const Process = () => {
                       className={`flex items-center gap-3 rounded-lg px-3 py-2 font-mono text-xs tracking-wider transition-all duration-300 ${
                         i === active
                           ? "bg-[var(--gold)]/15 text-white"
-                          : "text-white/83 hover:text-white"
+                          : "text-white/95 hover:text-white"
                       }`}
                     >
-                      <span className={i === active ? "text-[var(--gold)]" : "text-white/75"}>
+                      <span className={i === active ? "text-[var(--gold)]" : "text-white/90"}>
                         {String(i + 1).padStart(2, "0")}
                       </span>
                       <span className={`h-px transition-all duration-300 ${i === active ? "w-10 bg-[var(--gold)]" : "w-5 bg-white/20"}`} />

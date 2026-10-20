@@ -136,13 +136,13 @@ const SpotlightCard = ({
                   {name}
                 </span>
                 {tag && (
-                  <span className="ml-auto font-mono text-[11px] tracking-[0.2em] uppercase px-2 py-0.5 rounded-full bg-white/10 text-white/83">
+                  <span className="ml-auto font-mono text-[11px] tracking-[0.2em] uppercase px-2 py-0.5 rounded-full bg-white/10 text-white/95">
                     {tag}
                   </span>
                 )}
               </div>
               {where && (
-                <em className="pl-4 text-xs not-italic text-white/86 leading-snug">
+                <em className="pl-4 text-xs not-italic text-white/95 leading-snug">
                   <span className="italic">{where}</span>
                 </em>
               )}
@@ -170,7 +170,7 @@ export const Skillset = () => (
       <h2 className="mt-6 font-headline font-extrabold tracking-tight leading-[0.95] text-5xl md:text-7xl text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-white/40">
         My Skillset
       </h2>
-      <p className="mt-5 max-w-2xl text-base md:text-lg text-white/80 leading-relaxed">
+      <p className="mt-5 max-w-2xl text-base md:text-lg text-white/90 leading-relaxed">
         The models, languages, databases and cloud services I build with — and where I&apos;ve used them.
       </p>
     </motion.div>

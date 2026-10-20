@@ -98,7 +98,7 @@ const Hero = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6, duration: 0.8 }}
-          className="text-white/83 text-sm md:text-base font-sans"
+          className="text-white/95 text-sm md:text-base font-sans"
         >
           based in {PORTFOLIO_DATA.location}.
         </motion.div>
@@ -109,9 +109,9 @@ const Hero = () => {
           transition={{ delay: 0.8, duration: 0.8 }}
           className="flex items-center gap-4 md:gap-6 flex-wrap"
         >
-          <span className="text-[11px] font-mono text-white/80 tracking-[0.4em] uppercase hidden md:inline">Worked with</span>
+          <span className="text-[11px] font-mono text-white/90 tracking-[0.4em] uppercase hidden md:inline">Worked with</span>
           {["Hrud.ai", "CodeForces", "OpenAI", "HuggingFace", "Supabase"].map((c) => (
-            <span key={c} className="text-white/86 text-xs font-headline tracking-wide">
+            <span key={c} className="text-white/95 text-xs font-headline tracking-wide">
               {c}
             </span>
           ))}
@@ -160,11 +160,11 @@ const About = () => {
         transition={{ duration: 0.7 }}
         className="lg:col-span-7 relative"
       >
-        <h2 className="text-6xl md:text-8xl font-headline font-bold mb-10 leading-[0.9] tracking-tighter">
+        <h2 className="text-6xl md:text-8xl font-headline font-bold mb-10 leading-[0.9] tracking-tighter bg-gradient-to-b from-white via-white to-white/40 bg-clip-text text-transparent">
           Engineering the <br />
-          <span className="italic font-display font-light text-white/90">Neural</span> Future
+          <span className="italic font-display font-light">Neural</span> Future
         </h2>
-        <p className="text-lg md:text-xl text-white/86 leading-relaxed mb-10 font-light max-w-2xl">
+        <p className="text-lg md:text-xl text-white/95 leading-relaxed mb-10 font-normal max-w-2xl">
           {PORTFOLIO_DATA.summary}
         </p>
 
@@ -182,7 +182,7 @@ const About = () => {
               <div className="text-4xl md:text-5xl font-headline font-bold tracking-tighter text-white group-hover:text-[var(--gold)] transition-colors duration-500">
                 {s.value}
               </div>
-              <div className="mt-2 text-[11px] font-mono uppercase tracking-[0.25em] text-white/80">{s.label}</div>
+              <div className="mt-2 text-[11px] font-mono uppercase tracking-[0.25em] text-white/90">{s.label}</div>
             </motion.div>
           ))}
         </div>
@@ -201,7 +201,7 @@ const About = () => {
           <ResumeModal open={resumeOpen} onClose={() => setResumeOpen(false)} />
           <a
             href="#works"
-            className="text-[11px] font-mono uppercase tracking-[0.35em] text-white/83 hover:text-[var(--gold)] transition-colors"
+            className="text-[11px] font-mono uppercase tracking-[0.35em] text-white/95 hover:text-[var(--gold)] transition-colors"
           >
             See the work →
           </a>
@@ -232,8 +232,8 @@ const About = () => {
               ["Also known as", PORTFOLIO_DATA.alias],
             ].map(([k, v]) => (
               <div key={k as string} className="flex items-baseline justify-between gap-6 py-4">
-                <span className="text-[11px] font-mono text-white/80 tracking-[0.25em] uppercase shrink-0">{k}</span>
-                <span className="text-base md:text-lg font-light text-right">{v}</span>
+                <span className="text-[11px] font-mono text-white/90 tracking-[0.25em] uppercase shrink-0">{k}</span>
+                <span className="text-base md:text-lg font-normal text-right">{v}</span>
               </div>
             ))}
           </div>
@@ -250,11 +250,11 @@ const About = () => {
               transition={{ delay: 0.15 + i * 0.07 }}
               className="group relative p-6 rounded-3xl bg-[var(--rv-card)] border border-white/5 hover:border-[var(--gold)]/40 transition-all duration-500 hover:-translate-y-1"
             >
-              <span className="text-[11px] font-mono text-white/80 tracking-[0.3em]">0{i + 1}</span>
+              <span className="text-[11px] font-mono text-white/90 tracking-[0.3em]">0{i + 1}</span>
               <h4 className="mt-3 text-lg font-headline font-bold tracking-tight group-hover:text-[var(--gold)] transition-colors">
                 {f.title}
               </h4>
-              <p className="mt-2 text-xs leading-relaxed text-[var(--rv-muted)] font-light">{f.desc}</p>
+              <p className="mt-2 text-xs leading-relaxed text-[var(--rv-muted)] font-normal">{f.desc}</p>
             </motion.div>
           ))}
         </div>
@@ -297,7 +297,7 @@ const ActiveStopPanel = ({ index }: { index: number }) => {
           </span>
 
           <div className="flex flex-wrap items-center gap-3">
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/10 px-3 py-1 text-[11px] font-mono uppercase tracking-[0.25em] text-white/86">
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/10 px-3 py-1 text-[11px] font-mono uppercase tracking-[0.25em] text-white/95">
               <Icon className="h-3 w-3" />
               {meta.label}
             </span>
@@ -317,12 +317,12 @@ const ActiveStopPanel = ({ index }: { index: number }) => {
           <h4 className="mt-6 font-headline text-4xl md:text-5xl font-bold tracking-tighter leading-none">
             {stop.title}
           </h4>
-          <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.2em] text-white/83">{stop.place}</p>
+          <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.2em] text-white/95">{stop.place}</p>
 
           <p className="mt-6 font-display text-xl md:text-2xl italic leading-snug" style={{ color: accent }}>
             “{stop.caption}”
           </p>
-          <p className="mt-4 max-w-2xl text-sm md:text-[15px] font-light leading-relaxed text-[var(--rv-muted)]">
+          <p className="mt-4 max-w-2xl text-sm md:text-[15px] font-normal leading-relaxed text-[var(--rv-muted)]">
             {stop.description}
           </p>
 
@@ -332,7 +332,7 @@ const ActiveStopPanel = ({ index }: { index: number }) => {
               style={{ width: `${((index + 1) / JOURNEY.length) * 100}%`, background: accent }}
             />
           </div>
-          <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.3em] text-white/80">
+          <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.3em] text-white/90">
             Stop {index + 1} of {JOURNEY.length}
           </p>
         </motion.div>
@@ -442,13 +442,13 @@ const Experience = () => {
             <p className="font-display text-2xl md:text-3xl italic leading-snug text-white/92">
               “{JOURNEY_QUOTE.text}”
             </p>
-            <footer className="mt-5 max-w-xl text-sm font-light leading-relaxed text-[var(--rv-muted)]">
+            <footer className="mt-5 max-w-xl text-sm font-normal leading-relaxed text-[var(--rv-muted)]">
               {JOURNEY_QUOTE.caption}
             </footer>
           </motion.blockquote>
         </div>
 
-        <div className="mt-10 flex items-center gap-6 font-mono text-[11px] uppercase tracking-[0.3em] text-white/83">
+        <div className="mt-10 flex items-center gap-6 font-mono text-[11px] uppercase tracking-[0.3em] text-white/95">
           <span>{JOURNEY.length} stops</span>
           <span className="h-px w-8 bg-white/15" />
           <span>2010 → now</span>
@@ -625,7 +625,7 @@ const ProjectCard = ({
           </span>
         </div>
         {!item.visual && (
-          <span className="absolute bottom-6 left-8 font-headline font-bold text-6xl leading-none text-white/35 group-hover:text-white/80 transition-colors duration-500">
+          <span className="absolute bottom-6 left-8 font-headline font-bold text-6xl leading-none text-white/35 group-hover:text-white/90 transition-colors duration-500">
             0{index + 1}
           </span>
         )}
@@ -651,7 +651,7 @@ const ProjectCard = ({
           {item.title}
         </h3>
         {item.subtitle && (
-          <p className="text-[var(--rv-muted)] text-sm font-light leading-relaxed mb-6">
+          <p className="text-[var(--rv-muted)] text-sm font-normal leading-relaxed mb-6">
             {item.subtitle}
           </p>
         )}
@@ -660,7 +660,7 @@ const ProjectCard = ({
             {item.tags.map((t) => (
               <span
                 key={t}
-                className="text-[11px] font-mono uppercase tracking-[0.2em] px-3 py-1.5 rounded-full border border-white/10 text-white/86 group-hover:border-white/20 transition-colors"
+                className="text-[11px] font-mono uppercase tracking-[0.2em] px-3 py-1.5 rounded-full border border-white/10 text-white/95 group-hover:border-white/20 transition-colors"
               >
                 {t}
               </span>
@@ -672,7 +672,7 @@ const ProjectCard = ({
             {item.metrics.slice(0, 3).map((m) => (
               <div key={m.label} className="min-w-0 rounded-2xl bg-white/[0.03] border border-white/5 px-3 py-3">
                 <div className="text-sm md:text-base font-headline font-bold break-words" style={{ color: accentVar }}>{m.value}</div>
-                <div className="text-[11px] font-mono uppercase tracking-[0.2em] text-white/80 mt-1">{m.label}</div>
+                <div className="text-[11px] font-mono uppercase tracking-[0.2em] text-white/90 mt-1">{m.label}</div>
               </div>
             ))}
           </div>
@@ -685,7 +685,7 @@ const ProjectCard = ({
             View Case Study →
           </span>
           {item.year && (
-            <span className="ml-auto text-[11px] font-mono text-white/80 tracking-widest">
+            <span className="ml-auto text-[11px] font-mono text-white/90 tracking-widest">
               {item.year}
             </span>
           )}
@@ -819,7 +819,7 @@ const DetailModal = ({
                     {item.title}
                   </h2>
                   {item.subtitle && (
-                    <p className="mt-4 max-w-2xl text-base font-light text-white/83 md:text-lg">{item.subtitle}</p>
+                    <p className="mt-4 max-w-2xl text-base font-normal text-white/95 md:text-lg">{item.subtitle}</p>
                   )}
                 </div>
               </div>
@@ -838,7 +838,7 @@ const DetailModal = ({
                     {item.title}
                   </h2>
                   {item.subtitle && (
-                    <p className="mt-4 max-w-2xl text-base font-light text-white/83 md:text-lg">{item.subtitle}</p>
+                    <p className="mt-4 max-w-2xl text-base font-normal text-white/95 md:text-lg">{item.subtitle}</p>
                   )}
                 </div>
               </div>
@@ -849,8 +849,8 @@ const DetailModal = ({
               <div className="md:col-span-2 space-y-10">
                 {item.overview && (
                   <div>
-                    <span className="text-[11px] font-mono text-white/80 tracking-[0.4em] uppercase">Overview</span>
-                    <p className="mt-4 text-white/86 leading-relaxed text-base md:text-lg font-light">
+                    <span className="text-[11px] font-mono text-white/90 tracking-[0.4em] uppercase">Overview</span>
+                    <p className="mt-4 text-white/95 leading-relaxed text-base md:text-lg font-normal">
                       {item.overview}
                     </p>
                   </div>
@@ -858,12 +858,12 @@ const DetailModal = ({
 
                 {item.highlights && item.highlights.length > 0 && (
                   <div>
-                    <span className="text-[11px] font-mono text-white/80 tracking-[0.4em] uppercase">
+                    <span className="text-[11px] font-mono text-white/90 tracking-[0.4em] uppercase">
                       Key Highlights
                     </span>
                     <ul className="mt-4 space-y-3">
                       {item.highlights.map((h, i) => (
-                        <li key={i} className="flex gap-4 text-white/83 leading-relaxed">
+                        <li key={i} className="flex gap-4 text-white/95 leading-relaxed">
                           <span
                             className="mt-2 shrink-0 w-2 h-2 rounded-full"
                             style={{ background: accentVar }}
@@ -877,7 +877,7 @@ const DetailModal = ({
 
                 {item.metrics && item.metrics.length > 0 && (
                   <div>
-                    <span className="text-[11px] font-mono text-white/80 tracking-[0.4em] uppercase">Results</span>
+                    <span className="text-[11px] font-mono text-white/90 tracking-[0.4em] uppercase">Results</span>
                     <div className="mt-4 grid grid-cols-3 gap-3">
                       {item.metrics.map((m) => (
                         <div
@@ -887,7 +887,7 @@ const DetailModal = ({
                           <div className="font-headline text-2xl md:text-3xl font-bold" style={{ color: accentVar }}>
                             {m.value}
                           </div>
-                          <div className="mt-2 text-[11px] font-mono text-white/83 tracking-widest uppercase">
+                          <div className="mt-2 text-[11px] font-mono text-white/95 tracking-widest uppercase">
                             {m.label}
                           </div>
                         </div>
@@ -900,24 +900,24 @@ const DetailModal = ({
               <aside className="space-y-8">
                 {item.role && (
                   <div>
-                    <span className="text-[11px] font-mono text-white/80 tracking-[0.4em] uppercase">Role</span>
+                    <span className="text-[11px] font-mono text-white/90 tracking-[0.4em] uppercase">Role</span>
                     <p className="mt-3 text-white/90 text-sm leading-relaxed">{item.role}</p>
                   </div>
                 )}
                 {item.year && (
                   <div>
-                    <span className="text-[11px] font-mono text-white/80 tracking-[0.4em] uppercase">Timeline</span>
+                    <span className="text-[11px] font-mono text-white/90 tracking-[0.4em] uppercase">Timeline</span>
                     <p className="mt-3 text-white/90 text-sm">{item.year}</p>
                   </div>
                 )}
                 {item.tech && item.tech.length > 0 && (
                   <div>
-                    <span className="text-[11px] font-mono text-white/80 tracking-[0.4em] uppercase">Stack</span>
+                    <span className="text-[11px] font-mono text-white/90 tracking-[0.4em] uppercase">Stack</span>
                     <div className="mt-3 flex flex-wrap gap-2">
                       {item.tech.map((t) => (
                         <span
                           key={t}
-                          className="px-3 py-1.5 rounded-full text-[11px] font-mono tracking-widest uppercase text-white/83 border"
+                          className="px-3 py-1.5 rounded-full text-[11px] font-mono tracking-widest uppercase text-white/95 border"
                           style={{ borderColor: accentSoft, background: accentSoft }}
                         >
                           {t}
@@ -938,7 +938,7 @@ const DetailModal = ({
                       <span className="flex items-center gap-3 text-sm font-mono tracking-widest uppercase text-white/90">
                         <Github className="w-4 h-4" /> GitHub
                       </span>
-                      <ExternalLink className="w-4 h-4 text-white/83 group-hover:text-white transition-colors" />
+                      <ExternalLink className="w-4 h-4 text-white/95 group-hover:text-white transition-colors" />
                     </a>
                   )}
                   {item.paperUrl && (
@@ -988,7 +988,7 @@ const Works = () => {
       <h2 className="mt-6 bg-gradient-to-b from-white via-white to-white/40 bg-clip-text font-headline text-4xl font-extrabold leading-[0.98] tracking-tight text-transparent md:text-7xl">
         Selected Works
       </h2>
-      <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/83 md:text-lg">
+      <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/95 md:text-lg">
         A curated collection of neural artifacts and computational experiments executed with absolute precision.
       </p>
     </motion.div>
@@ -998,7 +998,7 @@ const Works = () => {
       <div className="flex items-center gap-4 mb-12">
         <span className="text-[var(--gold)] font-mono text-xs tracking-[0.4em] uppercase">Engineering Projects</span>
         <div className="h-px flex-1 bg-gradient-to-r from-[var(--gold)]/30 to-transparent" />
-        <span className="text-[11px] font-mono text-white/80 tracking-[0.3em]">
+        <span className="text-[11px] font-mono text-white/90 tracking-[0.3em]">
           {String(PORTFOLIO_DATA.projects.length).padStart(2, "0")} ITEMS
         </span>
       </div>
@@ -1014,7 +1014,7 @@ const Works = () => {
       <div className="flex items-center gap-4 mb-12">
         <span className="text-[var(--emerald)] font-mono text-xs tracking-[0.4em] uppercase">Research Publications</span>
         <div className="h-px flex-1 bg-gradient-to-r from-[var(--emerald)]/30 to-transparent" />
-        <span className="text-[11px] font-mono text-white/80 tracking-[0.3em]">
+        <span className="text-[11px] font-mono text-white/90 tracking-[0.3em]">
           {String(PORTFOLIO_DATA.researchPapers.length).padStart(2, "0")} ITEMS
         </span>
       </div>
@@ -1166,7 +1166,7 @@ const Contact = () => (
             <ArrowUpRight className="ml-auto w-4 h-4 shrink-0 text-white/90 group-hover:text-[var(--gold)] group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" />
           </div>
 
-          <span className="relative block mt-3 text-[11px] font-mono tracking-[0.3em] uppercase text-white/83 group-hover:text-white transition-colors">
+          <span className="relative block mt-3 text-[11px] font-mono tracking-[0.3em] uppercase text-white/95 group-hover:text-white transition-colors">
             {c.label} : {c.hint}
           </span>
         </motion.a>
@@ -1196,7 +1196,7 @@ const Footer = () => (
 
       <div className="grid grid-cols-2 gap-24">
         <div className="flex flex-col gap-6">
-          <span className="text-[11px] font-mono text-white/83 tracking-widest uppercase">Navigation</span>
+          <span className="text-[11px] font-mono text-white/95 tracking-widest uppercase">Navigation</span>
           <div className="flex flex-col gap-4 text-sm font-mono tracking-widest uppercase text-white/92">
             <a href="#home" className="hover:text-[var(--gold)] transition-colors">Home</a>
             <a href="#about" className="hover:text-[var(--gold)] transition-colors">About</a>
@@ -1205,7 +1205,7 @@ const Footer = () => (
           </div>
         </div>
         <div className="flex flex-col gap-6">
-          <span className="text-[11px] font-mono text-white/83 tracking-widest uppercase">Connect</span>
+          <span className="text-[11px] font-mono text-white/95 tracking-widest uppercase">Connect</span>
           <div className="flex flex-col gap-4 text-sm font-mono tracking-widest uppercase text-white/92">
             <a href="https://www.linkedin.com/in/solige-pullaiah-478462270" target="_blank" rel="noreferrer" className="hover:text-[var(--gold)] transition-colors">LinkedIn</a>
             <a href="https://x.com/puli_pullaiah" target="_blank" rel="noreferrer" className="hover:text-[var(--gold)] transition-colors">Twitter</a>
@@ -1275,7 +1275,7 @@ export default function PortfolioLanding() {
         >
           <h2 className="text-3xl md:text-6xl font-headline font-bold tracking-tighter mb-4 flex items-baseline justify-center gap-4">
             <span className="text-white">{PORTFOLIO_DATA.name.split(' ')[0]}</span>
-            <span className="text-white/83">{PORTFOLIO_DATA.name.split(' ')[1]}</span>
+            <span className="text-white/95">{PORTFOLIO_DATA.name.split(' ')[1]}</span>
           </h2>
           <div className="flex items-center justify-center gap-6 mb-6">
             <div className="h-[1px] w-12 md:w-24 bg-white/10" />

@@ -177,7 +177,7 @@ export const ContactForm = () => {
         <h3 className="mt-5 font-headline text-2xl font-bold leading-tight text-white md:text-3xl">
           Your message lands straight in my inbox.
         </h3>
-        <p className="mt-3 text-sm leading-relaxed text-white/83">
+        <p className="mt-3 text-sm leading-relaxed text-white/95">
           Write it on the right and hit send: it is delivered to my email from any device, no app
           needed. Prefer another channel? Text, WhatsApp or call me on{" "}
           <b className="text-white">{CONTACT_PHONE.display}</b>.
@@ -236,7 +236,7 @@ export const ContactForm = () => {
           <span className="font-mono text-[11px] uppercase tracking-[0.35em] text-[var(--gold)]">
             Send a message
           </span>
-          <span className="font-mono text-[11px] tracking-[0.2em] text-white/86">
+          <span className="font-mono text-[11px] tracking-[0.2em] text-white/95">
             → STRAIGHT TO MY INBOX
           </span>
         </div>
@@ -299,7 +299,7 @@ export const ContactForm = () => {
                 onChange={(e) => set("message", e.target.value)}
               />
             </Field>
-            <div className="mt-1 text-right font-mono text-[11px] tracking-wider text-white/86">
+            <div className="mt-1 text-right font-mono text-[11px] tracking-wider text-white/95">
               {f.message.length}/{MAX_MESSAGE}
             </div>
           </div>
@@ -329,7 +329,7 @@ export const ContactForm = () => {
               <Send className="h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
             )}
           </button>
-          <p className="max-w-xs text-xs leading-snug text-white/86">
+          <p className="max-w-xs text-xs leading-snug text-white/95">
             Delivered straight to my email inbox.
           </p>
         </div>
@@ -382,7 +382,7 @@ export const ContactForm = () => {
                   <AlertTriangle className="h-4 w-4" /> Not sent
                 </div>
                 <p className="mt-3 text-sm leading-relaxed text-white/90">{serverError}</p>
-                <p className="mt-3 text-xs leading-relaxed text-white/83">
+                <p className="mt-3 text-xs leading-relaxed text-white/95">
                   You can send the same message yourself with one of these:
                 </p>
                 <p className="mt-3 rounded-xl bg-black/30 p-3 text-sm leading-relaxed text-white/90">

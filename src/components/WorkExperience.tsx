@@ -69,7 +69,7 @@ const ProjectCard = ({ p, index }: { p: WorkProject; index: number }) => {
           <h3 className="font-headline text-xl font-bold leading-tight tracking-tight text-white md:text-2xl">
             {p.title}
           </h3>
-          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-white/83">{p.summary}</p>
+          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-white/95">{p.summary}</p>
 
           {p.problem && (
             <div className="mt-5 rounded-2xl border border-amber-300/40 bg-amber-300/[0.07] p-4">
@@ -115,7 +115,7 @@ const ProjectCard = ({ p, index }: { p: WorkProject; index: number }) => {
               {p.tags.map((t) => (
                 <li
                   key={t}
-                  className="rounded-full bg-white/10 px-2.5 py-1 font-mono text-[11px] tracking-wider text-white/86"
+                  className="rounded-full bg-white/10 px-2.5 py-1 font-mono text-[11px] tracking-wider text-white/95"
                 >
                   {t}
                 </li>
@@ -189,7 +189,7 @@ const GrowthPath = () => {
               >
                 {g.label}
               </button>
-              {i < GROWTH_STAGES.length - 1 && <ArrowRight className="hidden h-4 w-4 text-white/60 sm:block" />}
+              {i < GROWTH_STAGES.length - 1 && <ArrowRight className="hidden h-4 w-4 text-white/80 sm:block" />}
             </div>
           );
         })}
@@ -265,7 +265,7 @@ export const WorkExperience = () => {
         <h2 className="mt-6 bg-gradient-to-b from-white via-white to-white/40 bg-clip-text font-headline text-4xl font-extrabold leading-[0.98] tracking-tight text-transparent md:text-7xl">
           Shipped at Hrud.ai
         </h2>
-        <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/83 md:text-lg">
+        <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/95 md:text-lg">
           AI and full-stack products that real users and clients depend on.
         </p>
         <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.25em] text-[var(--gold)]">
@@ -355,7 +355,7 @@ export const WorkExperience = () => {
               <ArrowUpRight className="h-5 w-5" />
             </a>
           </h3>
-          <p className="mt-2 max-w-3xl text-sm leading-relaxed text-white/83">
+          <p className="mt-2 max-w-3xl text-sm leading-relaxed text-white/95">
             Building production-grade AI systems with LLMs, RAG pipelines and agents, plus the
             platforms, SaaS products and client work around them.
           </p>
@@ -406,7 +406,7 @@ export const WorkExperience = () => {
           May – Aug 2024 · Internship
         </div>
         <div className="font-headline text-lg font-bold text-white">AI/ML Intern — CodeForces</div>
-        <p className="text-sm text-white/83 md:ml-auto md:max-w-xl">
+        <p className="text-sm text-white/95 md:ml-auto md:max-w-xl">
           ML and deep learning for real-world tasks: data preprocessing, feature engineering and
           neural-network experiments — improved model performance by{" "}
           <b className="text-white">12%</b>.

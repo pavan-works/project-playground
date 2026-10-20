@@ -93,7 +93,7 @@ export const SoftSkills = () => (
         <h2 className="mt-6 bg-gradient-to-b from-white via-white to-white/40 bg-clip-text font-headline text-4xl font-extrabold leading-[0.98] tracking-tight text-transparent md:text-7xl">
           Professional Soft Skills
         </h2>
-        <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/83 md:text-lg">
+        <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/95 md:text-lg">
           How I work with people, not just code — each one backed by something I&apos;ve actually done.
         </p>
       </motion.div>
@@ -125,14 +125,14 @@ export const SoftSkills = () => (
                     >
                       <Icon className="h-7 w-7" strokeWidth={1.7} />
                     </span>
-                    <span className="font-mono text-[11px] tracking-[0.3em] text-white/83">
+                    <span className="font-mono text-[11px] tracking-[0.3em] text-white/95">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                   </div>
                   <h3 className="font-headline text-xl font-bold tracking-tight text-white md:text-2xl">
                     {s.title}
                   </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-white/86">{s.text}</p>
+                  <p className="mt-3 text-sm leading-relaxed text-white/95">{s.text}</p>
 
                   <ul className="mt-6 grid gap-2 border-t border-white/10 pt-5">
                     {s.evidence.map((e) => (
@@ -173,7 +173,7 @@ export const Achievements = () => (
         <h2 className="mt-6 bg-gradient-to-b from-white via-white to-white/40 bg-clip-text font-headline text-4xl font-extrabold leading-[0.98] tracking-tight text-transparent md:text-7xl">
           Achievements
         </h2>
-        <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/83 md:text-lg">
+        <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/95 md:text-lg">
           Podiums, rankings and leadership — on stage and in teams.
         </p>
       </motion.div>
@@ -230,7 +230,7 @@ export const Achievements = () => (
                     <h3 className="mt-3 font-headline text-lg font-bold text-white md:text-xl">
                       {a.title}
                     </h3>
-                    <p className="mt-1 text-sm leading-relaxed text-white/83">{a.detail}</p>
+                    <p className="mt-1 text-sm leading-relaxed text-white/95">{a.detail}</p>
                   </div>
                 </div>
               </GlowCard>

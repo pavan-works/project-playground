@@ -76,7 +76,7 @@ export const ResumeModal = ({ open, onClose }: { open: boolean; onClose: () => v
               title="Solige Pullaiah resume"
               className="min-h-0 w-full flex-1 bg-white"
             />
-            <p className="border-t border-white/10 px-4 py-2 text-center font-mono text-[11px] text-white/83 md:hidden">
+            <p className="border-t border-white/10 px-4 py-2 text-center font-mono text-[11px] text-white/95 md:hidden">
               Preview not showing? Use Download or Open above.
             </p>
           </motion.div>
