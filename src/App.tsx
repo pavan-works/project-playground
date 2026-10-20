@@ -609,7 +609,7 @@ const ProjectCard = ({
       />
       <div className={`relative shrink-0 overflow-hidden ${item.visual ? "h-64 md:h-72" : "aspect-video"}`}>
         {item.visual ? (
-          <ProjectVisual kind={item.visual} className="absolute inset-0 pt-9" />
+          <ProjectVisual kind={item.visual} className="absolute inset-0 pt-14 md:pt-9" />
         ) : (
           <img
             src={item.image}
@@ -619,7 +619,7 @@ const ProjectCard = ({
           />
         )}
         {!item.visual && <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[var(--rv-card)] via-transparent to-transparent" />}
-        <div className="absolute top-8 left-8 flex items-center gap-3">
+        <div className="absolute top-5 left-6 md:top-8 md:left-8 flex items-center gap-3">
           <div className="w-2 h-2 rounded-full animate-pulse" style={{ background: accentVar }} />
           <span className="text-[11px] font-mono text-white/90 tracking-[0.3em] uppercase">
             {item.category}
@@ -631,10 +631,10 @@ const ProjectCard = ({
           </span>
         )}
         <div
-          className="absolute top-8 right-8 w-14 h-14 rounded-full glass-panel border border-white/10 flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:rotate-45"
+          className="absolute top-3 right-4 md:top-6 md:right-6 w-9 h-9 md:w-11 md:h-11 rounded-full glass-panel border border-white/10 flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:rotate-45"
           style={{ background: `${accent === "gold" ? "rgba(245,158,11,0.15)" : "rgba(16,185,129,0.15)"}` }}
         >
-          <ArrowUpRight className="w-6 h-6 text-white" />
+          <ArrowUpRight className="w-4 h-4 md:w-5 md:h-5 text-white" />
         </div>
       </div>
       <div className="relative p-10 md:p-12 pt-6 flex flex-col h-full">

@@ -166,7 +166,7 @@ export const Process = () => {
 
       <div className="relative z-10 mx-auto grid w-full gap-14 px-6 md:px-14 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
         {/* sticky intro */}
-        <div className="lg:sticky lg:top-28 lg:self-start">
+        <div className="lg:sticky lg:top-6 lg:self-start">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -177,20 +177,20 @@ export const Process = () => {
               <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--gold)]" />
               My Process
             </span>
-            <h2 className="mt-6 font-headline text-3xl font-extrabold leading-[1.02] tracking-tight text-white md:text-5xl [overflow-wrap:anywhere]">
+            <h2 className="mt-5 font-headline text-3xl font-extrabold leading-[1.02] tracking-tight text-white md:text-5xl [overflow-wrap:anywhere]">
               Here&apos;s how I turn ideas into{" "}
               <span className="bg-gradient-to-r from-[var(--gold)] to-[var(--indigo-light)] bg-clip-text text-transparent">
                 real-world applications
               </span>
             </h2>
-            <p className="mt-6 max-w-xl text-base leading-relaxed text-white/83 md:text-lg">
+            <p className="mt-5 max-w-xl text-base leading-relaxed text-white/83 md:text-lg">
               A structured, practical approach to taking an AI idea from a problem statement to a
               system people can use — whether it ends as a research paper, a trained model, a RAG
               pipeline or an agent.
             </p>
 
             {/* lens switcher */}
-            <div className="mt-8">
+            <div className="mt-6">
               <div className="mb-3 font-mono text-[11px] uppercase tracking-[0.3em] text-white/86">
                 See the process through…
               </div>
@@ -225,7 +225,7 @@ export const Process = () => {
             </div>
 
             {/* live step tracker */}
-            <div className="mt-10 rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+            <div className="mt-6 rounded-2xl border border-white/10 bg-white/[0.03] p-4">
               <div className="mb-3 flex items-center justify-between font-mono text-[11px] uppercase tracking-[0.3em] text-white/86">
                 <span>You are at</span>
                 <span className="text-[var(--gold)]">
