@@ -1,4 +1,5 @@
 import { useRef, type MouseEvent } from "react";
+import { SectionLabel } from "./SectionLabel";
 import { motion } from "motion/react";
 import {
   Crown,
@@ -30,13 +31,6 @@ const ACH_ICONS: Record<Achievement["icon"], LucideIcon> = {
 };
 
 const SOFT_ACCENT = ["34,211,238", "129,140,248", "16,185,129", "250,204,21"];
-
-const Pill = ({ children }: { children: React.ReactNode }) => (
-  <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-4 py-1.5 font-mono text-[11px] uppercase tracking-[0.3em] text-white/90">
-    <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--gold)]" />
-    {children}
-  </span>
-);
 
 /** Card whose glow follows the cursor. */
 const GlowCard = ({
@@ -89,7 +83,7 @@ export const SoftSkills = () => (
         transition={{ duration: 0.7 }}
         className="mb-14 flex flex-col items-center text-center"
       >
-        <Pill>Core Competencies</Pill>
+        <SectionLabel n="08" text="Core Competencies" align="center" />
         <h2 className="mt-6 bg-gradient-to-b from-white via-white to-white/40 bg-clip-text font-headline text-4xl font-extrabold leading-[0.98] tracking-tight text-transparent md:text-7xl">
           Professional Soft Skills
         </h2>
@@ -169,7 +163,7 @@ export const Achievements = () => (
         transition={{ duration: 0.7 }}
         className="mb-14 flex flex-col items-center text-center"
       >
-        <Pill>Recognition</Pill>
+        <SectionLabel n="07" text="Recognition" align="center" />
         <h2 className="mt-6 bg-gradient-to-b from-white via-white to-white/40 bg-clip-text font-headline text-4xl font-extrabold leading-[0.98] tracking-tight text-transparent md:text-7xl">
           Achievements
         </h2>

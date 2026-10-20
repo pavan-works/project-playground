@@ -36,6 +36,7 @@ import { createPortal } from "react-dom";
 import { PORTFOLIO_DATA, JOURNEY, JOURNEY_QUOTE, type Project } from "./data";
 import portraitCutout from "./assets/portrait-smile.webp";
 import { AnimatedNav } from "./components/AnimatedNav";
+import { SectionLabel } from "./components/SectionLabel";
 import { JourneySlides } from "./components/JourneySlides";
 import { Skillset } from "./components/Skillset";
 import { Process } from "./components/Process";
@@ -109,11 +110,18 @@ const Hero = () => {
           transition={{ delay: 0.8, duration: 0.8 }}
           className="flex items-center gap-4 md:gap-6 flex-wrap"
         >
-          <span className="text-[11px] font-mono text-white/90 tracking-[0.4em] uppercase hidden md:inline">Worked with</span>
-          {["Hrud.ai", "CodeForces", "OpenAI", "HuggingFace", "Supabase"].map((c) => (
-            <span key={c} className="text-white/95 text-xs font-headline tracking-wide">
-              {c}
-            </span>
+          {[
+            { label: "Worked at", items: ["Hrud.ai", "CodeForces"] },
+            { label: "Built with", items: ["OpenAI", "Hugging Face", "Supabase"] },
+          ].map((g) => (
+            <div key={g.label} className="flex items-center gap-4 md:gap-6 flex-wrap">
+              <span className="text-[11px] font-mono text-white/90 tracking-[0.4em] uppercase hidden md:inline">{g.label}</span>
+              {g.items.map((c) => (
+                <span key={c} className="text-white/95 text-xs font-headline tracking-wide">
+                  {c}
+                </span>
+              ))}
+            </div>
           ))}
         </motion.div>
       </div>
@@ -148,8 +156,7 @@ const About = () => {
       viewport={{ once: true }}
       className="flex items-center gap-4 mb-12"
     >
-      <div className="w-12 h-px bg-[var(--gold)]" />
-      <span className="text-[var(--gold)] font-mono text-xs tracking-[0.5em] uppercase">01 / Profile</span>
+      <SectionLabel n="01" text="Profile" align="left" />
     </motion.div>
 
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-20 items-start">
@@ -342,62 +349,11 @@ const ActiveStopPanel = ({ index }: { index: number }) => {
 };
 
 const Experience = () => {
-  // slide = photo shown on the right; visitor photos come after the 6 stops,
-  // and while one of them is shown the card stays on the last stop
+  // slide = index of the stop shown in the card and the photo beside it
   const [slide, setSlide] = useState(0);
-  const [customImages, setCustomImages] = useState<string[]>(() => {
-    try {
-      return JSON.parse(localStorage.getItem("journey-custom-images") || "[]");
-    } catch {
-      return [];
-    }
-  });
-
-  const galleryImages = useMemo(() => {
-    const base = JOURNEY.map((s) => s.image!).filter(Boolean);
-    // visitor images go after the journey stops so image N always matches stop N
-    return [...base, ...customImages];
-  }, [customImages]);
-  const galleryLabels = useMemo(
-    () => [
-      ...JOURNEY.map((s) => `Stop ${JOURNEY.indexOf(s) + 1}: ${s.title}`),
-      ...customImages.map((_, i) => `Your photo ${i + 1}`),
-    ],
-    [customImages],
-  );
+  const galleryImages = useMemo(() => JOURNEY.map((s) => s.image!).filter(Boolean), []);
+  const galleryLabels = useMemo(() => JOURNEY.map((s, i) => `Stop ${i + 1}: ${s.title}`), []);
   const activeStop = Math.min(slide, JOURNEY.length - 1);
-
-  const handleAddImages = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = Array.from(e.target.files || []);
-    if (!files.length) return;
-    Promise.all(
-      files.map(
-        (file) =>
-          new Promise<string>((resolve) => {
-            const reader = new FileReader();
-            reader.onload = () => resolve(String(reader.result));
-            reader.readAsDataURL(file);
-          }),
-      ),
-    ).then((urls) => {
-      setCustomImages((prev) => {
-        const next = [...prev, ...urls];
-        try {
-          localStorage.setItem("journey-custom-images", JSON.stringify(next));
-        } catch {
-          /* storage full — keep in memory only */
-        }
-        return next;
-      });
-    });
-    e.target.value = "";
-  };
-
-  const clearCustomImages = () => {
-    setSlide((s) => Math.min(s, JOURNEY.length - 1));
-    setCustomImages([]);
-    localStorage.removeItem("journey-custom-images");
-  };
 
   return (
     <section id="journey" className="relative overflow-hidden bg-white/[0.01] py-40">
@@ -411,10 +367,7 @@ const Experience = () => {
           viewport={{ once: true }}
           className="mb-6 flex items-center gap-4"
         >
-          <div className="h-px w-12 bg-[var(--emerald)]" />
-          <span className="font-mono text-xs uppercase tracking-[0.5em] text-[var(--emerald)]">
-            02 / The Journey
-          </span>
+          <SectionLabel n="03" text="The Journey" align="left" />
         </motion.div>
 
         {/* Heading + quote */}
@@ -465,23 +418,6 @@ const Experience = () => {
               labels={galleryLabels}
               index={slide}
               onChange={setSlide}
-              overlay={
-                <>
-                  <label className="cursor-pointer rounded-full border border-white/25 bg-black/55 px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.2em] text-white/90 backdrop-blur-md transition-colors hover:border-[var(--emerald)] hover:text-[var(--emerald)]">
-                    + Add your own images
-                    <input type="file" accept="image/*" multiple className="sr-only" onChange={handleAddImages} />
-                  </label>
-                  {customImages.length > 0 && (
-                    <button
-                      type="button"
-                      onClick={clearCustomImages}
-                      className="rounded-full border border-white/25 bg-black/55 px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.2em] text-white/90 backdrop-blur-md hover:text-white"
-                    >
-                      Reset ({customImages.length})
-                    </button>
-                  )}
-                </>
-              }
             />
           </div>
         </div>
@@ -540,16 +476,6 @@ const Expertise = () => {
       </svg>
 
       <div className="w-full px-6 md:px-14 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="flex items-center gap-4 mb-16"
-        >
-          <div className="w-12 h-px bg-[var(--gold)]" />
-          <span className="text-[var(--gold)] font-mono text-xs tracking-[0.5em] uppercase">03 / Tech Stack</span>
-        </motion.div>
-
         <Skillset />
 
         <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-9 gap-4 md:gap-5 mb-24">
@@ -982,10 +908,7 @@ const Works = () => {
       transition={{ duration: 0.7 }}
       className="mb-24 flex flex-col items-center text-center"
     >
-      <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-4 py-1.5 font-mono text-[11px] uppercase tracking-[0.3em] text-white/90">
-        <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--gold)]" />
-        Portfolio
-      </span>
+      <SectionLabel n="06" text="Portfolio" align="center" />
       <h2 className="mt-6 bg-gradient-to-b from-white via-white to-white/40 bg-clip-text font-headline text-4xl font-extrabold leading-[0.98] tracking-tight text-transparent md:text-7xl">
         Selected Works
       </h2>
@@ -1031,6 +954,27 @@ const Works = () => {
   );
 };
 
+// Profile written as a small Python class; every value comes from the resume / this site.
+type CodeToken = [string, string?];
+const KW = "text-[var(--indigo-light)]";
+const NAME = "text-[var(--gold)]";
+const STR = "text-[var(--emerald)]";
+const CMT = "text-[var(--rv-muted)]/90";
+const PROFILE_CODE: CodeToken[][] = [
+  [["class", KW], [" "], ["SoligePullaiah", NAME], [":"]],
+  [["    role = "], ['"AI Engineer @ Hrud.ai"', STR]],
+  [["    based_in = "], ['"Hyderabad, India"', STR]],
+  [["    focus = ["], ['"RAG"', STR], [", "], ['"LLM agents"', STR], [", "], ['"NLP"', STR], [", "], ['"multimodal DL"', STR], ["]"]],
+  [["    research = ["], ['"LaMaTEPP: Indic machine translation"', STR], [","]],
+  [["                "], ['"SyncVerse: speech-driven lip-sync"', STR], ["]"]],
+  [["    stack = ["], ['"Python"', STR], [", "], ['"PyTorch"', STR], [", "], ['"Hugging Face"', STR], [", "], ['"FastAPI"', STR], [", "], ['"Supabase"', STR], ["]"]],
+  [[""]],
+  [["    "], ["def", KW], [" "], ["build", NAME], ["(self, idea):"]],
+  [["        plan = self.research_first(idea)   "], ["# papers, data, baselines", CMT]],
+  [["        system = self.ship(plan)           "], ["# build, evaluate, deploy", CMT]],
+  [["        "], ["return", KW], [" system.keep_improving()"]],
+];
+
 const CodeSnippet = () => (
   <section className="py-32 px-8 bg-white/5 overflow-hidden">
     <div className="max-w-4xl mx-auto">
@@ -1041,21 +985,22 @@ const CodeSnippet = () => (
             <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/40" />
             <div className="w-2.5 h-2.5 rounded-full bg-green-500/40" />
           </div>
-          <span className="text-[11px] font-mono text-[var(--rv-muted)]/90 tracking-widest uppercase">Neural_Processor.py</span>
+          <span className="text-[11px] font-mono text-[var(--rv-muted)]/90 tracking-widest">solige_pullaiah.py</span>
           <Terminal className="w-3.5 h-3.5 text-[var(--rv-muted)]/90" />
         </div>
-        <div className="p-10 font-mono text-sm leading-loose">
-          <pre className="text-[var(--rv-muted)]">
-            <code>
-              <span className="text-[var(--indigo-light)]">class</span> <span className="text-[var(--gold)]">NeuralInterface</span>:<br />
-              &nbsp;&nbsp;<span className="text-[var(--indigo-light)]">def</span> <span className="text-[var(--gold)]">__init__</span>(self, synaptic_load):<br />
-              &nbsp;&nbsp;&nbsp;&nbsp;self.core = <span className="text-[var(--emerald)]">"SP-ALPHA-2026"</span><br />
-              &nbsp;&nbsp;&nbsp;&nbsp;self.latency = <span className="text-orange-400">0.0012</span><br />
-              <br />
-              &nbsp;&nbsp;<span className="text-[var(--indigo-light)]">def</span> <span className="text-[var(--gold)]">process_intent</span>(self, prompt):<br />
-              &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-[var(--rv-muted)]/90"># Initializing thought bridge</span><br />
-              &nbsp;&nbsp;&nbsp;&nbsp;bridge = self.core.init_bridge(prompt)<br />
-              &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-[var(--indigo-light)]">return</span> bridge.synthesize()
+        <div className="p-6 md:p-10 font-code text-xs md:text-sm leading-loose overflow-x-auto">
+          <pre className="font-code text-[var(--rv-muted)]">
+            <code className="font-code">
+              {PROFILE_CODE.map((line, i) => (
+                <div key={i} className="whitespace-pre">
+                  {line.map(([text, cls], j) => (
+                    <span key={j} className={cls}>
+                      {text}
+                    </span>
+                  ))}
+                  {line.length === 1 && line[0][0] === "" ? "\u00a0" : null}
+                </div>
+              ))}
             </code>
           </pre>
         </div>
@@ -1110,12 +1055,9 @@ const Contact = () => (
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
+        className="w-full"
       >
-        <div className="flex items-center gap-4 mb-8">
-          <span className="w-14 h-px bg-gradient-to-r from-transparent to-[var(--gold)]" />
-          <span className="text-[var(--gold)] font-mono text-xs tracking-[0.5em] uppercase">Get In Touch</span>
-          <span className="w-14 h-px bg-gradient-to-l from-transparent to-[var(--gold)]" />
-        </div>
+        <SectionLabel n="09" text="Get In Touch" align="center" className="mb-8" />
         <h2 className="mb-10 bg-gradient-to-b from-white via-white to-white/40 bg-clip-text font-headline text-4xl font-extrabold leading-[0.98] tracking-tight text-transparent md:text-7xl">
           Let's Build Something
         </h2>

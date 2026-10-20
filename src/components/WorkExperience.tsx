@@ -1,4 +1,5 @@
 import { useRef, useState, type KeyboardEvent, type MouseEvent } from "react";
+import { SectionLabel } from "./SectionLabel";
 import { AnimatePresence, motion } from "motion/react";
 import { ArrowRight, ArrowUpRight, Briefcase, TrendingUp } from "lucide-react";
 import { GROWTH_STAGES, WORK_PROJECTS, type WorkProject } from "../data";
@@ -258,10 +259,7 @@ export const WorkExperience = () => {
         transition={{ duration: 0.7 }}
         className="mb-12 flex flex-col items-center text-center"
       >
-        <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-4 py-1.5 font-mono text-[11px] uppercase tracking-[0.3em] text-white/90">
-          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--gold)]" />
-          Work Experience
-        </span>
+        <SectionLabel n="02" text="Work Experience" align="center" />
         <h2 className="mt-6 bg-gradient-to-b from-white via-white to-white/40 bg-clip-text font-headline text-4xl font-extrabold leading-[0.98] tracking-tight text-transparent md:text-7xl">
           Shipped at Hrud.ai
         </h2>

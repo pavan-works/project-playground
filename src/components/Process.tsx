@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { SectionLabel } from "./SectionLabel";
 import { AnimatePresence, motion, useScroll, useSpring } from "motion/react";
 import {
   Target,
@@ -173,10 +174,7 @@ export const Process = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
           >
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-4 py-1.5 font-mono text-[11px] uppercase tracking-[0.3em] text-white/90">
-              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--gold)]" />
-              My Process
-            </span>
+            <SectionLabel n="05" text="My Process" align="left" />
             <h2 className="mt-5 font-headline text-3xl font-extrabold leading-[1.02] tracking-tight text-white md:text-5xl [overflow-wrap:anywhere]">
               Here&apos;s how I turn ideas into{" "}
               <span className="bg-gradient-to-r from-[var(--gold)] to-[var(--indigo-light)] bg-clip-text text-transparent">

@@ -1,4 +1,5 @@
 import { useRef, type MouseEvent } from "react";
+import { SectionLabel } from "./SectionLabel";
 import { motion } from "motion/react";
 import { Brain, Code2, Database, Cloud, type LucideIcon } from "lucide-react";
 import { SKILLSET, type SkillCategory } from "../data";
@@ -163,10 +164,7 @@ export const Skillset = () => (
       transition={{ duration: 0.7 }}
       className="flex flex-col items-center text-center mb-14"
     >
-      <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/15 bg-white/[0.06] font-mono text-[11px] tracking-[0.3em] uppercase text-white/90">
-        <span className="w-1.5 h-1.5 rounded-full bg-[var(--gold)] animate-pulse" />
-        Technical Stack
-      </span>
+      <SectionLabel n="04" text="Tech Stack" align="center" />
       <h2 className="mt-6 font-headline font-extrabold tracking-tight leading-[0.95] text-5xl md:text-7xl text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-white/40">
         My Skillset
       </h2>
