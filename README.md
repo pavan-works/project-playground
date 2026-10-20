@@ -56,10 +56,13 @@ project-playground/
 ├── api/contact.ts                # Vercel serverless function: contact form → email via Resend
 ├── tsconfig.json                 # TypeScript config
 ├── components.json               # shadcn/ui-style component config
-├── .env.example                  # Environment variable template (Gemini API key, App URL)
+├── .env.example                  # Env template (contact form: RESEND_API_KEY, CONTACT_TO, CONTACT_FROM; legacy Gemini/App URL)
 ├── AGENTS.md                     # Notes about the Lovable git-sync integration
 ├── about_me.md                   # Source-of-truth notes for personal/profile content (display name, GitHub, photo confirmed)
 ├── portfolio.md                  # Consolidated master doc: what is built, pending work, how-tos
+├── Report.md                     # Recruiter-style audit of the site (2026-10-11) + progress update
+├── Contact_Form_Plan.md          # Contact delivery plan (Vercel function + Resend) — live
+├── Mascot_Plan.md                # Animated mascot plan — not started
 ├── Resume-pullaiah.md            # Resume reference material
 ├── Ravindra_portfolio.md         # Additional portfolio reference notes
 ├── 21st_dev.md                   # Design/reference notes
@@ -72,6 +75,8 @@ project-playground/
 │   ├── components/
 │   │   ├── AnimatedNav.tsx        # Floating pill nav + top-right "Hire Me" button
 │   │   ├── JourneySlides.tsx      # Journey photo panel: full-size photo per stop, autoplay, dots/arrows
+│   │   ├── SectionLabel.tsx       # Numbered section labels ("line" / "pill" designs, ?labels= preview)
+│   │   ├── ResumeModal.tsx        # Resume preview + download modal and ResumeButton
 │   │   ├── Skillset.tsx           # "My Skillset" spotlight cards + marquee
 │   │   ├── Process.tsx            # "My Process" with lens switcher
 │   │   ├── WorkExperience.tsx     # Hrud.ai role + project cards (with animated visuals)
@@ -84,7 +89,7 @@ project-playground/
 │   │   ├── error-capture.ts       # Runtime error capture utility
 │   │   ├── error-page.ts          # Fallback error UI
 │   │   └── lovable-error-reporting.ts  # Error reporting hook for the Lovable platform
-│   └── assets/                    # Portrait (portrait-smile.png = hero photo), journey, project images, logos/
+│   └── assets/                    # Portrait (portrait-smile.webp = hero photo; .png = source), journey, project images, logos/
 └── stitch_modern_glow_portfolio/  # Design reference material: exported mockup images,
                                     # extracted Behance case-study text, and layout variants
                                     # used as visual inspiration (not part of the built app)
@@ -96,17 +101,23 @@ The page (`PortfolioLanding` in [src/App.tsx](src/App.tsx)) renders, top to bott
 
 1. **Loading screen** — an animated "Portfolio" logo/title reveal with the name, shown for ~2 seconds on load (kept by owner request).
 2. **`AnimatedNav`** — floating pill navigation that collapses on scroll, plus a **Hire Me** button fixed at the top right (links to `#contact`; on phones it appears once the menu collapses).
-3. **`Hero`** (`#home`) — full-height intro with a large "AI Engineer & Applied Researcher" headline behind the smiling portrait (on landscape screens "& Applied" and "Researcher" sit either side of the head) (`portrait-smile.png`), location, and a row of companies/tools worked with.
+3. **`Hero`** (`#home`) — full-height intro with a large "AI Engineer & Applied Researcher" headline behind the smiling portrait (on landscape screens "& Applied" and "Researcher" sit either side of the head; the second line is outlined on every screen size), location, and a bottom row **"Worked at** Hrud.ai · CodeForces" / **"Built with** OpenAI · Hugging Face · Supabase".
 4. **`About`** (`#about`) — profile summary, key stats, an "Identity" panel and 4 focus-area cards (RAG & Retrieval, Agentic Systems, Applied Research, Production ML).
 5. **`WorkExperience`** (`#experience`) — "Shipped at Hrud.ai": the AI Engineer role card, seven project cards (DevTools Control Center first, Job Galaxy, NCPL chatbot, Career Advisor Bot, NTRview Log, Pulse Celebrations v2, Xencomedical), each with an **animated visual**, plus a CodeForces strip.
-6. **`Experience`** (`#journey`) — "The Journey": quote, the active-stop card and, beside it, `JourneySlides`: that stop's photo filling a box of the same height, autoplaying forward 1 → 6 (dots, prev/next, arrow keys; pauses on hover and for reduced motion). Visitors can add their own images (stored in `localStorage`, shown after the 6 stops).
+6. **`Experience`** (`#journey`) — "The Journey": quote, the active-stop card and, beside it, `JourneySlides`: that stop's photo filling a box of the same height, autoplaying forward 1 → 6 (dots, prev/next, arrow keys; pauses on hover and for reduced motion). Only the 6 journey stops are shown (the visitor image upload was removed on 2026-10-20).
 7. **`Expertise`** (`#expertise`) — **My Skillset** (`Skillset`: AI & ML, Languages, Databases, Cloud & DevOps as spotlight cards with "where I used it", plus a skills marquee) followed by the logo grids "Tools & Platforms" / "APIs & AI Tools".
 8. **`Process`** (`#process`) — "My Process": six steps (Understand the Problem → Plan the Architecture → Check What Already Exists → Design → Build & Evaluate → Deploy & Improve) with a lens switcher (Research Paper · ML/DL/NLP · RAG · Agents) and a feedback-loop callout.
 9. **`Works`** (`#works`) — "Selected Works": Engineering Projects and Research Publications as `ProjectCard`s with animated visuals (RAG pipeline, job-search agent, English→Telugu/Tamil translation, speech→lip-sync). Opening one shows a full-width animation, details, and floating **Back to Works** / close buttons (clicking the empty area also closes).
 10. **`Achievements`** (`#achievements`) and **`SoftSkills`** (`#soft-skills`) — built only from facts in the resume.
-11. **`CodeSnippet`** — a decorative fake "terminal" code block for visual flavor.
+11. **`CodeSnippet`** — a code window titled `solige_pullaiah.py`: a short, valid Python class describing the owner (role, location, focus, research, stack, and how he builds), written only from resume/site facts and set in JetBrains Mono (`font-code`).
 12. **`Contact`** (`#contact`) — Mail / LinkedIn / GitHub cards plus the **`ContactForm`**: first/last name, email-or-phone, message and consent. Sending posts to **`/api/contact`** ([api/contact.ts](api/contact.ts), a Vercel serverless function) which validates it, blocks bots and emails it to the owner through **Resend**; if delivery fails the form offers SMS / WhatsApp / email / copy instead. Side panel: Text, WhatsApp, Call, Email.
 13. **`Footer`** — logo, navigation/social links (GitHub → `github.com/puli-pro`), and an "Available" status badge.
+
+**Section labels.** Every section has a numbered label above its heading, in page order: 01 / Profile · 02 / Work Experience · 03 / The Journey · 04 / Tech Stack · 05 / My Process · 06 / Portfolio · 07 / Recognition · 08 / Core Competencies · 09 / Get In Touch. All of them come from one component, [src/components/SectionLabel.tsx](src/components/SectionLabel.tsx), which has two designs:
+- `"line"` (current default) — short cyan line + cyan uppercase text, always on the left;
+- `"pill"` — rounded pill with a pulsing cyan dot and white text, aligned with its heading.
+
+Change `SECTION_LABEL_STYLE` in that file to switch the whole site, or preview either design without editing code by adding `?labels=line` or `?labels=pill` to the URL.
 
 ## Content Model
 
@@ -159,12 +170,13 @@ Defined in [package.json](package.json):
   - `APP_URL` — the hosted URL of the app, auto-injected by AI Studio's Cloud Run deployment.
   - `RESEND_API_KEY`, `CONTACT_TO`, optional `CONTACT_FROM` — used by the contact form's serverless function. Set them in **Vercel → Project → Settings → Environment Variables**; for local testing put them in `.env.local` (git-ignored) and `npm run dev` serves `/api/contact` too. Without them the form shows a clear "not set up yet" error plus the direct-contact links.
 - **Styling/theme:** Tailwind CSS 4 is configured through the Vite plugin (no separate `tailwind.config.js`); design tokens (colors like `--gold`, `--indigo`, `--emerald`, `--bg`, `--rv-muted`, `--rv-card`, fonts) are defined as CSS custom properties in [src/index.css](src/index.css) and consumed throughout [src/App.tsx](src/App.tsx).
-- **Local-only persistence:** Custom images a visitor uploads to the journey gallery are saved to `localStorage` (`journey-custom-images`) and are per-browser only, not shared or synced anywhere.
 
 ## Deployment & Integrations
 
 - **Google AI Studio** — the project was created/managed there; `metadata.json` declares the app name/description and enables `MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API`.
 - **Lovable** — the repository is connected to [Lovable](https://lovable.dev) for visual/AI-assisted editing that syncs via git. Per [AGENTS.md](AGENTS.md): **avoid force-pushing or rewriting published history** on the connected branch, since that can break the sync and lose project history on Lovable's side. Related error-reporting integration lives in [src/lib/lovable-error-reporting.ts](src/lib/lovable-error-reporting.ts).
+- **Contact form delivery** — live since 2026-10-16: `RESEND_API_KEY` and `CONTACT_TO` are set in Vercel and a real test message was delivered.
+- **Analytics (planned, not installed yet)** — researched on 2026-10-20: Vercel Web Analytics (free 50K events/month, 1-month history, no custom events on Hobby) and Umami Cloud (free 100K events/month, 6-month history, custom events and `?ref=`/UTM links). Both are cookieless and need no visitor login; awaiting the owner's choice. See `portfolio.md` §11.
 
 ## Design Assets
 
@@ -178,4 +190,5 @@ To personalize or update the portfolio:
 2. **Images** → add/replace files in [src/assets/](src/assets/) and update the corresponding `import`s in `data.ts` / `App.tsx`.
 3. **Section layout, copy, or styling** → edit the relevant section component in [src/App.tsx](src/App.tsx) (e.g. `Hero`, `About`, `Contact`) or the shared color/typography tokens in [src/index.css](src/index.css).
 4. **Navigation** → edit [src/components/AnimatedNav.tsx](src/components/AnimatedNav.tsx).
+4. **Section labels** (numbering / line vs pill design) → edit [src/components/SectionLabel.tsx](src/components/SectionLabel.tsx) and the `<SectionLabel n=… text=… />` calls in each section.
 5. **Journey photo panel** → edit [src/components/JourneySlides.tsx](src/components/JourneySlides.tsx).

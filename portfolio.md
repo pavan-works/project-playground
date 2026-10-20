@@ -2,7 +2,7 @@
 
 > Consolidated master document for the `project-playground` repository: what the portfolio is, everything built so far, how to run/edit/extend it, and what is still pending.
 > Compiled from: `README.md`, `about_me.md`, `Resume-pullaiah.md`, `Ravindra_portfolio.md`, `21st_dev.md`, `AGENTS.md`, `src/data.ts`, `src/App.tsx`, `src/index.css`, config files, `stitch_modern_glow_portfolio/`, and the git history.
-> Last updated: 2026-10-11.
+> Last updated: 2026-10-20.
 
 ---
 
@@ -39,7 +39,7 @@
 | Live URL | https://soligepullaiah.vercel.app/ (Vercel, deployed 2026-10-11) |
 | Dev URL | `http://localhost:3000` |
 | Theme decision | Stay in the current dark theme (confirmed); v2 plan in §16 |
-| Status | Skillset, Process, Work Experience (Hrud.ai), Selected Works (animated), Achievements, Soft Skills and Contact (SMS form) are **built**; **My Journey (timeline) and Those Who Shaped Me are pending**; resume modal + PDF, SEO/OG/JSON-LD tags, X link and Hyderabad location are **done**; deployment, real screenshots and the **Growth & Projects at Hrud.ai layout decision (§16.15)** are pending (see §11 and §16) |
+| Status | All sections are **built and live**: Hero, About, Work Experience (Hrud.ai tabs), Journey (photo panel), Skillset, Process, Selected Works, Achievements, Soft Skills, profile code block, Contact (**emails the owner via Resend — live and verified**). Pending: the audit's content items (honest project copy, research proof, filler/inflated copy, one consistent Hrud.ai title story — §11), the **section-label design choice** (`line` vs `pill`), **analytics** (Vercel vs Umami — §11), My Journey timeline / Those Who Shaped Me, real screenshots |
 | Theme | Dark "deep space", cyan (`--gold` token) + indigo + emerald accents |
 
 ---
@@ -189,23 +189,23 @@ npm run lint         # tsc --noEmit
 
 ## 6. Page architecture — section by section
 
-`PortfolioLanding` (bottom of `src/App.tsx`) shows a 2-second loading screen, then renders: `AnimatedNav` → `Hero` → `About` → `WorkExperience` → `Experience` (journey) → `Expertise` (Skillset + logos) → `Process` → `Works` → `Achievements` → `SoftSkills` → `CodeSnippet` → `Contact` (links + form) → `Footer`.
+`PortfolioLanding` (bottom of `src/App.tsx`) shows a 2-second loading screen (kept at the owner's request), then renders: `AnimatedNav` → `Hero` → `About` → `WorkExperience` → `Experience` (journey) → `Expertise` (Skillset + logos) → `Process` → `Works` → `Achievements` → `SoftSkills` → `CodeSnippet` → `Contact` (links + form) → `Footer`.
 
 | # | Section (`id`) | What it contains | Status |
 |---|---|---|---|
 | 0 | **Loading screen** | Animated "Portfolio" title reveal, ~2 s | ✅ |
 | – | **AnimatedNav** | Floating pill nav (Home, About, Experience, Expertise, Works) that collapses on scroll + fixed top-right **Hire Me** button → `#contact` (phones: shown when the nav is collapsed) | ✅ |
-| 1 | **Hero** (`#home`) | "AI ⭧ Engineer" + outlined "& Applied Researcher" (renamed 2026-10-20; split around the portrait's head on landscape screens, solid text on phones) behind the smiling portrait; location; "Worked with" row | ✅ |
+| 1 | **Hero** (`#home`) | "AI ⭧ Engineer" + outlined "& Applied Researcher" (renamed 2026-10-20; split around the portrait's head on landscape screens; outlined on phones too, 0.8px stroke) behind the smiling portrait; location; "Worked at" / "Built with" row | ✅ |
 | 2 | **About** (`#about`) | Summary, stats, identity panel, 4 focus cards | ⚠ confirm the "15+ systems shipped" stat |
 | 3 | **Work Experience** (`#experience`) | "Shipped at Hrud.ai": role card + 7 cards, each with an animated visual: **DevTools Control Center (featured, with the per-seat cost problem + formula)**, Job Galaxy SaaS & Admin Console, NCPL Website AI Chatbot, Career Advisor Bot, NTRview Log, Pulse Celebrations v2, Xencomedical client project; CodeForces strip (+12%) | ✅ |
-| 4 | **Journey** (`#journey`) | Pull-quote, active-stop panel, Three.js `InfiniteGallery` (6 stops, visitor image upload via `localStorage`) | ⚠ plan 16.7 (vertical timeline + new milestones) pending |
+| 4 | **Journey** (`#journey`) | Pull-quote, active-stop card + `JourneySlides` photo panel (same height as the card, autoplay 1 → 6, dots / arrows; only the 6 stops — visitor upload removed 2026-10-20) | ✅ (vertical timeline idea in 16.7 still open) |
 | 5 | **Expertise** (`#expertise`) | **My Skillset** (4 spotlight cards: AI & ML, Languages, Databases, Cloud & DevOps, each row with "where used"; cards numbered 01–04) + "Tools & Platforms" logo grid + "APIs & AI Tools" | ✅ |
 | 6 | **Process** (`#process`) | 6 steps + lens switcher (Research Paper / ML·DL·NLP / RAG / Agents) + "found something useful? update the plan" loop banner + scroll-drawn progress line | ✅ |
 | 7 | **Works** (`#works`) | Engineering Projects (Ollama Document Assistant, AI Job Intelligence Agent) + Research Publications (LaMaTEPP, SyncVerse) as `ProjectCard`s with animated visuals; `DetailModal` (portal, full-width animation on top, floating Back to Works + close, click outside to close) | ✅ (no real screenshots yet) |
 | 8 | **Achievements** (`#achievements`) | Bento grid: 3rd place Sign2Speak (featured), Top 2000 Super Speaker S2, 2nd prize elocution, Hrud.ai team lead, event anchoring | ✅ |
 | 9 | **Soft Skills** (`#soft-skills`) | Leadership, Public Speaking, Event Anchoring, End-to-End Ownership — each with resume-backed evidence only | ✅ |
-| 10 | **CodeSnippet** | Decorative fake terminal | ✅ (cosmetic) |
-| 11 | **Contact** (`#contact`, "Get In Touch") | Mail / LinkedIn / GitHub cards + **ContactForm** (first/last name, email-or-phone, message ≤ 280, consent) delivering as a **text to +91 93466 80696** (SMS prefilled on phones; Open SMS / WhatsApp / Email / Copy on desktop) + Text / WhatsApp / Call / Email panel | ✅ (see limitation in §16.11) |
+| 10 | **CodeSnippet** | `solige_pullaiah.py` — a short Python class describing the owner from real facts (replaced the fake `NeuralInterface`, 2026-10-20) | ✅ |
+| 11 | **Contact** (`#contact`, "Get In Touch") | Mail / LinkedIn / GitHub cards + **ContactForm** (first/last name, email-or-phone, message ≤ 280, consent) posting to **`/api/contact`** → email to the owner via **Resend** (live); SMS / WhatsApp / Email / Copy fallback only if delivery fails; + Text / WhatsApp / Call / Email panel | ✅ live (§16.17) |
 | 12 | **Footer** | Monogram, © line, nav links, connect links (GitHub → puli-pro), availability badge | ✅ Twitter/X → https://x.com/puli_pullaiah |
 | – | **Not built yet** | **Those Who Shaped Me** (people + "On my own") and the new **My Journey** timeline | ⏳ needs owner input |
 
@@ -312,7 +312,7 @@ Built so far:
 1. Full single-page portfolio (Hero, About, Experience journey, Expertise, Works, CodeSnippet, Contact, Footer) with loading screen and animated nav.
 2. Data-driven content layer (`data.ts`) with typed projects, research papers, journey stops.
 3. Project/research **detail modals** with overview, highlights, metrics, tech chips, GitHub/paper links.
-4. **Three.js infinite gallery** for the journey, with visitor image uploads persisted in `localStorage`.
+4. **Three.js infinite gallery** for the journey, with visitor image uploads persisted in `localStorage`. *(Replaced by `JourneySlides` in item 42; visitor upload removed in item 49.)*
 5. Contact section restyle: 3 link cards with logo tiles; footer with availability badge.
 6. **Tech Stack logo fixes** — replaced wrong/invisible logos with official ones: Flask (was black-on-dark), Vercel, SQLite, Railway (was remote URL), Node.js, Cursor, Groq (SVG instead of PNG + invert hack), LangChain (user-supplied real logo; the old SVG was LangSmith-like and was deleted).
 7. **Gmail logo** for the Mail card; contact icons now fill their tiles (`p-0`, tile 56px, `p-1` on image).
@@ -325,7 +325,7 @@ Built so far:
 14. **My Skillset** (`Skillset.tsx`): spotlight bento cards, "where used" rows, marquee; badges numbered 01–04.
 15. **My Process** (`Process.tsx`): owner's flow as six steps, lens switcher, feedback-loop banner.
 16. **Achievements** and **Professional Soft Skills** (resume-backed only).
-17. **Contact form** delivering as a text to +91 93466 80696 (SMS / WhatsApp / email fallbacks).
+17. **Contact form** delivering as a text to +91 93466 80696 (SMS / WhatsApp / email fallbacks). *(Replaced by email delivery in item 43.)*
 18. **Work Experience** (Hrud.ai): seven projects from the owner's notes; DevTools Control Center first with the per-seat cost problem (platforms × price per seat × developers); Job Galaxy second.
 19. **Animated project visuals** (`ProjectVisual.tsx`, 11 kinds): Works (RAG, job-search agent find→match→apply, English→Telugu/Tamil MoE translation, speech→lip-sync) and the seven Hrud.ai cards.
 20. **Project detail view fixes:** rendered through a portal (was hidden under the floating nav), floating Back-to-Works/close buttons in the empty corners (a full-width bar overlapped the animation; sticky bars also failed inside blurred/transformed parents), animation on its own full-width area above the title, centring bug that clipped the top of tall panels fixed (`my-auto`), card visuals fixed-height so there is no empty gap.
@@ -357,7 +357,14 @@ Built so far:
 43. **Contact delivery — Approach 4 (2026-10-16):** the "Let's Build Something" form now emails messages to the owner through `api/contact.ts` (Vercel function + Resend) instead of opening the visitor's SMS app; server-side validation, honeypot, minimum fill time and rate limiting; honest sending / sent / error states, with the SMS / WhatsApp / Email / Copy panel offered when delivery fails. Env vars documented in `.env.example`.
 44. **Hero title → "AI Engineer & Applied Researcher" (2026-10-20):** replaces "& ML Researcher" (the papers are NLP + multimodal deep learning, so a broader research title fits better). Always two lines (`whitespace-nowrap`). Line two is sized so it never exceeds line one; on landscape screens it becomes a grid "& Applied" | head-sized gap (23vh) | "Researcher" so the portrait's head never hides letters (`.hero-line2` in `index.css`, font `min(5.3vw, (48vw − 11.5vh) / 8.74)`); on phones it is solid text (an outline clogs at ~20px); on portrait tablets the heading is lifted to `top: 11vh` to clear the head. Checked at 375×812, 768×1024, 1280×1000, 1366×768 and 1900×875. `<title>`, Open Graph / Twitter titles and the JSON-LD description updated; JSON-LD `jobTitle` stays "AI Engineer".
 
-Recent commits (newest first, abridged): `d3933ae` portfolio overwritten → `d0e517a` Let's Build + fixed buttons → `502f8da` font colours, twitter links → `8c2b74a` About summary, Hyderabad, SEO → `a7e73f3` components/assets/config → `040dfad` project view + docs → `bff2397` Hire Me + DevTools first. Items 33–39 may still be uncommitted; run `git status`.
+45. **Contact form autofill (2026-10-16):** browser-autofilled fields kept the light browser background; `.contact-input:-webkit-autofill` / `:autofill` in `index.css` now covers it with the field's own dark fill (`#191d23`, `#20252a` when focused) and white text.
+46. **My Process + Works arrow (2026-10-19):** the sticky left column pins at `lg:top-6` (was `top-28`) with tighter spacing, so the whole intro incl. the "You are at" tracker fits on a laptop screen. Selected Works card arrow is smaller (36px phones / 44px desktop, was 56px); on phones the label + arrow sit in a top row and the animation starts below them (`pt-14 md:pt-9`), so the arrow never covers an animation.
+47. **About heading colour (2026-10-20):** "Engineering the Neural Future" uses the same white fade as "Shipped at Hrud.ai", "My Skillset" and "Selected Works" (colour only; font and position unchanged).
+48. **Background never dims text (2026-10-20):** the global vignette is now the first element in the page at `z-0`, so every section and the footer paint above it; the Selected Works emerald glow sits at `-z-10` inside an `isolate`d section. A check of all 431 text elements found no background layer on top of any text. The hero's "& Applied Researcher" is outlined on phones too (0.8px stroke instead of solid text). *(A site-wide text-brightening pass was tried the same day and reverted at the owner's request — see §15.)*
+49. **Audit clean-up, part 1 (2026-10-20):** hero row split into **"Worked at"** Hrud.ai · CodeForces and **"Built with"** OpenAI · Hugging Face · Supabase (no longer implies working *with* OpenAI); the fake `NeuralInterface` block replaced by `solige_pullaiah.py` (data-driven `PROFILE_CODE` tokens, JetBrains Mono so it aligns; scrolls inside its box on phones); the Journey's "+ Add your own images" visitor upload removed; every section numbered in page order 01–09.
+50. **Section labels component (2026-10-20):** `src/components/SectionLabel.tsx` renders all 9 labels. Two designs: `"line"` (default — cyan line + cyan text on the left) and `"pill"` (cyan-dot pill aligned with its heading). Switch with `SECTION_LABEL_STYLE`, or preview via `?labels=line` / `?labels=pill`. The duplicate "Technical Stack" pill under "04 / Tech Stack" was merged into the one label. **Owner still to choose the final design.**
+
+Recent commits (newest first, abridged): `529cded` labels → `2865970` background colour falling on text → `d763b98` text colour → `b9e2a7e` role name correction → `8bf83b8` fixing My Process → `c8db772` autofill fix → `24a9573` contact across all devices → `c375fed` Every stop → … → `d3933ae` portfolio overwritten → `d0e517a` Let's Build + fixed buttons → `502f8da` font colours, twitter links → `8c2b74a` About summary, Hyderabad, SEO → `a7e73f3` components/assets/config → `040dfad` project view + docs → `bff2397` Hire Me + DevTools first. Everything up to item 50 is committed and pushed (2026-10-20).
 
 ---
 
@@ -371,12 +378,18 @@ Recent commits (newest first, abridged): `d3933ae` portfolio overwritten → `d0
 - [x] `og:image` (`public/og-image.jpg`, 1200×630) and favicon set added (2026-10-15).
 - [ ] **Real project screenshots:** animated visuals now represent each project, but `projects[]` / `researchPapers[]` still carry Unsplash fallback images (unused when `visual` is set); add real screenshots/diagrams to case studies when available.
 - [ ] **SyncVerse links:** no `github`/`paperUrl` yet; add if/when public (the `DetailModal` handles missing links).
-- [ ] **Verify claims:** "15+ Systems shipped" in `ABOUT_STATS` is not supported by resume; confirm or change.
+- [ ] **Verify claims:** "15+ Systems shipped" and "∞ Curiosity" in `ABOUT_STATS` are not supported by the resume; confirm or change (Report.md suggests "7 production projects at Hrud.ai · 100+ repos managed · 194 CI tests · 2 manuscripts under review").
+- [ ] **Honest project copy (audit #1, critical):** Ollama Document Assistant (site: FAISS/Chroma/FastAPI/re-ranking; repo: Flask, whole-file prompt, no retrieval) and AI Job Intelligence Agent (site: multi-agent, LinkedIn API, Supabase; repo: fixed fetch → normalise → dedupe pipeline, no Supabase). Rewrite in `data.ts` (Report.md §4 has honest wording) or build the real features.
+- [ ] **Research proof (audit #2):** LaMaTEPP "Read Paper" opens a PNG screenshot on Drive and the result says "Estimated +5–10 BLEU"; SyncVerse names no baseline.
+- [ ] **Filler copy still on the site:** "neural artifacts and computational experiments executed with absolute precision" (Selected Works), "All neural rights reserved. Designed for the future of intelligence" (footer), "…through neural synthesis" (loader tagline — the loader itself stays).
+- [ ] **One Hrud.ai title story:** "AI Engineer · Jan 2026 – Present" vs growth path "AI Intern → AI Team Lead → DevOps & Architecture Engineer → AI Research Engineer" vs "Hrud.ai Internship" in Achievements — owner to give stage dates or pick one title.
+- [ ] **Section-label design:** choose `line` or `pill` (item 50), then set `SECTION_LABEL_STYLE`.
+- [ ] **Visitor analytics (researched 2026-10-20, not installed):** recommendation — Umami Cloud free (100K events/month, 6-month history, custom events for resume open/download, contact sent, Hire Me, case-study opens, LinkedIn/GitHub clicks; `?ref=<company>` links per job application) and/or Vercel Web Analytics (free 50K events/month, 1-month history, page views only on Hobby). Both cookieless, no visitor login, no consent banner. Not identifying individuals is by design; reverse-IP "company" tools are not recommended. Owner to choose; Umami needs the owner's free account + site ID, Vercel needs **Enable** in the dashboard + `@vercel/analytics`.
 - [x] **Deployed** on Vercel (https://soligepullaiah.vercel.app/); URL added to README and SEO tags.
 - [x] Live URL added to `Resume-pullaiah.md`. [ ] Still to add it to the resume PDF (owner).
 - [x] **Resume download:** PDF in `public/` + modal with Download (nav, About, Contact) — done (item 32).
-- [x] **Contact delivery — Approach 4** built (2026-10-16): `api/contact.ts` + `ContactForm.tsx` — see §16.17. [ ] **Owner:** add `RESEND_API_KEY` + `CONTACT_TO` in Vercel and redeploy, then send a real test message.
-- [ ] **Contact delivery fallback — Approach 1** (Web3Forms) if delivery is needed immediately (same plan file, §4).
+- [x] **Contact delivery — Approach 4** built (2026-10-16) and **live**: the owner set `RESEND_API_KEY` + `CONTACT_TO` (pulipavan696@gmail.com, the Resend account email) in Vercel and a real test message arrived — see §16.17.
+- [x] ~~Contact delivery fallback — Approach 1 (Web3Forms)~~ — not needed, Approach 4 is live.
 - [ ] *(Later, optional)* **SMS notification via Twilio / MSG91 / Fast2SMS** on top of the email flow — steps kept in [`Contact_Form_Plan.md`](Contact_Form_Plan.md) §5.
 - [ ] **Animated mascot** (from the "Make Your Own Mascot" guide): full plan in [`Mascot_Plan.md`](Mascot_Plan.md) — see §16.16.
 - [x] **Growth & Projects at Hrud.ai layout:** Option B (two-tab switch) chosen and built — see §16.15. [ ] Owner still to review the stage wording / dates / role title.
@@ -388,7 +401,7 @@ Recent commits (newest first, abridged): `d3933ae` portfolio overwritten → `d0
 - [ ] Certification (CCNA: Introduction to Networks)
 - [ ] Skills not shown as tiles: PyTorch, scikit-learn, XGBoost, OpenCV, YOLOv8, MLflow, Optuna, SHAP/LIME, Hugging Face Transformers (consider PyTorch/OpenCV/Supabase/Gemini tiles)
 - [ ] Education block with scores (partially present in journey markers)
-- [ ] Hrud.ai / CodeForces logos in "Worked with" row (currently plain text)
+- [ ] Hrud.ai / CodeForces logos in the hero "Worked at" row (currently plain text)
 
 ### Engineering / quality
 - [ ] **Offline-safe logos:** ~19 tiles + LinkedIn/GitHub still load from CDNs (jsDelivr, simpleicons, huggingface, lobehub). Download into `src/assets/logos/` for reliability.
@@ -397,7 +410,7 @@ Recent commits (newest first, abridged): `d3933ae` portfolio overwritten → `d0
 - [ ] **Performance:** `portrait-smile.png` and `portrait-cutout.png` are large PNGs → export WebP/AVIF; lazy-load below-fold images; check Three.js bundle size (code-split the gallery).
 - [ ] **Typing:** `StackCard` uses `skill: any` and `(PORTFOLIO_DATA as any)`; use the `Skill` type; add `techStack`/`aiTools` types.
 - [ ] Split the ~1200-line `App.tsx` into `sections/*.tsx` components.
-- [ ] Remove dead code/deps: `portrait-cutout.png`, unused `project-*.jpg`/`portrait.jpg`/`scribble.png` if not needed; `express`, `@google/genai`, `dotenv` unless a backend is added; rename package from `react-example`.
+- [ ] Remove dead code/deps: `portrait-cutout.png`, unused `project-*.jpg`/`portrait.jpg`/`scribble.png` if not needed; `three`, `@react-three/fiber`, `@react-three/drei`, `@types/three` (unused since item 42); `express`, `@google/genai`, `dotenv` (the contact backend uses no SDK); rename package from `react-example`.
 - [ ] Fix `components.json` (references nonexistent `src/styles.css`, `@/components/ui`) or delete it; pick one package manager (Bun **or** npm) and track one lockfile.
 - [ ] Add a basic test/CI (type-check + build on push).
 
@@ -469,6 +482,10 @@ Best fits for this portfolio: **command palette**, **bento grid** for About/skil
 - **Animation:** don't fade the hero portrait (text bleeds through); animate position only.
 - **Commit style:** small commits, descriptive messages; source photos (`placed_puli.png`, `profile_photo.jpeg`) are intentionally not committed.
 - **Design references** (`stitch_modern_glow_portfolio/`, `Ravindra_portfolio.md`, `21st_dev.md`) are inspiration only — nothing there is imported by the app.
+- **Loading screen:** keep the 2-second "Portfolio" + name loader (owner's decision, 2026-10-15), even though the audit suggested removing it.
+- **Colours:** don't change font colours site-wide unless the owner asks for it explicitly (a brightening pass was reverted on 2026-10-20). Background layers (vignette, glows, dot patterns) must stay *behind* text — never above it.
+- **Hrud.ai section** opens on the "Role & Growth at Hrud.ai" tab (owner's choice).
+- **Hero title** stays on exactly two lines on every screen; re-check the head-gap split (`.hero-line2`) if the text or portrait changes.
 
 ---
 
@@ -490,7 +507,7 @@ Best fits for this portfolio: **command palette**, **bento grid** for About/skil
 | 16.10 Those Who Shaped Me | ⏳ not started (needs people + "on my own" list) |
 | 16.11 Contact Me | ✅ built (SMS delivery limited to the visitor's device; provider-based auto-SMS pending account/keys) |
 | 16.12 Resume PDF / SEO / a11y | ✅ resume modal + PDF, SEO/OG/JSON-LD; ⏳ og:image/favicon/canonical, skip link, focus rings, reduced-motion audit |
-| 16.17 Contact delivery (Approach 4: Vercel function + Resend) | ✅ built (2026-10-16); ⏳ goes live once the owner adds `RESEND_API_KEY` + `CONTACT_TO` in Vercel — see [`Contact_Form_Plan.md`](Contact_Form_Plan.md) |
+| 16.17 Contact delivery (Approach 4: Vercel function + Resend) | ✅ built (2026-10-16) and **live** — keys set in Vercel, real test message delivered — see [`Contact_Form_Plan.md`](Contact_Form_Plan.md) |
 | 16.16 Animated mascot | ⏳ planned — see [`Mascot_Plan.md`](Mascot_Plan.md) (needs owner decisions) |
 | 16.15 Growth and Projects at Hrud.ai | ✅ **Option B built (2026-10-11):** two-tab switch "Role & Growth at Hrud.ai" / "Projects at Hrud.ai (7)"; opens on Role & Growth — see §16.15 |
 | Top-right Hire Me | ✅ built |
@@ -638,7 +655,7 @@ Format: dark band, pill "Milestones", H2 **"My Journey"**, vertical timeline, ce
 Existing 6 stops stay (school 2010–20 → CBSE 2020–22 → B.Tech 2022–26 → CodeForces 2024 → research 2025 → Hrud.ai 2026). Add/adjust:
 - [ ] Badges: SCHOOL · UNIVERSITY · INTERNSHIP · RESEARCH · HACKATHON · WORK · MILESTONE.
 - [ ] Add stops from the resume: **Sign2Speak hackathon (3rd place)**, **Super Speaker Top 2000** (❓ dates), **graduation 2026** (B.Tech CGPA 8.18).
-- [ ] Keep the existing Three.js **InfiniteGallery** as an optional "Gallery" view; the timeline becomes the default (better on mobile, lighter).
+- [x] ~~Keep the Three.js InfiniteGallery as an optional view~~ — the gallery was replaced by the `JourneySlides` photo panel (item 42).
 - [ ] Scroll-linked line-draw animation (`scaleY`).
 
 ### 16.8 Professional Soft Skills — "How I work with people, not just code."
@@ -809,7 +826,7 @@ Current: 3 link cards only. Target (matches the reference):
 
 ### 16.17 "Let's Build Something" — contact delivery from any device (planning)
 
-**Status (2026-10-16): built.** `api/contact.ts` (Vercel function: JSON-only, validation, honeypot `company`, ≥ 3 s time-to-submit, best-effort 5 / 10 min per-IP limit, Resend REST call, `{ ok: true }` only after Resend returns an id; logs status only, never message bodies) and `ContactForm.tsx` (sending / sent / error states, fallback panel on error). `npm run dev` also serves `/api/contact` through a small plugin in `vite.config.ts`, reading keys from `.env.local`. Live delivery needs the owner's `RESEND_API_KEY` + `CONTACT_TO` in Vercel.
+**Status (2026-10-16): built.** `api/contact.ts` (Vercel function: JSON-only, validation, honeypot `company`, ≥ 3 s time-to-submit, best-effort 5 / 10 min per-IP limit, Resend REST call, `{ ok: true }` only after Resend returns an id; logs status only, never message bodies) and `ContactForm.tsx` (sending / sent / error states, fallback panel on error). `npm run dev` also serves `/api/contact` through a small plugin in `vite.config.ts`, reading keys from `.env.local`. **Live:** the owner added `RESEND_API_KEY` + `CONTACT_TO` in Vercel (Production + Preview) and a real test message from the site arrived in the inbox. No Resend domain is needed — messages are sent from `onboarding@resend.dev` to the Resend account's own address.
 
 **Full plan: [`Contact_Form_Plan.md`](Contact_Form_Plan.md).** The previous idea (Twilio SMS via a serverless function, §16.11) is replaced by an email-first approach.
 

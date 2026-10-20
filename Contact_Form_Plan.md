@@ -2,7 +2,7 @@
 
 > Goal: visitors can message the owner **from any device**, and the message reaches the owner's inbox without relying on the visitor's own SMS / WhatsApp app.
 > Site: https://soligepullaiah.vercel.app/ (Vercel). Form: `src/components/ContactForm.tsx`. Section: "Let's Build Something" in `src/App.tsx` (Contact).
-> Status: **built (2026-10-16) — waiting for the owner's Resend key in Vercel to go live.** Code: `api/contact.ts` + `src/components/ContactForm.tsx` (+ a dev-only `/api/contact` route in `vite.config.ts`). Tracked in `portfolio.md` §16.17.
+> Status: **live (2026-10-16).** The owner created a Resend account with pulipavan696@gmail.com, added `RESEND_API_KEY` and `CONTACT_TO` in Vercel, and a real test message from the live site was delivered. Code: `api/contact.ts` + `src/components/ContactForm.tsx` (+ a dev-only `/api/contact` route in `vite.config.ts`). Tracked in `portfolio.md` §16.17.
 > Written: 2026-10-11.
 
 ---
@@ -102,13 +102,13 @@ Visitors can contact the owner from any device using the method they prefer. The
 
 ## 6. Checklist
 
-- [ ] **Owner:** create a Resend account and add `RESEND_API_KEY` and `CONTACT_TO` in Vercel (never share the key in chat or commit it), then redeploy.
-- [ ] Confirm the destination email (`pulipavan696@gmail.com`).
+- [x] **Owner:** created a Resend account and added `RESEND_API_KEY` and `CONTACT_TO` in Vercel, then redeployed. (Recommended: use a key with **Sending access** only.)
+- [x] Destination email confirmed: `pulipavan696@gmail.com` (also the Resend account email, so no domain is needed).
 - [x] Add `api/contact.ts` (validation, honeypot, minimum time-to-submit, best-effort per-IP rate limit 5 / 10 min, Resend via its REST API — no SDK dependency).
 - [x] Wire `ContactForm.tsx` (sending / success / error, honeypot, fallback SMS / WhatsApp / Email / Copy panel on error).
 - [x] `wa.me`, `sms:` and `tel:` direct-contact links (side panel, already present).
-- [x] Tested locally (2026-10-16): invalid input → 422 with field errors, honeypot / instant submit → 400, GET → 405, rate limit → 429, keys missing → 503, Resend rejecting the key → 502; UI sending / success (mocked reply) / error states. [ ] Still to test after deploy: a real delivery, and on a phone.
-- [ ] Send a real test message after deploy and confirm it arrives.
+- [x] Tested locally (2026-10-16): invalid input → 422 with field errors, honeypot / instant submit → 400, GET → 405, rate limit → 429, keys missing → 503, Resend rejecting the key → 502; UI sending / success (mocked reply) / error states. Real delivery tested on the live site (2026-10-16) ✅. [ ] Still worth a test from a phone.
+- [x] Real test message sent after deploy — it arrived.
 - [x] Update `portfolio.md`, `README.md` and the change log.
 - [ ] (Optional) Turnstile / Upstash rate limiting if spam appears.
 - [ ] (Later, optional) SMS notification via Twilio / MSG91 / Fast2SMS — see §5.
@@ -118,9 +118,17 @@ Visitors can contact the owner from any device using the method they prefer. The
 
 ## 7. Open questions
 
-1. Is the destination email `pulipavan696@gmail.com`?
+1. ~~Is the destination email `pulipavan696@gmail.com`?~~ Yes.
 2. Keep the phone number (+91 93466 80696) public on the site, or show only the form + email?
-3. Build Approach 4 directly, or ship Web3Forms first as a stopgap?
+3. ~~Build Approach 4 directly, or ship Web3Forms first?~~ Approach 4 was built directly and is live.
 4. Do you want a confirmation email sent back to the visitor? (needs a verified domain in Resend — not planned.)
 5. Any spam seen so far that would justify adding Turnstile from day one?
 6. Do you still want SMS notifications later (§5), or is the email push notification on your phone enough?
+
+---
+
+## 8. Follow-ups after launch (2026-10-16)
+
+- **Autofill styling:** autofilled fields showed the browser's light background; fixed with `.contact-input:-webkit-autofill` / `:autofill` in `src/index.css` (dark fill + white text).
+- **Resend domain:** not needed. Without a verified domain Resend only delivers to the account owner's own email, which is exactly this use. `soligepullaiah.vercel.app` cannot be verified (Vercel owns its DNS); a custom domain would only matter for a custom sender address or emailing visitors back.
+- **Key hygiene:** keep the key only in Vercel; prefer a **Sending access** key over Full access.

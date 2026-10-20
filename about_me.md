@@ -16,7 +16,7 @@
 | **GitHub** | [github.com/puli-pro](https://github.com/puli-pro) |
 | **Profile / Avatar Photo** | `src/assets/portrait-smile.png` *(used on site)* — sources: `src/assets/logos/placed_puli.png`, `src/assets/logos/profile_photo.jpeg` |
 | **Email** | pulipavan696@gmail.com |
-| **Phone (contact texts)** | +91 93466 80696 — shown on the site; messages from the contact form arrive as a text to this number |
+| **Phone (contact texts)** | +91 93466 80696 — shown on the site (Text / WhatsApp / Call links). Contact-form messages now arrive by **email** (Resend → pulipavan696@gmail.com) |
 | **LinkedIn** | [linkedin.com/in/solige-pullaiah-478462270](https://www.linkedin.com/in/solige-pullaiah-478462270) |
 | **Location** | Nandyal, Andhra Pradesh, India |
 | **Current Role** | **AI Engineer** — Hrud.ai, Hyderabad *(confirmed by owner; see https://hrud.ai/team)* |
@@ -170,4 +170,4 @@ Before implementation, confirm or supply:
 
 ## Website status (kept in sync with `portfolio.md`)
 
-Built: Skillset, Process, Work Experience (Hrud.ai), Selected Works with animated visuals, Achievements, Professional Soft Skills, Contact form (text message to the phone above), top-right "Hire Me". Pending: My Journey timeline, "Those Who Shaped Me", resume PDF/SEO, deployment. Details and the to-do plan: see [portfolio.md](portfolio.md).
+Live at https://soligepullaiah.vercel.app/. Built: hero ("AI Engineer & Applied Researcher"), About, Work Experience (Hrud.ai, opens on Role & Growth), Journey photo panel, Skillset, Process, Selected Works with animated visuals, Achievements, Professional Soft Skills, `solige_pullaiah.py` profile code block, Contact form (emails the owner via Resend — live), resume modal + PDF, SEO / share image / favicon, numbered section labels 01–09. Pending: honest project descriptions, research proof links, one consistent Hrud.ai title story, section-label design choice, visitor analytics, "Those Who Shaped Me". Details and the to-do plan: see [portfolio.md](portfolio.md).

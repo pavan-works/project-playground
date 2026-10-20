@@ -9,6 +9,29 @@
 | **Live site** | Serves the same build (JS bundle `index-Blxf3qIU.js`) |
 | **Labels used** | **Confirmed**: checked directly. **Risk**: likely problem, not proven. **Recommendation**: opinion or best practice. |
 
+## Progress since this audit (updated 2026-10-20)
+
+The audit below is kept as written on 11 October. Since then:
+
+**Fixed**
+- Hero now says "AI Engineer & Applied Researcher" (two lines on every screen; the portrait no longer hides letters).
+- "Worked with … OpenAI · HuggingFace" → "Worked at Hrud.ai · CodeForces" / "Built with OpenAI · Hugging Face · Supabase".
+- Fake `NeuralInterface` code block → `solige_pullaiah.py`, a profile written from real facts.
+- Visitor "+ Add your own images" upload removed; the 3D gallery (scroll trap, arrow-key hijack, three.js weight) replaced by a photo panel. Initial JS ≈ 160 KB gzipped (was 396 KB); hero portrait WebP 119 KB (was a 742 KB PNG).
+- Every section numbered 01–09 with one shared label component.
+- `og:image`, favicon set, focus-visible rings, skip link, reduced-motion support, dialog semantics on the project view.
+- Contact form now really delivers (Vercel function + Resend), with honest sent / error states.
+- Background layers no longer sit on top of text.
+
+**Kept by the owner's choice**
+- The 2-second "Portfolio" loading screen.
+
+**Still open** (see `portfolio.md` §11)
+- Project descriptions vs repo code (critical), LaMaTEPP screenshot link / "Estimated", SyncVerse baseline.
+- "15+ systems shipped", "∞ Curiosity", "neural artifacts…" subtitle, "neural rights" footer, loader tagline.
+- Conflicting Hrud.ai titles; resume says Visakhapatnam, site says Hyderabad.
+- GitHub profile and repo READMEs; unused dependencies; six fonts; no tests/CI.
+
 ## Executive summary
 
 The site looks polished and expensive, and the Hrud.ai work section is strong. The problem is credibility: what the site says about your two personal projects does not match the code in those repos. Recruiters skimming the page will be impressed. A technical hiring manager who clicks "GitHub" will find the gap within about two minutes, and that can turn a "maybe" into a rejection.
