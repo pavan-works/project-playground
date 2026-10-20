@@ -53,7 +53,7 @@ const Hero = () => {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1100px] h-[1100px] bg-[var(--gold)]/5 rounded-full blur-[160px] pointer-events-none" />
 
       {/* Typographic lockup — bottom half, top layer */}
-      <div className="absolute inset-x-0 top-[16vh] md:top-[14vh] z-30 pointer-events-none px-4">
+      <div className="hero-lockup absolute inset-x-0 top-[16vh] md:top-[14vh] z-30 pointer-events-none px-4">
         <motion.h1
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -73,13 +73,12 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.1, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-          className="font-headline font-black leading-[0.85] tracking-[-0.05em] text-[7.1vw] md:text-[7.1vw] text-center whitespace-nowrap mt-[0.5vw]"
-          style={{
-            WebkitTextStroke: "1.5px rgba(255,255,255,0.9)",
-            color: "transparent",
-          }}
+          className="hero-outline hero-line2 font-headline font-black leading-[0.85] tracking-[-0.03em] md:tracking-[-0.05em] text-[5.2vw] md:text-[5.3vw] text-center whitespace-nowrap mt-[1.2vw] md:mt-[0.8vw]"
         >
-          &amp; ML Researcher
+          {/* on wide screens the two words sit either side of the portrait's head (see .hero-line2) */}
+          <span className="hero-line2-a">&amp; Applied</span>
+          <span className="hero-line2-gap"> </span>
+          <span className="hero-line2-b">Researcher</span>
         </motion.h2>
       </div>
 

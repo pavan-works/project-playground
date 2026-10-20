@@ -35,7 +35,7 @@ Requirements: laptop + Chrome, ChatGPT or Claude (to plan the character), Node.j
 
 ### Step 1 — Plan the mascot on paper (guide: about 2 minutes)
 Ask ChatGPT/Claude for a one-page **mascot card** (name, which starter to copy, body/eye colours, eye shape, 5 animations and when each plays, 3 places to use it, a checklist of Studio tabs). Give it:
-- **Brand/page:** Solige Pullaiah — AI Engineer & ML Researcher portfolio.
+- **Brand/page:** Solige Pullaiah — AI Engineer & Applied Researcher portfolio.
 - **What I do:** builds RAG, LLM-agent and multimodal AI systems.
 - **Audience:** recruiters, hiring managers, collaborators, clients.
 - **Colours:** the site palette — cyan `#22d3ee`, indigo `#6366f1` / `#818cf8`, emerald `#10b981` on near-black `#030303`.

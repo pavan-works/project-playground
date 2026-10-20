@@ -96,7 +96,7 @@ The page (`PortfolioLanding` in [src/App.tsx](src/App.tsx)) renders, top to bott
 
 1. **Loading screen** — an animated "Portfolio" logo/title reveal with the name, shown for ~2 seconds on load (kept by owner request).
 2. **`AnimatedNav`** — floating pill navigation that collapses on scroll, plus a **Hire Me** button fixed at the top right (links to `#contact`; on phones it appears once the menu collapses).
-3. **`Hero`** (`#home`) — full-height intro with a large "AI Engineer & ML Researcher" headline behind the smiling portrait (`portrait-smile.png`), location, and a row of companies/tools worked with.
+3. **`Hero`** (`#home`) — full-height intro with a large "AI Engineer & Applied Researcher" headline behind the smiling portrait (on landscape screens "& Applied" and "Researcher" sit either side of the head) (`portrait-smile.png`), location, and a row of companies/tools worked with.
 4. **`About`** (`#about`) — profile summary, key stats, an "Identity" panel and 4 focus-area cards (RAG & Retrieval, Agentic Systems, Applied Research, Production ML).
 5. **`WorkExperience`** (`#experience`) — "Shipped at Hrud.ai": the AI Engineer role card, seven project cards (DevTools Control Center first, Job Galaxy, NCPL chatbot, Career Advisor Bot, NTRview Log, Pulse Celebrations v2, Xencomedical), each with an **animated visual**, plus a CodeForces strip.
 6. **`Experience`** (`#journey`) — "The Journey": quote, the active-stop card and, beside it, `JourneySlides`: that stop's photo filling a box of the same height, autoplaying forward 1 → 6 (dots, prev/next, arrow keys; pauses on hover and for reduced motion). Visitors can add their own images (stored in `localStorage`, shown after the 6 stops).

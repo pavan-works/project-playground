@@ -86,6 +86,39 @@ body::before {
   }
 }
 
+/* Hero second line ("& Applied Researcher"): outlined on tablet/desktop; on phones
+   the text is only ~20px tall, where an outline clogs the letters, so use solid text. */
+.hero-outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.9);
+}
+@media (max-width: 767px) {
+  .hero-outline {
+    color: rgba(255, 255, 255, 0.88);
+    -webkit-text-stroke: 0;
+  }
+}
+
+/* On landscape screens the portrait's head (≈ 29% of the photo's height; the photo is
+   72vh tall, so ≈ 21vh wide, centred) covers the middle of the hero's second line.
+   Split the line into "& Applied" | gap | "Researcher" with the gap where the head is,
+   and size the text so "Researcher" (8.74em wide) always fits in its half. */
+@media (min-width: 768px) and (min-aspect-ratio: 5/4) {
+  .hero-line2 {
+    display: grid;
+    grid-template-columns: 1fr 23vh 1fr;
+    align-items: baseline;
+    font-size: min(5.3vw, calc((48vw - 11.5vh) / 8.74));
+  }
+  .hero-line2-a { justify-self: end; }
+  .hero-line2-b { justify-self: start; }
+}
+/* Portrait tablets keep the single centred line; lift the heading a little so the
+   top of the head starts below it. */
+@media (min-width: 768px) and (max-aspect-ratio: 5/4) {
+  .hero-lockup { top: 11vh; }
+}
+
 /* ---- Contact form: keep autofilled fields in the dark theme ----
    Browsers paint their own light background/text on autofilled inputs; an inset
    shadow covers that background and text-fill-color restores the white text.
