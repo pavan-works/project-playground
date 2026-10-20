@@ -86,16 +86,15 @@ body::before {
   }
 }
 
-/* Hero second line ("& Applied Researcher"): outlined on tablet/desktop; on phones
-   the text is only ~20px tall, where an outline clogs the letters, so use solid text. */
+/* Hero second line ("& Applied Researcher"): outlined on every screen size. */
 .hero-outline {
   color: transparent;
   -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.9);
 }
 @media (max-width: 767px) {
+  /* same outlined style as desktop; a thinner stroke keeps the small letters open */
   .hero-outline {
-    color: rgba(255, 255, 255, 0.95);
-    -webkit-text-stroke: 0;
+    -webkit-text-stroke: 0.8px rgba(255, 255, 255, 0.95);
   }
 }
 

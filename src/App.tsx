@@ -971,8 +971,9 @@ const Works = () => {
   const [openPaper, setOpenPaper] = useState<Project | null>(null);
 
   return (
-  <section id="works" className="py-40 px-6 md:px-14 relative overflow-hidden">
-    <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[var(--emerald)]/5 rounded-full blur-[150px] pointer-events-none" />
+  <section id="works" className="py-40 px-6 md:px-14 relative isolate overflow-hidden">
+    {/* ambient glow: -z-10 inside the isolated section, so it stays behind the text */}
+    <div className="absolute top-0 right-0 -z-10 w-[600px] h-[600px] bg-[var(--emerald)]/5 rounded-full blur-[150px] pointer-events-none" />
     
     <motion.div
       initial={{ opacity: 0, y: 24 }}
@@ -1302,6 +1303,9 @@ export default function PortfolioLanding() {
     <MotionConfig reducedMotion="user">
     <div className="bg-[var(--bg)] text-[var(--rv-muted)] min-h-screen selection:bg-[var(--gold)] selection:text-black">
       <a href="#main" className="skip-link">Skip to content</a>
+      {/* Global vignette: first in the page and z-0, so every section and the footer paint
+          above it — it darkens the background only, never the text */}
+      <div className="fixed inset-0 pointer-events-none bg-radial-[circle_at_center,_transparent_0%,_var(--bg)_95%] opacity-50 z-0" />
       <AnimatedNav />
       <main id="main" tabIndex={-1} className="relative z-10 outline-none">
         <Hero />
@@ -1318,8 +1322,6 @@ export default function PortfolioLanding() {
       </main>
       <Footer />
       
-      {/* Global Vignette */}
-      <div className="fixed inset-0 pointer-events-none bg-radial-[circle_at_center,_transparent_0%,_var(--bg)_95%] opacity-50 z-40" />
     </div>
     </MotionConfig>
   );
