@@ -24,6 +24,8 @@
 14. [How-to recipes](#14-how-to-recipes)
 15. [Rules & conventions](#15-rules--conventions)
 16. [To Do — Portfolio v2 plan](#16-to-do--portfolio-v2-plan-based-on-the-portfolio_dhanushhtml-reference) — incl. [16.15 Growth and Projects at Hrud.ai](#1615-growth-and-projects-at-hrudai--planning--implementation)
+17. [Work Experience redesign — "The Zoom" (plan)](#17-work-experience-redesign--the-zoom-plan)
+18. [21st.dev curation — what to adopt](#18-21stdev-curation--what-to-adopt) (details in 21st_dev.md)
 
 ---
 
@@ -141,7 +143,7 @@ project-playground/
 ├─ about_me.md                profile source of truth
 ├─ Resume-pullaiah.md         resume (latest facts)
 ├─ Ravindra_portfolio.md      reference doc of ANOTHER person's portfolio (design/structure inspiration)
-├─ 21st_dev.md                curated 21st.dev UI component links (ideas backlog)
+├─ 21st_dev.md                21st.dev research: catalogue, chosen components/themes/icons, rejected list, secure key use + original link collection
 ├─ README.md                  detailed repo README
 ├─ portfolio.md               THIS FILE
 ├─ src/
@@ -384,6 +386,7 @@ Recent commits (newest first, abridged): `529cded` labels → `2865970` backgrou
 - [ ] **Filler copy still on the site:** "neural artifacts and computational experiments executed with absolute precision" (Selected Works), "All neural rights reserved. Designed for the future of intelligence" (footer), "…through neural synthesis" (loader tagline — the loader itself stays).
 - [ ] **One Hrud.ai title story:** "AI Engineer · Jan 2026 – Present" vs growth path "AI Intern → AI Team Lead → DevOps & Architecture Engineer → AI Research Engineer" vs "Hrud.ai Internship" in Achievements — owner to give stage dates or pick one title.
 - [ ] **Section-label design:** choose `line` or `pill` (item 50), then set `SECTION_LABEL_STYLE`.
+- [ ] **Work Experience redesign, "The Zoom" (planned 2026-10-21; a first build on 2026-10-22 was reverted at the owner's request):** replace the Role & Growth tab with one zoom-out experience (a feature → a product → the team's work → the platform → across products; the job titles revealed last). Full plan and owner questions: [§17](#17-work-experience-redesign--the-zoom-plan).
 - [ ] **Visitor analytics (researched 2026-10-20, not installed):** recommendation — Umami Cloud free (100K events/month, 6-month history, custom events for resume open/download, contact sent, Hire Me, case-study opens, LinkedIn/GitHub clicks; `?ref=<company>` links per job application) and/or Vercel Web Analytics (free 50K events/month, 1-month history, page views only on Hobby). Both cookieless, no visitor login, no consent banner. Not identifying individuals is by design; reverse-IP "company" tools are not recommended. Owner to choose; Umami needs the owner's free account + site ID, Vercel needs **Enable** in the dashboard + `@vercel/analytics`.
 - [x] **Deployed** on Vercel (https://soligepullaiah.vercel.app/); URL added to README and SEO tags.
 - [x] Live URL added to `Resume-pullaiah.md`. [ ] Still to add it to the resume PDF (owner).
@@ -848,3 +851,191 @@ Current: 3 link cards only. Target (matches the reference):
 
 **Order with other work:** build this before the mascot (§16.16); the mascot can later play `celebrate` / `confused` on form success / error.
 
+---
+
+## 17. Work Experience redesign — "The Zoom" (plan)
+
+> Status: **plan only.** Written 2026-10-21. A first build (4 stops, `ZoomGrowth.tsx`) was tried on 2026-10-22 and **reverted at the owner's request** — the Role & Growth tab is back to the role card + growth buttons. Rethink the concept before building again.
+> Scope: the **Role & Growth at Hrud.ai** part of `src/components/WorkExperience.tsx` (today: role card + `GrowthPath` with four title buttons). The **Projects at Hrud.ai (7)** grid stays and gets linked from the new experience.
+> Rule: every fact below comes from `src/data.ts` (`WORK_PROJECTS`, `GROWTH_STAGES`) and `Resume-pullaiah.md`. Nothing is invented; items marked **❓ OWNER** need confirmation before build.
+
+---
+
+### 17.1 What I studied
+
+**Visual identity.** Dark "deep space" background, cyan (`--gold`) / indigo / emerald accents, Syne headlines, JetBrains Mono for code-like text, animated SVG project diagrams (the site's strongest signature). Every section already uses cards, tabs or grids, so a new card layout would just blend in.
+
+**What the Hrud.ai material actually contains** (beyond the technologies):
+
+| Real fact (source) | What it says about the thinking |
+|---|---|
+| DevTools: "every platform charges per seat (~$20)… **platforms × price per seat × number of developers**" | He describes problems as **formulas** and attacks the term that multiplies the pain. |
+| DevTools: one control plane for 100+ repos and 55 Supabase projects | He builds the thing **other work runs on**. |
+| Job Galaxy: admin console **split into its own deployment** to shrink the attack surface | He changes the **structure**, not just the code. |
+| Job Galaxy: demand monitor alerts specialists **days ahead** | He moves effort **earlier in time**. |
+| NCPL: **pre-rendered 26 uncrawled pages** | He finds what is invisible (to search engines) and makes it visible. |
+| Career bot: **collects the profile first**, then recommends | He fixes the **order** of steps. |
+| Pulse v2: "I helped **shape** v2, not just build it" | Planning the architecture, not only executing it. |
+| Resume: "**Connect different parts of a product** to create more value" | His own one-line philosophy. |
+| Growth: AI Intern → AI Team Lead → DevOps & Architecture Engineer → AI Research Engineer | See the insight below. |
+
+**The insight.** Read the four titles as *what he was responsible for*, not as job names:
+
+| Stage | Unit of work (from `GROWTH_STAGES`) |
+|---|---|
+| AI Intern | **a feature** — "building real AI features on the team's stack" |
+| AI Team Lead | **a project / the team's delivery** — "ownership of design and delivery of AI projects" |
+| DevOps & Architecture | **the platform** — "the structural backbone the rest of the ecosystem runs on" (100+ repos, 55 projects) |
+| AI Research Engineer | **ideas that cross products** — "applying new AI techniques to live projects", "connecting different parts of a product" |
+
+> **Growth at Hrud.ai was not a climb up a ladder. It was a change of zoom: each step, the thing he worked on got one level bigger.**
+
+That is true, specific to him, only obvious in hindsight, and it can be *experienced* rather than read.
+
+---
+
+### 17.2 Assumptions I challenged
+
+| Usual assumption | Challenge |
+|---|---|
+| Experience = a list of titles with dates | Titles are the *least* informative part. Show what changed in **scope**; reveal the titles last. |
+| Projects = equal cards in a grid | His projects aren't equal or separate: they share a platform, and one of them *is* that platform. |
+| Growth goes upward (timeline, ladder, staircase) | His growth goes **outward**: same company, wider frame. |
+| Interaction = decoration (hover, parallax) | The one interaction should **be** the idea: zooming out *is* growing. |
+| Impressive = big numbers | The most striking number here is a **ratio**: the 7 projects you just read about are 7 dots among 100+ repos. |
+
+---
+
+### 17.3 Concepts explored (genuinely different ideas, not styles)
+
+#### A. *The Zoom*, "same company, wider frame" ★ chosen
+The section opens on one tiny, real thing: a single chatbot answer bubble grounded in company FAQs. One control zooms out, and each zoom level is a growth stage. Everything you saw stays on screen and shrinks into a part of the next level. **Signature moment:** at the end, the four job titles appear as labels on the zoom levels you just travelled: *"You just scrolled through my promotions."*
+
+#### B. *The Formula*, "find the term that multiplies"
+Each project is shown as an equation of its problem (cost = platforms × seat price × developers; exposure ∝ public routes; missed demand ∝ reaction delay). Visitors move a variable, then "apply the fix" and watch which term he changed. Strong, but it explains *projects*, not *growth*, and most of the projects have no real numbers to build an honest formula from.
+
+#### C. *Pull one thread*, a dependency web
+The seven projects as a web of shared parts (internal platform → Job Galaxy roles/countries, control plane → every repo, company FAQs → bots). Remove the control plane and see what loses visibility. It shows "connects parts of a product", but it risks looking like a generic network-graph dashboard, and the real dependencies are only partly documented.
+
+#### D. *Same question, four answers*
+One recurring problem ("the team can't see what's deployed") answered differently at each stage. Memorable, but the answers would have to be **invented**, which breaks the honesty rule.
+
+#### E. *Commit history of a career*
+Growth as a git log / diff of responsibilities. Clever for developers, but it's a known portfolio cliché, and it repeats the timeline pattern in a new costume.
+
+| | A Zoom | B Formula | C Thread | D Question | E Git log |
+|---|---|---|---|---|---|
+| Rooted in a real insight about *him* | ★★★ | ★★★ | ★★ | ★ | ★ |
+| Explains growth (not just projects) | ★★★ | ★ | ★★ | ★★★ | ★★ |
+| Honest with today's data | ★★★ | ★★ | ★★ | ✗ | ★★★ |
+| Surprise / "why haven't I seen this" | ★★★ | ★★ | ★★ | ★★ | ★ |
+| Could be a generic template? | No | No | Partly | No | Yes |
+
+**Decision: A, with B embedded as one beat** (the DevTools formula appears at the platform level as *the reason the platform exists*). One idea, one interaction, used consistently.
+
+---
+
+### 17.4 The experience, beat by beat
+
+**One control:** a zoom dial (− / +) with five stops. Wheel, pinch, arrow keys and the buttons all move it. The stops are labelled by **what's in the frame**, never by title: `a feature · a product · the team's work · the platform · across products`. The canvas never changes. Objects persist and shrink, so a detail shown early is still there later, now small, and means something new.
+
+| Stop | In frame (real content) | Caption (restrained, factual) |
+|---|---|---|
+| **1 · a feature** | One chat exchange: a visitor asks, the bot answers from company FAQs/courses (NCPL bot: "grounded retrieval… answers stay on-topic"; voice + text). | *"One answer, grounded in the company's own FAQs."* |
+| **2 · a product** | Zoom out: the bubble is now one corner of the **NCPL website**: the bot, 26 previously uncrawled pages now pre-rendered (shown as 26 small page tiles lighting up), the careers/blog module. | *"The bot was one piece. 26 pages search engines couldn't see became visible."* |
+| **3 · the team's work** | Zoom out: the NCPL site shrinks to one of **seven product nodes**: Job Galaxy + Admin Console, Career Advisor Bot, NTRview Log, Pulse v2, Xencomedical, DevTools. Each node shows one verb from its real story (*split*, *alert days ahead*, *profile first*, *practise*, *shaped v2*, *2-day delivery*). Click a node → the Projects tab opens on that card. | *"Leading meant owning delivery: from idea to production."* |
+| **4 · the platform** *(the turn)* | Zoom out: the seven nodes shrink into **7 dots among 100+ repository dots and 55 Supabase project dots**, all held by one control plane (RBAC, health monitoring, 7-check branch policy, 194 CI tests). The DevTools formula appears once: `platforms × price per seat × developers`, and its first term **collapses to 1**. | *"The seven projects were never the whole picture. This is what they run on."* |
+| **5 · across products** | Zoom out one last time: the platform becomes one layer. Thin lines carry techniques *between* products (retrieval, rate limiting, server-side auth appear in more than one project). | *"Now the work is connecting parts of products: taking one technique where it adds value."* |
+| **Reveal** | The dial's five stops quietly gain their real names: **AI Intern · AI Team Lead · DevOps & Architecture Engineer · AI Research Engineer**. A last line: | *"You just zoomed through my promotions. Each one, the frame got bigger."* |
+
+**Why this lands:**
+- **Hidden layer:** the visitor thinks they're exploring scale and only learns at the end that scale *was* the career story. They make the connection themselves.
+- **An early detail gains meaning later:** the first chat bubble is still on screen at stop 5, now a speck.
+- **An interaction that states a principle:** zooming out *is* "seeing the system, not the part", which is how he works.
+- **Restraint:** one canvas, one control, no parallax, no 3D, no particle effects. The motion is purely spatial (scale and position), the same kind of thing the site's SVG diagrams already do.
+
+---
+
+### 17.5 Copy rules
+
+- One short caption per stop, in plain words. No "revolutionised", "seamless", "cutting-edge".
+- Numbers only where documented: 26 pages, 7 projects, 100+ repos, 55 Supabase projects, 194 CI tests, 7-check policy, ~$20/seat, 2-day delivery.
+- No dates, until the owner provides them.
+- The title reveal happens **once**, at the end; titles never appear earlier in this section.
+
+---
+
+### 17.6 Interaction & accessibility
+
+| Need | Plan |
+|---|---|
+| Controls | Dial buttons (− / +), clickable stop labels, arrow keys when the stage is focused, wheel/pinch **only after the stage is clicked or focused** (no scroll trap; same rule as the old gallery fix). |
+| Reduced motion | No zoom tween: each stop crossfades. The content and the reveal stay identical. |
+| Screen readers | The stage has a hidden ordered list: one item per stop with its caption and facts, plus the title mapping at the end. Captions update in an `aria-live="polite"` region. |
+| Phones | Same five stops, square canvas, big ± buttons, swipe left/right between stops. Captions sit below the canvas, never over it. |
+| No-JS / failure | Falls back to the ordered list (the content is readable without the canvas). |
+| First-time hint | A single line under the dial: *"Zoom out →"*. It disappears after the first move. |
+
+---
+
+### 17.7 Technical plan
+
+**Rendering.** One SVG scene (consistent with `ProjectVisual.tsx`) inside a fixed-aspect box. Each object has a position and size in "world" coordinates; a zoom stop is just a camera `{ x, y, scale }`. Moving between stops tweens the camera with `motion` (already installed). Objects never unmount, which is what makes them persist and shrink. No new dependencies; three.js is not needed.
+
+**Files.**
+- `src/components/ZoomGrowth.tsx`: the stage, dial, captions, reveal, reduced-motion and screen-reader paths.
+- `src/data.ts`: new `ZOOM_STOPS` (id, stopLabel, titleRevealed, caption, camera, facts[]) plus `ZOOM_OBJECTS` (id, level, shape, label, world rect, linkToProjectId?). Facts reference `WORK_PROJECTS` / `GROWTH_STAGES` ids so there's one source of truth.
+- `src/components/WorkExperience.tsx`: the "Role & Growth at Hrud.ai" tab renders `<ZoomGrowth />` instead of the role card + `GrowthPath`; node clicks switch to the Projects tab and scroll to that card.
+
+**Performance.** Fewer than 200 SVG elements; the 100+ repo dots are one generated `<path>` grid (not 100 nodes). The scene loads with the section, and the transform runs on one `<g>`, so it's cheap.
+
+**Testing.** 375 × 812, 768 × 1024, 1366 × 768, 1900 × 875; keyboard-only run; reduced-motion run; screen-reader list check; contrast ≥ 4.5:1 for captions; no page scroll trapped by the stage.
+
+---
+
+### 17.8 Build order
+
+1. **Paper prototype:** the five frames as static SVGs. Confirm the story reads in order with no interaction. *(Gate: if the static frames don't surprise, rethink before coding.)*
+2. `ZOOM_STOPS` / `ZOOM_OBJECTS` data from real facts, reviewed by the owner.
+3. The stage + camera tween + dial, desktop first.
+4. Stops 1–3 content, then the stop-4 turn (dots + formula collapse), then stop 5 and the reveal.
+5. Phones, keyboard, reduced motion, screen-reader list.
+6. Link nodes to the Projects tab; remove `GrowthPath` (keep `GROWTH_STAGES` as the data source).
+7. QA matrix (§17.7), then update `README.md` / `portfolio.md`.
+
+Rough effort: 2–3 focused days after the owner answers §17.10.
+
+---
+
+### 17.9 The Ultimate Test, answered for this concept
+
+| Question | Answer |
+|---|---|
+| Would it work as a generic template? | No. It depends on *his* specific growth from a feature to a platform, and on the real 7-of-100+ ratio. Another person's career would need a different idea. |
+| Entertaining, or does it reveal an idea? | It reveals one: growth as a change of scope, and "see the system, not the part". |
+| Is the originality in the concept or the styling? | In the concept. Styled plainly, the reveal still works. |
+| Does it show how he thinks? | Yes: formulas (stop 4), structure over patches (split console, control plane), connecting parts (stop 5). Visitors infer it; the copy never says "I'm a systems thinker". |
+| Would an experienced designer/engineer notice the thought? | Object constancy, titles withheld until the end, the formula collapsing at the exact level where the platform appears: these are deliberate. |
+| Will visitors remember the idea after forgetting the animation? | *"His promotions were zoom levels."* That sentence survives without the visuals. |
+
+---
+
+### 17.10 Questions for the owner (needed before building)
+
+1. ❓ **Stage ↔ scope mapping:** is it fair to say intern = features, lead = projects/delivery, DevOps & Architecture = platform, research engineer = across products? (Taken from `GROWTH_STAGES`; please correct if the real order of responsibilities differed.)
+2. ❓ **Starting object:** is the NCPL chatbot the right first "feature"? Alternatives from the resume: the one-time "What's New" toast on first login after a release, or the voice/text website assistant.
+3. ❓ **Stop 5 examples:** which techniques really moved between products? (For example retrieval in NCPL + Career bot; rate limits and server-side keys in Career bot + Job Galaxy.) Only confirmed links will be drawn.
+4. ❓ **Titles:** confirm the four titles and their order; are there dates you want shown at the reveal (optional)?
+5. ❓ **Public detail:** OK to name all seven internal/client products and show the 100+ / 55 / 194 numbers? (They're already on the site.)
+6. ❓ **Vercel project count** for the platform frame (currently unknown, so it will be omitted).
+7. ❓ Keep the "Role & Growth / Projects" tabs, or let *The Zoom* replace the Role & Growth tab entirely (recommended) while Projects stays as the reference grid?
+
+### 17.11 Components from 21st.dev
+
+Moved to [`21st_dev.md`](21st_dev.md) §3 (which components fit each beat of *The Zoom*, and which were rejected). Short version: no 21st.dev component provides the core zoom; borrow Zoom Level Toggle Group (stop selector), Text Morph (titles reveal) and Animated Beam (stop 5); the stage, camera and dot field stay custom.
+
+---
+
+## 18. 21st.dev curation — what to adopt
+
+Moved to [`21st_dev.md`](21st_dev.md) §4 (themes, picks by section, icons, templates, rejected list, secure use of the API key, suggested order). Short version: keep our palette but adopt *Indigo Mono*'s one-accent / three-font discipline; adopt Morphing Dialog (case studies), Transition Panel (Process lenses), Scroll Progress, a copy-email button and role chips; keep `lucide-react` and self-host brand logos.

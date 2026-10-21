@@ -65,7 +65,7 @@ project-playground/
 ├── Mascot_Plan.md                # Animated mascot plan — not started
 ├── Resume-pullaiah.md            # Resume reference material
 ├── Ravindra_portfolio.md         # Additional portfolio reference notes
-├── 21st_dev.md                   # Design/reference notes
+├── 21st_dev.md                   # 21st.dev research: chosen components/themes/icons, rejected list, secure API-key use, link collection
 ├── src/
 │   ├── main.tsx                  # React root / app bootstrap
 │   ├── App.tsx                   # All page sections + PortfolioLanding (default export)
