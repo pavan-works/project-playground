@@ -1,5 +1,6 @@
 import { useMemo, useRef, useState, type FormEvent } from "react";
 import { AnimatePresence, motion } from "motion/react";
+import { track } from "../lib/analytics";
 import {
   AlertTriangle,
   Check,
@@ -120,6 +121,7 @@ export const ContactForm = () => {
       // success only when the server confirms the email service accepted the message
       if (res.ok && out?.ok) {
         setStatus("sent");
+        track("contact_form_sent");
         return;
       }
       if (out?.fields) {

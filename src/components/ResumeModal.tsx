@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "motion/react";
 import { Download, ExternalLink, FileText, X } from "lucide-react";
+import { track } from "../lib/analytics";
 
 export const RESUME_URL = "/Solige_Pullaiah_Resume_AI.pdf";
 const RESUME_FILENAME = "Solige_Pullaiah_Resume_AI.pdf";
@@ -9,6 +10,7 @@ const RESUME_FILENAME = "Solige_Pullaiah_Resume_AI.pdf";
 export const ResumeModal = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
   useEffect(() => {
     if (!open) return;
+    track("resume_preview_open");
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";

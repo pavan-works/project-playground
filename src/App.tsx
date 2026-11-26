@@ -46,6 +46,7 @@ import { ContactForm } from "./components/ContactForm";
 import { ResumeButton, ResumeModal } from "./components/ResumeModal";
 import { SoftSkills, Achievements } from "./components/SoftSkillsAchievements";
 import logoGmail from "./assets/logos/gmail.svg";
+import { track } from "./lib/analytics";
 
 const Hero = () => {
   return (
@@ -893,8 +894,17 @@ const DetailModal = ({
 };
 
 const Works = () => {
-  const [openProject, setOpenProject] = useState<Project | null>(null);
-  const [openPaper, setOpenPaper] = useState<Project | null>(null);
+  const [openProject, setOpenProjectRaw] = useState<Project | null>(null);
+  const [openPaper, setOpenPaperRaw] = useState<Project | null>(null);
+  // count a case study when it is opened (not when it is closed)
+  const setOpenProject = (p: Project | null) => {
+    if (p) track("case_study_open", { project: p.title });
+    setOpenProjectRaw(p);
+  };
+  const setOpenPaper = (p: Project | null) => {
+    if (p) track("case_study_open", { project: p.title });
+    setOpenPaperRaw(p);
+  };
 
   return (
   <section id="works" className="py-40 px-6 md:px-14 relative isolate overflow-hidden">
